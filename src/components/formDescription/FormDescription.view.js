@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Description from '../description/Description.view';
+import Description from 'components/description/Description.view';
 
 const FormDescription = ({ content }) => (
   <Description label="Formularz" content={ content } />
