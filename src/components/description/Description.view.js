@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import classes from './description.module.scss';
 
 const Description = ({ label, content }) => (
-  <div>
+  <div className={classes.description}>
     <p className={ classes.label }>
       { label }
       :
     </p>
     <p className={ classes.content }>
       { content }
-      :
     </p>
   </div>
 );

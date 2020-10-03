@@ -1,6 +1,22 @@
-.label{
-  color: red;
+.description {
+  width: 100%;
+  background-color: #222;
+  padding: 15px;
+  border-radius: 5px;
+
+  .label {
+    color: #bdaeae;
+    font-size: 17px;
+  }
+
+  .content {
+    color: white;
+    padding: 0 10px 5px 5px;
+    margin-left: 10px;
+    border-left: 2px solid;
+    border-image: linear-gradient(180deg, #222 0%, #222 49%, #771e76 50%, #771e76 100%) 1;
+    border-bottom: 2px solid ;
+    width: max-content;
+  }
 }
-.content{
-  color: yellowgreen;
-}
+
