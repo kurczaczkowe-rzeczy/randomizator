@@ -1,3 +1,10 @@
-.label{
-  color: #771e76;
+.label {
+  color: #bdaeae;
+  display: inline-block;
+  margin: 0 15px 0 0;
+  font-size: 18px;
+
+  span {
+    color: #ff3c3c;
+  }
 }
