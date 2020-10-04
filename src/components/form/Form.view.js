@@ -20,6 +20,4 @@ const Form = () => (
   </form>
 );
 
-Form.propTypes = {};
-
 export default Form;
