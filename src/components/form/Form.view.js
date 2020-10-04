@@ -1,28 +1,41 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Label from 'components/form/components/label/Label.view';
 import TextInput from 'components/form/components/textInput/TextInput.view';
-import classes from './form.module.scss';
 import Button from 'components/form/components/button/Button.view';
-import PropTypes from 'prop-types';
+import classes from './form.module.scss';
 
-const Form = ({ onSubmit }) => (
-  <form className={classes.form} onSubmit={onSubmit}>
-    <div className={classes[ 'align-bottom' ]}>
-      <Label content="Imie męskie" required />
-      <TextInput name="name_male" required />
-    </div>
+const Form = ({ onSubmit, preview }) => {
+  const formClass = [ classes.form ];
 
-    <div className={classes[ 'align-bottom' ]}>
-      <Label content="Imie damskie" required />
-      <TextInput name="name_female" required />
-    </div>
+  if ( preview ) {
+    formClass.push( classes.disabled );
+  }
 
-    <Button value="Wyślij" type="submit" />
-  </form>
-);
+  return (
+    <form className={ formClass.join( ' ' ) } onSubmit={ onSubmit }>
+      <div className={ classes[ 'align-bottom' ] }>
+        <Label content="Imie męskie" required />
+        <TextInput name="name_male" required />
+      </div>
 
-Form.propTypes = { onSubmit: PropTypes.func };
+      <div className={ classes[ 'align-bottom' ] }>
+        <Label content="Imie damskie" required />
+        <TextInput name="name_female" required />
+      </div>
 
-Form.defaultProps = { onSubmit: () => {} };
+      <Button value="Wyślij" type="submit" />
+    </form>
+  );
+};
 
+Form.propTypes = {
+  preview: PropTypes.bool,
+  onSubmit: PropTypes.func,
+};
+
+Form.defaultProps = {
+  onSubmit: () => {},
+  preview: false,
+};
 export default Form;
