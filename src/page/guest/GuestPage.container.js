@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import GuestPageView from 'page/guest/GuestPage.view';
 import firebase from 'config/firebaseConfig';
+import { useCollectionOnce, useDocumentData } from 'react-firebase-hooks/firestore';
 import { useLocation } from 'react-router';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
@@ -13,47 +14,40 @@ const GuestPage = () => {
   const [ formName, setFormName ] = useState( '' );
   const [ answers, setAnswers ] = useState([]);
 
+  const [ userSnap ] = useCollectionOnce( firebase.collection( 'users' ));
+  const [ formsSnap ] = useDocumentData( firebase.doc( `${ pathArray[ 2 ] }/${ pathArray[ 3 ] }` ));
+
   useEffect(() => {
-    if ( users === null ) {
-      firebase.firestore()
-        .collection( 'users' )
-        .get()
-        .then(( response ) => {
-          const usersList = {};
+    if ( users === null && userSnap ) {
+      const usersList = {};
 
-          response.docs.forEach(( doc ) => {
-            usersList[ doc.id ] = doc.data().name;
-          });
+      userSnap.docs.forEach(( doc ) => {
+        usersList[ doc.id ] = doc.data().name;
+      });
 
-          localStorage.setItem( 'user', JSON.stringify( usersList ));
-          setUsers( usersList );
-        });
+      localStorage.setItem( 'user', JSON.stringify( usersList ));
+      setUsers( usersList );
     }
-    if ( _isEmpty( formName )) {
-      firebase.firestore()
-        .collection( pathArray[ 2 ])
-        .doc( pathArray[ 3 ])
-        .get()
-        .then(( response ) => {
-          setFormName( response.data().name );
-          setAnswers( response.data().answers );
-        });
+    if ( _isEmpty( formName ) && formsSnap ) {
+      setFormName( formsSnap.name );
+      setAnswers( formsSnap.answers );
     }
   }, [
     formName,
+    formsSnap,
     pathArray,
+    userSnap,
     users,
   ]);
 
-  const sendForm = ( nameMale, nameFemale ) => {
+  const onSubmit = ( nameMale, nameFemale ) => {
     const ans = answers.push({
       nameMale,
       nameFemale,
     });
 
     setAnswers( ans );
-
-    firebase.firestore().collection( pathArray[ 2 ])
+    firebase.collection( pathArray[ 2 ])
       .doc( pathArray[ 3 ])
       .update({ answers })
       .then(() => alert( 'Dane zostały zapisane' ))
@@ -65,7 +59,7 @@ const GuestPage = () => {
       creatorName={ _get(
         users, pathArray[ 2 ], '',
       ) } formName={formName}
-      sendFormFunction={( nameMale, nameFemale ) => sendForm( nameMale, nameFemale )}
+      onSubmit={( nameMale, nameFemale ) => onSubmit( nameMale, nameFemale )}
     />
   );
 };

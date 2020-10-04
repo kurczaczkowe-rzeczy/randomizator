@@ -1,1 +1,1 @@
-export { default } from './Form.view';
+export { default } from './Form.container';

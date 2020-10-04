@@ -5,15 +5,8 @@ import classes from './form.module.scss';
 import Button from 'components/form/components/button/Button.view';
 import PropTypes from 'prop-types';
 
-const Form = ({ sendFormFunction }) => (
-  <form
-    className={classes.form} onSubmit={( event ) => {
-      event.preventDefault();
-      const data = new FormData( event.target );
-
-      sendFormFunction( data.get( 'name_male' ), data.get( 'name_female' ));
-    }}
-  >
+const Form = ({ onSubmit }) => (
+  <form className={classes.form} onSubmit={onSubmit}>
     <div className={classes[ 'align-bottom' ]}>
       <Label content="Imie męskie" required />
       <TextInput name="name_male" required />
@@ -28,8 +21,8 @@ const Form = ({ sendFormFunction }) => (
   </form>
 );
 
-Form.propTypes = { sendFormFunction: PropTypes.func };
+Form.propTypes = { onSubmit: PropTypes.func };
 
-Form.defaultProps = { sendFormFunction: () => {} };
+Form.defaultProps = { onSubmit: () => {} };
 
 export default Form;

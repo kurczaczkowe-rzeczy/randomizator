@@ -8,23 +8,23 @@ import classes from './guestPage.module.scss';
 const GuestPageView = ({
   creatorName,
   formName,
-  sendFormFunction,
+  onSubmit,
 }) => (
   <div className={classes.guest}>
     <div className={ classes.description }>
       <Description label="Twórca" content={creatorName} />
       <Description label="Formularz" content={formName} />
     </div>
-    <Card title="FORMULARZ" body={<Form sendFormFunction={sendFormFunction} />} />
+    <Card title="FORMULARZ" body={<Form onSubmit={onSubmit} />} />
   </div>
 );
 
 GuestPageView.propTypes = {
   creatorName: PropTypes.string.isRequired,
   formName: PropTypes.string.isRequired,
-  sendFormFunction: PropTypes.func,
+  onSubmit: PropTypes.func,
 };
 
-GuestPageView.defaultProps = { sendFormFunction: () => {} };
+GuestPageView.defaultProps = { onSubmit: () => {} };
 
 export default GuestPageView;
