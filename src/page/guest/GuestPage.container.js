@@ -10,7 +10,7 @@ const GuestPage = () => {
   const pathArray = history.pathname.split( '/' );
 
   const [ users, setUsers ] = useState( JSON.parse( localStorage.getItem( 'user' )));
-  const [ formName, setFormName ] = useState( '' );
+  const [ formName, setFormName ] = useState( 'Imiona zwierząt anglojęzyczne' );
 
   useEffect(() => {
     if ( users === null ) {
