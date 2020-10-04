@@ -1,0 +1,16 @@
+.guest{
+  margin-top: 48px;
+
+  display: flex;
+  justify-content: space-around;
+
+  .description{
+    min-width: 30%;
+    div:first-child {
+      margin-bottom: 25px;
+    }
+  }
+  .form{
+    min-width: 50%;
+  }
+}
