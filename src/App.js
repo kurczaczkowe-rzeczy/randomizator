@@ -4,7 +4,7 @@ import {
 } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import Creator from 'page/Creator';
-import GuestPage from 'page/guest/GuestPage';
+import GuestPage from 'page/guest';
 import Form from 'page/Form';
 import NotFound from 'page/NotFound';
 
