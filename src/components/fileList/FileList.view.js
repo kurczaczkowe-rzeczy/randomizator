@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import uuid from 'react-uuid';
 
 import FileItem from 'components/fileList/components/fileItem/FileItem.view';
 
 const FileList = ({
   files, onSend, onRemove,
-}) => files.map(( file, index ) => (
+}) => files.map(( file ) => (
   <FileItem
-    key={ `file-${ index }` }
+    key={ `file-${ uuid() }` }
     onSend={ onSend }
     displayName={ file }
     onRemove={ onRemove }
