@@ -1,10 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { any } from 'prop-types';
 import IconButton from 'components/iconButton/IconButton.view';
 import Card from 'components/card/Card.view';
 import DrawResult from 'components/drawResult/DrawResult.view';
 
-const Creator = ({ onRandomClick, loadedData }) => (
+const Creator = ({
+  result, onRandomClick, loadedData,
+}) => (
   <div>
     <h1>Creator panel</h1>
     { loadedData &&
@@ -13,8 +15,8 @@ const Creator = ({ onRandomClick, loadedData }) => (
       title="Wylosowane odpowiedzi"
       body={(
         <DrawResult
-          maleName="Imie męskie - wylosowane"
-          femaleName="Imie damskie - wylosowane"
+          maleName={result.nameMale}
+          femaleName={result.nameFemale}
         />
       )}
     />
@@ -23,6 +25,7 @@ const Creator = ({ onRandomClick, loadedData }) => (
 
 Creator.propTypes = {
   loadedData: PropTypes.bool.isRequired,
+  result: PropTypes.objectOf( PropTypes.any ).isRequired,
   onRandomClick: PropTypes.func,
 };
 Creator.defaultProps = { onRandomClick: () => {} };

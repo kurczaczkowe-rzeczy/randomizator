@@ -12,7 +12,6 @@ const useAnswers = () => {
     }
   });
   const [ dataLoad, setDataLoad ] = useState( false );
-  const [ answers, setAnswers ] = useState([]);
   const history = useLocation();
 
   useEffect(() => {
@@ -22,8 +21,6 @@ const useAnswers = () => {
       .onSnapshot((( snapshot ) => {
         snapshot.docs.forEach(( doc ) => {
           const ans = doc.data().answers;
-
-          setAnswers( ans );
           const result = getData( ans );
 
           setData( result );
@@ -33,11 +30,7 @@ const useAnswers = () => {
     return () => unsub();
   }, [ ]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return [
-    answers,
-    data,
-    dataLoad,
-  ];
+  return [ data, dataLoad ];
 };
 
 const getData = ( answers ) => {
@@ -56,18 +49,20 @@ const getData = ( answers ) => {
 };
 
 const Creator = () => {
-  const [
-    answers,
-    data,
-    dataLoad,
-  ] = useAnswers();
+  const [ data, dataLoad ] = useAnswers();
+
+  const [ result, setResult ] = useState({ });
 
   const drawResult = () => {
-    console.log( answers );
-    console.log( data );
+    const draw = { };
+
+    for ( const [ key, value ] of Object.entries( data )) {
+      draw[ key ] = value[ Math.floor( Math.random() * value.length ) ];
+    }
+    setResult( draw );
   };
 
-  return ( <CreatorView onRandomClick={drawResult} loadedData={dataLoad} /> );
+  return ( <CreatorView result={result} onRandomClick={drawResult} loadedData={dataLoad} /> );
 };
 
 export default Creator;
