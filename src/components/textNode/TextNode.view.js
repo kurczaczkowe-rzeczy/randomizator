@@ -1,26 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextField = ({
+const TextNode = ({
   classes, value, required, type,
 }) => (
   <p className={ classes }>
     { value }
-    { ( required && type === 'label' ) && <span>* </span> }
+    {( required && type === 'label' ) && <span>* </span> }
     { type === 'label' && ':'}
   </p>
 );
 
-TextField.propTypes = {
+TextNode.propTypes = {
   classes: PropTypes.node.isRequired,
   value: PropTypes.string.isRequired,
   required: PropTypes.bool,
   type: PropTypes.oneOf([ 'input-text', 'label' ]),
 };
 
-TextField.defaultProps = {
+TextNode.defaultProps = {
   required: false,
   type: 'label',
 };
 
-export default TextField;
+export default TextNode;
