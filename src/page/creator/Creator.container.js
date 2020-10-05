@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import _isNil from 'lodash/isNil';
+
 import firebase from 'config/firebaseConfig';
+
 import CreatorView from './Creator.view';
 import { useLocation } from 'react-router';
 import useStateWithCallback from 'use-state-with-callback';
-import _isNil from 'lodash/isNil';
 
 const useAnswers = () => {
   const [ data, setData ] = useStateWithCallback([], ( data ) => {

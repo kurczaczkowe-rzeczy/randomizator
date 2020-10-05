@@ -1,8 +1,9 @@
 import React from 'react';
-import PropTypes, { any } from 'prop-types';
-import IconButton from 'components/iconButton/IconButton.view';
+import PropTypes from 'prop-types';
+
 import Card from 'components/card/Card.view';
 import DrawResult from 'components/drawResult/DrawResult.view';
+import IconButton from 'components/iconButton/IconButton.view';
 
 const Creator = ({
   result, onRandomClick, loadedData,
@@ -26,8 +27,7 @@ const Creator = ({
 Creator.propTypes = {
   loadedData: PropTypes.bool.isRequired,
   result: PropTypes.objectOf( PropTypes.any ).isRequired,
-  onRandomClick: PropTypes.func,
+  onRandomClick: PropTypes.func.isRequired,
 };
-Creator.defaultProps = { onRandomClick: () => {} };
 
 export default Creator;

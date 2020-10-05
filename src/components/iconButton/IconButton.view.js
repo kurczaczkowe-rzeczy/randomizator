@@ -1,7 +1,7 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
 import ScatterPlotIcon from '@material-ui/icons/ScatterPlot';
+
 import classes from './iconButton.module.scss';
 
 const IconButton = ({ value, onClick }) => (

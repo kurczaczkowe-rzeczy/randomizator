@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classes from './drawResult.module.scss';
+
 import TextField from 'components/textField/TextField.view';
+
+import classes from './drawResult.module.scss';
 
 const DrawResult = ({ maleName, femaleName }) => (
   <div>
