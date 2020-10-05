@@ -10,8 +10,7 @@ const Creator = ({
 }) => (
   <div>
     <h1>Creator panel</h1>
-    { loadedData &&
-      <IconButton value="Wylosuj odpowiedzi" onClick={ onRandomClick } />}
+    { loadedData && <IconButton value="Wylosuj odpowiedzi" onClick={ onRandomClick } /> }
     <Card
       title="Wylosowane odpowiedzi"
       body={(

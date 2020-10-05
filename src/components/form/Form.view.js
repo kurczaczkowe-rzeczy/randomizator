@@ -1,20 +1,22 @@
 import React from 'react';
-import Label from 'components/form/components/label/Label.view';
-import TextInput from 'components/form/components/textInput/TextInput.view';
-import classes from './form.module.scss';
-import Button from 'components/form/components/button/Button.view';
 import PropTypes from 'prop-types';
 
+import Label from './components/label/Label.view';
+import TextInput from './components/textInput/TextInput.view';
+import Button from './components/button/Button.view';
+import classes from './form.module.scss';
+
+// ToDo create component that wraps label and textInput
 const Form = ({ onSubmit }) => (
-  <form className={classes.form} onSubmit={onSubmit}>
-    <div className={classes[ 'align-bottom' ]}>
-      <Label content="Imie męskie" required />
-      <TextInput name="name_male" required />
+  <form className={ classes.form } onSubmit={ onSubmit }>
+    <div className={ classes[ 'align-bottom' ]}>
+      <Label required content="Imie męskie" />
+      <TextInput required name="name_male" />
     </div>
 
-    <div className={classes[ 'align-bottom' ]}>
-      <Label content="Imie damskie" required />
-      <TextInput name="name_female" required />
+    <div className={ classes[ 'align-bottom' ]}>
+      <Label required content="Imie damskie" />
+      <TextInput required name="name_female" />
     </div>
 
     <Button value="Wyślij" type="submit" />

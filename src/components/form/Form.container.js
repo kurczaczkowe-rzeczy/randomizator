@@ -1,6 +1,7 @@
 import React from 'react';
-import FormView from './Form.view';
 import PropTypes from 'prop-types';
+
+import FormView from './Form.view';
 
 const Form = ({ onSubmit }) => {
   const handleSubmit = ( event ) => {
@@ -11,7 +12,7 @@ const Form = ({ onSubmit }) => {
   };
 
   return (
-    <FormView onSubmit={handleSubmit} />
+    <FormView onSubmit={ handleSubmit } />
   );
 };
 

@@ -3,7 +3,8 @@ import {
   Switch, Route, Redirect,
 } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import Creator from 'page/Creator';
+
+import Creator from 'page/creator';
 import GuestPage from 'page/guest';
 import Form from 'page/Form';
 import NotFound from 'page/NotFound';
