@@ -1,8 +1,10 @@
-import Description from 'components/description/Description.view';
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import Description from 'components/description/Description.view';
 import Card from 'components/card/Card.view';
 import Form from 'components/form';
+
 import classes from './guestPage.module.scss';
 
 const GuestPageView = ({
@@ -10,12 +12,12 @@ const GuestPageView = ({
   formName,
   onSubmit,
 }) => (
-  <div className={classes.guest}>
+  <div className={ classes.guest }>
     <div className={ classes.description }>
-      <Description label="Twórca" content={creatorName} />
-      <Description label="Formularz" content={formName} />
+      <Description label="Twórca" content={ creatorName } />
+      <Description label="Formularz" content={ formName } />
     </div>
-    <Card title="FORMULARZ" body={<Form onSubmit={onSubmit} />} />
+    <Card title="FORMULARZ" body={ <Form onSubmit={ onSubmit } /> } />
   </div>
 );
 

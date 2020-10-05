@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FormView from './Form.view';
 
+
 const Form = ({ onSubmit, preview }) => {
   const handleSubmit = ( event ) => {
     event.preventDefault();
@@ -11,7 +12,6 @@ const Form = ({ onSubmit, preview }) => {
   };
 
   return (
-
     <FormView onSubmit={handleSubmit} preview={preview} />
   );
 };

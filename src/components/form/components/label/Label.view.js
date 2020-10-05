@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import classes from './label.module.scss';
 
 const Label = ({ content, required }) => (
@@ -16,4 +17,5 @@ Label.propTypes = {
 };
 
 Label.defaultProps = { required: false };
+
 export default Label;
