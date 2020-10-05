@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import GuestPageView from 'page/guest/GuestPage.view';
-import firebase from 'config/firebaseConfig';
+import { db, firestore } from 'config/firebaseConfig';
 import { useCollectionOnce, useDocumentData } from 'react-firebase-hooks/firestore';
 import { useLocation } from 'react-router';
 import _get from 'lodash/get';
@@ -12,10 +12,9 @@ const GuestPage = () => {
 
   const [ users, setUsers ] = useState( JSON.parse( localStorage.getItem( 'user' )));
   const [ formName, setFormName ] = useState( '' );
-  const [ answers, setAnswers ] = useState([]);
 
-  const [ userSnap ] = useCollectionOnce( firebase.collection( 'users' ));
-  const [ formsSnap ] = useDocumentData( firebase.doc( `${ pathArray[ 2 ] }/${ pathArray[ 3 ] }` ));
+  const [ userSnap ] = useCollectionOnce( db.collection( 'users' ));
+  const [ formsSnap ] = useDocumentData( db.doc( `${ pathArray[ 2 ] }/${ pathArray[ 3 ] }` ));
 
   useEffect(() => {
     if ( users === null && userSnap ) {
@@ -30,7 +29,6 @@ const GuestPage = () => {
     }
     if ( _isEmpty( formName ) && formsSnap ) {
       setFormName( formsSnap.name );
-      setAnswers( formsSnap.answers );
     }
   }, [
     formName,
@@ -41,15 +39,14 @@ const GuestPage = () => {
   ]);
 
   const onSubmit = ( nameMale, nameFemale ) => {
-    const ans = answers.push({
+    const ans = {
       nameMale,
       nameFemale,
-    });
+    };
 
-    setAnswers( ans );
-    firebase.collection( pathArray[ 2 ])
+    db.collection( pathArray[ 2 ])
       .doc( pathArray[ 3 ])
-      .update({ answers })
+      .update({ answers: firestore.FieldValue.arrayUnion( ans ) })
       .then(() => alert( 'Dane zostały zapisane' ))
       .catch(( error ) => console.log( 'Error!', error ));
   };
