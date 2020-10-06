@@ -4,7 +4,7 @@ import useStateWithCallback from 'use-state-with-callback';
 import _isNil from 'lodash/isNil';
 import _isEmpty from 'lodash/isEmpty';
 
-import firebase from 'config/firebaseConfig';
+import { db } from 'config/firebaseConfig';
 
 import CreatorView from './Creator.view';
 
@@ -20,7 +20,7 @@ const useAnswers = () => {
   useEffect(() => {
     const pathArray = history.pathname.split( '/' );
 
-    const unsub = firebase.collection( pathArray[ 2 ])
+    const unsub = db.collection( pathArray[ 2 ])
       .onSnapshot((( snapshot ) => {
         snapshot.docs.forEach(( doc ) => {
           const ans = doc.data().answers;
