@@ -1,8 +1,9 @@
 import React from 'react';
-import FormView from './Form.view';
 import PropTypes from 'prop-types';
+import FormView from './Form.view';
 
-const Form = ({ onSubmit }) => {
+
+const Form = ({ onSubmit, preview }) => {
   const handleSubmit = ( event ) => {
     event.preventDefault();
     const data = new FormData( event.target );
@@ -11,12 +12,18 @@ const Form = ({ onSubmit }) => {
   };
 
   return (
-    <FormView onSubmit={handleSubmit} />
+    <FormView onSubmit={handleSubmit} preview={preview} />
   );
 };
 
-Form.propTypes = { onSubmit: PropTypes.func };
+Form.propTypes = {
+  preview: PropTypes.bool,
+  onSubmit: PropTypes.func,
+};
 
-Form.defaultProps = { onSubmit: () => {} };
+Form.defaultProps = {
+  onSubmit: () => {},
+  preview: false,
+};
 
 export default Form;

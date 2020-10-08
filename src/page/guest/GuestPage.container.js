@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import GuestPageView from 'page/guest/GuestPage.view';
 import { db, firestore } from 'config/firebaseConfig';
+// ToDo Remove react-firebase-hooks
 import { useCollectionOnce, useDocumentData } from 'react-firebase-hooks/firestore';
 import { useLocation } from 'react-router';
 import _get from 'lodash/get';
@@ -44,6 +45,7 @@ const GuestPage = () => {
       nameFemale,
     };
 
+    // ToDo Rewrite firestore connection with hooks
     db.collection( pathArray[ 2 ])
       .doc( pathArray[ 3 ])
       .update({ answers: firestore.FieldValue.arrayUnion( ans ) })
@@ -55,7 +57,8 @@ const GuestPage = () => {
     <GuestPageView
       creatorName={ _get(
         users, pathArray[ 2 ], '',
-      ) } formName={formName}
+      )}
+      formName={ formName }
       onSubmit={( nameMale, nameFemale ) => onSubmit( nameMale, nameFemale )}
     />
   );

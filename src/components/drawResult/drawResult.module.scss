@@ -1,0 +1,27 @@
+.alignCenterRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.label{
+  margin: 0 15px 0 0;
+  font-size: 1.2em;
+  min-width: max-content;
+  span{
+    color: #ff3c3c;
+  }
+}
+
+.input{
+  background-color: #222222;
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-image: linear-gradient(180deg, #222 0%, #222 49%, #771e76 50%, #771e76 100%) 1;
+  border-bottom: 2px solid;
+  padding: 8px;
+  color: #bdaeae;
+  font-size: 17px;
+  min-width: 60%;
+  max-width: 60%;
+}
