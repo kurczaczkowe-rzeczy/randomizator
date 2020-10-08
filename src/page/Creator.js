@@ -1,11 +1,11 @@
 import React from 'react';
+import FileContainer from 'components/fileContainer/FileContainer.container';
 
-function Creator() {
-    return (
-        <div>
-            <h1>Creator panel</h1>
-        </div>
-    );
-}
+const Creator = () => (
+  <div>
+    <h1>Creator panel</h1>
+    <FileContainer />
+  </div>
+);
 
 export default Creator;

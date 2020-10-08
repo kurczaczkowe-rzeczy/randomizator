@@ -3,10 +3,10 @@ import { useLocation } from 'react-router';
 import _isEmpty from 'lodash/isEmpty';
 import _map from 'lodash/map';
 
-import parseText from 'components/fileContainer/FileContainer.utils';
 import { db, firestore } from 'config/firebaseConfig';
 
-import FileContainerView from 'components/fileContainer/FileContainer.view';
+import parseText from './FileContainer.utils';
+import FileContainerView from './FileContainer.view';
 
 const FileContainer = () => {
   const history = useLocation();
@@ -32,7 +32,6 @@ const FileContainer = () => {
   };
 
   const onDropAccepted = ( acceptedFiles ) => {
-
     setAcceptedFile( _map( acceptedFiles, ( file ) => file.name ));
 
     const reader = new FileReader();
@@ -53,9 +52,5 @@ const FileContainer = () => {
     />
   );
 };
-
-FileContainer.propTypes = {};
-
-FileContainer.defaultProps = {};
 
 export default FileContainer;

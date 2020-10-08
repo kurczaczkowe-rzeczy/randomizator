@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'react-uuid';
 
-import FileItem from 'components/fileList/components/fileItem/FileItem.view';
+import FileItem from './components/fileItem/FileItem.view';
 
 const FileList = ({
   files, onSend, onRemove,

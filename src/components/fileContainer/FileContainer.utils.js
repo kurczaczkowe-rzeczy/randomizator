@@ -6,26 +6,26 @@ const parseText = ( text ) => {
   const jsonCSV = readString( text ).data;
 
   const answers = [];
-  let keys = [];
-  let result = {};
+  let fieldNames = [];
+  let answer = {};
 
-  _forEach( jsonCSV, ( value, index ) => {
-    if ( !index ) {
-      keys = value;
+  _forEach( jsonCSV, ( fileRow, index ) => {
+    if ( index === 0 ) {
+      fieldNames = fileRow;
 
       return;
     }
 
-    _forEach( value, ( val, ind ) => {
+    _forEach( fileRow, ( cell, ind ) => {
       if ( ind !== 0 ) {
-        result[ keys[ ind ] ] = val;
+        answer[ fieldNames[ ind ] ] = cell;
       }
     });
 
-    if ( !_isEmpty( result )) {
-      answers.push({ ...result });
+    if ( !_isEmpty( answer )) {
+      answers.push({ ...answer });
     }
-    result = {};
+    answer = {};
   });
 
   return answers;

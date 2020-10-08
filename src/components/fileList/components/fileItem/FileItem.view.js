@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import classes from 'components/fileList/components/fileItem/fileItem.module.scss';
+import classes from './fileItem.module.scss';
 
 const FileItem = ({
   displayName, onRemove, onSend,
