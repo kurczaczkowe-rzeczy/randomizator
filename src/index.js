@@ -1,32 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  compose,
+  createStore,
+  applyMiddleware,
+} from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { reduxFirestore, getFirestore } from 'redux-firestore';
+import { getFirebase } from 'react-redux-firebase';
+
+import { firebase } from 'config/firebaseConfig';
+import rootReducer from 'store/reducers/rootReducer';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import {
-  compose, createStore, applyMiddleware,
-} from 'redux';
-import { Provider } from 'react-redux';
-import rootReducer from 'store/reducers/rootReducer';
-import thunk from 'redux-thunk';
-import { reduxFirestore, getFirestore } from 'redux-firestore';
-import { getFirebase } from 'react-redux-firebase';
-import { db } from 'config/firebaseConfig';
-
 const store = createStore( rootReducer, compose(
   applyMiddleware( thunk.withExtraArgument({ getFirebase, getFirestore })),
-  reduxFirestore( db ),
+  reduxFirestore( firebase ),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 ));
-
-/* const store = createStore( rootReducer,
-     compose(
-       applyMiddleware( thunk.withExtraArgument({ getFirebase, getFirestore })),
-       reduxFirestore( db ),
-       reactReduxFirebase( db ),
-       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-     )); */
 
 ReactDOM.render( <React.StrictMode><Provider store={store}><App /></Provider></React.StrictMode>,
   document.getElementById( 'root' ));

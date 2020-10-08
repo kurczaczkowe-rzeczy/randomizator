@@ -1,11 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import GuestPageView from 'page/guest/GuestPage.view';
-import { db, firestore } from 'config/firebaseConfig';
-// ToDo Remove react-firebase-hooks
-import { useCollectionOnce, useDocumentData } from 'react-firebase-hooks/firestore';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
+import { connect } from 'react-redux';
 
-const GuestPage = () => {
+import { db, firestore } from 'config/firebaseConfig';
+import { getUserName } from 'store/actions/userActions';
+import { getFormName } from 'store/actions/formAction';
+
+import GuestPageView from 'page/guest/GuestPage.view';
+
+const GuestPage = ({
+  formName,
+  getFormName,
+  getUser,
+  userName,
+}) => {
   const history = useLocation();
   const pathArray = history.pathname.split( '/' );
 
