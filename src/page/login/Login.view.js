@@ -9,7 +9,7 @@ const Login = ({ onLogin }) => (
   <div className={classes.center}>
     <Card
       title="Zaloguj się" body={(
-        <form onSubmit={() => onLogin} method="post">
+        <form onSubmit={onLogin} method="post">
           <TextInput
             name="email"
             placeholder="email@example.com"
