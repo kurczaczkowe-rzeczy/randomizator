@@ -1,43 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import GuestPageView from 'page/guest/GuestPage.view';
-import { db, firestore } from 'config/firebaseConfig';
-// ToDo Remove react-firebase-hooks
-import { useCollectionOnce, useDocumentData } from 'react-firebase-hooks/firestore';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
-import _get from 'lodash/get';
-import _isEmpty from 'lodash/isEmpty';
+import { connect } from 'react-redux';
 
-const GuestPage = () => {
+import { db, firestore } from 'config/firebaseConfig';
+import { getUserName } from 'store/actions/userActions';
+import { getFormName } from 'store/actions/formAction';
+
+import GuestPageView from 'page/guest/GuestPage.view';
+
+const GuestPage = ({
+  formName,
+  getFormName,
+  getUser,
+  userName,
+}) => {
   const history = useLocation();
   const pathArray = history.pathname.split( '/' );
 
-  const [ users, setUsers ] = useState( JSON.parse( localStorage.getItem( 'user' )));
-  const [ formName, setFormName ] = useState( '' );
-
-  const [ userSnap ] = useCollectionOnce( db.collection( 'users' ));
-  const [ formsSnap ] = useDocumentData( db.doc( `${ pathArray[ 2 ] }/${ pathArray[ 3 ] }` ));
-
   useEffect(() => {
-    if ( users === null && userSnap ) {
-      const usersList = {};
-
-      userSnap.docs.forEach(( doc ) => {
-        usersList[ doc.id ] = doc.data().name;
-      });
-
-      localStorage.setItem( 'user', JSON.stringify( usersList ));
-      setUsers( usersList );
-    }
-    if ( _isEmpty( formName ) && formsSnap ) {
-      setFormName( formsSnap.name );
-    }
-  }, [
-    formName,
-    formsSnap,
-    pathArray,
-    userSnap,
-    users,
-  ]);
+    getUser( pathArray[ 2 ]);
+    getFormName( pathArray[ 2 ], pathArray[ 3 ]);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
   const onSubmit = ( nameMale, nameFemale ) => {
     const ans = {
@@ -45,7 +29,6 @@ const GuestPage = () => {
       nameFemale,
     };
 
-    // ToDo Rewrite firestore connection with hooks
     db.collection( pathArray[ 2 ])
       .doc( pathArray[ 3 ])
       .update({ answers: firestore.FieldValue.arrayUnion( ans ) })
@@ -55,13 +38,35 @@ const GuestPage = () => {
 
   return (
     <GuestPageView
-      creatorName={ _get(
-        users, pathArray[ 2 ], '',
-      )}
-      formName={ formName }
+      creatorName={ userName }
+      formName={formName}
       onSubmit={( nameMale, nameFemale ) => onSubmit( nameMale, nameFemale )}
     />
   );
 };
 
-export default GuestPage;
+GuestPage.propTypes = {
+  formName: PropTypes.string,
+  getFormName: PropTypes.func,
+  getUser: PropTypes.func,
+  userName: PropTypes.string,
+};
+
+GuestPage.defaultProps = {
+  getFormName: () => {},
+  getUser: () => {},
+  formName: '',
+  userName: '',
+};
+
+const mapStateToProps = ( state ) => ({
+  userName: state.usr.userName,
+  formName: state.form.formName,
+});
+
+const mapDispatchToProps = ( dispatch ) => ({
+  getUser: ( id ) => dispatch( getUserName( id )),
+  getFormName: ( userID, formID ) => dispatch( getFormName( userID, formID )),
+});
+
+export default connect( mapStateToProps, mapDispatchToProps )( GuestPage );
