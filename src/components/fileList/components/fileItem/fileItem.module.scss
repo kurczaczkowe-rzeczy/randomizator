@@ -1,0 +1,16 @@
+.file{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222222;
+  border-radius: 5px;
+  p{
+    margin-left: 16px;
+    color: #bdaeae;
+  }
+  .icon{
+    color: #bdaeae;
+    cursor: pointer;
+    margin: 0 16px;
+  }
+}
