@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import DrawView from './Draw.view';
+import { connect } from 'react-redux';
 
 const Draw = ({
   loadedData, onRandomClick, result,
@@ -11,8 +12,12 @@ const Draw = ({
 
 Draw.propTypes = {
   loadedData: PropTypes.bool.isRequired,
-  result: PropTypes.objectOf( PropTypes.any ).isRequired,
   onRandomClick: PropTypes.func.isRequired,
+  result: PropTypes.objectOf( PropTypes.any ),
 };
 
-export default Draw;
+Draw.defaultProps = { result: {}};
+
+const mapStateToProps = ( state ) => ({ result: state.draw.result });
+
+export default connect( mapStateToProps )( Draw );

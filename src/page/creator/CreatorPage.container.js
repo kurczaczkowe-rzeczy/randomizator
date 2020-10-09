@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import _isNil from 'lodash/isNil';
 
@@ -8,11 +9,11 @@ import CreatorView from 'page/creator/CreatorPage.view';
 import { setDrawResult } from 'store/actions/drawAction';
 import { connect } from 'react-redux';
 import { setAnswers } from 'store/actions/answersAction';
+import { setFormName } from 'store/actions/formAction';
 
 const Creator = ({
-  tags, setDrawResult, setAnswers, answers, isLoaded,
+  setDrawResult, setAnswers, isLoaded, setFormName, name,
 }) => {
-  const [ result, setResult ] = useState({ nameFemale: '', nameMale: '' });
   const history = useLocation();
   const pathArray = history.pathname.split( '/' );
 
@@ -22,6 +23,7 @@ const Creator = ({
         snapshot.docs.forEach(( doc ) => {
           const ans = doc.data().answers;
 
+          setFormName( doc.data().name );
           getData( ans );
         });
       }));
@@ -44,29 +46,37 @@ const Creator = ({
   };
 
   const drawResult = () => {
-    const draw = { };
-
-    setDrawResult( tags );
-
-    for ( const [ key, value ] of Object.entries( answers )) {
-      draw[ key ] = value[ Math.floor( Math.random() * value.length ) ];
-    }
-    setResult( draw );
+    setDrawResult();
   };
 
-  return ( <CreatorView loadedData={ isLoaded } result={ result } onRandomClick={ drawResult } /> );
+  return ( <CreatorView loadedData={ isLoaded } onRandomClick={ drawResult } name={ name } /> );
+};
+
+Creator.propTypes = {
+  isLoaded: PropTypes.bool,
+  name: PropTypes.string,
+  setAnswers: PropTypes.func,
+  setDrawResult: PropTypes.func,
+  setFormName: PropTypes.func,
+};
+
+Creator.defaultProps = {
+  isLoaded: false,
+  name: '',
+  setAnswers: () => {},
+  setDrawResult: () => {},
+  setFormName: () => {},
 };
 
 const mapStateToProps = ( state ) => ({
-  result: state.draw.result,
-  tags: state.draw.tags,
-  answers: state.ans.answers,
   isLoaded: state.ans.isLoaded,
+  name: state.form.formName,
 });
 
 const mapDispatchToProps = ( dispatch ) => ({
   setDrawResult: () => dispatch( setDrawResult()),
   setAnswers: ( answers ) => dispatch( setAnswers( answers )),
+  setFormName: ( id ) => dispatch( setFormName( id )),
 });
 
 export default connect( mapStateToProps, mapDispatchToProps )( Creator );

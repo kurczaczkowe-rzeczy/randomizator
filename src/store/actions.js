@@ -8,4 +8,4 @@ export const ERROR_FORM_DONT_EXIST = 'ERROR_FORM_DONT_EXIST';
 
 export const ADD_TAG = 'ADD_TAG';
 export const REMOVE_TAG = 'REMOVE_TAG';
-export const DRAW_RESULT = 'REMOVE_TAG';
+export const DRAW_RESULT = 'DRAW_RESULT';

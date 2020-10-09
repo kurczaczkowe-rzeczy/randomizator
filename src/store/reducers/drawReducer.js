@@ -22,7 +22,10 @@ const reducer = ( state = initState, action = {}) => { // id:'' text:''
         tags: action.tags,
       };
     case DRAW_RESULT:
-      return { ...state };
+      return {
+        ...state,
+        result: action.draw,
+      };
     default:
       return state;
   }

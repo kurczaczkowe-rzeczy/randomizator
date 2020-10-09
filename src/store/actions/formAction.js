@@ -16,3 +16,7 @@ export const getFormName = ( userID, formID ) =>
         }
       });
   };
+
+export const setFormName = ( formName ) => ( dispatch ) => {
+  dispatch({ type: actionTypes.GET_FORM_NAME, name: formName });
+};

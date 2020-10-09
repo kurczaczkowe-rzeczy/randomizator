@@ -28,7 +28,6 @@ const SelectFilter = ({
   };
 
   const handleAddition = ( tag ) => {
-    console.log( tag );
     addTag( tag );
   };
 

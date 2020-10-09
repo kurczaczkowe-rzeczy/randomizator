@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import classes from './creatorPage.module.scss';
+
 import Card from 'components/card/Card.view';
 import FileContainer from 'components/fileContainer/FileContainer.container';
-import CreatorDescription from 'components/creatorDescription/CreatorDescription.view';
-import classes from './creatorPage.module.scss';
+import FormDescription from 'components/formDescription/FormDescription.view';
 import Form from 'components/form';
 import Draw from 'components/draw';
 
 const Creator = ({
-  result, onRandomClick, loadedData, name,
+  onRandomClick, loadedData, name,
 }) => (
   <div className={classes.page}>
     <div className={classes.leftSpace}>
-      <CreatorDescription content={name} />
+      <FormDescription content={name} />
       <FileContainer />
     </div>
     <div className={classes.rightSpace}>
@@ -21,7 +22,7 @@ const Creator = ({
       <Card
         title="Losowanie"
         body={(
-          <Draw loadedData={loadedData} onRandomClick={onRandomClick} result={result} />
+          <Draw loadedData={loadedData} onRandomClick={onRandomClick} />
         )}
       />
     </div>
@@ -30,11 +31,10 @@ const Creator = ({
 
 Creator.propTypes = {
   loadedData: PropTypes.bool.isRequired,
-  result: PropTypes.objectOf( PropTypes.any ).isRequired,
   onRandomClick: PropTypes.func.isRequired,
   name: PropTypes.string,
 };
 
-Creator.defaultProps = { name: 'Ziemniaczek' };
+Creator.defaultProps = { name: '' };
 
 export default Creator;

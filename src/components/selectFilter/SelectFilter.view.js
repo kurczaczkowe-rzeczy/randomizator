@@ -26,7 +26,7 @@ SelectFilter.propTypes = {
   handleTagClick: PropTypes.func,
   tags: PropTypes.arrayOf( PropTypes.shape({
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
   })),
 };
 

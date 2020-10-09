@@ -12,18 +12,18 @@ const Draw = ({
     <SelectFilter />
     { loadedData && <IconButton value="Wylosuj odpowiedzi" onClick={ onRandomClick } /> }
     <DrawResult
-      maleName={result.nameMale}
-      femaleName={result.nameFemale}
+      maleName={result.nameMale || ''}
+      femaleName={result.nameFemale || ''}
     />
   </>
 );
 
 Draw.propTypes = {
   loadedData: PropTypes.bool.isRequired,
-  result: PropTypes.objectOf( PropTypes.any ).isRequired,
   onRandomClick: PropTypes.func.isRequired,
+  result: PropTypes.objectOf( PropTypes.any ),
 };
 
-Draw.defaultProps = {};
+Draw.defaultProps = { result: {}};
 
 export default Draw;

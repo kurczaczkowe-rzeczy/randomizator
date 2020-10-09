@@ -21,7 +21,6 @@ const FileContainer = () => {
   const [ answers, setAnswers ] = useState([]);
 
   const sendFile = () => {
-    console.log( answers );
     if ( !_isEmpty( answers )) {
       db.collection( pathArray[ 2 ])
         .doc( 'uIoLWxSTnXqdZJuzNi5v' )
