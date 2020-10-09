@@ -45,7 +45,7 @@ const Creator = ({
         result[ key ].push( value );
       }
     }
-    setAnswers( result );
+    setAnswers( result, answers.length );
   };
 
   const drawResult = () => {
@@ -73,7 +73,7 @@ const mapStateToProps = ( state ) => ({ name: state.form.formName });
 
 const mapDispatchToProps = ( dispatch ) => ({
   setDrawResult: () => dispatch( setDrawResult()),
-  setAnswers: ( answers ) => dispatch( setAnswers( answers )),
+  setAnswers: ( answers, counter ) => dispatch( setAnswers( answers, counter )),
   setFormName: ( id ) => dispatch( setFormName( id )),
 });
 
