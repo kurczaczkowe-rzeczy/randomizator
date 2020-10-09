@@ -31,7 +31,7 @@ const Creator = ({
         snapshot.docs.forEach(( doc ) => {
           const ans = doc.data().answers;
 
-          setFormName( doc.data().name );
+          setFormName( doc.data().name, doc.id );
           getData( ans );
         });
       }));
@@ -86,7 +86,7 @@ const mapStateToProps = ( state ) => ({ name: state.form.formName });
 const mapDispatchToProps = ( dispatch ) => ({
   drawResult: () => dispatch( setDrawResult()),
   setAnswers: ( answers, counter ) => dispatch( setAnswers( answers, counter )),
-  setFormName: ( id ) => dispatch( setFormName( id )),
+  setFormName: ( name, id ) => dispatch( setFormName( name, id )),
   logout: () => dispatch( signOut()),
 });
 
