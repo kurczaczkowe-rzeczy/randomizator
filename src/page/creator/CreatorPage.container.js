@@ -6,7 +6,7 @@ import _isEmpty from 'lodash/isEmpty';
 
 import { db } from 'config/firebaseConfig';
 
-import CreatorView from './Creator.view';
+import CreatorView from 'page/creator/CreatorPage.view';
 
 const useAnswers = () => {
   const [ data, setData ] = useStateWithCallback([], ( data ) => {
@@ -54,7 +54,7 @@ const getData = ( answers ) => {
 const Creator = () => {
   const [ data, dataLoad ] = useAnswers();
 
-  const [ result, setResult ] = useState({ });
+  const [ result, setResult ] = useState({ nameFemale: '', nameMale: '' });
 
   const drawResult = () => {
     const draw = { };

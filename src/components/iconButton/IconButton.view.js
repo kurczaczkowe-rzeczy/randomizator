@@ -6,7 +6,7 @@ import classes from './iconButton.module.scss';
 
 const IconButton = ({ value, onClick }) => (
   <button type="button" className={ classes.button } onClick={ onClick }>
-    <ScatterPlotIcon classes={{ root: classes.icon }} fontSize="large" />
+    <ScatterPlotIcon classes={{ root: classes.icon }} />
     <span>{ value }</span>
   </button>
 );

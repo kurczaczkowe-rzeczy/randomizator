@@ -7,11 +7,11 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  padding-top: 35px;
   margin-bottom: 15px;
   position: relative;
   z-index: 1;
   transition: all 300ms ease-in-out;
+  padding: 35px 15px 0 15px;
 
   &.active{
     background-color: #222;

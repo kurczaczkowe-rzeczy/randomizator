@@ -1,0 +1,10 @@
+.page {
+  display: flex;
+  justify-content: space-evenly;
+  .leftSpace {
+    max-width: 30%;
+  }
+  .rightSpace {
+    width: 50%;
+  }
+}
