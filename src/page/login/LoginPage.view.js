@@ -25,7 +25,7 @@ const Login = ({ onLogin, authError }) => (
             />
             <Button value="Zaloguj się" type="submit" />
           </form>
-          { authError !== '' && <div className={ classes.error }>{authError}</div> }
+          { authError !== null && <div className={ classes.error }>{authError}</div> }
         </>
       )}
     />

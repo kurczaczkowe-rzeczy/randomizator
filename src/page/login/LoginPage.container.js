@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import LoginPageView from 'page/login/LoginPage.view';
 import { signIn, signOut } from 'store/actions/authAction';
-import { Redirect } from 'react-router';
+import CheckAuth from 'hoc/checkAuth/CheckAuth';
 
 const Login = ({
   signIn, authError, auth,
@@ -17,11 +17,13 @@ const Login = ({
     signIn({ email: data.get( 'email' ), password: data.get( 'password' ) });
   };
 
-  return !auth.auth.uid
-    ? (
+  return (
+    <CheckAuth
+      path={auth.auth.uid}
+    >
       <LoginPageView onLogin={ handleLogin } authError={ authError } />
-    )
-    : ( <Redirect to={ `/randomizator/${ auth.auth.uid }` } /> );
+    </CheckAuth>
+  );
 };
 
 Login.propTypes = {

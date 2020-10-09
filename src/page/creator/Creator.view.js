@@ -20,7 +20,7 @@ const Creator = ({
         />
       )}
     />
-    <IconButton value="Wyloguj się" onClick={signOut} />
+    <IconButton value="Wyloguj się" onClick={signOut} icon="logout" />
   </div>
 );
 

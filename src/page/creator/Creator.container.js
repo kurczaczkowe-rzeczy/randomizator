@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
+import PropTypes from 'prop-types';
 import useStateWithCallback from 'use-state-with-callback';
 import _isNil from 'lodash/isNil';
 import _isEmpty from 'lodash/isEmpty';
@@ -9,6 +10,7 @@ import { db } from 'config/firebaseConfig';
 import CreatorView from './Creator.view';
 import { signOut } from 'store/actions/authAction';
 import { connect } from 'react-redux';
+import CheckAuth from 'hoc/checkAuth/CheckAuth';
 
 const useAnswers = () => {
   const [ data, setData ] = useStateWithCallback([], ( data ) => {
@@ -53,7 +55,7 @@ const getData = ( answers ) => {
   return result;
 };
 
-const Creator = () => {
+const Creator = ({ signOut }) => {
   const [ data, dataLoad ] = useAnswers();
 
   const [ result, setResult ] = useState({ });
@@ -68,12 +70,18 @@ const Creator = () => {
   };
 
   return (
-    <CreatorView
-      loadedData={ dataLoad} result={ result } onRandomClick={ drawResult }
-      signOut={signOut}
-    />
+    <CheckAuth isLogged>
+      <CreatorView
+        loadedData={ dataLoad} result={ result } onRandomClick={ drawResult }
+        signOut={signOut}
+      />
+    </CheckAuth>
   );
 };
+
+Creator.propTypes = { signOut: PropTypes.func };
+
+Creator.defaultProps = { signOut: () => {} };
 
 export const mapActionToProps = ( dispatch ) => ({ signOut: () => dispatch( signOut()) });
 
