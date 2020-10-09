@@ -1,3 +1,6 @@
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const ADD_FORM = 'ADD_FORM';
 
 export const GET_USER_NAME = 'GET_USER_NAME';

@@ -7,6 +7,8 @@ import _isEmpty from 'lodash/isEmpty';
 import { db } from 'config/firebaseConfig';
 
 import CreatorView from './Creator.view';
+import { signOut } from 'store/actions/authAction';
+import { connect } from 'react-redux';
 
 const useAnswers = () => {
   const [ data, setData ] = useStateWithCallback([], ( data ) => {
@@ -65,7 +67,14 @@ const Creator = () => {
     setResult( draw );
   };
 
-  return ( <CreatorView loadedData={ dataLoad} result={ result } onRandomClick={ drawResult } /> );
+  return (
+    <CreatorView
+      loadedData={ dataLoad} result={ result } onRandomClick={ drawResult }
+      signOut={signOut}
+    />
+  );
 };
 
-export default Creator;
+export const mapActionToProps = ( dispatch ) => ({ signOut: () => dispatch( signOut()) });
+
+export default  connect( null, mapActionToProps )( Creator );

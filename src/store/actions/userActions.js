@@ -2,11 +2,11 @@ import * as actionTypes from 'store/actions';
 
 export const getUserName = ( id ) =>
   (
-    dispatch, getState, { getFirestore },
+    dispatch, getState, { getFirebase, getFirestore },
   ) => {
-    const firestore = getFirestore();
-
-    firestore.collection( 'users' ).doc( id )
+    getFirestore()
+      .collection( 'users' )
+      .doc( id )
       .get()
       .then(( doc ) => {
         if ( doc.exists ) {

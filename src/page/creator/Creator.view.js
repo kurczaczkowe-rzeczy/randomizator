@@ -6,7 +6,7 @@ import DrawResult from 'components/drawResult/DrawResult.view';
 import IconButton from 'components/iconButton/IconButton.view';
 
 const Creator = ({
-  result, onRandomClick, loadedData,
+  result, onRandomClick, loadedData, signOut,
 }) => (
   <div>
     <h1>Creator panel</h1>
@@ -20,6 +20,7 @@ const Creator = ({
         />
       )}
     />
+    <IconButton value="Wyloguj się" onClick={signOut} />
   </div>
 );
 
@@ -27,6 +28,9 @@ Creator.propTypes = {
   loadedData: PropTypes.bool.isRequired,
   result: PropTypes.objectOf( PropTypes.any ).isRequired,
   onRandomClick: PropTypes.func.isRequired,
+  signOut: PropTypes.func,
 };
+
+Creator.defaultProps = { signOut: () => {} };
 
 export default Creator;
