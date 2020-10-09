@@ -20,6 +20,8 @@ const SelectFilter = ({
     handleDrag={ handleDrag }
     handleTagClick={ handleTagClick }
     inputFieldPosition="top"
+    placeholder="Wprowadź składnik filtrowania"
+    autofocus={ false }
   />
 );
 
