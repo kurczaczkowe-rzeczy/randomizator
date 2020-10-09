@@ -25,7 +25,10 @@ const FileContainer = () => {
       db.collection( pathArray[ 2 ])
         .doc( 'uIoLWxSTnXqdZJuzNi5v' )
         .update({ answers: firestore.FieldValue.arrayUnion( ...answers ) })
-        .then(() => alert( 'Dane zostały zapisane' ))
+        .then(() => {
+          setAcceptedFile([]);
+          alert( 'Dane zostały zapisane' );
+        })
         .catch(( error ) => console.log( 'Error!', error ));
     }
   };
