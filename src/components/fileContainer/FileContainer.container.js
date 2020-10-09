@@ -43,9 +43,14 @@ const FileContainer = () => {
     reader.readAsText( acceptedFiles[ 0 ]);
   };
 
+  const onDropRejected =  () => {
+    alert( 'Taki plik nie jest akceptowany. Prosze podać plik z rozszerzeniem CSV' );
+  };
+
   return (
     <FileContainerView
       onDropAccepted={ onDropAccepted }
+      onDropRejected={ onDropRejected }
       acceptedFile={ acceptedFile }
       onRemove={ removeFile }
       onSend={ sendFile }

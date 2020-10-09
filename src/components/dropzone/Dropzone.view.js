@@ -7,13 +7,14 @@ import classNames from 'classnames';
 import classes from './fileDropzone.module.scss';
 
 const DropzoneView = ({
-  onDropAccepted, multiple, type,
+  onDropAccepted, onDropRejected, multiple, type,
 }) => (
   <Dropzone
     multiple={ multiple }
     accept={ type }
     activeStyle={ classes.active }
     onDropAccepted={ onDropAccepted }
+    onDropRejected={ onDropRejected }
   >
     { ({
       getRootProps, getInputProps, isDragActive,
@@ -39,6 +40,7 @@ const DropzoneView = ({
 
 DropzoneView.propTypes = {
   onDropAccepted: PropTypes.func.isRequired,
+  onDropRejected: PropTypes.func.isRequired,
   multiple: PropTypes.bool,
   type: PropTypes.string,
 };
