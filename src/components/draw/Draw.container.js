@@ -13,13 +13,19 @@ const Draw = ({
 );
 
 Draw.propTypes = {
-  loadedData: PropTypes.bool.isRequired,
   onRandomClick: PropTypes.func.isRequired,
+  loadedData: PropTypes.bool,
   result: PropTypes.objectOf( PropTypes.any ),
 };
 
-Draw.defaultProps = { result: {}};
+Draw.defaultProps = {
+  loadedData: false,
+  result: {},
+};
 
-const mapStateToProps = ( state ) => ({ result: state.draw.result });
+const mapStateToProps = ( state ) => ({
+  loadedData: state.ans.isLoaded,
+  result: state.draw.result,
+});
 
 export default connect( mapStateToProps )( Draw );

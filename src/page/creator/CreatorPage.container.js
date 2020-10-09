@@ -14,7 +14,6 @@ import { setFormName } from 'store/actions/formAction';
 const Creator = ({
   setDrawResult,
   setAnswers,
-  isLoaded,
   setFormName,
   name,
 }) => {
@@ -53,11 +52,10 @@ const Creator = ({
     setDrawResult();
   };
 
-  return ( <CreatorView loadedData={ isLoaded } onRandomClick={ drawResult } name={ name } /> );
+  return ( <CreatorView onRandomClick={ drawResult } name={ name } /> );
 };
 
 Creator.propTypes = {
-  isLoaded: PropTypes.bool,
   name: PropTypes.string,
   setAnswers: PropTypes.func,
   setDrawResult: PropTypes.func,
@@ -65,17 +63,13 @@ Creator.propTypes = {
 };
 
 Creator.defaultProps = {
-  isLoaded: false,
   name: '',
   setAnswers: () => {},
   setDrawResult: () => {},
   setFormName: () => {},
 };
 
-const mapStateToProps = ( state ) => ({
-  isLoaded: state.ans.isLoaded,
-  name: state.form.formName,
-});
+const mapStateToProps = ( state ) => ({ name: state.form.formName });
 
 const mapDispatchToProps = ( dispatch ) => ({
   setDrawResult: () => dispatch( setDrawResult()),

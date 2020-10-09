@@ -11,7 +11,6 @@ import Draw from 'components/draw';
 
 const Creator = ({
   onRandomClick,
-  loadedData,
   name,
 }) => (
   <div className={classes.page}>
@@ -24,7 +23,7 @@ const Creator = ({
       <Card
         title="Losowanie"
         body={(
-          <Draw loadedData={loadedData} onRandomClick={onRandomClick} />
+          <Draw onRandomClick={onRandomClick} />
         )}
       />
     </div>
@@ -32,7 +31,6 @@ const Creator = ({
 );
 
 Creator.propTypes = {
-  loadedData: PropTypes.bool.isRequired,
   onRandomClick: PropTypes.func.isRequired,
   name: PropTypes.string,
 };
