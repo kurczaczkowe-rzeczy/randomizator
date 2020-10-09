@@ -14,8 +14,8 @@ const Draw = ({
     <SelectFilter />
     { loadedData && <IconButton value="Wylosuj odpowiedzi" onClick={ onRandomClick } /> }
     <DrawResult
-      maleName={ result.nameMale || '' }
-      femaleName={ result.nameFemale || '' }
+      maleName={ result.nameMale }
+      femaleName={ result.nameFemale }
     />
   </>
 );
