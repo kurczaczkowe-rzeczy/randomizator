@@ -5,12 +5,14 @@ import uuid from 'react-uuid';
 import FileItem from './components/fileItem/FileItem.view';
 
 const FileList = ({
-  files, onSend, onRemove,
+  files,
+  onSend,
+  onRemove,
 }) => files.map(( file ) => (
   <FileItem
     key={ `file-${ uuid() }` }
-    onSend={ onSend }
     displayName={ file }
+    onSend={ onSend }
     onRemove={ onRemove }
   />
 ));

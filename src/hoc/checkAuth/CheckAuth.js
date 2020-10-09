@@ -4,7 +4,10 @@ import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 
 const CheckAuth = ({
-  children, path, isLogged, auth,
+  isLogged,
+  path,
+  auth,
+  children,
 }) => {
   if ( !isLogged ) {
     return ( auth.uid === undefined )

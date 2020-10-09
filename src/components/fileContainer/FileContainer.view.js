@@ -5,10 +5,14 @@ import Dropzone from 'components/dropzone/Dropzone.view';
 import FileList from 'components/fileList/FileList.view';
 
 const FileContainer = ({
-  onDropAccepted, onDropRejected, acceptedFile, onRemove, onSend,
+  acceptedFile,
+  onDropAccepted,
+  onDropRejected,
+  onRemove,
+  onSend,
 }) => (
   <div>
-    <Dropzone onDropAccepted={ onDropAccepted } onDropRejected={onDropRejected} />
+    <Dropzone onDropAccepted={ onDropAccepted } onDropRejected={ onDropRejected } />
     <FileList files={ acceptedFile } onRemove={ onRemove } onSend={ onSend } />
   </div>
 );

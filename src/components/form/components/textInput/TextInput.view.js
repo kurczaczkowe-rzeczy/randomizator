@@ -4,14 +4,17 @@ import PropTypes from 'prop-types';
 import classes from './textInput.module.scss';
 
 const TextInput = ({
-  name, required, placeholder, type,
+  required,
+  name,
+  placeholder,
+  type,
 }) => (
   <input
     required={ required }
-    className={ classes[ 'input-text' ] }
-    type={type}
-    placeholder={placeholder}
+    type={ type }
+    placeholder={ placeholder }
     name={ name }
+    className={ classes[ 'input-text' ] }
   />
 );
 

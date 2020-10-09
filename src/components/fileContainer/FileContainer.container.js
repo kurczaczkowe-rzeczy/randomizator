@@ -21,10 +21,9 @@ const FileContainer = () => {
   const [ answers, setAnswers ] = useState([]);
 
   const sendFile = () => {
-    console.log( answers );
     if ( !_isEmpty( answers )) {
       db.collection( pathArray[ 2 ])
-        .doc( 'uIoLWxSTnXqdZJuzNi5v' )
+        .doc( pathArray[ 3 ])
         .update({ answers: firestore.FieldValue.arrayUnion( ...answers ) })
         .then(() => {
           setAcceptedFile([]);
@@ -52,9 +51,9 @@ const FileContainer = () => {
 
   return (
     <FileContainerView
+      acceptedFile={ acceptedFile }
       onDropAccepted={ onDropAccepted }
       onDropRejected={ onDropRejected }
-      acceptedFile={ acceptedFile }
       onRemove={ removeFile }
       onSend={ sendFile }
     />

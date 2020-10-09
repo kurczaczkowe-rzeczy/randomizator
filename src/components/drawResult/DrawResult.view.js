@@ -39,8 +39,13 @@ const DrawResult = ({ maleName, femaleName }) => (
 );
 
 DrawResult.propTypes = {
-  femaleName: PropTypes.string.isRequired,
-  maleName: PropTypes.string.isRequired,
+  femaleName: PropTypes.string,
+  maleName: PropTypes.string,
+};
+
+DrawResult.defaultProps = {
+  femaleName: '',
+  maleName: '',
 };
 
 export default DrawResult;

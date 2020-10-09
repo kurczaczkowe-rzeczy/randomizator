@@ -17,15 +17,18 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-dropzone": "11.0.1",
+    "react-papaparse": "^3.8.0",
     "react-redux": "^7.2.1",
     "react-redux-firebase": "^3.7.0",
-    "react-papaparse": "^3.8.0",
     "react-router": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-tag-input": "^6.4.3",
+    "react-uuid": "^1.0.2",
     "redux": "^4.0.5",
     "redux-firestore": "^0.14.0",
     "redux-thunk": "^2.3.0",
-    "react-uuid": "^1.0.2"
+    "react-dnd": "^5.0.0",
+    "react-dnd-html5-backend": "^3.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
