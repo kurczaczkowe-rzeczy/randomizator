@@ -1,71 +1,72 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import useStateWithCallback from 'use-state-with-callback';
 import _isNil from 'lodash/isNil';
-import _isEmpty from 'lodash/isEmpty';
 
 import { db } from 'config/firebaseConfig';
 
 import CreatorView from 'page/creator/CreatorPage.view';
+import { setDrawResult } from 'store/actions/drawAction';
+import { connect } from 'react-redux';
+import { setAnswers } from 'store/actions/answersAction';
 
-const useAnswers = () => {
-  const [ data, setData ] = useStateWithCallback([], ( data ) => {
-    if ( _isEmpty( data )) {
-      setDataLoad( true );
-    }
-  });
-  const [ dataLoad, setDataLoad ] = useState( false );
+const Creator = ({
+  tags, setDrawResult, setAnswers, answers, isLoaded,
+}) => {
+  const [ result, setResult ] = useState({ nameFemale: '', nameMale: '' });
   const history = useLocation();
+  const pathArray = history.pathname.split( '/' );
 
   useEffect(() => {
-    const pathArray = history.pathname.split( '/' );
-
     const unsub = db.collection( pathArray[ 2 ])
       .onSnapshot((( snapshot ) => {
         snapshot.docs.forEach(( doc ) => {
           const ans = doc.data().answers;
-          const result = getData( ans );
 
-          setData( result );
+          getData( ans );
         });
       }));
 
     return () => unsub();
   }, [ ]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return [ data, dataLoad ];
-};
+  const getData = ( answers ) => {
+    const result = {};
 
-const getData = ( answers ) => {
-  const result = { };
-
-  for ( let i = 0;i < answers.length;i++ ) {
-    for ( const [ key, value ] of Object.entries( answers[ i ])) {
-      if ( _isNil( result[ key ])) {
-        result[ key ] = [];
+    for ( let i = 0;i < answers.length;i++ ) {
+      for ( const [ key, value ] of Object.entries( answers[ i ])) {
+        if ( _isNil( result[ key ])) {
+          result[ key ] = [];
+        }
+        result[ key ].push( value );
       }
-      result[ key ].push( value );
     }
-  }
-
-  return result;
-};
-
-const Creator = () => {
-  const [ data, dataLoad ] = useAnswers();
-
-  const [ result, setResult ] = useState({ nameFemale: '', nameMale: '' });
+    setAnswers( result );
+  };
 
   const drawResult = () => {
     const draw = { };
 
-    for ( const [ key, value ] of Object.entries( data )) {
+    setDrawResult( tags );
+
+    for ( const [ key, value ] of Object.entries( answers )) {
       draw[ key ] = value[ Math.floor( Math.random() * value.length ) ];
     }
     setResult( draw );
   };
 
-  return ( <CreatorView loadedData={ dataLoad} result={ result } onRandomClick={ drawResult } /> );
+  return ( <CreatorView loadedData={ isLoaded } result={ result } onRandomClick={ drawResult } /> );
 };
 
-export default Creator;
+const mapStateToProps = ( state ) => ({
+  result: state.draw.result,
+  tags: state.draw.tags,
+  answers: state.ans.answers,
+  isLoaded: state.ans.isLoaded,
+});
+
+const mapDispatchToProps = ( dispatch ) => ({
+  setDrawResult: () => dispatch( setDrawResult()),
+  setAnswers: ( answers ) => dispatch( setAnswers( answers )),
+});
+
+export default connect( mapStateToProps, mapDispatchToProps )( Creator );

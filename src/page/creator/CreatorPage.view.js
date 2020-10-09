@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Card from 'components/card/Card.view';
-import DrawResult from 'components/drawResult/DrawResult.view';
-import IconButton from 'components/iconButton/IconButton.view';
 import FileContainer from 'components/fileContainer/FileContainer.container';
 import CreatorDescription from 'components/creatorDescription/CreatorDescription.view';
 import classes from './creatorPage.module.scss';
