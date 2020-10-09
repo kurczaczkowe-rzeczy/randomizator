@@ -44,8 +44,8 @@ DrawResult.propTypes = {
 };
 
 DrawResult.defaultProps = {
-  femaleName: '',
-  maleName: '',
+  femaleName: ' ',
+  maleName: ' ',
 };
 
 export default DrawResult;

@@ -22,6 +22,8 @@ export const getFormName = ( userID, formID ) =>
       });
   };
 
-export const setFormName = ( formName ) => ( dispatch ) => {
-  dispatch({ type: GET_FORM_NAME, name: formName });
+export const setFormName = ( formName, docID ) => ( dispatch ) => {
+  dispatch({
+    type: GET_FORM_NAME, name: formName, docID,
+  });
 };

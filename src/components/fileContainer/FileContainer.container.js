@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import _isEmpty from 'lodash/isEmpty';
 import _map from 'lodash/map';
 
@@ -8,7 +10,7 @@ import { db, firestore } from 'config/firebaseConfig';
 import parseText from './FileContainer.utils';
 import FileContainerView from './FileContainer.view';
 
-const FileContainer = () => {
+const FileContainer = ({ formID }) => {
   const history = useLocation();
   const pathArray = history.pathname.split( '/' );
 
@@ -21,9 +23,10 @@ const FileContainer = () => {
   const [ answers, setAnswers ] = useState([]);
 
   const sendFile = () => {
+    console.log( formID );
     if ( !_isEmpty( answers )) {
       db.collection( pathArray[ 2 ])
-        .doc( pathArray[ 3 ])
+        .doc( formID )
         .update({ answers: firestore.FieldValue.arrayUnion( ...answers ) })
         .then(() => {
           setAcceptedFile([]);
@@ -60,4 +63,10 @@ const FileContainer = () => {
   );
 };
 
-export default FileContainer;
+FileContainer.propTypes = { formID: PropTypes.string };
+
+FileContainer.defaultProps = { formID: '' };
+
+const mapStateToProps = ( state ) => ({ formID: state.form.docID });
+
+export default connect( mapStateToProps )( FileContainer );
