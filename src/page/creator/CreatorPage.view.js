@@ -10,7 +10,9 @@ import Form from 'components/form';
 import Draw from 'components/draw';
 
 const Creator = ({
-  onRandomClick, loadedData, name,
+  onRandomClick,
+  loadedData,
+  name,
 }) => (
   <div className={classes.page}>
     <div className={classes.leftSpace}>

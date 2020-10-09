@@ -6,7 +6,9 @@ import DrawResult from 'components/drawResult/DrawResult.view';
 import SelectFilter from 'components/selectFilter';
 
 const Draw = ({
-  loadedData, onRandomClick, result,
+  loadedData,
+  onRandomClick,
+  result,
 }) => (
   <>
     <SelectFilter />

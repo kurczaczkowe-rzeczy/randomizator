@@ -5,7 +5,9 @@ import DrawView from './Draw.view';
 import { connect } from 'react-redux';
 
 const Draw = ({
-  loadedData, onRandomClick, result,
+  loadedData,
+  onRandomClick,
+  result,
 }) => (
   <DrawView loadedData={loadedData} onRandomClick={onRandomClick} result={result} />
 );

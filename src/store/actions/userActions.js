@@ -2,7 +2,9 @@ import * as actionTypes from 'store/actions';
 
 export const getUserName = ( id ) =>
   (
-    dispatch, getState, { getFirestore },
+    dispatch,
+    getState,
+    { getFirestore },
   ) => {
     const firestore = getFirestore();
 

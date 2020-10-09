@@ -5,7 +5,12 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import './selectFilter.modele.scss';
 
 const SelectFilter = ({
-  tags, delimiters, handleDelete, handleAddition, handleDrag, handleTagClick,
+  tags,
+  delimiters,
+  handleDelete,
+  handleAddition,
+  handleDrag,
+  handleTagClick,
 }) => (
   <ReactTags
     tags={ tags }

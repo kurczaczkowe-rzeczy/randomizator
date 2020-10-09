@@ -12,7 +12,11 @@ import { setAnswers } from 'store/actions/answersAction';
 import { setFormName } from 'store/actions/formAction';
 
 const Creator = ({
-  setDrawResult, setAnswers, isLoaded, setFormName, name,
+  setDrawResult,
+  setAnswers,
+  isLoaded,
+  setFormName,
+  name,
 }) => {
   const history = useLocation();
   const pathArray = history.pathname.split( '/' );
