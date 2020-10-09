@@ -1,0 +1,39 @@
+.ReactTags__tags {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 15px 0;
+}
+.ReactTags__tagInputField {
+  //przekazać klasę dla inputów
+  background-color: #1B1B1B;
+  border: 2px solid #771e76;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 5px;
+  color: #bdaeae;
+}
+
+.ReactTags__tagInput {
+  margin-bottom: 10px
+}
+
+.ReactTags__selected {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  column-gap: 5px;
+  row-gap: 5px;
+}
+
+.ReactTags__tag {
+  background-color: #1B1B1B;
+  border: 1px solid #771e76;
+  border-radius: 10px;
+  padding: 4px 8px;
+  cursor: default !important;
+}
+.ReactTags__remove {
+  padding-left: 4px;
+  color: #771e76;
+  cursor: pointer;
+}
