@@ -4,11 +4,11 @@ export const getUserName = ( id ) =>
   (
     dispatch,
     getState,
-    { getFirestore },
+    { getFirebase, getFirestore },
   ) => {
-    const firestore = getFirestore();
-
-    firestore.collection( 'users' ).doc( id )
+    getFirestore()
+      .collection( 'users' )
+      .doc( id )
       .get()
       .then(( doc ) => {
         if ( doc.exists ) {
