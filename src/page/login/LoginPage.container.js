@@ -7,7 +7,9 @@ import { signIn, signOut } from 'store/actions/authAction';
 import CheckAuth from 'hoc/checkAuth/CheckAuth';
 
 const Login = ({
-  signIn, authError, auth,
+  signIn,
+  authError,
+  auth,
 }) => {
 
   const handleLogin = ( event ) => {
@@ -19,7 +21,7 @@ const Login = ({
 
   return (
     <CheckAuth
-      path={auth.auth.uid}
+      path={ auth.uid }
     >
       <LoginPageView onLogin={ handleLogin } authError={ authError } />
     </CheckAuth>
@@ -27,24 +29,21 @@ const Login = ({
 };
 
 Login.propTypes = {
-  auth: PropTypes.shape({
-    auth: PropTypes.shape({ uid: PropTypes.string }),
-    push: PropTypes.func,
-  }),
+  auth: PropTypes.shape({ uid: PropTypes.string }),
   authError: PropTypes.string,
   signIn: PropTypes.func,
 };
 
 Login.defaultProps = {
-  auth: {
-    auth: '',
-    push: () => {},
-  },
+  auth: { uid: '' },
   authError: '',
   signIn: () => {},
 };
 
-export const mapStateToProps = ( state ) => ({ authError: state.auth.authError, auth: state.firebase });
+export const mapStateToProps = ( state ) => ({
+  authError: state.auth.authError,
+  auth: state.firebase.auth,
+});
 export const mapActionToProps = ( dispatch ) => ({
   signIn: ( credential ) => dispatch( signIn( credential )),
   signOut: () => dispatch( signOut()),

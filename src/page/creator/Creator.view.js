@@ -6,21 +6,24 @@ import DrawResult from 'components/drawResult/DrawResult.view';
 import IconButton from 'components/iconButton/IconButton.view';
 
 const Creator = ({
-  result, onRandomClick, loadedData, signOut,
+  result,
+  onRandomClick,
+  loadedData,
+  signOut,
 }) => (
   <div>
     <h1>Creator panel</h1>
     { loadedData && <IconButton value="Wylosuj odpowiedzi" onClick={ onRandomClick } /> }
     <Card
       title="Wylosowane odpowiedzi"
-      body={(
+      body={ (
         <DrawResult
-          maleName={result.nameMale}
-          femaleName={result.nameFemale}
+          maleName={ result.nameMale }
+          femaleName={ result.nameFemale }
         />
-      )}
+      ) }
     />
-    <IconButton value="Wyloguj się" onClick={signOut} icon="logout" />
+    <IconButton value="Wyloguj się" onClick={ signOut } icon="logout" />
   </div>
 );
 

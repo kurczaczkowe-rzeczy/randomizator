@@ -7,12 +7,12 @@ const CheckAuth = ({
   children, path, isLogged, auth,
 }) => {
   if ( !isLogged ) {
-    return ( auth.auth.uid === undefined )
+    return ( auth.uid === undefined )
       ? ( children )
       : ( <Redirect to={ `/randomizator/${ path }` } /> );
   }
 
-  return ( auth.auth.uid === undefined )
+  return ( auth.uid === undefined )
     ? ( <Redirect to="/randomizator/" /> )
     : ( children );
 
@@ -20,24 +20,17 @@ const CheckAuth = ({
 
 CheckAuth.propTypes = {
   children: PropTypes.node.isRequired,
-  auth: PropTypes.shape({
-    auth: PropTypes.shape({ uid: PropTypes.string }),
-    push: PropTypes.func,
-  }),
+  auth: PropTypes.shape({ uid: PropTypes.string }),
   isLogged: PropTypes.bool,
   path: PropTypes.string,
 };
 
 CheckAuth.defaultProps = {
-  auth: {
-    auth: { uid: '' },
-    push: () => {
-    },
-  },
+  auth: { uid: '' },
   isLogged: false,
   path: '',
 };
 
-export const mapStateToProps = ( state ) => ({ auth: state.firebase });
+export const mapStateToProps = ( state ) => ({ auth: state.firebase.auth });
 
 export default connect( mapStateToProps )( CheckAuth );

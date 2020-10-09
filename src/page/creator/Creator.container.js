@@ -72,8 +72,8 @@ const Creator = ({ signOut }) => {
   return (
     <CheckAuth isLogged>
       <CreatorView
-        loadedData={ dataLoad} result={ result } onRandomClick={ drawResult }
-        signOut={signOut}
+        loadedData={ dataLoad } result={ result } onRandomClick={ drawResult }
+        signOut={ signOut }
       />
     </CheckAuth>
   );
