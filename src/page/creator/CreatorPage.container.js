@@ -17,7 +17,7 @@ import CreatorView from 'page/creator/CreatorPage.view';
 
 const Creator = ({
   name,
-  setDrawResult,
+  drawResult,
   setAnswers,
   setFormName,
   logout,
@@ -54,10 +54,6 @@ const Creator = ({
     setAnswers( result, answers.length );
   };
 
-  const drawResult = () => {
-    setDrawResult();
-  };
-
   return (
     <CheckAuth isLogged>
       <CreatorView
@@ -70,17 +66,17 @@ const Creator = ({
 };
 
 Creator.propTypes = {
+  drawResult: PropTypes.func,
   logout: PropTypes.func,
   name: PropTypes.string,
   setAnswers: PropTypes.func,
-  setDrawResult: PropTypes.func,
   setFormName: PropTypes.func,
 };
 
 Creator.defaultProps = {
   name: '',
   setAnswers: () => {},
-  setDrawResult: () => {},
+  drawResult: () => {},
   setFormName: () => {},
   logout: () => {},
 };
@@ -88,7 +84,7 @@ Creator.defaultProps = {
 const mapStateToProps = ( state ) => ({ name: state.form.formName });
 
 const mapDispatchToProps = ( dispatch ) => ({
-  setDrawResult: () => dispatch( setDrawResult()),
+  drawResult: () => dispatch( setDrawResult()),
   setAnswers: ( answers, counter ) => dispatch( setAnswers( answers, counter )),
   setFormName: ( id ) => dispatch( setFormName( id )),
   logout: () => dispatch( signOut()),
