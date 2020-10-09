@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {
   createStore,
-  applyMiddleware, compose,
+  applyMiddleware,
+  compose,
 } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import {
-  createFirestoreInstance, reduxFirestore, getFirestore,
+  createFirestoreInstance,
+  reduxFirestore,
+  getFirestore,
 } from 'redux-firestore';
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
 

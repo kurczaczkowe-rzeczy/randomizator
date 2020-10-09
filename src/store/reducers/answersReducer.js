@@ -1,7 +1,9 @@
 import { SET_ANSWERS } from 'store/actions';
 
 const initState = {
-  answers: [], isLoaded: false, counter: 0,
+  isLoaded: false,
+  counter: 0,
+  answers: [],
 };
 
 const reducer = ( state = initState, action = {}) => {

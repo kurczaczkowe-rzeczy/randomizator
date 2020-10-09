@@ -1,4 +1,4 @@
-import * as actionTypes from 'store/actions';
+import { GET_FORM_NAME, ERROR_FORM_DONT_EXIST } from 'store/actions';
 
 const initState = {
   formName: '',
@@ -7,12 +7,12 @@ const initState = {
 
 const reducer = ( state = initState, action = {}) => {
   switch ( action.type ) {
-    case actionTypes.GET_FORM_NAME:
+    case GET_FORM_NAME:
       return {
         ...state,
         formName: action.name,
       };
-    case actionTypes.ERROR_FORM_DONT_EXIST:
+    case ERROR_FORM_DONT_EXIST:
       return {
         ...state,
         formName: '',

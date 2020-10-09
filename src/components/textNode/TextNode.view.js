@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TextNode = ({
-  classes, value, required, type,
+  required,
+  type,
+  value,
+  classes,
 }) => (
   <p className={ classes }>
     { value }

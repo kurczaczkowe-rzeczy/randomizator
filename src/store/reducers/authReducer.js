@@ -1,8 +1,13 @@
 import {
-  LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT_SUCCESS,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR,
+  LOGOUT_SUCCESS,
 } from 'store/actions';
 
-const initState = { authError: null, isLogin: false };
+const initState = {
+  isLogin: false,
+  authError: null,
+};
 
 const reducer = ( state = initState, action = {}) => {
   switch ( action.type ) {

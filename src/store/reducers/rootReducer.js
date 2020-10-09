@@ -2,20 +2,20 @@ import { combineReducers } from 'redux';
 import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer } from 'redux-firestore';
 
+import authReducer from './authReducer';
 import userReducer from './userReducer';
 import formReducer from './formReducer';
-import authReducer from './authReducer';
-import drawReducer from './drawReducer';
 import answersReducer from './answersReducer';
+import drawReducer from './drawReducer';
 
 const rootReducer = combineReducers({
-  usr: userReducer,
-  form: formReducer,
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   auth: authReducer,
-  draw: drawReducer,
+  usr: userReducer,
+  form: formReducer,
   ans: answersReducer,
+  draw: drawReducer,
 });
 
 export default rootReducer;

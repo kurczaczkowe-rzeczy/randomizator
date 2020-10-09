@@ -7,7 +7,10 @@ import classNames from 'classnames';
 import classes from './fileDropzone.module.scss';
 
 const DropzoneView = ({
-  onDropAccepted, onDropRejected, multiple, type,
+  multiple,
+  type,
+  onDropAccepted,
+  onDropRejected,
 }) => (
   <Dropzone
     multiple={ multiple }
@@ -17,14 +20,16 @@ const DropzoneView = ({
     onDropRejected={ onDropRejected }
   >
     { ({
-      getRootProps, getInputProps, isDragActive,
+      getRootProps,
+      getInputProps,
+      isDragActive,
     }) => (
       <div
         { ...getRootProps({ className: 'dropzone' }) }
-        className={ classNames( classes.box, { [ classes.active ]: isDragActive })}
+        className={ classNames( classes.box, { [ classes.active ]: isDragActive }) }
       >
         <input { ...getInputProps() } />
-        <DescriptionIcon classes={{ root: classes.icon } } />
+        <DescriptionIcon classes={{ root: classes.icon }} />
         { isDragActive
           ? ( <p>Tu upuść plik</p> )
           : (
@@ -32,7 +37,7 @@ const DropzoneView = ({
               <p>Upuść tu plik lub kliknij, aby wybrać z listy</p>
               <p>Tylko pliki z rozszerzeniem CSV</p>
             </>
-          )}
+          ) }
       </div>
     ) }
   </Dropzone>

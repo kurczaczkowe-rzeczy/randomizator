@@ -6,13 +6,15 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import classes from './fileItem.module.scss';
 
 const FileItem = ({
-  displayName, onRemove, onSend,
+  displayName,
+  onRemove,
+  onSend,
 }) => (
-  <div className={classes.file}>
+  <div className={ classes.file }>
     <p>{displayName}</p>
     <div>
-      <CloudUploadIcon onClick={onSend} classes={{ root: classes.icon } } />
-      <DeleteIcon onClick={onRemove} classes={{ root: classes.icon } } />
+      <CloudUploadIcon classes={{ root: classes.icon }} onClick={ onSend } />
+      <DeleteIcon classes={{ root: classes.icon }} onClick={ onRemove } />
     </div>
   </div>
 );

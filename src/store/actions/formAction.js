@@ -1,4 +1,7 @@
-import * as actionTypes from 'store/actions';
+import {
+  GET_FORM_NAME,
+  ERROR_FORM_DONT_EXIST,
+}  from 'store/actions';
 
 export const getFormName = ( userID, formID ) =>
   (
@@ -12,13 +15,13 @@ export const getFormName = ( userID, formID ) =>
       .get()
       .then(( doc ) => {
         if ( doc.exists ) {
-          dispatch({ type: actionTypes.GET_FORM_NAME, name: doc.data().name });
+          dispatch({ type: GET_FORM_NAME, name: doc.data().name });
         } else {
-          dispatch({ type: actionTypes.ERROR_FORM_DONT_EXIST, errorMsg: 'Form don\'t exist' });
+          dispatch({ type: ERROR_FORM_DONT_EXIST, errorMsg: 'Form don\'t exist' });
         }
       });
   };
 
 export const setFormName = ( formName ) => ( dispatch ) => {
-  dispatch({ type: actionTypes.GET_FORM_NAME, name: formName });
+  dispatch({ type: GET_FORM_NAME, name: formName });
 };

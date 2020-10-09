@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import DrawView from './Draw.view';
-import { connect } from 'react-redux';
 
 const Draw = ({
   loadedData,
-  onRandomClick,
   result,
+  onRandomClick,
 }) => (
-  <DrawView loadedData={loadedData} onRandomClick={onRandomClick} result={result} />
+  <DrawView
+    loadedData={ loadedData }
+    result={ result }
+    onRandomClick={ onRandomClick }
+  />
 );
 
 Draw.propTypes = {

@@ -1,10 +1,10 @@
-import * as actionTypes from 'store/actions';
+import { GET_USER_NAME, ERROR_USER_DONT_EXIST } from 'store/actions';
 
 export const getUserName = ( id ) =>
   (
     dispatch,
     getState,
-    { getFirebase, getFirestore },
+    { getFirestore },
   ) => {
     getFirestore()
       .collection( 'users' )
@@ -12,9 +12,9 @@ export const getUserName = ( id ) =>
       .get()
       .then(( doc ) => {
         if ( doc.exists ) {
-          dispatch({ type: actionTypes.GET_USER_NAME, name: doc.data().name });
+          dispatch({ type: GET_USER_NAME, name: doc.data().name });
         } else {
-          dispatch({ type: actionTypes.ERROR_USER_DONT_EXIST, errorMsg: 'User don\'t exist' });
+          dispatch({ type: ERROR_USER_DONT_EXIST, errorMsg: 'User don\'t exist' });
         }
       });
   };

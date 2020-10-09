@@ -2,20 +2,25 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import _isNil from 'lodash/isNil';
+import _forEach from 'lodash/forEach';
+import { connect } from 'react-redux';
 
 import { db } from 'config/firebaseConfig';
-
-import CreatorView from 'page/creator/CreatorPage.view';
 import { setDrawResult } from 'store/actions/drawAction';
-import { connect } from 'react-redux';
 import { setAnswers } from 'store/actions/answersAction';
 import { setFormName } from 'store/actions/formAction';
+import { signOut } from 'store/actions/authAction';
+
+import CheckAuth from 'hoc/checkAuth/CheckAuth';
+
+import CreatorView from 'page/creator/CreatorPage.view';
 
 const Creator = ({
+  name,
   setDrawResult,
   setAnswers,
   setFormName,
-  name,
+  logout,
 }) => {
   const history = useLocation();
   const pathArray = history.pathname.split( '/' );
@@ -37,14 +42,15 @@ const Creator = ({
   const getData = ( answers ) => {
     const result = {};
 
-    for ( let i = 0;i < answers.length;i++ ) {
-      for ( const [ key, value ] of Object.entries( answers[ i ])) {
+    _forEach( answers, ( answer ) => {
+      _forEach( answer, ( value, key ) => {
         if ( _isNil( result[ key ])) {
           result[ key ] = [];
         }
         result[ key ].push( value );
-      }
-    }
+      });
+    });
+
     setAnswers( result, answers.length );
   };
 
@@ -52,10 +58,19 @@ const Creator = ({
     setDrawResult();
   };
 
-  return ( <CreatorView onRandomClick={ drawResult } name={ name } /> );
+  return (
+    <CheckAuth isLogged>
+      <CreatorView
+        name={ name }
+        onRandomClick={ drawResult }
+        logout={ logout }
+      />
+    </CheckAuth>
+  );
 };
 
 Creator.propTypes = {
+  logout: PropTypes.func,
   name: PropTypes.string,
   setAnswers: PropTypes.func,
   setDrawResult: PropTypes.func,
@@ -67,6 +82,7 @@ Creator.defaultProps = {
   setAnswers: () => {},
   setDrawResult: () => {},
   setFormName: () => {},
+  logout: () => {},
 };
 
 const mapStateToProps = ( state ) => ({ name: state.form.formName });
@@ -75,6 +91,7 @@ const mapDispatchToProps = ( dispatch ) => ({
   setDrawResult: () => dispatch( setDrawResult()),
   setAnswers: ( answers, counter ) => dispatch( setAnswers( answers, counter )),
   setFormName: ( id ) => dispatch( setFormName( id )),
+  logout: () => dispatch( signOut()),
 });
 
 export default connect( mapStateToProps, mapDispatchToProps )( Creator );

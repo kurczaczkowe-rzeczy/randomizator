@@ -10,10 +10,10 @@ import { getFormName } from 'store/actions/formAction';
 import GuestPageView from 'page/guest/GuestPage.view';
 
 const GuestPage = ({
-  formName,
-  getFormName,
-  getUser,
   userName,
+  formName,
+  getUser,
+  getFormName,
 }) => {
   const history = useLocation();
   const pathArray = history.pathname.split( '/' );
@@ -39,8 +39,8 @@ const GuestPage = ({
   return (
     <GuestPageView
       creatorName={ userName }
-      formName={formName}
-      onSubmit={( nameMale, nameFemale ) => onSubmit( nameMale, nameFemale )}
+      formName={ formName }
+      onSubmit={ ( nameMale, nameFemale ) => onSubmit( nameMale, nameFemale ) }
     />
   );
 };

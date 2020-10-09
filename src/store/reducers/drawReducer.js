@@ -1,8 +1,14 @@
 import {
-  ADD_TAG, DRAW_RESULT, REMOVE_TAG, SET_TAGS,
+  ADD_TAG,
+  DRAW_RESULT,
+  REMOVE_TAG,
+  SET_TAGS,
 } from 'store/actions';
 
-const initState = { tags: [], result: {}};
+const initState = {
+  tags: [],
+  result: {},
+};
 
 const reducer = ( state = initState, action = {}) => { // id:'' text:''
   switch ( action.type ) {

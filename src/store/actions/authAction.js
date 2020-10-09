@@ -1,5 +1,7 @@
 import {
-  LOGIN_ERROR, LOGIN_SUCCESS, LOGOUT_SUCCESS,
+  LOGIN_ERROR,
+  LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
 } from 'store/actions';
 
 export const signIn = ( credentials ) => (

@@ -2,14 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import LoginPageView from 'page/login/LoginPage.view';
 import { signIn, signOut } from 'store/actions/authAction';
 import CheckAuth from 'hoc/checkAuth/CheckAuth';
 
+import LoginPageView from 'page/login/LoginPage.view';
+
 const Login = ({
-  signIn,
   authError,
   auth,
+  signIn,
 }) => {
 
   const handleLogin = ( event ) => {
@@ -20,10 +21,8 @@ const Login = ({
   };
 
   return (
-    <CheckAuth
-      path={ auth.uid }
-    >
-      <LoginPageView onLogin={ handleLogin } authError={ authError } />
+    <CheckAuth path={ auth.uid }>
+      <LoginPageView authError={ authError } onLogin={ handleLogin } />
     </CheckAuth>
   );
 };

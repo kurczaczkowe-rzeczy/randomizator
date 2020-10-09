@@ -7,15 +7,15 @@ import SelectFilter from 'components/selectFilter';
 
 const Draw = ({
   loadedData,
-  onRandomClick,
   result,
+  onRandomClick,
 }) => (
   <>
     <SelectFilter />
     { loadedData && <IconButton value="Wylosuj odpowiedzi" onClick={ onRandomClick } /> }
     <DrawResult
-      maleName={result.nameMale || ''}
-      femaleName={result.nameFemale || ''}
+      maleName={ result.nameMale || '' }
+      femaleName={ result.nameFemale || '' }
     />
   </>
 );

@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import SelectFilterView from './SelectFilter.view';
 import {
-  addTag, removeTag, setTags,
+  addTag,
+  removeTag,
+  setTags,
 } from 'store/actions/drawAction';
+
+import SelectFilterView from './SelectFilter.view';
 
 const KeyCodes = {
   comma: 188,
@@ -20,7 +23,10 @@ const delimiters = [
 ];
 
 const SelectFilter = ({
-  addTag, removeTag, setTags, tags,
+  tags,
+  addTag,
+  removeTag,
+  setTags,
 }) => {
 
   const handleDelete = ( i ) => {

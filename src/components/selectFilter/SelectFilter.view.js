@@ -13,15 +13,15 @@ const SelectFilter = ({
   handleTagClick,
 }) => (
   <ReactTags
+    autofocus={ false }
+    inputFieldPosition="top"
+    placeholder="Wprowadź składnik filtrowania"
     tags={ tags }
     delimiters={ delimiters }
     handleDelete={ handleDelete }
     handleAddition={ handleAddition }
     handleDrag={ handleDrag }
     handleTagClick={ handleTagClick }
-    inputFieldPosition="top"
-    placeholder="Wprowadź składnik filtrowania"
-    autofocus={ false }
   />
 );
 

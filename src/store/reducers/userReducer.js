@@ -1,16 +1,16 @@
-import * as actionTypes from 'store/actions';
+import { ERROR_USER_DONT_EXIST, GET_USER_NAME } from 'store/actions';
 
 const initState = { userName: '', errors: {}};
 
 const reducer = ( state = initState, action = {}) => {
 
   switch ( action.type ) {
-    case actionTypes.GET_USER_NAME:
+    case GET_USER_NAME:
       return {
         ...state,
         userName: action.name,
       };
-    case actionTypes.ERROR_USER_DONT_EXIST:
+    case ERROR_USER_DONT_EXIST:
       return {
         ...state,
         userName: '',

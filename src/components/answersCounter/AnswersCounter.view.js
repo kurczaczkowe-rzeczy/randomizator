@@ -5,12 +5,10 @@ import { connect } from 'react-redux';
 import classes from './answersCounter.module.scss';
 
 const AnswersCounter = ({ counter }) => (
-  <h3 className={classes.title}>
+  <h3 className={ classes.title }>
     Ilość odpowiedzi:
-    <span>
-      {' '}
-      {counter}
-    </span>
+    {' '}
+    <span>{ counter }</span>
   </h3>
 );
 

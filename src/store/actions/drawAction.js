@@ -4,7 +4,10 @@ import _forEach from 'lodash/forEach';
 
 import { randomItem, filterArrayByTag } from './drawAction.utils';
 import {
-  ADD_TAG, DRAW_RESULT, REMOVE_TAG, SET_TAGS,
+  ADD_TAG,
+  DRAW_RESULT,
+  REMOVE_TAG,
+  SET_TAGS,
 } from 'store/actions';
 
 export const setDrawResult = () =>  ( dispatch, getState ) => {
