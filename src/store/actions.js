@@ -1,3 +1,4 @@
+export const SET_TAGS = 'SET_TAGS';
 export const SET_ANSWERS = 'SET_ANSWERS';
 export const GET_USER_NAME = 'GET_USER_NAME';
 export const ERROR_USER_DONT_EXIST = 'ERROR_USER_DONT_EXIST';

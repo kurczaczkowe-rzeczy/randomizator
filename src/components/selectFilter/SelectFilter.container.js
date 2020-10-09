@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import SelectFilterView from './SelectFilter.view';
+import {
+  addTag, removeTag, setTags,
+} from 'store/actions/drawAction';
 
 const KeyCodes = {
   comma: 188,
@@ -14,22 +19,23 @@ const delimiters = [
   KeyCodes.space,
 ];
 
-const SelectFilter = () => {
-
-  const [ tags, setTags ] = useState([]);
+const SelectFilter = ({
+  addTag, removeTag, setTags, tags,
+}) => {
 
   const handleDelete = ( i ) => {
-    setTags( tags.filter(( tag, index ) => index !== i ));
+    removeTag( i );
   };
 
   const handleAddition = ( tag ) => {
-    setTags([ ...tags, tag ]);
+    console.log( tag );
+    addTag( tag );
   };
 
   const  handleDrag = (
     tag, currPos, newPos,
   ) => {
-    const newTags = tags.slice();
+    const newTags = [ ...tags ];
 
     newTags.splice( currPos, 1 );
     newTags.splice(
@@ -50,8 +56,19 @@ const SelectFilter = () => {
   );
 };
 
-SelectFilter.propTypes = {};
+SelectFilter.propTypes = {
+  addTag: PropTypes.func.isRequired,
+  removeTag: PropTypes.func.isRequired,
+  setTags: PropTypes.func.isRequired,
+  tags: PropTypes.arrayOf( PropTypes.object ).isRequired,
+};
 
-SelectFilter.defaultProps = {};
+const mapStateToProps = ( state ) => ({ tags: state.draw.tags });
 
-export default SelectFilter;
+const mapDispatchToProps = ( dispatch ) => ({
+  addTag: ( tag ) => dispatch( addTag( tag )),
+  removeTag: ( index ) => dispatch( removeTag( index )),
+  setTags: ( answers ) => dispatch( setTags( answers )),
+});
+
+export default connect( mapStateToProps, mapDispatchToProps )( SelectFilter );
