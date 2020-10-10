@@ -1,13 +1,14 @@
 import {
   ADD_TAG,
-  DRAW_RESULT,
-  REMOVE_TAG,
+  DRAW_RESULT, ERROR_DRAW_RESULT,
+  REMOVE_TAG, SET_ERROR_DRAW_RESULT,
   SET_TAGS,
 } from 'store/actions';
 
 const initState = {
   tags: [],
   result: {},
+  errorField: [],
 };
 
 const reducer = ( state = initState, action = {}) => { // id:'' text:''
@@ -31,6 +32,16 @@ const reducer = ( state = initState, action = {}) => { // id:'' text:''
       return {
         ...state,
         result: action.draw,
+      };
+    case ERROR_DRAW_RESULT:
+      return {
+        ...state,
+        errorField: [ ...state.errorField, action.key ],
+      };
+    case SET_ERROR_DRAW_RESULT:
+      return {
+        ...state,
+        errorField: action.errors,
       };
     default:
       return state;
