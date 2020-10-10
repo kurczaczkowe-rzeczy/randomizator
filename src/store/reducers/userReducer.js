@@ -1,6 +1,9 @@
 import { ERROR_USER_DONT_EXIST, GET_USER_NAME } from 'store/actions';
 
-const initState = { userName: '', errors: {}};
+const initState = {
+  userName: '',
+  errors: null,
+};
 
 const reducer = ( state = initState, action = {}) => {
 
@@ -9,6 +12,7 @@ const reducer = ( state = initState, action = {}) => {
       return {
         ...state,
         userName: action.name,
+        errors: null,
       };
     case ERROR_USER_DONT_EXIST:
       return {
