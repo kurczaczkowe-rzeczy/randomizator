@@ -1,4 +1,4 @@
-.input-text{
+.inputText {
   background-color: #222222;
   border-left: 2px solid;
   border-right: 2px solid;
@@ -7,4 +7,9 @@
   padding: 8px;
   color: #bdaeae;
   font-size: 17px;
+}
+.fullWidth {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 8px;
 }

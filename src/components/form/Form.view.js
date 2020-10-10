@@ -31,6 +31,12 @@ const Form = ({ onSubmit, preview }) => (
         name="name_female"
       />
     </div>
+    <TextInput
+      required
+      fullWidth
+      name="check_is_not_robot"
+      placeholder="Aby wysłać, wpisz nazwę formularza"
+    />
     <Button value="Wyślij" type="submit" />
   </form>
 );
