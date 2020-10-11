@@ -1,3 +1,8 @@
+## 1.0.2 (October 11, 2020)
+- Add 404 page for GitHub
+- Add favicon
+- Change title of page
+
 ## 1.0.1 (October 11, 2020)
 - Update README
 

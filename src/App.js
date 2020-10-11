@@ -12,7 +12,7 @@ import ErrorPage from 'page/errorPage/ErrorPage.view';
 import Login from 'page/login';
 
 const App = () => (
-  <BrowserRouter>
+  <BrowserRouter basename="/randomizator">
     <Switch>
       <Route exact path="/randomizator" component={ Login } />
       <Route exact path="/randomizator/not_found" component={ ErrorPage } />

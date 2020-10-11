@@ -1,7 +1,7 @@
 {
-  "name": "randomizator",
   "homepage": "/randomizator/",
-  "version": "1.0.1",
+  "name": "randomizator",
+  "version": "1.0.2",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.1",
@@ -32,6 +32,8 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
