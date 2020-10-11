@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/randomizator/static/css/main.2f0def65.chunk.css",
-    "main.js": "/randomizator/static/js/main.e9edbded.chunk.js",
-    "main.js.map": "/randomizator/static/js/main.e9edbded.chunk.js.map",
+    "main.js": "/randomizator/static/js/main.262a4e0f.chunk.js",
+    "main.js.map": "/randomizator/static/js/main.262a4e0f.chunk.js.map",
     "runtime-main.js": "/randomizator/static/js/runtime-main.c8d2544f.js",
     "runtime-main.js.map": "/randomizator/static/js/runtime-main.c8d2544f.js.map",
     "static/js/2.0346dca3.chunk.js": "/randomizator/static/js/2.0346dca3.chunk.js",
     "static/js/2.0346dca3.chunk.js.map": "/randomizator/static/js/2.0346dca3.chunk.js.map",
     "index.html": "/randomizator/index.html",
-    "precache-manifest.3ef721cd2196d9e40baa134692f4c104.js": "/randomizator/precache-manifest.3ef721cd2196d9e40baa134692f4c104.js",
+    "precache-manifest.d0d8e82b12b2116b217dfb6a2cb2c84d.js": "/randomizator/precache-manifest.d0d8e82b12b2116b217dfb6a2cb2c84d.js",
     "service-worker.js": "/randomizator/service-worker.js",
     "static/css/main.2f0def65.chunk.css.map": "/randomizator/static/css/main.2f0def65.chunk.css.map",
     "static/js/2.0346dca3.chunk.js.LICENSE.txt": "/randomizator/static/js/2.0346dca3.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.c8d2544f.js",
     "static/js/2.0346dca3.chunk.js",
     "static/css/main.2f0def65.chunk.css",
-    "static/js/main.e9edbded.chunk.js"
+    "static/js/main.262a4e0f.chunk.js"
   ]
 }
