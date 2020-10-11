@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Card from 'components/card/Card.view';
 import Form from 'components/form';
 import CreatorDescription from 'components/creatorDescription/CreatorDescription.view';
-import FormDescription from 'components/formDescription/FormDescription.view';
+import FormName from 'components/guestFormDescription/FormName.view';
 
 import classes from './guestPage.module.scss';
 
@@ -15,8 +15,16 @@ const GuestPageView = ({
 }) => (
   <div className={ classes.guest }>
     <div className={ classes.description }>
-      <CreatorDescription content={ creatorName } />
-      <FormDescription content={ formName } />
+      <Card
+        additionalClass={ classes.baseLine }
+        body={ (
+          <CreatorDescription content={ creatorName } />
+        ) }
+      />
+      <Card
+        additionalClass={ classes.baseLine }
+        body={ <FormName content={ formName } /> }
+      />
     </div>
     <Card title="FORMULARZ" body={ <Form onSubmit={ onSubmit } /> } />
   </div>

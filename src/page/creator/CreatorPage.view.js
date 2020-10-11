@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import Card from 'components/card/Card.view';
 
 import FileContainer from 'components/fileContainer/FileContainer.container';
-import FormDescription from 'components/formDescription/FormDescription.view';
+import FormList from 'components/formList/FormList.view';
 import Form from 'components/form';
 import Draw from 'components/draw';
 import AnswersCounter from 'components/answersCounter/AnswersCounter.view';
 import IconButton from 'components/iconButton/IconButton.view';
-import CopyLink from 'components/copyLink';
 
 import classes from './creatorPage.module.scss';
 
@@ -21,9 +20,14 @@ const Creator = ({
 }) => (
   <div className={ classes.creator }>
     <div className={ classes.leftSpace }>
-      <FormDescription content={ name } />
       <Card
-        body={ <CopyLink userID={ userID } /> }
+        additionalClass={ classes.baseLine }
+        body={ (
+          <FormList
+            content={ name }
+            userID={ userID }
+          />
+        ) }
       />
       <FileContainer />
     </div>
