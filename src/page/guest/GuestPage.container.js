@@ -48,8 +48,6 @@ const GuestPage = ({
 
   const redirect = ( <Redirect from="/*" to="/randomizator/not_found" /> );
 
-  console.log( errorUserName, errorFormName );
-
   return ( errorFormName || errorUserName ) ? redirect : displayPage;
 
 };

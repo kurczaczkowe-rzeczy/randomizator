@@ -1,7 +1,7 @@
 {
-  "homepage": "/randomizator/",
+  "homepage" : "https://kurczaczkowe-rzeczy.github.io/randomizator",
   "name": "randomizator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.1",

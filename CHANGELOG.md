@@ -1,3 +1,6 @@
+## 1.0.4 (October 11, 2020)
+- Add Footer
+
 ## 1.0.3 (October 11, 2020)
 - Fix wrong paths
 

@@ -20,6 +20,8 @@ const Login = ({
     signIn({ email: data.get( 'email' ), password: data.get( 'password' ) });
   };
 
+  // signOut();
+
   return (
     <CheckAuth path={ auth.uid }>
       <LoginPageView authError={ authError } onLogin={ handleLogin } />
