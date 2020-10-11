@@ -60,6 +60,7 @@ const Creator = ({
         name={ name }
         onRandomClick={ drawResult }
         logout={ logout }
+        userID={ pathArray[ 2 ] }
       />
     </CheckAuth>
   );
