@@ -14,11 +14,11 @@ import Login from 'page/login';
 const App = () => (
   <BrowserRouter basename="/randomizator">
     <Switch>
-      <Route exact path="/randomizator" component={ Login } />
-      <Route exact path="/randomizator/not_found" component={ ErrorPage } />
-      <Route exact path="/randomizator/:creator_id" component={ Creator } />
-      <Route exact path="/randomizator/:creator_id/:list_id" component={ GuestPage } />
-      <Redirect from="/*" to="/randomizator" />
+      <Route exact path="/" component={ Login } />
+      <Route exact path="/not_found" component={ ErrorPage } />
+      <Route exact path="/:creator_id" component={ Creator } />
+      <Route exact path="/:creator_id/:list_id" component={ GuestPage } />
+      <Redirect from="/*" to="/" />
     </Switch>
   </BrowserRouter>
 );

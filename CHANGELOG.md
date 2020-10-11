@@ -1,3 +1,6 @@
+## 1.0.3 (October 11, 2020)
+- Fix wrong paths
+
 ## 1.0.2 (October 11, 2020)
 - Add 404 page for GitHub
 - Add favicon

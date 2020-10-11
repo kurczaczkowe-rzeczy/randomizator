@@ -1,7 +1,7 @@
 {
   "homepage": "/randomizator/",
   "name": "randomizator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.1",
