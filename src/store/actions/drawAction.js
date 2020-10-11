@@ -25,7 +25,6 @@ export const setDrawResult = () => ( dispatch, getState ) => {
     if ( tags.length !== 0 ) {
       const filteredArray = filterArrayByTag( arrayOfAnswer, tags );
 
-      console.log({ filteredArray });
       if ( _isEmpty( filteredArray )) {
         dispatch({ type: ERROR_DRAW_RESULT, key });
       } else {
