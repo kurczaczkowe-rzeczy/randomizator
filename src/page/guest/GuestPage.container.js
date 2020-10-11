@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router';
+import { Redirect, useLocation } from 'react-router';
 import { connect } from 'react-redux';
 
 import { db, firestore } from 'config/firebaseConfig';
@@ -14,6 +14,8 @@ const GuestPage = ({
   formName,
   getUser,
   getFormName,
+  errorFormName,
+  errorUserName,
 }) => {
   const history = useLocation();
   const pathArray = history.pathname.split( '/' );
@@ -36,16 +38,25 @@ const GuestPage = ({
       .catch(( error ) => console.log( 'Error!', error ));
   };
 
-  return (
+  const displayPage = (
     <GuestPageView
       creatorName={ userName }
       formName={ formName }
       onSubmit={ ( nameMale, nameFemale ) => onSubmit( nameMale, nameFemale ) }
     />
   );
+
+  const redirect = ( <Redirect from="/*" to="/randomizator/not_found" /> );
+
+  console.log( errorUserName, errorFormName );
+
+  return ( errorFormName || errorUserName ) ? redirect : displayPage;
+
 };
 
 GuestPage.propTypes = {
+  errorFormName: PropTypes.string,
+  errorUserName: PropTypes.string,
   formName: PropTypes.string,
   getFormName: PropTypes.func,
   getUser: PropTypes.func,
@@ -57,11 +68,15 @@ GuestPage.defaultProps = {
   getUser: () => {},
   formName: '',
   userName: '',
+  errorFormName: '',
+  errorUserName: '',
 };
 
 const mapStateToProps = ( state ) => ({
   userName: state.usr.userName,
   formName: state.form.formName,
+  errorFormName: state.form.errors,
+  errorUserName: state.usr.errors,
 });
 
 const mapDispatchToProps = ( dispatch ) => ({

@@ -3,7 +3,7 @@ import { GET_FORM_NAME, ERROR_FORM_DONT_EXIST } from 'store/actions';
 const initState = {
   formName: '',
   docID: '',
-  errors: {},
+  errors: null,
 };
 
 const reducer = ( state = initState, action = {}) => {
@@ -13,6 +13,7 @@ const reducer = ( state = initState, action = {}) => {
         ...state,
         formName: action.name,
         docID: action.docID,
+        errors: null,
       };
     case ERROR_FORM_DONT_EXIST:
       return {
