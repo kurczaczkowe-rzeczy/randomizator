@@ -8,6 +8,7 @@ import SelectFilter from 'components/selectFilter';
 const Draw = ({
   loadedData,
   result,
+  errors,
   onRandomClick,
 }) => (
   <>
@@ -16,6 +17,7 @@ const Draw = ({
     <DrawResult
       maleName={ result.nameMale }
       femaleName={ result.nameFemale }
+      errors={ errors }
     />
   </>
 );
@@ -23,9 +25,13 @@ const Draw = ({
 Draw.propTypes = {
   loadedData: PropTypes.bool.isRequired,
   onRandomClick: PropTypes.func.isRequired,
+  errors: PropTypes.arrayOf( PropTypes.string ),
   result: PropTypes.objectOf( PropTypes.any ),
 };
 
-Draw.defaultProps = { result: {}};
+Draw.defaultProps = {
+  result: {},
+  errors: [],
+};
 
 export default Draw;
