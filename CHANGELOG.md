@@ -1,3 +1,6 @@
+## 1.0.1 (October 11, 2020)
+- Update README
+
 ## 1.0.0 (October 11, 2020)
 - You can login 
 - You can send answers via form (unauthorized)

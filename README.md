@@ -1,5 +1,9 @@
 # Randomizator [![App Release](https://img.shields.io/badge/dynamic/json?color=blue&label=version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 
+If you want to test check this [link](https://kurczaczkowe-rzeczy.github.io/randomizator/). Test credentials:
+- User name: randomizator@example.com
+- Password: randomizator1234
+
 ## Project Overview
 You can easily collect answers from unauthorized users. You can randomize from the form fields.
 You can also filter the answers to be taken into account in the draw. Filtering is done by passing 
@@ -11,8 +15,8 @@ a string of characters that begin a given answer in the field.
 [![React Release](https://img.shields.io/badge/dynamic/json?color=blue&label=react&query=%24.dependencies.react&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![Uuid Release](https://img.shields.io/badge/dynamic/json?color=blue&label=react-uuid&query=%24.dependencies['react-uuid']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![Lodash Release](https://img.shields.io/badge/dynamic/json?color=blue&label=lodash&query=%24.dependencies.lodash&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
-[![ESLint Release](https://img.shields.io/badge/dynamic/json?color=blue&label=eslint&query=%24.devDependencies.eslint&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
-[![Node Sass Release](https://img.shields.io/badge/dynamic/json?color=blue&label=node-sass&query=%24.devDependencies['node-sass']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
+[![ESLint Release](https://img.shields.io/badge/dynamic/json?color=blue&label=eslint&query=%24.dependencies.eslint&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
+[![Node Sass Release](https://img.shields.io/badge/dynamic/json?color=blue&label=node-sass&query=%24.dependencies['node-sass']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![React Router Release](https://img.shields.io/badge/dynamic/json?color=blue&label=react-router&query=%24.dependencies['react-router']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![GitHub Pages Release](https://img.shields.io/badge/dynamic/json?color=blue&label=gh-pages&query=%24.dependencies['gh-pages']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![Classnames Release](https://img.shields.io/badge/dynamic/json?color=blue&label=classnames&query=%24.dependencies.classnames&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
