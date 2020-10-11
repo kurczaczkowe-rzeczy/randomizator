@@ -1,0 +1,21 @@
+.form {
+  border-radius: 5px;
+  width: max-content;
+  padding: 20px 35px;
+
+  div {
+    margin: 20px 0;
+  }
+
+  .align-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+.disabled{
+  button[type='submit'], input{
+    pointer-events: none;
+  }
+}

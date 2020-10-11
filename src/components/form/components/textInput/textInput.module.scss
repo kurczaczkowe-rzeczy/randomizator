@@ -1,0 +1,15 @@
+.inputText {
+  background-color: #222222;
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-image: linear-gradient(180deg, #222 0%, #222 49%, #771e76 50%, #771e76 100%) 1;
+  border-bottom: 2px solid;
+  padding: 8px;
+  color: #bdaeae;
+  font-size: 17px;
+}
+.fullWidth {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
