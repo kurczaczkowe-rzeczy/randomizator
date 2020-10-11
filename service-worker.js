@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/randomizator/precache-manifest.d0d8e82b12b2116b217dfb6a2cb2c84d.js"
+  "/precache-manifest.fa942294893cd9a783c8baf38d889901.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -33,7 +33,7 @@ workbox.core.clientsClaim();
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/randomizator/index.html"), {
+workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/index.html"), {
   
   blacklist: [/^\/_/,/\/[^\/?]+\.[^\/]+$/],
 });
