@@ -10,12 +10,12 @@ import { clearDraw, setDrawResult } from 'store/actions/drawAction';
 import { setAnswers } from 'store/actions/answersAction';
 import { setFormName } from 'store/actions/formAction';
 import { signOut } from 'store/actions/authAction';
+import { addForm } from 'store/actions/formsActions';
+import { FORM_ID_KEY } from 'constans';
 
 import CheckAuth from 'hoc/checkAuth/CheckAuth';
 
 import CreatorView from 'page/creator/CreatorPage.view';
-import { addForm } from 'store/actions/formsActions';
-import { FORM_ID_KEY } from 'constans';
 
 const Creator = ({
   addForm,
@@ -32,7 +32,7 @@ const Creator = ({
   useEffect(() => {
     const unsub = db.collection( pathArray[ 2 ])
       .onSnapshot((( snap ) => {
-        snap.docs.forEach(( doc ) => {
+        _forEach( snap.docs, ( doc ) => {
           const form = {
             name: doc.data().name,
             id: doc.id,
@@ -52,7 +52,7 @@ const Creator = ({
     if ( formID !== null ) {
       const unsub = db.collection( pathArray[ 2 ])
         .onSnapshot((( snap ) => {
-          snap.docs.forEach(( doc ) => {
+          _forEach( snap.docs, ( doc ) => {
             const ans = doc.data().answers;
 
             if ( formID === doc.id ) {

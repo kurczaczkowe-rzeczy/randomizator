@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Select from 'components/select/Select.view';
 import CopyLink from 'components/copyLink';
+
 import classes from './formList.module.scss';
 
 const FormList = ({

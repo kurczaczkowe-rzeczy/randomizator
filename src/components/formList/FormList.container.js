@@ -5,10 +5,15 @@ import { connect } from 'react-redux';
 import FormListView from 'components/formList/FormList.view';
 
 const FormList = ({
-  content, userID, forms, onFormIdChange,
+  content,
+  userID,
+  forms,
+  onFormIdChange,
 }) => (
   <FormListView
-    content={ content } userID={ userID } forms={ forms }
+    content={ content }
+    userID={ userID }
+    forms={ forms }
     onFormIdChange={ onFormIdChange }
   />
 );

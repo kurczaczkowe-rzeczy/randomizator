@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import useStateWithCallback from 'use-state-with-callback';
+import { DELAY_DISAPPEARING, HOME_PAGE } from 'constans';
 
 import CopyLinkView from 'components/copyLink/CopyLink.view';
-import { DELAY_DISAPPEARING, HOME_PAGE } from 'constans';
 
 const CopyLink = ({ formID, userID }) => {
   const [ link, setLink ] = useState( '' );

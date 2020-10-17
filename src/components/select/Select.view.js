@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SelectUI from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -7,7 +8,6 @@ import FormControl from '@material-ui/core/FormControl';
 import _map from 'lodash/map';
 
 import useStyle from 'components/select/Select.styles';
-import { connect } from 'react-redux';
 
 const Select = ({
   options, onFormIdChange, defaultValue, label,

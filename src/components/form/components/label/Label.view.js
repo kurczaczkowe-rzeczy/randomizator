@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import classes from './label.module.scss';
 
 const Label = ({
-  content, required, id,
+  content,
+  required,
 }) => (
-  <p className={ classes.label } id={ id }>
+  <p className={ classes.label }>
     { content }
     { required && <span>* </span> }
     :
