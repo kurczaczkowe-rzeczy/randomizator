@@ -14,9 +14,11 @@ import { signOut } from 'store/actions/authAction';
 import CheckAuth from 'hoc/checkAuth/CheckAuth';
 
 import CreatorView from 'page/creator/CreatorPage.view';
+import { addForm } from 'store/actions/formsActions';
 
 const Creator = ({
   name,
+  addForm,
   drawResult,
   setAnswers,
   setFormName,
@@ -31,13 +33,17 @@ const Creator = ({
         snapshot.docs.forEach(( doc ) => {
           const ans = doc.data().answers;
 
+          const form = { name: doc.data().name, id: doc.id };
+
+          // console.debug( form );
+          addForm( form );
           setFormName( doc.data().name, doc.id );
           getData( ans );
         });
       }));
 
     return () => unsub();
-  }, [ ]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getData = ( answers ) => {
     const result = {};
@@ -67,6 +73,7 @@ const Creator = ({
 };
 
 Creator.propTypes = {
+  addForm: PropTypes.func,
   drawResult: PropTypes.func,
   logout: PropTypes.func,
   name: PropTypes.string,
@@ -76,6 +83,7 @@ Creator.propTypes = {
 
 Creator.defaultProps = {
   name: '',
+  addForm: () => {},
   setAnswers: () => {},
   drawResult: () => {},
   setFormName: () => {},
@@ -85,6 +93,10 @@ Creator.defaultProps = {
 const mapStateToProps = ( state ) => ({ name: state.form.formName });
 
 const mapDispatchToProps = ( dispatch ) => ({
+  addForm: ( form ) => {
+    console.debug( form );
+    dispatch( addForm( form ));
+  },
   drawResult: () => dispatch( setDrawResult()),
   setAnswers: ( answers, counter ) => dispatch( setAnswers( answers, counter )),
   setFormName: ( name, id ) => dispatch( setFormName( name, id )),
