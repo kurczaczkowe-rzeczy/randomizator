@@ -14,9 +14,13 @@ const Select = ({ options }) => {
   const opt = _map( options, ( option ) => (
     <MenuItem
       key={ option.id }
-      classes={{ root: styles.menuItem, selected: styles.menuItemSelected }}
+      value={ option.name }
+      classes={{
+        root: styles.menuItem,
+        selected: styles.menuItemSelected,
+      }}
     >
-      {option.name}
+      { option.name }
     </MenuItem>
   ));
 
@@ -33,7 +37,7 @@ const Select = ({ options }) => {
         MenuProps={{ classes: { paper: styles.paper }}}
         labelId="form-name"
       >
-        {opt}
+        { opt }
       </SelectUI>
     </FormControl>
   );
@@ -46,6 +50,6 @@ Select.propTypes = {
   })),
 };
 
-Select.defaultProps = { options: []};
+Select.defaultProps = { options: [{ id: '', name: '' }]};
 
 export default Select;

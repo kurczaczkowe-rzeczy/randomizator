@@ -10,7 +10,7 @@ const reducer = ( state = initState, action = {}) => {
     case ADD_FORM:
       return {
         ...state,
-        forms: action.forms,
+        forms: [ ...state.forms, action.forms ],
         errors: null,
       };
     default:

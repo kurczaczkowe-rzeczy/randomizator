@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Card from 'components/card/Card.view';
 
 import FileContainer from 'components/fileContainer/FileContainer.container';
-import FormList from 'components/formList/FormList.view';
+import FormList from 'components/formList';
 import Form from 'components/form';
 import Draw from 'components/draw';
 import AnswersCounter from 'components/answersCounter/AnswersCounter.view';

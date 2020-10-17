@@ -1,18 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import Description from 'components/description/Description.view';
-import Select from 'components/select/Select.view';
-import CopyLink from 'components/copyLink';
+import FormListView from 'components/formList/FormList.view';
 
 const FormList = ({
   content, userID, forms,
 }) => (
-  <>
-    <Description label="Formularz" content={ content } />
-    <Select options={ forms } />
-    <CopyLink userID={ userID } />
-  </>
+  <FormListView content={ content } userID={ userID } forms={ forms } />
 );
 
 FormList.propTypes = {
@@ -26,5 +21,7 @@ FormList.propTypes = {
 
 FormList.defaultProps = { userID: '', forms: [{ id: '', name: '' }]};
 
-export default FormList;
+const mapStateToProps = ( state ) => ({ forms: state.forms.forms });
+
+export default connect( mapStateToProps )( FormList );
 
