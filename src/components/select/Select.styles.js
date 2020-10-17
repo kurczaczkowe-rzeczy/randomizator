@@ -3,6 +3,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 export default makeStyles(() => ({
   label: {
     color: '#bdaeae',
+    fontSize: '19px',
     '&.Mui-focused': { color: '#bdaeae' },
   },
   labelFocus: { '&:focus': { background: 'transparent', color: '#bdaeae' }},
@@ -17,5 +18,5 @@ export default makeStyles(() => ({
   },
   menuItemSelected: { background: '#771e76' },
   icon: { fill: '#771e76' },
-  selected: { color: '#fff' },
+  selected: { color: '#fff', paddingTop: '12px' },
 }));

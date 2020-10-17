@@ -18,7 +18,6 @@ import { addForm } from 'store/actions/formsActions';
 import { FORM_ID_KEY } from 'constans';
 
 const Creator = ({
-  name,
   addForm,
   drawResult,
   setAnswers,
@@ -89,7 +88,6 @@ const Creator = ({
   return (
     <CheckAuth isLogged>
       <CreatorView
-        name={ name }
         onRandomClick={ drawResult }
         logout={ logout }
         userID={ pathArray[ 2 ] }
@@ -103,13 +101,11 @@ Creator.propTypes = {
   addForm: PropTypes.func,
   drawResult: PropTypes.func,
   logout: PropTypes.func,
-  name: PropTypes.string,
   setAnswers: PropTypes.func,
   setFormName: PropTypes.func,
 };
 
 Creator.defaultProps = {
-  name: '',
   addForm: () => {
   },
   setAnswers: () => {
@@ -122,8 +118,6 @@ Creator.defaultProps = {
   },
 };
 
-const mapStateToProps = ( state ) => ({ name: state.form.formName });
-
 const mapDispatchToProps = ( dispatch ) => ({
   addForm: ( form ) => dispatch( addForm( form )),
   drawResult: () => dispatch( setDrawResult()),
@@ -132,4 +126,4 @@ const mapDispatchToProps = ( dispatch ) => ({
   logout: () => dispatch( signOut()),
 });
 
-export default connect( mapStateToProps, mapDispatchToProps )( Creator );
+export default connect( null, mapDispatchToProps )( Creator );

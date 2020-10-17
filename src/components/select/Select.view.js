@@ -10,7 +10,7 @@ import useStyle from 'components/select/Select.styles';
 import { connect } from 'react-redux';
 
 const Select = ({
-  options, onFormIdChange, defaultValue,
+  options, onFormIdChange, defaultValue, label,
 }) => {
   const styles = useStyle();
   const [ valueForm, setValueForm ] = useState( '' );
@@ -42,7 +42,6 @@ const Select = ({
     }
 
     return value;
-
   };
 
   return (
@@ -51,7 +50,8 @@ const Select = ({
         id="form-name"
         classes={{ root: styles.label }}
       >
-        Formularz:
+        {label}
+        :
       </InputLabel>
       <SelectUI
         value={ getValue( valueForm ) }
@@ -69,6 +69,7 @@ const Select = ({
 
 Select.propTypes = {
   defaultValue: PropTypes.string,
+  label: PropTypes.string,
   options: PropTypes.arrayOf( PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
@@ -78,6 +79,7 @@ Select.propTypes = {
 
 Select.defaultProps = {
   defaultValue: '',
+  label: '',
   options: [{ id: '', name: '' }],
   onFormIdChange: () => {},
 };

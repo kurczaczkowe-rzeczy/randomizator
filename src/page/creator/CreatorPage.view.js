@@ -14,7 +14,6 @@ import classes from './creatorPage.module.scss';
 
 const Creator = ({
   onRandomClick,
-  name,
   logout,
   userID,
   onFormIdChange,
@@ -26,7 +25,7 @@ const Creator = ({
         body={ (
           <FormList
             onFormIdChange={ onFormIdChange }
-            content={ name }
+            content="Nazwa aktywnego formularza"
             userID={ userID }
           />
         ) }
@@ -57,13 +56,11 @@ const Creator = ({
 Creator.propTypes = {
   logout: PropTypes.func.isRequired,
   onRandomClick: PropTypes.func.isRequired,
-  name: PropTypes.string,
   userID: PropTypes.string,
   onFormIdChange: PropTypes.func,
 };
 
 Creator.defaultProps = {
-  name: '',
   userID: '',
   onFormIdChange: () => {},
 };
