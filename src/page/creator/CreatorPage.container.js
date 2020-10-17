@@ -6,7 +6,7 @@ import _forEach from 'lodash/forEach';
 import { connect } from 'react-redux';
 
 import { db } from 'config/firebaseConfig';
-import { setDrawResult } from 'store/actions/drawAction';
+import { clearDraw, setDrawResult } from 'store/actions/drawAction';
 import { setAnswers } from 'store/actions/answersAction';
 import { setFormName } from 'store/actions/formAction';
 import { signOut } from 'store/actions/authAction';
@@ -19,6 +19,7 @@ import { FORM_ID_KEY } from 'constans';
 
 const Creator = ({
   addForm,
+  clearDraw,
   drawResult,
   setAnswers,
   setFormName,
@@ -83,6 +84,7 @@ const Creator = ({
   const onFormIdChange = ( formID ) => {
     setFormID( formID );
     localStorage.setItem( FORM_ID_KEY, formID );
+    clearDraw();
   };
 
   return (
@@ -99,6 +101,7 @@ const Creator = ({
 
 Creator.propTypes = {
   addForm: PropTypes.func,
+  clearDraw: PropTypes.func,
   drawResult: PropTypes.func,
   logout: PropTypes.func,
   setAnswers: PropTypes.func,
@@ -106,16 +109,12 @@ Creator.propTypes = {
 };
 
 Creator.defaultProps = {
-  addForm: () => {
-  },
-  setAnswers: () => {
-  },
-  drawResult: () => {
-  },
-  setFormName: () => {
-  },
-  logout: () => {
-  },
+  addForm: () => {},
+  clearDraw: () => {},
+  drawResult: () => {},
+  logout: () => {},
+  setAnswers: () => {},
+  setFormName: () => {},
 };
 
 const mapDispatchToProps = ( dispatch ) => ({
@@ -123,6 +122,7 @@ const mapDispatchToProps = ( dispatch ) => ({
   drawResult: () => dispatch( setDrawResult()),
   setAnswers: ( answers, counter ) => dispatch( setAnswers( answers, counter )),
   setFormName: ( name, id ) => dispatch( setFormName( name, id )),
+  clearDraw: () => dispatch( clearDraw()),
   logout: () => dispatch( signOut()),
 });
 
