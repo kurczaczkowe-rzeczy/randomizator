@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import _isEmpty from 'lodash/isEmpty';
 import useStateWithCallback from 'use-state-with-callback';
 
 import CopyLinkView from 'components/copyLink/CopyLink.view';
@@ -15,9 +14,11 @@ const CopyLink = ({ formID, userID }) => {
     }
   });
 
-  if ( _isEmpty( link ) && formID ) {
-    setLink( `${ HOME_PAGE }/${ userID }/${ formID }` );
-  }
+  useEffect(() => {
+    if ( formID ) {
+      setLink( `${ HOME_PAGE }/${ userID }/${ formID }` );
+    }
+  }, [ formID ]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <CopyLinkView
