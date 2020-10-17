@@ -5,7 +5,7 @@ import _isEmpty from 'lodash/isEmpty';
 import useStateWithCallback from 'use-state-with-callback';
 
 import CopyLinkView from 'components/copyLink/CopyLink.view';
-import { DELAY_DISAPPEARING } from 'constans';
+import { DELAY_DISAPPEARING, HOME_PAGE } from 'constans';
 
 const CopyLink = ({ formID, userID }) => {
   const [ link, setLink ] = useState( '' );
@@ -16,7 +16,7 @@ const CopyLink = ({ formID, userID }) => {
   });
 
   if ( _isEmpty( link ) && formID ) {
-    setLink( `${ process.env.REACT_APP_HOMEPAGE }/${ userID }/${ formID }` );
+    setLink( `${ HOME_PAGE }/${ userID }/${ formID }` );
   }
 
   return (
