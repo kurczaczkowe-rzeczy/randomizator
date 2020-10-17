@@ -5,9 +5,12 @@ import { connect } from 'react-redux';
 import FormListView from 'components/formList/FormList.view';
 
 const FormList = ({
-  content, userID, forms,
+  content, userID, forms, onFormIdChange,
 }) => (
-  <FormListView content={ content } userID={ userID } forms={ forms } />
+  <FormListView
+    content={ content } userID={ userID } forms={ forms }
+    onFormIdChange={ onFormIdChange }
+  />
 );
 
 FormList.propTypes = {
@@ -17,9 +20,14 @@ FormList.propTypes = {
     name: PropTypes.string,
   })),
   userID: PropTypes.string,
+  onFormIdChange: PropTypes.func,
 };
 
-FormList.defaultProps = { userID: '', forms: [{ id: '', name: '' }]};
+FormList.defaultProps = {
+  userID: '',
+  forms: [{ id: '', name: '' }],
+  onFormIdChange: () => {},
+};
 
 const mapStateToProps = ( state ) => ({ forms: state.forms.forms });
 

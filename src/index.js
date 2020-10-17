@@ -21,12 +21,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const store = createStore( rootReducer,
-  compose( reduxFirestore( firebase ),
+  compose(
+    reduxFirestore( firebase ),
     applyMiddleware( thunk.withExtraArgument({
       getFirebase,
       getFirestore,
     })),
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   ));
 
 const rrfProps = {

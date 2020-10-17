@@ -7,8 +7,11 @@ import FormControl from '@material-ui/core/FormControl';
 import _map from 'lodash/map';
 
 import useStyle from 'components/select/Select.styles';
+import { connect } from 'react-redux';
 
-const Select = ({ options }) => {
+const Select = ({
+  options, onFormIdChange, defaultValue,
+}) => {
   const styles = useStyle();
   const [ valueForm, setValueForm ] = useState( '' );
 
@@ -20,11 +23,27 @@ const Select = ({ options }) => {
         root: styles.menuItem,
         selected: styles.menuItemSelected,
       }}
-      onClick={ () => setValueForm( option.name ) }
+      onClick={ () => {
+        setValueForm( option.name );
+        onFormIdChange( option.id );
+      } }
     >
       { option.name }
     </MenuItem>
   ));
+
+  const getValue = ( value ) => {
+    if ( value === '' ) {
+      if ( options ) {
+        const find = options.find(( opt ) => opt.id === defaultValue );
+
+        return find ? find.name : '';
+      }
+    }
+
+    return value;
+
+  };
 
   return (
     <FormControl fullWidth>
@@ -35,7 +54,7 @@ const Select = ({ options }) => {
         Formularz:
       </InputLabel>
       <SelectUI
-        value={ valueForm }
+        value={ getValue( valueForm ) }
         classes={{
           select: styles.labelFocus, icon: styles.icon, root: styles.selected,
         }}
@@ -49,12 +68,20 @@ const Select = ({ options }) => {
 };
 
 Select.propTypes = {
+  defaultValue: PropTypes.string,
   options: PropTypes.arrayOf( PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
   })),
+  onFormIdChange: PropTypes.func,
 };
 
-Select.defaultProps = { options: [{ id: '', name: '' }]};
+Select.defaultProps = {
+  defaultValue: '',
+  options: [{ id: '', name: '' }],
+  onFormIdChange: () => {},
+};
 
-export default Select;
+const mapStateToProps = ( state ) => ({ defaultValue: state.form.docID });
+
+export default connect( mapStateToProps )( Select );

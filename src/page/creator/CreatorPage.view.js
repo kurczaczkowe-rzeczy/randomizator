@@ -17,6 +17,7 @@ const Creator = ({
   name,
   logout,
   userID,
+  onFormIdChange,
 }) => (
   <div className={ classes.creator }>
     <div className={ classes.leftSpace }>
@@ -24,6 +25,7 @@ const Creator = ({
         cardClass={ classes.baseLine }
         body={ (
           <FormList
+            onFormIdChange={ onFormIdChange }
             content={ name }
             userID={ userID }
           />
@@ -57,11 +59,13 @@ Creator.propTypes = {
   onRandomClick: PropTypes.func.isRequired,
   name: PropTypes.string,
   userID: PropTypes.string,
+  onFormIdChange: PropTypes.func,
 };
 
 Creator.defaultProps = {
   name: '',
   userID: '',
+  onFormIdChange: () => {},
 };
 
 export default Creator;

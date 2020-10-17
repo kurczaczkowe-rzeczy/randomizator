@@ -6,11 +6,14 @@ import Select from 'components/select/Select.view';
 import CopyLink from 'components/copyLink';
 
 const FormList = ({
-  content, userID, forms,
+  content, userID, forms, onFormIdChange,
 }) => (
   <>
     <Description label="Formularz" content={ content } />
-    <Select options={ forms } />
+    <Select
+      options={ forms }
+      onFormIdChange={ onFormIdChange }
+    />
     <CopyLink userID={ userID } />
   </>
 );
@@ -22,9 +25,14 @@ FormList.propTypes = {
     name: PropTypes.string,
   })),
   userID: PropTypes.string,
+  onFormIdChange: PropTypes.func,
 };
 
-FormList.defaultProps = { userID: '', forms: [{ id: '', name: '' }]};
+FormList.defaultProps = {
+  userID: '',
+  forms: [{ id: '', name: '' }],
+  onFormIdChange: () => {},
+};
 
 export default FormList;
 

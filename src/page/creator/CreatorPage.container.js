@@ -32,10 +32,6 @@ const Creator = ({
   useEffect(() => {
     const unsub = db.collection( pathArray[ 2 ])
       .onSnapshot((( snap ) => {
-        if ( formID === null ) {
-          setFormID( snap.docs[ 0 ].id );
-          localStorage.setItem( FORM_ID_KEY, snap.docs[ 0 ].id );
-        }
         snap.docs.forEach(( doc ) => {
           const form = {
             name: doc.data().name,
@@ -43,17 +39,32 @@ const Creator = ({
           };
 
           addForm( form );
-          const ans = doc.data().answers;
-
-          if ( formID === doc.id ) {
-            setFormName( doc.data().name, doc.id );
-            getData( ans );
+          if ( formID === null ) {
+            localStorage.setItem( FORM_ID_KEY, formID );
           }
         });
       }));
 
     return () => unsub();
-  }, [ ]);// eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if ( formID !== null ) {
+      const unsub = db.collection( pathArray[ 2 ])
+        .onSnapshot((( snap ) => {
+          snap.docs.forEach(( doc ) => {
+            const ans = doc.data().answers;
+
+            if ( formID === doc.id ) {
+              setFormName( doc.data().name, doc.id );
+              getData( ans );
+            }
+          });
+        }));
+
+      return () => unsub();
+    }
+  }, [ formID ]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getData = ( answers ) => {
     const result = {};
@@ -70,6 +81,11 @@ const Creator = ({
     setAnswers( result, answers.length );
   };
 
+  const onFormIdChange = ( formID ) => {
+    setFormID( formID );
+    localStorage.setItem( FORM_ID_KEY, formID );
+  };
+
   return (
     <CheckAuth isLogged>
       <CreatorView
@@ -77,6 +93,7 @@ const Creator = ({
         onRandomClick={ drawResult }
         logout={ logout }
         userID={ pathArray[ 2 ] }
+        onFormIdChange={ ( formID ) => onFormIdChange( formID ) }
       />
     </CheckAuth>
   );
