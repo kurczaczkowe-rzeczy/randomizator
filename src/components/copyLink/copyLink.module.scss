@@ -1,0 +1,41 @@
+.link {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  svg {
+    cursor: pointer;
+
+    &:hover {
+      fill: #771e76;
+    }
+  }
+
+  p {
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.copied{
+  position: absolute;
+  opacity: 0;
+  left: 20px;
+  right: 0;
+  top: 30px;
+  text-align: center;
+  width: max-content !important;
+  background-color: #1b1b1b;
+  padding: 8px;
+  border-radius: 15px;
+  transition: all 0.5s ease-in-out;
+
+  &.show{
+    top: 30px;
+    opacity: 1;
+  }
+}

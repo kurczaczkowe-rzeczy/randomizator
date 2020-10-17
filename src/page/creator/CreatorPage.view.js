@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Card from 'components/card/Card.view';
 
 import FileContainer from 'components/fileContainer/FileContainer.container';
-import FormDescription from 'components/formDescription/FormDescription.view';
+import FormList from 'components/formList/FormList.view';
 import Form from 'components/form';
 import Draw from 'components/draw';
 import AnswersCounter from 'components/answersCounter/AnswersCounter.view';
@@ -16,10 +16,19 @@ const Creator = ({
   onRandomClick,
   name,
   logout,
+  userID,
 }) => (
   <div className={ classes.creator }>
     <div className={ classes.leftSpace }>
-      <FormDescription content={ name } />
+      <Card
+        cardClass={ classes.baseLine }
+        body={ (
+          <FormList
+            content={ name }
+            userID={ userID }
+          />
+        ) }
+      />
       <FileContainer />
     </div>
     <div className={ classes.rightSpace }>
@@ -47,8 +56,12 @@ Creator.propTypes = {
   logout: PropTypes.func.isRequired,
   onRandomClick: PropTypes.func.isRequired,
   name: PropTypes.string,
+  userID: PropTypes.string,
 };
 
-Creator.defaultProps = { name: '' };
+Creator.defaultProps = {
+  name: '',
+  userID: '',
+};
 
 export default Creator;
