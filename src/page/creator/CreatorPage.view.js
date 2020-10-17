@@ -21,7 +21,7 @@ const Creator = ({
   <div className={ classes.creator }>
     <div className={ classes.leftSpace }>
       <Card
-        additionalClass={ classes.baseLine }
+        cardClass={ classes.baseLine }
         body={ (
           <FormList
             content={ name }

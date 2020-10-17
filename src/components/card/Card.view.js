@@ -6,11 +6,11 @@ import classNames from 'classnames';
 import classes from './card.module.scss';
 
 const Card = ({
-  title, body, additionalClass,
+  title, body, cardClass,
 }) => (
   <div className={
     classNames( classes.card,
-      { [ additionalClass ]: !_isEmpty( additionalClass ) })
+      { [ cardClass ]: !_isEmpty( cardClass ) })
   }
   >
     { ( title && !_isEmpty( title )) && <h3>{ title }</h3> }
@@ -20,12 +20,12 @@ const Card = ({
 
 Card.propTypes = {
   body: PropTypes.node.isRequired,
-  additionalClass: PropTypes.string,
+  cardClass: PropTypes.string,
   title: PropTypes.string,
 };
 
 Card.defaultProps = {
-  additionalClass: '',
+  cardClass: '',
   title: '',
 };
 

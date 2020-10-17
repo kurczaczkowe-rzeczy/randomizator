@@ -16,13 +16,13 @@ const GuestPageView = ({
   <div className={ classes.guest }>
     <div className={ classes.description }>
       <Card
-        additionalClass={ classes.baseLine }
+        cardClass={ classes.baseLine }
         body={ (
           <CreatorDescription content={ creatorName } />
         ) }
       />
       <Card
-        additionalClass={ classes.baseLine }
+        cardClass={ classes.baseLine }
         body={ <FormName content={ formName } /> }
       />
     </div>
