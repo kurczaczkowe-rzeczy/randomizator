@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import SelectUI from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -10,6 +10,7 @@ import useStyle from 'components/select/Select.styles';
 
 const Select = ({ options }) => {
   const styles = useStyle();
+  const [ valueForm, setValueForm ] = useState( '' );
 
   const opt = _map( options, ( option ) => (
     <MenuItem
@@ -19,6 +20,7 @@ const Select = ({ options }) => {
         root: styles.menuItem,
         selected: styles.menuItemSelected,
       }}
+      onClick={ () => setValueForm( option.name ) }
     >
       { option.name }
     </MenuItem>
@@ -33,7 +35,10 @@ const Select = ({ options }) => {
         Formularz:
       </InputLabel>
       <SelectUI
-        classes={{ select: styles.labelFocus }}
+        value={ valueForm }
+        classes={{
+          select: styles.labelFocus, icon: styles.icon, root: styles.selected,
+        }}
         MenuProps={{ classes: { paper: styles.paper }}}
         labelId="form-name"
       >

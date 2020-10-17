@@ -16,4 +16,6 @@ export default makeStyles(() => ({
     padding: '8px 16px',
   },
   menuItemSelected: { background: '#771e76' },
+  icon: { fill: '#771e76' },
+  selected: { color: '#fff' },
 }));
