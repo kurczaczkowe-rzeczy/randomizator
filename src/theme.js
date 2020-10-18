@@ -5,7 +5,10 @@ const backgroundLight = '#222';
 
 export const theme = createMuiTheme({
   palette: {
-    primary: { main: accent },
+    primary: {
+      main: accent,
+      light: '#765076',
+    },
     backgroundLight,
     backgroundDark: '#1b1b1b',
     colorText: '#bdaeae',

@@ -36,6 +36,7 @@ export default makeStyles(( theme ) => ({
     padding: theme.spacing( 1, 2 ),
     '&:last-of-type': { border: 'none' },
     '&.Mui-selected': { background: theme.palette.primary.main },
+    '&.Mui-selected:hover, &:hover': { background: theme.palette.primary.light },
   },
 
   icon: {
