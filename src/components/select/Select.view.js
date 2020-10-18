@@ -1,57 +1,34 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SelectUI from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import _map from 'lodash/map';
 
-import useStyle from 'components/select/Select.styles';
+import useStyle from './Select.styles';
+import {
+  createID,
+  createOptions,
+  getValue,
+} from './Select.utils';
 
 const Select = ({
-  options, onFormIdChange, defaultValue, label,
+  open,
+  valueForm,
+  defaultValue,
+  label,
+  options,
+  onClose,
+  onItemClick,
+  onOpen,
 }) => {
   const styles = useStyle();
-  const [ valueForm, setValueForm ] = useState( '' );
-
-  const opt = _map( options, ( option ) => (
-    <MenuItem
-      key={ option.id }
-      value={ option.name }
-      classes={{
-        root: styles.menuItem,
-        selected: styles.menuItemSelected,
-      }}
-      onClick={ () => {
-        setValueForm( option.name );
-        onFormIdChange( option.id );
-      } }
-    >
-      { option.name }
-    </MenuItem>
-  ));
-
-  const getValue = ( value ) => {
-    if ( value === '' ) {
-      if ( options ) {
-        const find = options.find(( opt ) => opt.id === defaultValue );
-
-        return find ? find.name : '';
-      }
-    }
-
-    return value;
-  };
-  const [ open, setOpen ] = useState( false );
-
-  const onOpen = () => setOpen( true );
-  const onClose = () => setOpen( false );
 
   return (
     <FormControl fullWidth>
       <InputLabel
-        id="form-name"
+        id={ createID( label ) }
         classes={{ root: styles.label }}
       >
         {label}
@@ -60,7 +37,9 @@ const Select = ({
       <SelectUI
         disableUnderline
         open={ open }
-        value={ getValue( valueForm ) }
+        value={ getValue(
+          options, valueForm, defaultValue,
+        ) }
         classes={{
           select: styles.select, icon: styles.icon, root: styles.selected,
         }}
@@ -77,9 +56,11 @@ const Select = ({
         }}
         onClose={ onClose }
         onOpen={ onOpen }
-        labelId="form-name"
+        labelId={ createID( label ) }
       >
-        { opt }
+        { createOptions(
+          options, styles, onItemClick,
+        ) }
       </SelectUI>
     </FormControl>
   );
@@ -88,18 +69,26 @@ const Select = ({
 Select.propTypes = {
   defaultValue: PropTypes.string,
   label: PropTypes.string,
+  open: PropTypes.bool,
   options: PropTypes.arrayOf( PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
   })),
-  onFormIdChange: PropTypes.func,
+  valueForm: PropTypes.string,
+  onClose: PropTypes.func,
+  onItemClick: PropTypes.func,
+  onOpen: PropTypes.func,
 };
 
 Select.defaultProps = {
+  open: false,
+  valueForm: '',
   defaultValue: '',
   label: '',
   options: [{ id: '', name: '' }],
-  onFormIdChange: () => {},
+  onClose: () => {},
+  onItemClick: () => {},
+  onOpen: () => {},
 };
 
 const mapStateToProps = ( state ) => ({ defaultValue: state.form.docID });

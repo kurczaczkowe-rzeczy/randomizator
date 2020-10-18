@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import Select from 'components/select/Select.view';
+import Select from 'components/select';
 import CopyLink from 'components/copyLink';
 
 import classes from './formList.module.scss';
