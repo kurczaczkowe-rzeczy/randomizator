@@ -12,7 +12,6 @@ import IconButton from 'components/iconButton/IconButton.view';
 import classes from './creatorPage.module.scss';
 
 const Creator = ({
-  userID,
   onRandomClick,
   logout,
   onFormIdChange,
@@ -23,8 +22,7 @@ const Creator = ({
         cardClass={ classes.baseLine }
         body={ (
           <FormList
-            content="Nazwa aktywnego formularza"
-            userID={ userID }
+            label="Nazwa aktywnego formularza"
             onFormIdChange={ onFormIdChange }
           />
         ) }
@@ -55,13 +53,9 @@ const Creator = ({
 Creator.propTypes = {
   logout: PropTypes.func.isRequired,
   onRandomClick: PropTypes.func.isRequired,
-  userID: PropTypes.string,
   onFormIdChange: PropTypes.func,
 };
 
-Creator.defaultProps = {
-  userID: '',
-  onFormIdChange: () => {},
-};
+Creator.defaultProps = { onFormIdChange: () => {} };
 
 export default Creator;

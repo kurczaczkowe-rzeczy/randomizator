@@ -18,7 +18,7 @@ const FormList = ({
       options={ forms }
       onFormIdChange={ onFormIdChange }
     />
-    <CopyLink userID={ userID } />
+    <CopyLink />
   </div>
 );
 
@@ -28,12 +28,10 @@ FormList.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string,
   })),
-  userID: PropTypes.string,
   onFormIdChange: PropTypes.func,
 };
 
 FormList.defaultProps = {
-  userID: '',
   forms: [{ id: '', name: '' }],
   onFormIdChange: () => {},
 };

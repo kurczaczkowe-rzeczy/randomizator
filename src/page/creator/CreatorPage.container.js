@@ -92,7 +92,6 @@ const Creator = ({
       <CreatorView
         onRandomClick={ drawResult }
         logout={ logout }
-        userID={ pathArray[ 2 ] }
         onFormIdChange={ ( formID ) => onFormIdChange( formID ) }
       />
     </CheckAuth>
