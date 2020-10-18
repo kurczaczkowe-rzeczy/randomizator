@@ -4,13 +4,13 @@ export default makeStyles(( theme ) => ({
   label: {
     color: theme.palette.colorText,
     fontSize: theme.fonts.size.label,
+    paddingLeft: theme.spacing( 1 ),
     '&.Mui-focused': { color: theme.palette.colorText },
   },
 
   list: { padding: 0 },
 
   select: {
-    backgroundColor: theme.palette.backgroundLight,
     borderLeft: theme.borders.input,
     borderRight: theme.borders.input,
     borderImage: theme.palette.gradient.input,
