@@ -1,4 +1,7 @@
-import { ADD_FORM, CLEAR_FORMS } from 'store/actions';
+import _unionWith from 'lodash/unionWith';
+import _isEqual from 'lodash/isEqual';
+
+import { ADD_FORM } from 'store/actions';
 
 const initState = {
   forms: [],
@@ -10,11 +13,13 @@ const reducer = ( state = initState, action = {}) => {
     case ADD_FORM:
       return {
         ...state,
-        forms: [ ...state.forms, action.forms ],
+        forms: _unionWith(
+          state.forms,
+          [ action.forms ],
+          _isEqual,
+        ),
         errors: null,
       };
-    case CLEAR_FORMS:
-      return { ...initState };
     default:
       return state;
   }
