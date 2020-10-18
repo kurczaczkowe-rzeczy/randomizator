@@ -1,7 +1,14 @@
 import { db } from 'config/firebaseConfig';
 import _forEach from 'lodash/forEach';
 
-export const formsSubscription = ( userID, func ) => db.collection( userID )
+export const formsSubscription = (
+  userID,
+  snapshotFunction,
+  setFormID,
+) => db.collection( userID )
   .onSnapshot(( snap ) => {
-    _forEach( snap.docs, func );
+    if ( setFormID ) {
+      setFormID( snap.docs );
+    }
+    _forEach( snap.docs, snapshotFunction );
   });

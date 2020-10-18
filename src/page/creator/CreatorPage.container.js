@@ -29,18 +29,32 @@ const Creator = ({
   const pathArray = history.pathname.split( '/' );
   const [ formID, setFormID ] = useState( localStorage.getItem( FORM_ID_KEY ));
 
-  useEffect(() => {
-    const subscription = formsSubscription( pathArray[ 2 ], ( doc ) => {
-      const form = {
-        name: doc.data().name,
-        id: doc.id,
-      };
+  const updateFormID = ( forms ) => {
+    const found = forms.findIndex(( form ) => form.id === formID );
 
-      addForm( form );
-      if ( formID === null ) {
-        localStorage.setItem( FORM_ID_KEY, formID );
-      }
-    });
+    if ( found === -1 ) {
+      localStorage.setItem( FORM_ID_KEY, forms[ 0 ].id  );
+      setFormID( forms[ 0 ].id );
+    }
+  };
+
+  useEffect(() => {
+    const subscription = formsSubscription(
+      pathArray[ 2 ],
+      ( doc ) => {
+        const form = {
+          name: doc.data().name,
+          id: doc.id,
+        };
+
+        addForm( form );
+        if ( _isNil( formID )) {
+          localStorage.setItem( FORM_ID_KEY, form.id );
+          setFormID( form.id );
+        }
+      },
+      updateFormID,
+    );
 
     return () => subscription();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
