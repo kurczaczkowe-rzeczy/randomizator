@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
-  createID,
+  prepareID,
   createOptions,
   getValue,
 } from './Select.utils';
@@ -48,7 +48,7 @@ const Select = ({
   return (
     <FormControl fullWidth>
       <InputLabel
-        id={ createID( label ) }
+        id={ prepareID( label ) }
         classes={{ root: styles.label }}
       >
         {label}
@@ -66,7 +66,7 @@ const Select = ({
         MenuProps={ menuProps }
         onClose={ onClose }
         onOpen={ onOpen }
-        labelId={ createID( label ) }
+        labelId={ prepareID( label ) }
       >
         { createOptions(
           options,

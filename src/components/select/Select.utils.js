@@ -1,5 +1,8 @@
 import React from 'react';
 import _map from 'lodash/map';
+import _find from 'lodash/find';
+import _toLower from 'lodash/toLower';
+import _replace from 'lodash/replace';
 
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -10,7 +13,7 @@ const getValue = (
 ) => {
   if ( value === '' ) {
     if ( options ) {
-      const find = options.find(( opt ) => opt.id === defaultValue );
+      const find = _find( options, ( opt ) => opt.id === defaultValue );
 
       return find ? find.name : '';
     }
@@ -34,10 +37,12 @@ const createOptions = (
   </MenuItem>
 ));
 
-const createID = ( label ) => label.toLowerCase().replaceAll( ' ', '-' );
+const prepareID = ( label ) => _toLower( _replace(
+  label, /\s/g, '-',
+));
 
 export {
-  createID,
+  prepareID,
   createOptions,
   getValue,
 };

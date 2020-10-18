@@ -8,10 +8,10 @@ const Select = ({
   onFormIdChange,
 }) => {
   const [ open, setOpen ] = useState( false );
+  const [ valueForm, setValueForm ] = useState( '' );
 
   const onOpen = () => setOpen( true );
   const onClose = () => setOpen( false );
-  const [ valueForm, setValueForm ] = useState( '' );
 
   const onMenuItemClick = ( option ) => {
     setValueForm( option.name );
