@@ -1,36 +1,36 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-export default makeStyles(() => ({
+export default makeStyles(( theme ) => ({
   label: {
-    color: '#bdaeae',
-    fontSize: '19px',
-    '&.Mui-focused': { color: '#bdaeae' },
+    color: theme.palette.colorText,
+    fontSize: theme.fonts.size.label,
+    '&.Mui-focused': { color: theme.palette.colorText },
   },
 
   labelFocus: {
     '&:focus':
       {
         background: 'transparent',
-        color: '#bdaeae',
+        color: theme.palette.colorText,
       },
   },
 
   paper: {
-    background: '#1b1b1b',
-    color: '#bdaeae',
+    background: theme.palette.backgroundDark,
+    color: theme.palette.colorText,
   },
 
   menuItem: {
-    borderBottom: '1px solid #771e76',
-    padding: '8px 16px',
+    borderBottom: `1px solid ${ theme.palette.primary }`,
+    padding: theme.spacing( 1, 2 ),
   },
 
-  menuItemSelected: { background: '#771e76' },
+  menuItemSelected: { background: theme.palette.primary },
 
-  icon: { fill: '#771e76' },
+  icon: { fill: theme.palette.primary },
 
   selected: {
-    color: '#fff',
-    paddingTop: '12px',
+    color: theme.palette.colorTextSelected,
+    paddingTop: theme.spacing( 1.5 ),
   },
 }));
