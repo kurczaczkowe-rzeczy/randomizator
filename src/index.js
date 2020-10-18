@@ -30,7 +30,7 @@ const store = createStore( rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   ));
 
-const rrfProps = {
+const reactReduxFirebaseProps = {
   firebase,
   config: {
     useFirestoreForProfile: true,
@@ -44,7 +44,7 @@ const rrfProps = {
 const render = (
   <React.StrictMode>
     <Provider store={ store }>
-      <ReactReduxFirebaseProvider { ...rrfProps }>
+      <ReactReduxFirebaseProvider { ...reactReduxFirebaseProps }>
         <App />
       </ReactReduxFirebaseProvider>
     </Provider>
