@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Select from 'components/select/Select.view';
 import CopyLink from 'components/copyLink';
@@ -7,11 +8,13 @@ import CopyLink from 'components/copyLink';
 import classes from './formList.module.scss';
 
 const FormList = ({
-  content, userID, forms, onFormIdChange,
+  label,
+  forms,
+  onFormIdChange,
 }) => (
   <div className={ classes.formDetails }>
     <Select
-      label={ content }
+      label={ label }
       options={ forms }
       onFormIdChange={ onFormIdChange }
     />
@@ -20,7 +23,7 @@ const FormList = ({
 );
 
 FormList.propTypes = {
-  content: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   forms: PropTypes.arrayOf( PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
@@ -35,5 +38,7 @@ FormList.defaultProps = {
   onFormIdChange: () => {},
 };
 
-export default FormList;
+const mapStateToProps = ( state ) => ({ forms: state.forms.forms });
+
+export default connect( mapStateToProps )( FormList );
 
