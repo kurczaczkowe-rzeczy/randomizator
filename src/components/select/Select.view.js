@@ -43,6 +43,10 @@ const Select = ({
 
     return value;
   };
+  const [ open, setOpen ] = useState( false );
+
+  const onOpen = () => setOpen( true );
+  const onClose = () => setOpen( false );
 
   return (
     <FormControl fullWidth>
@@ -54,11 +58,25 @@ const Select = ({
         :
       </InputLabel>
       <SelectUI
+        disableUnderline
+        open={ open }
         value={ getValue( valueForm ) }
         classes={{
-          select: styles.labelFocus, icon: styles.icon, root: styles.selected,
+          select: styles.select, icon: styles.icon, root: styles.selected,
         }}
-        MenuProps={{ classes: { paper: styles.paper }}}
+        MenuProps={{
+          classes: {
+            paper: styles.paper,
+            list: styles.list,
+          },
+          anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'left',
+          },
+          getContentAnchorEl: null,
+        }}
+        onClose={ onClose }
+        onOpen={ onOpen }
         labelId="form-name"
       >
         { opt }
