@@ -27,10 +27,7 @@ const createOptions = (
   <MenuItem
     key={ option.id }
     value={ option.name }
-    classes={{
-      root: styles.menuItem,
-      selected: styles.menuItemSelected,
-    }}
+    classes={{ root: styles.menuItem }}
     onClick={ () => onClick( option ) }
   >
     { option.name }

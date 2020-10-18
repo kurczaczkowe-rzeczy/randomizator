@@ -28,15 +28,15 @@ export default makeStyles(( theme ) => ({
   paper: {
     background: theme.palette.backgroundDark,
     color: theme.palette.colorText,
+    borderRadius: 0,
   },
 
   menuItem: {
     borderBottom: `1px solid ${ theme.palette.primary.main }`,
     padding: theme.spacing( 1, 2 ),
     '&:last-of-type': { border: 'none' },
+    '&.Mui-selected': { background: theme.palette.primary.main },
   },
-
-  menuItemSelected: { background: theme.palette.primary.main },
 
   icon: {
     fill: theme.palette.primary.main,

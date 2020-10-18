@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import SelectView from './Select.view';
 
 const Select = ({
-  defaultValue,
   label,
   onFormIdChange,
 }) => {
@@ -24,7 +22,6 @@ const Select = ({
     <SelectView
       open={ open }
       valueForm={ valueForm }
-      defaultValue={ defaultValue }
       label={ label }
       onClose={ onClose }
       onItemClick={ onMenuItemClick }
@@ -34,17 +31,13 @@ const Select = ({
 };
 
 Select.propTypes = {
-  defaultValue: PropTypes.string,
   label: PropTypes.string,
   onFormIdChange: PropTypes.func,
 };
 
 Select.defaultProps = {
-  defaultValue: '',
   label: '',
   onFormIdChange: () => {},
 };
 
-const mapStateToProps = ( state ) => ({ defaultValue: state.form.docID });
-
-export default connect( mapStateToProps )( Select );
+export default Select;
