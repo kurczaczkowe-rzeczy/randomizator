@@ -5,7 +5,6 @@ import _isNil from 'lodash/isNil';
 import _forEach from 'lodash/forEach';
 import { connect } from 'react-redux';
 
-import { db } from 'config/firebaseConfig';
 import { clearDraw, setDrawResult } from 'store/actions/drawAction';
 import { setAnswers } from 'store/actions/answersAction';
 import { setFormName } from 'store/actions/formAction';
@@ -16,6 +15,7 @@ import { FORM_ID_KEY } from 'constans';
 import CheckAuth from 'hoc/checkAuth/CheckAuth';
 
 import CreatorView from 'page/creator/CreatorPage.view';
+import { formsSubscription } from 'page/creator/CreatorPage.utils';
 
 const Creator = ({
   addForm,
@@ -30,39 +30,33 @@ const Creator = ({
   const [ formID, setFormID ] = useState( localStorage.getItem( FORM_ID_KEY ));
 
   useEffect(() => {
-    const unsub = db.collection( pathArray[ 2 ])
-      .onSnapshot((( snap ) => {
-        _forEach( snap.docs, ( doc ) => {
-          const form = {
-            name: doc.data().name,
-            id: doc.id,
-          };
+    const subscription = formsSubscription( pathArray[ 2 ], ( doc ) => {
+      const form = {
+        name: doc.data().name,
+        id: doc.id,
+      };
 
-          addForm( form );
-          if ( formID === null ) {
-            localStorage.setItem( FORM_ID_KEY, formID );
-          }
-        });
-      }));
+      addForm( form );
+      if ( formID === null ) {
+        localStorage.setItem( FORM_ID_KEY, formID );
+      }
+    });
 
-    return () => unsub();
+    return () => subscription();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if ( formID !== null ) {
-      const unsub = db.collection( pathArray[ 2 ])
-        .onSnapshot((( snap ) => {
-          _forEach( snap.docs, ( doc ) => {
-            const ans = doc.data().answers;
+      const subscription = formsSubscription( pathArray[ 2 ], ( doc ) => {
+        const ans = doc.data().answers;
 
-            if ( formID === doc.id ) {
-              setFormName( doc.data().name, doc.id );
-              getData( ans );
-            }
-          });
-        }));
+        if ( formID === doc.id ) {
+          setFormName( doc.data().name, doc.id );
+          getData( ans );
+        }
+      });
 
-      return () => unsub();
+      return () => subscription();
     }
   }, [ formID ]); // eslint-disable-line react-hooks/exhaustive-deps
 
