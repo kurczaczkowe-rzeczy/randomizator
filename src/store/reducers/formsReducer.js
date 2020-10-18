@@ -1,4 +1,4 @@
-import { ADD_FORM } from 'store/actions';
+import { ADD_FORM, CLEAR_FORMS } from 'store/actions';
 
 const initState = {
   forms: [],
@@ -13,6 +13,8 @@ const reducer = ( state = initState, action = {}) => {
         forms: [ ...state.forms, action.forms ],
         errors: null,
       };
+    case CLEAR_FORMS:
+      return { ...initState };
     default:
       return state;
   }

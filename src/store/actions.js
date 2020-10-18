@@ -9,6 +9,7 @@ export const ERROR_USER_DONT_EXIST = 'ERROR_USER_DONT_EXIST';
 
 export const GET_FORM_NAME = 'GET_FORM_NAME';
 export const ADD_FORM = 'ADD_FORM';
+export const CLEAR_FORMS = 'CLEAR_FORMS';
 export const ERROR_FORM_DONT_EXIST = 'ERROR_FORM_DONT_EXIST';
 
 export const SET_TAGS = 'SET_TAGS';
