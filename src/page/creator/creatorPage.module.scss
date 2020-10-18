@@ -1,19 +1,25 @@
 .creator {
   display: flex;
   justify-content: space-around;
-  margin-top: 48px;
+  padding-top: 48px;
 
   .leftSpace {
     width: 30%;
     display: flex;
     flex-direction: column;
-    row-gap: 35px;
+
+    & > div {
+      margin-bottom: 34px;
+    }
   }
   .rightSpace {
     width: 50%;
     display: flex;
     flex-direction: column;
-    row-gap: 35px;
+
+    & > div {
+      margin-bottom: 34px;
+    }
   }
 
   .inline {

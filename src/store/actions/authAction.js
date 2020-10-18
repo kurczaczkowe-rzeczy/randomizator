@@ -1,4 +1,5 @@
 import {
+  CLEAR_FORMS,
   LOGIN_ERROR,
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
@@ -27,5 +28,6 @@ export const signOut = () => (
   firebase.auth().signOut()
     .then(() => {
       dispatch({ type: LOGOUT_SUCCESS });
+      dispatch({ type: CLEAR_FORMS });
     });
 };

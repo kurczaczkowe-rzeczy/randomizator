@@ -12,7 +12,12 @@ import {
   SET_TAGS,
   ERROR_DRAW_RESULT,
   SET_ERROR_DRAW_RESULT,
+  CLEAR_DRAW_RESULT,
 } from 'store/actions';
+
+export const clearDraw = () => ( dispatch ) => {
+  dispatch({ type: CLEAR_DRAW_RESULT });
+};
 
 export const setDrawResult = () => ( dispatch, getState ) => {
   const draw = {};

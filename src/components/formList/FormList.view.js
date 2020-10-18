@@ -1,22 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Description from 'components/description/Description.view';
+import Select from 'components/select';
 import CopyLink from 'components/copyLink';
 
-const FormList = ({ content, userID }) => (
-  <>
-    <Description label="Formularz" content={ content } />
-    <CopyLink userID={ userID } />
-  </>
+import classes from './formList.module.scss';
+
+const FormList = ({
+  label,
+  onFormIdChange,
+}) => (
+  <div className={ classes.formDetails }>
+    <Select
+      label={ label }
+      onFormIdChange={ onFormIdChange }
+    />
+    <CopyLink />
+  </div>
 );
 
 FormList.propTypes = {
-  content: PropTypes.string.isRequired,
-  userID: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  onFormIdChange: PropTypes.func,
 };
 
-FormList.defaultProps = { userID: '' };
+FormList.defaultProps = { onFormIdChange: () => {} };
 
 export default FormList;
 

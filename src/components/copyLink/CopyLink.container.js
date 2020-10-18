@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import _isEmpty from 'lodash/isEmpty';
 import useStateWithCallback from 'use-state-with-callback';
-
-import CopyLinkView from 'components/copyLink/CopyLink.view';
 import { DELAY_DISAPPEARING, HOME_PAGE } from 'constans';
 
-const CopyLink = ({ formID, userID }) => {
+import CopyLinkView from 'components/copyLink/CopyLink.view';
+
+const CopyLink = ({ formID, auth }) => {
   const [ link, setLink ] = useState( '' );
   const [ copied, setCopied ] = useStateWithCallback( false, ( copied ) => {
     if ( copied ) {
@@ -15,9 +14,11 @@ const CopyLink = ({ formID, userID }) => {
     }
   });
 
-  if ( _isEmpty( link ) && formID ) {
-    setLink( `${ HOME_PAGE }/${ userID }/${ formID }` );
-  }
+  useEffect(() => {
+    if ( formID ) {
+      setLink( `${ HOME_PAGE }/${ auth.uid }/${ formID }` );
+    }
+  }, [ formID ]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <CopyLinkView
@@ -29,15 +30,18 @@ const CopyLink = ({ formID, userID }) => {
 };
 
 CopyLink.propTypes = {
+  auth: PropTypes.shape({ uid: PropTypes.string }),
   formID: PropTypes.string,
-  userID: PropTypes.string,
 };
 
 CopyLink.defaultProps = {
+  auth: { uid: '' },
   formID: '',
-  userID: '',
 };
 
-const mapStateToProps = ( state ) => ({ formID: state.form.docID });
+const mapStateToProps = ( state ) => ({
+  formID: state.form.docID,
+  auth: state.firebase.auth,
+});
 
 export default connect( mapStateToProps )( CopyLink );
