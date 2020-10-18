@@ -1,3 +1,8 @@
+## 1.1.0 (October 18, 2020)
+- Add copy link functionality
+- Add list of forms
+- Switch between forms
+
 ## 1.0.4 (October 11, 2020)
 - Add Footer
 

@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 
 import classes from './label.module.scss';
 
-const Label = ({ content, required }) => (
+const Label = ({
+  content,
+  required,
+}) => (
   <p className={ classes.label }>
     { content }
     { required && <span>* </span> }

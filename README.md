@@ -28,6 +28,7 @@ a string of characters that begin a given answer in the field.
 [![Dropzone Release](https://img.shields.io/badge/dynamic/json?color=blue&label=react-dropzone&query=%24.dependencies['react-dropzone']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![Papaparse Release](https://img.shields.io/badge/dynamic/json?color=blue&label=react-papaparse&query=%24.dependencies['react-papaparse']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![Material-UI icon Release](https://img.shields.io/badge/dynamic/json?color=blue&label=material-ui&query=%24.dependencies['@material-ui/core']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
+[![Copy to clipboard](https://img.shields.io/badge/dynamic/json?color=blue&label=react-copy-to-clipboard&query=%24.dependencies['react-copy-to-clipboard']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 
 
 ## Screenshots
@@ -38,7 +39,8 @@ a string of characters that begin a given answer in the field.
 ![form-display](https://user-images.githubusercontent.com/33415084/95674979-25bb9000-0bb4-11eb-8afe-a7387e3b30bb.png)
 
 ### Authorized
-![after-login](https://user-images.githubusercontent.com/33415084/95674976-248a6300-0bb4-11eb-8204-246d87b6a215.png)
+![after-login](https://user-images.githubusercontent.com/33415084/96367924-f7f4bf00-1150-11eb-9608-deeffaea4f4d.png)
+![show-list-forms](https://user-images.githubusercontent.com/33415084/96367974-3e4a1e00-1151-11eb-8fbc-ef82d197b314.png)
 
 ### Error page
 ![form-not-exist](https://user-images.githubusercontent.com/33415084/95674980-26542680-0bb4-11eb-8f30-a7d7e7a36c50.png)
@@ -72,3 +74,5 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Credits
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). <br>
+Special thanks for [rafgraph](https://github.com/rafgraph) and his [repo](https://github.com/rafgraph/spa-github-pages) that helps me
+with routes redirect to 404. 

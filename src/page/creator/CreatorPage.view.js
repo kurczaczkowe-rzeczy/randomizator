@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Card from 'components/card/Card.view';
-
 import FileContainer from 'components/fileContainer/FileContainer.container';
-import FormDescription from 'components/formDescription/FormDescription.view';
+import FormList from 'components/formList';
 import Form from 'components/form';
 import Draw from 'components/draw';
 import AnswersCounter from 'components/answersCounter/AnswersCounter.view';
@@ -14,12 +13,20 @@ import classes from './creatorPage.module.scss';
 
 const Creator = ({
   onRandomClick,
-  name,
   logout,
+  onFormIdChange,
 }) => (
   <div className={ classes.creator }>
     <div className={ classes.leftSpace }>
-      <FormDescription content={ name } />
+      <Card
+        cardClass={ classes.baseLine }
+        body={ (
+          <FormList
+            label="Nazwa aktywnego formularza"
+            onFormIdChange={ onFormIdChange }
+          />
+        ) }
+      />
       <FileContainer />
     </div>
     <div className={ classes.rightSpace }>
@@ -46,9 +53,9 @@ const Creator = ({
 Creator.propTypes = {
   logout: PropTypes.func.isRequired,
   onRandomClick: PropTypes.func.isRequired,
-  name: PropTypes.string,
+  onFormIdChange: PropTypes.func,
 };
 
-Creator.defaultProps = { name: '' };
+Creator.defaultProps = { onFormIdChange: () => {} };
 
 export default Creator;

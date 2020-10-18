@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import Description from 'components/description/Description.view';
 
-const FormDescription = ({ content }) => (
+const FormName = ({ content }) => (
   <Description label="Formularz" content={ content } />
 );
 
-FormDescription.propTypes = { content: PropTypes.string.isRequired };
+FormName.propTypes = { content: PropTypes.string.isRequired };
 
-export default FormDescription;
+export default FormName;

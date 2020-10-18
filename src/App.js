@@ -5,6 +5,9 @@ import {
   Redirect,
 } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from '@material-ui/styles';
+
+import { theme } from 'theme';
 
 import Creator from 'page/creator';
 import GuestPage from 'page/guest';
@@ -13,7 +16,7 @@ import Login from 'page/login';
 import Footer from 'components/footer/Footer.view';
 
 const App = () => (
-  <>
+  <ThemeProvider theme={ theme }>
     <BrowserRouter>
       <Switch>
         <Route exact path="/randomizator/" component={ Login } />
@@ -24,7 +27,7 @@ const App = () => (
       </Switch>
     </BrowserRouter>
     <Footer />
-  </>
+  </ThemeProvider>
 );
 
 export default App;

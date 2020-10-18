@@ -1,11 +1,12 @@
 {
-  "homepage" : "https://kurczaczkowe-rzeczy.github.io/randomizator",
+  "homepage": "https://kurczaczkowe-rzeczy.github.io/randomizator",
   "name": "randomizator",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/styles": "^4.10.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -16,6 +17,7 @@
     "lodash": "^4.17.20",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dnd": "^5.0.0",
     "react-dnd-html5-backend": "^3.0.2",
     "react-dom": "^16.13.1",
