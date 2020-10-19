@@ -1,3 +1,6 @@
+## 1.1.1 (October 19, 2020)
+- Fix problem with redux
+
 ## 1.1.0 (October 18, 2020)
 - Add copy link functionality
 - Add list of forms
