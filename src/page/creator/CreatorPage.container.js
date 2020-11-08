@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import _isNil from 'lodash/isNil';
 import _forEach from 'lodash/forEach';
+import _find from 'lodash/find';
 import { connect } from 'react-redux';
 
 import { clearDraw, setDrawResult } from 'store/actions/drawAction';
@@ -82,7 +83,10 @@ const Creator = ({
         if ( _isNil( result[ key ])) {
           result[ key ] = [];
         }
-        result[ key ].push( value );
+
+        if ( !_find( result[ key ], ( val ) => val === value )) {
+          result[ key ].push( value );
+        }
       });
     });
 
