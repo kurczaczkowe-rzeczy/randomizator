@@ -6,7 +6,10 @@ import classNames from 'classnames';
 import classes from './card.module.scss';
 
 const Card = ({
-  title, body, cardClass, id,
+  title,
+  cardClass,
+  body,
+  id,
 }) => (
   <div
     className={ classNames( classes.card, { [ cardClass ]: !_isEmpty( cardClass ) }) }
