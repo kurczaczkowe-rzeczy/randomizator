@@ -30,8 +30,7 @@ CopyLink.propTypes = {
 CopyLink.defaultProps = {
   copied: false,
   link: '',
-  onClick: () => {
-  },
+  onClick: () => {},
 };
 
 export default CopyLink;
