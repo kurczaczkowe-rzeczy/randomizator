@@ -7,7 +7,9 @@ import classNames from 'classnames';
 import classes from './copyLink.module.scss';
 
 const CopyLink = ({
-  copied, link, onClick,
+  copied,
+  link,
+  onClick,
 }) => (
   <div className={ classes.link }>
     <CopyToClipboard

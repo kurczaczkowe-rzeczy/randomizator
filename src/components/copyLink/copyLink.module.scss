@@ -15,8 +15,10 @@
 
   p {
     width: 90%;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin: 0;
+    overflow-x: scroll;
+    scrollbar-color: #771e76 #1b1b1b;
+    scrollbar-width: thin;
     white-space: nowrap;
   }
 }
