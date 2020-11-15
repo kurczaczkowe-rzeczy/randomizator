@@ -1,17 +1,39 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _isEmpty from 'lodash/isEmpty';
 import _isEqual from 'lodash/isEqual';
+import { DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
+
+import useTimeout from 'hooks/useTimeout';
+
+import cardClasses from 'components/card/card.module.scss';
+import descriptionClasses from 'components/description/description.module.scss';
 
 import FormView from './Form.view';
+
+// ToDo refactor when need to be used in another component
+const toggleHighlight = ( toRemove = false ) => {
+  const cardElement = document.querySelector( '#formName' );
+  const [ , contentElement ] = cardElement.children[ 0 ].children;
+
+  if ( toRemove ) {
+    cardElement.classList.remove( cardClasses.highlight );
+    contentElement.classList.remove( descriptionClasses.highlight );
+  } else {
+    cardElement.classList.add( cardClasses.highlight );
+    contentElement.classList.add( descriptionClasses.highlight );
+  }
+};
 
 const Form = ({
   preview,
   nameOfForm,
   onSubmit,
 }) => {
-  const handleSubmit = ( event ) => {
+  const { runTimeout, stopTimeout } = useTimeout( toggleHighlight, DELAY_FORM_NAME_HIGHLIGHT );
+
+  const handleSubmit = useCallback(( event ) => {
     event.preventDefault();
     const data = new FormData( event.target );
     const fromInput = data.get( 'check_is_not_robot' );
@@ -23,13 +45,30 @@ const Form = ({
     } else {
       onSubmit( data.get( 'name_male' ), data.get( 'name_female' ));
     }
-  };
+  }, [ nameOfForm, onSubmit ]);
+
+  const handleChange = useCallback(( event ) => {
+    const { target: { name, value }} = event;
+
+    if ( name === 'check_is_not_robot' ) {
+      if ( value === nameOfForm ) {
+        stopTimeout();
+        toggleHighlight( true );
+      } else { runTimeout(); }
+    }
+
+  }, [
+    nameOfForm,
+    runTimeout,
+    stopTimeout,
+  ]);
 
   return (
     <FormView
       preview={ preview }
       nameOfForm={ nameOfForm }
       onSubmit={ handleSubmit }
+      onChange={ handleChange }
     />
   );
 };

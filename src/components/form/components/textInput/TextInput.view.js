@@ -10,6 +10,7 @@ const TextInput = ({
   placeholder,
   type,
   fullWidth,
+  onChange,
 }) => (
   <input
     required={ required }
@@ -18,6 +19,7 @@ const TextInput = ({
     placeholder={ placeholder }
     name={ name }
     className={ classNames( classes.inputText, { [ classes.fullWidth ]: fullWidth }) }
+    onChange={ onChange }
   />
 );
 
@@ -27,6 +29,7 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   type: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 TextInput.defaultProps = {
@@ -34,6 +37,7 @@ TextInput.defaultProps = {
   required: false,
   type: 'text',
   fullWidth: false,
+  onChange: () => {},
 };
 
 export default TextInput;
