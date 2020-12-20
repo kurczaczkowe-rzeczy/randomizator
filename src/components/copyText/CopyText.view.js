@@ -4,11 +4,12 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import classNames from 'classnames';
 
-import classes from './copyLink.module.scss';
+import classes from 'components/copyText/copyText.module.scss';
 
-const CopyLink = ({
+const CopyText = ({
   copied,
   link,
+  component,
   onClick,
 }) => (
   <div className={ classes.link }>
@@ -18,21 +19,22 @@ const CopyLink = ({
     >
       <FileCopyIcon />
     </CopyToClipboard>
-    <p>{ link }</p>
+    { component }
     <div className={ classNames( classes.copied, { [ classes.show ]: copied }) }>Skopiowano</div>
   </div>
 );
 
-CopyLink.propTypes = {
+CopyText.propTypes = {
+  component: PropTypes.element.isRequired,
   copied: PropTypes.bool,
   link: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-CopyLink.defaultProps = {
+CopyText.defaultProps = {
   copied: false,
   link: '',
   onClick: () => {},
 };
 
-export default CopyLink;
+export default CopyText;
