@@ -4,19 +4,17 @@ import PropTypes from 'prop-types';
 import classes from './description.module.scss';
 
 const Description = ({ label, content }) => (
-  <div className={ classes.description }>
+  <div>
     <p className={ classes.label }>
       { label }
       :
     </p>
-    <p className={ classes.content }>
-      { content }
-    </p>
+    { content }
   </div>
 );
 
 Description.propTypes = {
-  content: PropTypes.string.isRequired,
+  content: PropTypes.element.isRequired,
   label: PropTypes.string.isRequired,
 };
 
