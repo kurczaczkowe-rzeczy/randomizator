@@ -10,11 +10,10 @@ import AnswersCounter from 'components/answersCounter/AnswersCounter.view';
 import IconButton from 'components/iconButton/IconButton.view';
 
 import classes from './creatorPage.module.scss';
-import CopyLink from 'components/copyText';
+import CopyText from 'components/copyText';
 
 const Creator = ({
   link,
-  component,
   onRandomClick,
   logout,
   onFormIdChange,
@@ -24,16 +23,20 @@ const Creator = ({
       <Card
         cardClass={ classes.rowGap }
         body={ (
-          <>
+          <div className={ classes.formNameWrapper }>
             <FormList
               label="Nazwa aktywnego formularza"
               onFormIdChange={ onFormIdChange }
             />
-            <CopyLink
-              link={ link }
-              component={ component }
+            <CopyText
+              text={ link }
+              content={ (
+                <p className={ classes.copyText }>
+                  { link }
+                </p>
+              ) }
             />
-          </>
+          </div>
         ) }
       />
       <FileContainer />
@@ -60,7 +63,6 @@ const Creator = ({
 );
 
 Creator.propTypes = {
-  component: PropTypes.element.isRequired,
   link: PropTypes.string.isRequired,
   logout: PropTypes.func.isRequired,
   onRandomClick: PropTypes.func.isRequired,

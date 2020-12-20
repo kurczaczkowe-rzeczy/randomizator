@@ -105,7 +105,6 @@ const Creator = ({
     <CheckAuth isLogged>
       <CreatorView
         link={ link }
-        component={ <p>{ link }</p> }
         onRandomClick={ drawResult }
         logout={ logout }
         onFormIdChange={ ( formID ) => onFormIdChange( formID ) }
