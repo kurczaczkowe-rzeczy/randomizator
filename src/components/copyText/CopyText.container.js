@@ -5,7 +5,7 @@ import { DELAY_DISAPPEARING } from 'constans';
 
 import CopyTextView from 'components/copyText/CopyText.view';
 
-const CopyText = ({ link, component }) => {
+const CopyText = ({ text, content }) => {
   const [ copied, setCopied ] = useStateWithCallback( false, ( copied ) => {
     if ( copied ) {
       setTimeout(() => { setCopied( false ); }, DELAY_DISAPPEARING );
@@ -15,16 +15,16 @@ const CopyText = ({ link, component }) => {
   return (
     <CopyTextView
       copied={ copied }
-      link={ link }
-      component={ component }
+      text={ text }
+      content={ content }
       onClick={ () => setCopied( true ) }
     />
   );
 };
 
 CopyText.propTypes = {
-  component: PropTypes.element.isRequired,
-  link: PropTypes.string.isRequired,
+  content: PropTypes.element.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 export default CopyText;

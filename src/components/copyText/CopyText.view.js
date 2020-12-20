@@ -8,32 +8,32 @@ import classes from 'components/copyText/copyText.module.scss';
 
 const CopyText = ({
   copied,
-  link,
-  component,
+  text,
+  content,
   onClick,
 }) => (
-  <div className={ classes.link }>
+  <div className={ classes.text }>
     <CopyToClipboard
-      text={ link }
+      text={ text }
       onCopy={ onClick }
     >
       <FileCopyIcon />
     </CopyToClipboard>
-    { component }
+    { content }
     <div className={ classNames( classes.copied, { [ classes.show ]: copied }) }>Skopiowano</div>
   </div>
 );
 
 CopyText.propTypes = {
-  component: PropTypes.element.isRequired,
+  content: PropTypes.element.isRequired,
   copied: PropTypes.bool,
-  link: PropTypes.string,
+  text: PropTypes.string,
   onClick: PropTypes.func,
 };
 
 CopyText.defaultProps = {
   copied: false,
-  link: '',
+  text: '',
   onClick: () => {},
 };
 
