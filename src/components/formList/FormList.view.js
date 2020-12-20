@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 
 import Select from 'components/select';
 
-import classes from './formList.module.scss';
-
 const FormList = ({
   label,
   onFormIdChange,
 }) => (
-  <div className={ classes.formDetails }>
+  <div>
     <Select
       label={ label }
       onFormIdChange={ onFormIdChange }
