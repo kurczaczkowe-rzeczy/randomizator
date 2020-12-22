@@ -11,7 +11,7 @@ import { setAnswers } from 'store/actions/answersAction';
 import { setFormName } from 'store/actions/formAction';
 import { signOut } from 'store/actions/authAction';
 import { addForm } from 'store/actions/formsActions';
-import { FORM_ID_KEY } from 'constans';
+import { FORM_ID_KEY, HOME_PAGE } from 'constans';
 
 import CheckAuth from 'hoc/checkAuth/CheckAuth';
 
@@ -19,6 +19,7 @@ import CreatorView from 'page/creator/CreatorPage.view';
 import { formsSubscription } from 'page/creator/CreatorPage.utils';
 
 const Creator = ({
+  auth,
   addForm,
   clearDraw,
   drawResult,
@@ -29,6 +30,7 @@ const Creator = ({
   const history = useLocation();
   const pathArray = history.pathname.split( '/' );
   const [ formID, setFormID ] = useState( localStorage.getItem( FORM_ID_KEY ));
+  const [ link, setLink ] = useState( '' );
 
   const updateFormID = ( forms ) => {
     const found = forms.findIndex(( form ) => form.id === formID );
@@ -71,6 +73,8 @@ const Creator = ({
         }
       });
 
+      setLink( `${ HOME_PAGE }/${ auth.uid }/${ formID }` );
+
       return () => subscription();
     }
   }, [ formID ]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -100,6 +104,7 @@ const Creator = ({
   return (
     <CheckAuth isLogged>
       <CreatorView
+        link={ link }
         onRandomClick={ drawResult }
         logout={ logout }
         onFormIdChange={ ( formID ) => onFormIdChange( formID ) }
@@ -110,6 +115,7 @@ const Creator = ({
 
 Creator.propTypes = {
   addForm: PropTypes.func,
+  auth: PropTypes.shape({ uid: PropTypes.string }),
   clearDraw: PropTypes.func,
   drawResult: PropTypes.func,
   logout: PropTypes.func,
@@ -118,6 +124,7 @@ Creator.propTypes = {
 };
 
 Creator.defaultProps = {
+  auth: { uid: '' },
   addForm: () => {},
   clearDraw: () => {},
   drawResult: () => {},
@@ -125,6 +132,8 @@ Creator.defaultProps = {
   setAnswers: () => {},
   setFormName: () => {},
 };
+
+const mapStateToProps = ( state ) => ({ auth: state.firebase.auth });
 
 const mapDispatchToProps = ( dispatch ) => ({
   addForm: ( form ) => dispatch( addForm( form )),
@@ -135,4 +144,4 @@ const mapDispatchToProps = ( dispatch ) => ({
   logout: () => dispatch( signOut()),
 });
 
-export default connect( null, mapDispatchToProps )( Creator );
+export default connect( mapStateToProps, mapDispatchToProps )( Creator );

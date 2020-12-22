@@ -1,10 +1,8 @@
-.link {
-  width: 100%;
+.text {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   position: relative;
-
+  justify-content: space-between;
   svg {
     cursor: pointer;
 
@@ -13,14 +11,6 @@
     }
   }
 
-  p {
-    width: 90%;
-    margin: 0;
-    overflow-x: scroll;
-    scrollbar-color: #771e76 #1b1b1b;
-    scrollbar-width: thin;
-    white-space: nowrap;
-  }
 }
 
 .copied{

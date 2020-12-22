@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import Card from 'components/card/Card.view';
 import Form from 'components/form';
 import CreatorDescription from 'components/creatorDescription/CreatorDescription.view';
-import FormName from 'components/guestFormDescription/FormName.view';
 
 import classes from './guestPage.module.scss';
+import CopyText from 'components/copyText';
+import TextBox from 'components/textBox/TextBox.view';
 
 const GuestPageView = ({
   creatorName,
@@ -22,7 +23,12 @@ const GuestPageView = ({
       <Card
         id="formName"
         cardClass={ classes.baseLine }
-        body={ <FormName content={ formName } /> }
+        body={ (
+          <CopyText
+            text={ formName }
+            content={ <TextBox>{formName}</TextBox> }
+          />
+        ) }
       />
     </div>
     <Card title="FORMULARZ" body={ <Form onSubmit={ onSubmit } /> } />

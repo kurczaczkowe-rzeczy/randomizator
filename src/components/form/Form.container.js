@@ -8,7 +8,7 @@ import { DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
 import useTimeout from 'hooks/useTimeout';
 
 import cardClasses from 'components/card/card.module.scss';
-import descriptionClasses from 'components/description/description.module.scss';
+import textBoxClasses from 'components/textBox/textBox.module.scss';
 
 import FormView from './Form.view';
 
@@ -19,10 +19,10 @@ const toggleHighlight = ( toRemove = false ) => {
 
   if ( toRemove ) {
     cardElement.classList.remove( cardClasses.highlight );
-    contentElement.classList.remove( descriptionClasses.highlight );
+    contentElement.classList.remove( textBoxClasses.highlight );
   } else {
     cardElement.classList.add( cardClasses.highlight );
-    contentElement.classList.add( descriptionClasses.highlight );
+    contentElement.classList.add( textBoxClasses.highlight );
   }
 };
 
