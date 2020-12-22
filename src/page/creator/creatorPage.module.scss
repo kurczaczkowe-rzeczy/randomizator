@@ -33,6 +33,23 @@
   }
 }
 
-.baseLine {
-  align-items: baseline;
+.formNameWrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  row-gap: 24px;
+
+  .copyText {
+    width: 90%;
+    margin: 0;
+    justify-content: space-between;
+    overflow-x: scroll;
+    scrollbar-color: #771e76 #1b1b1b;
+    scrollbar-width: thin;
+    white-space: nowrap;
+  }
+}
+
+.rowGap {
+  row-gap: 24px;
 }
