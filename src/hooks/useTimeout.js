@@ -1,17 +1,18 @@
 import { useState } from 'react';
 
-const useTimeout = ( callback, delay ) => {
+const useTimeout = ( delay ) => {
   const [ timeoutId, setTimeoutId ] = useState( -1 );
 
-  const runTimeout = () => {
+  const runTimeout = ( callback ) => {
     if ( timeoutId > -1 ) {
-      stopTimeout();
+      stopTimeout( callback );
     }
     setTimeoutId( setTimeout( callback, delay ));
   };
-  const stopTimeout = () => {
+  const stopTimeout = ( callback, ...args ) => {
     clearTimeout( timeoutId );
     setTimeoutId( -1 );
+    callback( ...args );
   };
 
   return { runTimeout, stopTimeout };

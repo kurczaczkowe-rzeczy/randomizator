@@ -31,7 +31,7 @@ const Form = ({
   nameOfForm,
   onSubmit,
 }) => {
-  const { runTimeout, stopTimeout } = useTimeout( toggleHighlight, DELAY_FORM_NAME_HIGHLIGHT );
+  const { runTimeout, stopTimeout } = useTimeout( DELAY_FORM_NAME_HIGHLIGHT );
 
   const handleSubmit = useCallback(( event ) => {
     event.preventDefault();
@@ -47,16 +47,14 @@ const Form = ({
     }
   }, [ nameOfForm, onSubmit ]);
 
-  const handleChange = useCallback(( event ) => {
-    const { target: { name, value }} = event;
+  const highlightFormName = useCallback(( event ) => {
+    const { target: { value }} = event;
 
-    if ( name === 'check_is_not_robot' ) {
-      if ( value === nameOfForm ) {
-        stopTimeout();
-        toggleHighlight( true );
-      } else { runTimeout(); }
+    if ( value === nameOfForm ) {
+      return stopTimeout( toggleHighlight, true );
     }
 
+    return runTimeout( toggleHighlight );
   }, [
     nameOfForm,
     runTimeout,
@@ -68,12 +66,13 @@ const Form = ({
       preview={ preview }
       nameOfForm={ nameOfForm }
       onSubmit={ handleSubmit }
-      onChange={ handleChange }
+      highlightFormName={ highlightFormName }
     />
   );
 };
 
 Form.propTypes = {
+  highlightFormName: PropTypes.func,
   nameOfForm: PropTypes.string,
   preview: PropTypes.bool,
   onSubmit: PropTypes.func,
@@ -82,6 +81,7 @@ Form.propTypes = {
 Form.defaultProps = {
   nameOfForm: '',
   preview: false,
+  highlightFormName: () => {},
   onSubmit: () => {},
 };
 

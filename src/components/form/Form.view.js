@@ -10,46 +10,38 @@ import classes from './form.module.scss';
 // ToDo create component that wraps label and textInput
 const Form = ({
   preview,
-  onChange,
+  highlightFormName,
   onSubmit,
 }) => (
   <form className={ classNames( classes.form, { [ classes.disabled ]: preview }) } onSubmit={ onSubmit }>
     <div className={ classes[ 'align-bottom' ] }>
       <Label required content="Imie męskie" />
-      <TextInput
-        required
-        name="name_male"
-        onChange={ onChange }
-      />
+      <TextInput required name="name_male" />
     </div>
-
     <div className={ classes[ 'align-bottom' ] }>
       <Label required content="Imie damskie" />
-      <TextInput
-        required
-        name="name_female"
-        onChange={ onChange }
-      />
+      <TextInput required name="name_female" />
     </div>
     <TextInput
       required
       fullWidth
       name="check_is_not_robot"
-      onChange={ onChange }
       placeholder="Aby wysłać, wpisz nazwę formularza"
+      onChange={ highlightFormName }
+      onFocus={ highlightFormName }
     />
     <Button value="Wyślij" type="submit" />
   </form>
 );
 
 Form.propTypes = {
+  highlightFormName: PropTypes.func,
   preview: PropTypes.bool,
-  onChange: PropTypes.func,
   onSubmit: PropTypes.func,
 };
 
 Form.defaultProps = {
-  onChange: () => {},
+  highlightFormName: () => {},
   onSubmit: () => {},
   preview: false,
 };
