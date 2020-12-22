@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Description from 'components/description/Description.view';
 import TextBox from 'components/textBox/TextBox.view';
 
-const FormName = ({ content }) => (
+const FormName = ({ content }) => ( // todo to refactor
   <Description
     label="Formularz" content={ (
       <TextBox>

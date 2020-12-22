@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Description from 'components/description/Description.view';
 import TextBox from 'components/textBox/TextBox.view';
 
-const CreatorDescription = ({ content }) => (
+const CreatorDescription = ({ content }) => ( // todo to refactor
   <Description
     label="Twórca"
     content={ (
