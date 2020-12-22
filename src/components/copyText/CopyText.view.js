@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import classes from 'components/copyText/copyText.module.scss';
 
 const CopyText = ({
-  copied,
+  isCopied,
   text,
   content,
   onClick,
@@ -20,19 +20,19 @@ const CopyText = ({
       <FileCopyIcon />
     </CopyToClipboard>
     { content }
-    <div className={ classNames( classes.copied, { [ classes.show ]: copied }) }>Skopiowano</div>
+    <div className={ classNames( classes.copied, { [ classes.show ]: isCopied }) }>Skopiowano</div>
   </div>
 );
 
 CopyText.propTypes = {
   content: PropTypes.element.isRequired,
-  copied: PropTypes.bool,
+  isCopied: PropTypes.bool,
   text: PropTypes.string,
   onClick: PropTypes.func,
 };
 
 CopyText.defaultProps = {
-  copied: false,
+  isCopied: false,
   text: '',
   onClick: () => {},
 };

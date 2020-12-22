@@ -6,18 +6,18 @@ import { DELAY_DISAPPEARING } from 'constans';
 import CopyTextView from 'components/copyText/CopyText.view';
 
 const CopyText = ({ text, content }) => {
-  const [ copied, setCopied ] = useStateWithCallback( false, ( copied ) => {
+  const [ isCopied, setIsCopied ] = useStateWithCallback( false, ( copied ) => {
     if ( copied ) {
-      setTimeout(() => { setCopied( false ); }, DELAY_DISAPPEARING );
+      setTimeout(() => { setIsCopied( false ); }, DELAY_DISAPPEARING );
     }
   });
 
   return (
     <CopyTextView
-      copied={ copied }
+      isCopied={ isCopied }
       text={ text }
       content={ content }
-      onClick={ () => setCopied( true ) }
+      onClick={ () => setIsCopied( true ) }
     />
   );
 };
