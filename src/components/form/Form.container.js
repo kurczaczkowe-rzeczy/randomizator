@@ -3,36 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _isEmpty from 'lodash/isEmpty';
 import _isEqual from 'lodash/isEqual';
-import { DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
-
-import useTimeout from 'hooks/useTimeout';
-
-import cardClasses from 'components/card/card.module.scss';
-import textBoxClasses from 'components/textBox/textBox.module.scss';
 
 import FormView from './Form.view';
-
-// ToDo refactor when need to be used in another component
-const toggleHighlight = ( toRemove = false ) => {
-  const cardElement = document.querySelector( '#formName' );
-  const [ , contentElement ] = cardElement.children[ 0 ].children;
-
-  if ( toRemove ) {
-    cardElement.classList.remove( cardClasses.highlight );
-    contentElement.classList.remove( textBoxClasses.highlight );
-  } else {
-    cardElement.classList.add( cardClasses.highlight );
-    contentElement.classList.add( textBoxClasses.highlight );
-  }
-};
 
 const Form = ({
   preview,
   nameOfForm,
   onSubmit,
+  additionalFunction,
 }) => {
-  const { runTimeout, stopTimeout } = useTimeout( DELAY_FORM_NAME_HIGHLIGHT );
-
+  /* ToDo use constants instead of hardcoded strings */
   const handleSubmit = useCallback(( event ) => {
     event.preventDefault();
     const data = new FormData( event.target );
@@ -47,32 +27,18 @@ const Form = ({
     }
   }, [ nameOfForm, onSubmit ]);
 
-  const highlightFormName = useCallback(( event ) => {
-    const { target: { value }} = event;
-
-    if ( value === nameOfForm ) {
-      return stopTimeout( toggleHighlight, true );
-    }
-
-    return runTimeout( toggleHighlight );
-  }, [
-    nameOfForm,
-    runTimeout,
-    stopTimeout,
-  ]);
-
   return (
     <FormView
       preview={ preview }
       nameOfForm={ nameOfForm }
       onSubmit={ handleSubmit }
-      highlightFormName={ highlightFormName }
+      additionalFunction={ additionalFunction }
     />
   );
 };
 
 Form.propTypes = {
-  highlightFormName: PropTypes.func,
+  additionalFunction: PropTypes.func,
   nameOfForm: PropTypes.string,
   preview: PropTypes.bool,
   onSubmit: PropTypes.func,
@@ -81,7 +47,7 @@ Form.propTypes = {
 Form.defaultProps = {
   nameOfForm: '',
   preview: false,
-  highlightFormName: () => {},
+  additionalFunction: () => {},
   onSubmit: () => {},
 };
 

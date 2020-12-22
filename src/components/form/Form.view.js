@@ -10,10 +10,11 @@ import classes from './form.module.scss';
 // ToDo create component that wraps label and textInput
 const Form = ({
   preview,
-  highlightFormName,
+  additionalFunction,
   onSubmit,
 }) => (
   <form className={ classNames( classes.form, { [ classes.disabled ]: preview }) } onSubmit={ onSubmit }>
+    {/* ToDo use constants instead of hardcoded strings */}
     <div className={ classes[ 'align-bottom' ] }>
       <Label required content="Imie męskie" />
       <TextInput required name="name_male" />
@@ -27,21 +28,21 @@ const Form = ({
       fullWidth
       name="check_is_not_robot"
       placeholder="Aby wysłać, wpisz nazwę formularza"
-      onChange={ highlightFormName }
-      onFocus={ highlightFormName }
+      onChange={ additionalFunction }
+      onFocus={ additionalFunction }
     />
     <Button value="Wyślij" type="submit" />
   </form>
 );
 
 Form.propTypes = {
-  highlightFormName: PropTypes.func,
+  additionalFunction: PropTypes.func,
   preview: PropTypes.bool,
   onSubmit: PropTypes.func,
 };
 
 Form.defaultProps = {
-  highlightFormName: () => {},
+  additionalFunction: () => {},
   onSubmit: () => {},
   preview: false,
 };

@@ -3,9 +3,9 @@ import { useState } from 'react';
 const useTimeout = ( delay ) => {
   const [ timeoutId, setTimeoutId ] = useState( -1 );
 
-  const runTimeout = ( callback ) => {
+  const runTimeout = ( callback, ...args ) => {
     if ( timeoutId > -1 ) {
-      stopTimeout( callback );
+      stopTimeout( callback, ...args );
     }
     setTimeoutId( setTimeout( callback, delay ));
   };

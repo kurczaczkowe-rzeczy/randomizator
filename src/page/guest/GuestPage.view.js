@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import Card from 'components/card/Card.view';
-import Form from 'components/form';
+import CopyText from 'components/copyText';
 import CreatorDescription from 'components/creatorDescription/CreatorDescription.view';
+import Form from 'components/form';
+import TextBox from 'components/textBox/TextBox.view';
 
 import classes from './guestPage.module.scss';
-import CopyText from 'components/copyText';
-import TextBox from 'components/textBox/TextBox.view';
 
 const GuestPageView = ({
   creatorName,
   formName,
   onSubmit,
+  isHighlighted,
+  highlightFormName,
 }) => (
+  /* ToDo use constants instead of hardcoded strings */
   <div className={ classes.guest }>
     <div className={ classes.description }>
       <Card
@@ -22,25 +26,35 @@ const GuestPageView = ({
       />
       <Card
         id="formName"
-        cardClass={ classes.baseLine }
+        cardClass={ classNames( classes.baseLine, { [ classes.highlightCard ]: isHighlighted }) }
         body={ (
           <CopyText
             text={ formName }
-            content={ <TextBox>{formName}</TextBox> }
+            content={ (
+              <TextBox additionalClasses={ classNames({ [ classes.highlightText ]: isHighlighted }) }>
+                { formName }
+              </TextBox>
+            ) }
           />
         ) }
       />
     </div>
-    <Card title="FORMULARZ" body={ <Form onSubmit={ onSubmit } /> } />
+    <Card title="FORMULARZ" body={ <Form onSubmit={ onSubmit } additionalFunction={ highlightFormName } /> } />
   </div>
 );
 
 GuestPageView.propTypes = {
   creatorName: PropTypes.string.isRequired,
   formName: PropTypes.string.isRequired,
+  highlightFormName: PropTypes.func,
+  isHighlighted: PropTypes.bool,
   onSubmit: PropTypes.func,
 };
 
-GuestPageView.defaultProps = { onSubmit: () => {} };
+GuestPageView.defaultProps = {
+  isHighlighted: false,
+  highlightFormName: () => {},
+  onSubmit: () => {},
+};
 
 export default GuestPageView;
