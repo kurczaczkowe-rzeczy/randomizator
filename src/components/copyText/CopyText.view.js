@@ -26,14 +26,13 @@ const CopyText = ({
 
 CopyText.propTypes = {
   content: PropTypes.element.isRequired,
+  text: PropTypes.string.isRequired,
   isCopied: PropTypes.bool,
-  text: PropTypes.string,
   onClick: PropTypes.func,
 };
 
 CopyText.defaultProps = {
   isCopied: false,
-  text: '',
   onClick: () => {},
 };
 
