@@ -5,7 +5,6 @@ import Description from 'components/description/Description.view';
 import TextBox from 'components/textBox/TextBox.view';
 
 const FormName = ({ content }) => (
-
   <Description
     label="Formularz" content={ (
       <TextBox>
