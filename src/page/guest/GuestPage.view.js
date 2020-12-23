@@ -6,6 +6,7 @@ import Card from 'components/card/Card.view';
 import CopyText from 'components/copyText';
 import CreatorDescription from 'components/creatorDescription/CreatorDescription.view';
 import Form from 'components/form';
+import FormName from 'components/guestFormDescription/FormName.view';
 import TextBox from 'components/textBox/TextBox.view';
 
 import classes from './guestPage.module.scss';
@@ -28,13 +29,16 @@ const GuestPageView = ({
         id="formName"
         cardClass={ classNames( classes.baseLine, { [ classes.highlightCard ]: isHighlighted }) }
         body={ (
-          <CopyText
-            text={ formName }
-            content={ (
-              <TextBox additionalClasses={ classNames({ [ classes.highlightText ]: isHighlighted }) }>
-                { formName }
-              </TextBox>
-            ) }
+          <FormName content={ (
+            <CopyText
+              text={ formName }
+              content={ (
+                <TextBox additionalClasses={ classNames({ [ classes.highlightText ]: isHighlighted }) }>
+                  { formName }
+                </TextBox>
+              ) }
+            />
+          ) }
           />
         ) }
       />
