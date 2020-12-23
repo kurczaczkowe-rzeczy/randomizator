@@ -12,18 +12,4 @@
   h3 {
     text-align: center;
   }
-
-  &.highlight {
-    animation-name: highLight;
-    animation-duration: 2.5s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-  }
-}
-
-@keyframes highLight {
-  50% {
-    background-color: #333;
-    box-shadow: #771e76 0 0 30px;
-  }
 }
