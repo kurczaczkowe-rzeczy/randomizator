@@ -1,3 +1,4 @@
+import FormName from 'components/guestFormDescription/FormName.view';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -24,9 +25,12 @@ const GuestPageView = ({
         id="formName"
         cardClass={ classes.baseLine }
         body={ (
-          <CopyText
-            text={ formName }
-            content={ <TextBox>{formName}</TextBox> }
+          <FormName content={ (
+            <CopyText
+              text={ formName }
+              content={ <TextBox>{formName}</TextBox> }
+            />
+          ) }
           />
         ) }
       />

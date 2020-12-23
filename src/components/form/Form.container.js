@@ -15,7 +15,7 @@ import FormView from './Form.view';
 // ToDo refactor when need to be used in another component
 const toggleHighlight = ( toRemove = false ) => {
   const cardElement = document.querySelector( '#formName' );
-  const [ , contentElement ] = cardElement.children[ 0 ].children;
+  const [ , contentElement ] = cardElement.children[ 0 ].children[ 1 ].children;
 
   if ( toRemove ) {
     cardElement.classList.remove( cardClasses.highlight );
