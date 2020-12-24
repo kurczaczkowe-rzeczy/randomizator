@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/scripts/static/css/main.fb8e02e3.chunk.css",
-    "main.js": "/scripts/static/js/main.c09f6720.chunk.js",
-    "main.js.map": "/scripts/static/js/main.c09f6720.chunk.js.map",
-    "runtime-main.js": "/scripts/static/js/runtime-main.f42b3d43.js",
-    "runtime-main.js.map": "/scripts/static/js/runtime-main.f42b3d43.js.map",
-    "static/js/2.9311b18d.chunk.js": "/scripts/static/js/2.9311b18d.chunk.js",
-    "static/js/2.9311b18d.chunk.js.map": "/scripts/static/js/2.9311b18d.chunk.js.map",
-    "index.html": "/scripts/index.html",
-    "precache-manifest.42137d1722b3ebcfe7fe4b776981cd70.js": "/scripts/precache-manifest.42137d1722b3ebcfe7fe4b776981cd70.js",
-    "service-worker.js": "/scripts/service-worker.js",
-    "static/css/main.fb8e02e3.chunk.css.map": "/scripts/static/css/main.fb8e02e3.chunk.css.map",
-    "static/js/2.9311b18d.chunk.js.LICENSE.txt": "/scripts/static/js/2.9311b18d.chunk.js.LICENSE.txt",
-    "static/media/unicorn.fb72f883.svg": "/scripts/static/media/unicorn.fb72f883.svg"
+    "main.css": "/randomizator/static/css/main.fcb2f6fc.chunk.css",
+    "main.js": "/randomizator/static/js/main.c50bb87d.chunk.js",
+    "main.js.map": "/randomizator/static/js/main.c50bb87d.chunk.js.map",
+    "runtime-main.js": "/randomizator/static/js/runtime-main.c8d2544f.js",
+    "runtime-main.js.map": "/randomizator/static/js/runtime-main.c8d2544f.js.map",
+    "static/js/2.836413c0.chunk.js": "/randomizator/static/js/2.836413c0.chunk.js",
+    "static/js/2.836413c0.chunk.js.map": "/randomizator/static/js/2.836413c0.chunk.js.map",
+    "index.html": "/randomizator/index.html",
+    "precache-manifest.3d4d1fc453f9fb40b1f95e8c49ac3fa3.js": "/randomizator/precache-manifest.3d4d1fc453f9fb40b1f95e8c49ac3fa3.js",
+    "service-worker.js": "/randomizator/service-worker.js",
+    "static/css/main.fcb2f6fc.chunk.css.map": "/randomizator/static/css/main.fcb2f6fc.chunk.css.map",
+    "static/js/2.836413c0.chunk.js.LICENSE.txt": "/randomizator/static/js/2.836413c0.chunk.js.LICENSE.txt",
+    "static/media/unicorn.fb72f883.svg": "/randomizator/static/media/unicorn.fb72f883.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.f42b3d43.js",
-    "static/js/2.9311b18d.chunk.js",
-    "static/css/main.fb8e02e3.chunk.css",
-    "static/js/main.c09f6720.chunk.js"
+    "static/js/runtime-main.c8d2544f.js",
+    "static/js/2.836413c0.chunk.js",
+    "static/css/main.fcb2f6fc.chunk.css",
+    "static/js/main.c50bb87d.chunk.js"
   ]
 }
