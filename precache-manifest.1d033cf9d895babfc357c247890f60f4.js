@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c4d37a857b1f259dc0c4c7bf355fbc66",
+    "revision": "7131df9dc7977d4258d667212895d43d",
     "url": "/randomizator/index.html"
   },
   {
-    "revision": "d8825c5a647ecbbd14ab",
+    "revision": "f5591d8c588e00c2606e",
     "url": "/randomizator/static/css/main.fb8e02e3.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/randomizator/static/js/2.0bbbbdab.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d8825c5a647ecbbd14ab",
-    "url": "/randomizator/static/js/main.cb6f3e2b.chunk.js"
+    "revision": "f5591d8c588e00c2606e",
+    "url": "/randomizator/static/js/main.e8556872.chunk.js"
   },
   {
     "revision": "da189dc0e0480b24502c",
