@@ -21,11 +21,11 @@ const Creator = ({
   <div className={ classes.creator }>
     <div className={ classes.leftSpace }>
       <Card
-        cardClass={ classes.rowGap }
         body={ (
           <div className={ classes.formNameWrapper }>
             <FormList
               label="Nazwa aktywnego formularza"
+              classes={ classes.rowGap }
               onFormIdChange={ onFormIdChange }
             />
             <CopyText

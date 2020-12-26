@@ -5,9 +5,10 @@ import Select from 'components/select';
 
 const FormList = ({
   label,
+  classes,
   onFormIdChange,
 }) => (
-  <div>
+  <div className={ classes }>
     <Select
       label={ label }
       onFormIdChange={ onFormIdChange }
@@ -17,10 +18,14 @@ const FormList = ({
 
 FormList.propTypes = {
   label: PropTypes.string.isRequired,
+  classes: PropTypes.string,
   onFormIdChange: PropTypes.func,
 };
 
-FormList.defaultProps = { onFormIdChange: () => {} };
+FormList.defaultProps = {
+  classes: undefined,
+  onFormIdChange: () => {},
+};
 
 export default FormList;
 

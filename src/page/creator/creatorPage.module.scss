@@ -37,7 +37,6 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  row-gap: 24px;
 
   .copyText {
     width: 90%;
@@ -51,5 +50,5 @@
 }
 
 .rowGap {
-  row-gap: 24px;
+  margin-bottom: 24px;
 }
