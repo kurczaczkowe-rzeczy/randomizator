@@ -10,9 +10,10 @@ const CopyText = ({
   isCopied,
   text,
   content,
+  withFlexStart,
   onClick,
 }) => (
-  <div className={ classes.text }>
+  <div className={ classNames( classes.text, { [ classes.withFlexStart ]: withFlexStart }) }>
     <CopyToClipboard
       text={ text }
       onCopy={ onClick }
@@ -28,11 +29,13 @@ CopyText.propTypes = {
   content: PropTypes.element.isRequired,
   text: PropTypes.string.isRequired,
   isCopied: PropTypes.bool,
+  withFlexStart: PropTypes.bool,
   onClick: PropTypes.func,
 };
 
 CopyText.defaultProps = {
   isCopied: false,
+  withFlexStart: false,
   onClick: () => {},
 };
 

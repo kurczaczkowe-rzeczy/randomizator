@@ -31,9 +31,12 @@ const GuestPageView = ({
         body={ (
           <FormName content={ (
             <CopyText
+              withFlexStart
               text={ formName }
               content={ (
-                <TextBox additionalClasses={ classNames({ [ classes.highlightText ]: isHighlighted }) }>
+                <TextBox
+                  additionalClasses={ classNames( classes.textBox, { [ classes.highlightText ]: isHighlighted }) }
+                >
                   { formName }
                 </TextBox>
               ) }

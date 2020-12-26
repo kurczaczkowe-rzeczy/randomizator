@@ -5,7 +5,9 @@ import { DELAY_DISAPPEARING } from 'constans';
 
 import CopyTextView from 'components/copyText/CopyText.view';
 
-const CopyText = ({ text, content }) => {
+const CopyText = ({
+  text, content, withFlexStart,
+}) => {
   const [ isCopied, setIsCopied ] = useStateWithCallback( false, ( copied ) => {
     if ( copied ) {
       setTimeout(() => { setIsCopied( false ); }, DELAY_DISAPPEARING );
@@ -14,6 +16,7 @@ const CopyText = ({ text, content }) => {
 
   return (
     <CopyTextView
+      withFlexStart={ withFlexStart }
       isCopied={ isCopied }
       text={ text }
       content={ content }
@@ -25,6 +28,9 @@ const CopyText = ({ text, content }) => {
 CopyText.propTypes = {
   content: PropTypes.element.isRequired,
   text: PropTypes.string.isRequired,
+  withFlexStart: PropTypes.bool,
 };
+
+CopyText.defaultProps = { withFlexStart: false };
 
 export default CopyText;
