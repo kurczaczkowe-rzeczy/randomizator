@@ -1,7 +1,7 @@
 {
   "homepage": "https://kurczaczkowe-rzeczy.github.io/randomizator",
   "name": "randomizator",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.1",
@@ -30,6 +30,7 @@
     "react-tag-input": "^6.4.3",
     "react-uuid": "^1.0.2",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
     "redux-firestore": "^0.14.0",
     "redux-thunk": "^2.3.0"
   },

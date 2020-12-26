@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _isEmpty from 'lodash/isEmpty';
@@ -10,8 +10,10 @@ const Form = ({
   preview,
   nameOfForm,
   onSubmit,
+  additionalFunction,
 }) => {
-  const handleSubmit = ( event ) => {
+  /* ToDo use constants instead of hardcoded strings */
+  const handleSubmit = useCallback(( event ) => {
     event.preventDefault();
     const data = new FormData( event.target );
     const fromInput = data.get( 'check_is_not_robot' );
@@ -23,18 +25,20 @@ const Form = ({
     } else {
       onSubmit( data.get( 'name_male' ), data.get( 'name_female' ));
     }
-  };
+  }, [ nameOfForm, onSubmit ]);
 
   return (
     <FormView
       preview={ preview }
       nameOfForm={ nameOfForm }
       onSubmit={ handleSubmit }
+      additionalFunction={ additionalFunction }
     />
   );
 };
 
 Form.propTypes = {
+  additionalFunction: PropTypes.func,
   nameOfForm: PropTypes.string,
   preview: PropTypes.bool,
   onSubmit: PropTypes.func,
@@ -43,6 +47,7 @@ Form.propTypes = {
 Form.defaultProps = {
   nameOfForm: '',
   preview: false,
+  additionalFunction: () => {},
   onSubmit: () => {},
 };
 

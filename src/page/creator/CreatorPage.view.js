@@ -10,8 +10,10 @@ import AnswersCounter from 'components/answersCounter/AnswersCounter.view';
 import IconButton from 'components/iconButton/IconButton.view';
 
 import classes from './creatorPage.module.scss';
+import CopyText from 'components/copyText';
 
 const Creator = ({
+  link,
   onRandomClick,
   logout,
   onFormIdChange,
@@ -19,12 +21,22 @@ const Creator = ({
   <div className={ classes.creator }>
     <div className={ classes.leftSpace }>
       <Card
-        cardClass={ classes.baseLine }
         body={ (
-          <FormList
-            label="Nazwa aktywnego formularza"
-            onFormIdChange={ onFormIdChange }
-          />
+          <div className={ classes.formNameWrapper }>
+            <FormList
+              label="Nazwa aktywnego formularza"
+              classes={ classes.rowGap }
+              onFormIdChange={ onFormIdChange }
+            />
+            <CopyText
+              text={ link }
+              content={ (
+                <p className={ classes.copyText }>
+                  { link }
+                </p>
+              ) }
+            />
+          </div>
         ) }
       />
       <FileContainer />
@@ -51,6 +63,7 @@ const Creator = ({
 );
 
 Creator.propTypes = {
+  link: PropTypes.string.isRequired,
   logout: PropTypes.func.isRequired,
   onRandomClick: PropTypes.func.isRequired,
   onFormIdChange: PropTypes.func,

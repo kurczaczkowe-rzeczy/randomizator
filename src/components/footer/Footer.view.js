@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { APP_VERSION } from 'constans';
+
 import classes from './footer.module.scss';
 
 const Footer = () => (
@@ -13,7 +15,7 @@ const Footer = () => (
     >
       Kurczaczkowe rzeczy
     </a>
-    { `. Wersja: ${ process.env.REACT_APP_VERSION } ` }
+    { `. Wersja: ${ APP_VERSION } ` }
   </div>
 );
 

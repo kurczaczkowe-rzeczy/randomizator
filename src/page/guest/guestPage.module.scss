@@ -14,6 +14,53 @@
   }
 }
 
+.textBox { margin-top: 0; }
+
 .baseLine {
   align-items: baseline;
+}
+
+.highlightCard {
+  animation-name: highLight;
+  animation-duration: 2.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.highlightText {
+  &::before {
+    animation-name: highLightBefore, rotate;
+    animation-timing-function: ease-in-out, linear;
+    animation-iteration-count: infinite;
+    animation-duration: 2.5s, 4s;
+  }
+
+  &::after {
+    animation-name: highLightAfter;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 2.5s;
+  }
+}
+
+@keyframes highLightAfter {
+  50% { background-color: #333; }
+}
+
+@keyframes highLightBefore{
+  50% {
+    background-color: #333;
+    background-image: linear-gradient(#333, #333), linear-gradient(#771e76, #771e76);
+  }
+}
+
+@keyframes rotate {
+  100% { transform: rotate(1turn); }
+}
+
+@keyframes highLight {
+  50% {
+    background-color: #333;
+    box-shadow: #771e76 0 0 30px;
+  }
 }

@@ -2,29 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Select from 'components/select';
-import CopyLink from 'components/copyLink';
-
-import classes from './formList.module.scss';
 
 const FormList = ({
   label,
+  classes,
   onFormIdChange,
 }) => (
-  <div className={ classes.formDetails }>
+  <div className={ classes }>
     <Select
       label={ label }
       onFormIdChange={ onFormIdChange }
     />
-    <CopyLink />
   </div>
 );
 
 FormList.propTypes = {
   label: PropTypes.string.isRequired,
+  classes: PropTypes.string,
   onFormIdChange: PropTypes.func,
 };
 
-FormList.defaultProps = { onFormIdChange: () => {} };
+FormList.defaultProps = {
+  classes: undefined,
+  onFormIdChange: () => {},
+};
 
 export default FormList;
 

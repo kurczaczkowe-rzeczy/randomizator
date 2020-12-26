@@ -1,10 +1,8 @@
-.link {
-  width: 100%;
+.text {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   position: relative;
-
+  justify-content: space-between;
   svg {
     cursor: pointer;
 
@@ -13,12 +11,10 @@
     }
   }
 
-  p {
-    width: 90%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+}
+
+.withFlexStart {
+  align-items: flex-start;
 }
 
 .copied{

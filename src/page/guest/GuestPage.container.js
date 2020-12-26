@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react';
+import React, {
+  useCallback, useEffect, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, useLocation } from 'react-router';
 import { connect } from 'react-redux';
+import { DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
 
+import useTimeout from 'hooks/useTimeout';
 import { db, firestore } from 'config/firebaseConfig';
 import { getUserName } from 'store/actions/userActions';
 import { getFormName } from 'store/actions/formAction';
@@ -17,13 +21,25 @@ const GuestPage = ({
   errorFormName,
   errorUserName,
 }) => {
+  /* ToDo use constants instead of hardcoded strings */
   const history = useLocation();
   const pathArray = history.pathname.split( '/' );
+  const [ isHighlighted, setIsHighlighted ] = useState( false );
+  const { runTimeout, stopTimeout } = useTimeout( DELAY_FORM_NAME_HIGHLIGHT );
 
-  useEffect(() => {
-    getUser( pathArray[ 2 ]);
-    getFormName( pathArray[ 2 ], pathArray[ 3 ]);
-  }, []);// eslint-disable-line react-hooks/exhaustive-deps
+  const highlightFormName = useCallback(( event ) => {
+    const { target: { value }} = event;
+
+    if ( value === formName ) {
+      return stopTimeout(() => setIsHighlighted( false ));
+    }
+
+    return runTimeout(() => setIsHighlighted( true ));
+  }, [
+    formName,
+    runTimeout,
+    stopTimeout,
+  ]);
 
   const onSubmit = ( nameMale, nameFemale ) => {
     const ans = {
@@ -38,10 +54,17 @@ const GuestPage = ({
       .catch(( error ) => console.log( 'Error!', error ));
   };
 
+  useEffect(() => {
+    getUser( pathArray[ 2 ]);
+    getFormName( pathArray[ 2 ], pathArray[ 3 ]);
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
+
   const displayPage = (
     <GuestPageView
       creatorName={ userName }
       formName={ formName }
+      isHighlighted={ isHighlighted }
+      highlightFormName={ highlightFormName }
       onSubmit={ ( nameMale, nameFemale ) => onSubmit( nameMale, nameFemale ) }
     />
   );

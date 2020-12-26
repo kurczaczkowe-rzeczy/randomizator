@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import _isNil from 'lodash/isNil';
 import _forEach from 'lodash/forEach';
+import _union from 'lodash/union';
 import { connect } from 'react-redux';
 
 import { clearDraw, setDrawResult } from 'store/actions/drawAction';
@@ -10,7 +11,7 @@ import { setAnswers } from 'store/actions/answersAction';
 import { setFormName } from 'store/actions/formAction';
 import { signOut } from 'store/actions/authAction';
 import { addForm } from 'store/actions/formsActions';
-import { FORM_ID_KEY } from 'constans';
+import { FORM_ID_KEY, HOME_PAGE } from 'constans';
 
 import CheckAuth from 'hoc/checkAuth/CheckAuth';
 
@@ -18,6 +19,7 @@ import CreatorView from 'page/creator/CreatorPage.view';
 import { formsSubscription } from 'page/creator/CreatorPage.utils';
 
 const Creator = ({
+  auth,
   addForm,
   clearDraw,
   drawResult,
@@ -28,12 +30,13 @@ const Creator = ({
   const history = useLocation();
   const pathArray = history.pathname.split( '/' );
   const [ formID, setFormID ] = useState( localStorage.getItem( FORM_ID_KEY ));
+  const [ link, setLink ] = useState( '' );
 
   const updateFormID = ( forms ) => {
     const found = forms.findIndex(( form ) => form.id === formID );
 
     if ( found === -1 ) {
-      localStorage.setItem( FORM_ID_KEY, forms[ 0 ].id  );
+      localStorage.setItem( FORM_ID_KEY, forms[ 0 ].id );
       setFormID( forms[ 0 ].id );
     }
   };
@@ -70,6 +73,8 @@ const Creator = ({
         }
       });
 
+      setLink( `${ HOME_PAGE }/${ auth.uid }/${ formID }` );
+
       return () => subscription();
     }
   }, [ formID ]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -82,7 +87,8 @@ const Creator = ({
         if ( _isNil( result[ key ])) {
           result[ key ] = [];
         }
-        result[ key ].push( value );
+
+        result[ key ] = _union( result[ key ], [ value ]);
       });
     });
 
@@ -98,6 +104,7 @@ const Creator = ({
   return (
     <CheckAuth isLogged>
       <CreatorView
+        link={ link }
         onRandomClick={ drawResult }
         logout={ logout }
         onFormIdChange={ ( formID ) => onFormIdChange( formID ) }
@@ -108,6 +115,7 @@ const Creator = ({
 
 Creator.propTypes = {
   addForm: PropTypes.func,
+  auth: PropTypes.shape({ uid: PropTypes.string }),
   clearDraw: PropTypes.func,
   drawResult: PropTypes.func,
   logout: PropTypes.func,
@@ -116,6 +124,7 @@ Creator.propTypes = {
 };
 
 Creator.defaultProps = {
+  auth: { uid: '' },
   addForm: () => {},
   clearDraw: () => {},
   drawResult: () => {},
@@ -123,6 +132,8 @@ Creator.defaultProps = {
   setAnswers: () => {},
   setFormName: () => {},
 };
+
+const mapStateToProps = ( state ) => ({ auth: state.firebase.auth });
 
 const mapDispatchToProps = ( dispatch ) => ({
   addForm: ( form ) => dispatch( addForm( form )),
@@ -133,4 +144,4 @@ const mapDispatchToProps = ( dispatch ) => ({
   logout: () => dispatch( signOut()),
 });
 
-export default connect( null, mapDispatchToProps )( Creator );
+export default connect( mapStateToProps, mapDispatchToProps )( Creator );

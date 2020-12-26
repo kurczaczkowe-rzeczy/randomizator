@@ -10,6 +10,8 @@ const TextInput = ({
   placeholder,
   type,
   fullWidth,
+  onChange,
+  onFocus,
 }) => (
   <input
     required={ required }
@@ -18,6 +20,8 @@ const TextInput = ({
     placeholder={ placeholder }
     name={ name }
     className={ classNames( classes.inputText, { [ classes.fullWidth ]: fullWidth }) }
+    onChange={ onChange }
+    onFocus={ onFocus }
   />
 );
 
@@ -27,6 +31,8 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   type: PropTypes.string,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
 };
 
 TextInput.defaultProps = {
@@ -34,6 +40,8 @@ TextInput.defaultProps = {
   required: false,
   type: 'text',
   fullWidth: false,
+  onChange: () => {},
+  onFocus: () => {},
 };
 
 export default TextInput;
