@@ -36,10 +36,10 @@ a string of characters that begin a given answer in the field.
 ### Unauthorized
 ![login-page](https://user-images.githubusercontent.com/33415084/95674977-25bb9000-0bb4-11eb-9175-824f79c2b2e4.png)
 
-![form-display](https://user-images.githubusercontent.com/33415084/95674979-25bb9000-0bb4-11eb-8afe-a7387e3b30bb.png)
+![form-display](https://user-images.githubusercontent.com/34583194/103149592-1f789100-476b-11eb-8d35-fbce43ab6bd5.png)
 
 ### Authorized
-![after-login](https://user-images.githubusercontent.com/33415084/96367924-f7f4bf00-1150-11eb-9608-deeffaea4f4d.png)
+![after-login](https://user-images.githubusercontent.com/34583194/103149942-e8a47a00-476e-11eb-9601-13cbf2b06b15.png)
 ![show-list-forms](https://user-images.githubusercontent.com/33415084/96367974-3e4a1e00-1151-11eb-8fbc-ef82d197b314.png)
 
 ### Error page

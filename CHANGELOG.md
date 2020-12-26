@@ -1,3 +1,9 @@
+## 1.2.0 (December 26, 2020)
+- Add copy form name functionality
+- Copy text now is scrollable
+- Now draws from unique value
+- Form name now highlight on idle
+
 ## 1.1.1 (October 19, 2020)
 - Fix problem with redux
 
