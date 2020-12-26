@@ -1,10 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  createStore,
-  applyMiddleware,
-  compose,
-} from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import {
@@ -21,11 +18,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const store = createStore( rootReducer,
-  compose( reduxFirestore( firebase ),
+  composeWithDevTools( reduxFirestore( firebase ),
     applyMiddleware( thunk.withExtraArgument({
       getFirebase,
       getFirestore,
-    })))); // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    }))));
 
 const reactReduxFirebaseProps = {
   firebase,
