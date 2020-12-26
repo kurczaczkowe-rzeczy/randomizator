@@ -7,6 +7,6 @@ const FormName = ({ content }) => ( // todo to refactor
   <Description label="Formularz" content={ content } />
 );
 
-FormName.propTypes = { content: PropTypes.string.isRequired };
+FormName.propTypes = { content: PropTypes.node.isRequired };
 
 export default FormName;
