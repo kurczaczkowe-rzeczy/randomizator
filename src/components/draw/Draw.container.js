@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import DrawView from './Draw.view';
-
+// ToDo remove this component, is redundant
 const Draw = ({
   loadedData,
   result,

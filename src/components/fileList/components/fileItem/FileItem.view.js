@@ -4,7 +4,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import classes from './fileItem.module.scss';
-
+// ToDo Move to global scope
 const FileItem = ({
   displayName,
   onRemove,

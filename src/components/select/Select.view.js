@@ -51,6 +51,7 @@ const Select = ({
         id={ prepareID( label ) }
         classes={{ root: styles.label }}
       >
+        {/* ToDo refactor this */}
         {label}
         :
       </InputLabel>

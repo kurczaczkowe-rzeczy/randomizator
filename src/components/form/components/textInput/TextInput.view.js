@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import classes from './textInput.module.scss';
 
+// ToDo move to global scope
 const TextInput = ({
   required,
   name,

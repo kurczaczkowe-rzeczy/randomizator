@@ -8,7 +8,7 @@ const initState = {
 
 const reducer = ( state = initState, action = {}) => {
   switch ( action.type ) {
-    case GET_FORM_NAME:
+    case GET_FORM_NAME: // ToDo change name
       return {
         ...state,
         formName: action.name,

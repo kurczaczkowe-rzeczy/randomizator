@@ -13,7 +13,7 @@ const initState = {
   result: {},
   errorField: [],
 };
-
+// ToDo make parentheses consistent
 const reducer = ( state = initState, action = {}) => { // id:'' text:''
   switch ( action.type ) {
     case ADD_TAG:

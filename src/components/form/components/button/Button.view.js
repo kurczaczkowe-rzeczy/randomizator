@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import classes from './button.module.scss';
-
+// ToDo move to global scope
 const Button = ({ value, type }) => (
   // eslint-disable-next-line react/button-has-type
   <button className={ classes.button } type={ type }>{ value }</button>

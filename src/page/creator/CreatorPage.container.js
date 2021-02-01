@@ -29,7 +29,7 @@ const Creator = ({
 }) => {
   const history = useLocation();
   const pathArray = history.pathname.split( '/' );
-  const [ formID, setFormID ] = useState( localStorage.getItem( FORM_ID_KEY ));
+  const [ formID, setFormID ] = useState( localStorage.getItem( FORM_ID_KEY )); // ToDo create localstorage hook
   const [ link, setLink ] = useState( '' );
 
   const updateFormID = ( forms ) => {
@@ -43,14 +43,14 @@ const Creator = ({
 
   useEffect(() => {
     const subscription = formsSubscription(
-      pathArray[ 2 ],
-      ( doc ) => {
+      pathArray[ 2 ], // ToDo maybe call array elements
+      ( doc ) => { // ToDo maybe puts this function into const
         const form = {
           name: doc.data().name,
           id: doc.id,
         };
 
-        addForm( form );
+        addForm( form ); // ToDo we can add all forms at once?
         if ( _isNil( formID )) {
           localStorage.setItem( FORM_ID_KEY, form.id );
           setFormID( form.id );

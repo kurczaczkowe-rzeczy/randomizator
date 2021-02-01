@@ -27,5 +27,5 @@ export const signOut = () => (
   firebase.auth().signOut()
     .then(() => {
       dispatch({ type: LOGOUT_SUCCESS });
-    });
+    }); // ToDo add error catching
 };

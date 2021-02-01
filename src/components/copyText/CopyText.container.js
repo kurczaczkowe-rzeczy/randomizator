@@ -5,6 +5,7 @@ import { DELAY_DISAPPEARING } from 'constans';
 
 import CopyTextView from 'components/copyText/CopyText.view';
 
+// ToDo we can replace {...} with prop and pass prop to view component
 const CopyText = ({
   text, content, withFlexStart,
 }) => {
@@ -17,9 +18,9 @@ const CopyText = ({
   return (
     <CopyTextView
       withFlexStart={ withFlexStart }
-      isCopied={ isCopied }
       text={ text }
       content={ content }
+      isCopied={ isCopied }
       onClick={ () => setIsCopied( true ) }
     />
   );

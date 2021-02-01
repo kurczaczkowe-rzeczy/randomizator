@@ -23,16 +23,16 @@ const FileContainer = ({ formID }) => {
   const [ answers, setAnswers ] = useState([]);
 
   const sendFile = () => {
-    console.log( formID );
+    console.log( formID ); // FixMe please
     if ( !_isEmpty( answers )) {
       db.collection( pathArray[ 2 ])
         .doc( formID )
-        .update({ answers: firestore.FieldValue.arrayUnion( ...answers ) })
+        .update({ answers: firestore.FieldValue.arrayUnion( ...answers ) }) // ToDo move to hook
         .then(() => {
           setAcceptedFile([]);
-          alert( 'Dane zostały zapisane' );
+          alert( 'Dane zostały zapisane' ); // ToDo change to snackbar
         })
-        .catch(( error ) => console.log( 'Error!', error ));
+        .catch(( error ) => console.log( 'Error!', error )); // ToDo better error handling
     }
   };
 
@@ -48,8 +48,8 @@ const FileContainer = ({ formID }) => {
     reader.readAsText( acceptedFiles[ 0 ]);
   };
 
-  const onDropRejected =  () => {
-    alert( 'Taki plik nie jest akceptowany. Prosze podać plik z rozszerzeniem CSV' );
+  const onDropRejected = () => {
+    alert( 'Taki plik nie jest akceptowany. Prosze podać plik z rozszerzeniem CSV' ); // ToDo change to snackbar
   };
 
   return (

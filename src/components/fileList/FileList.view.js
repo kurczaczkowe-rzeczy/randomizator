@@ -4,6 +4,7 @@ import uuid from 'react-uuid';
 
 import FileItem from './components/fileItem/FileItem.view';
 
+// ToDo change to FileItem util
 const FileList = ({
   files,
   onSend,

@@ -49,9 +49,9 @@ const GuestPage = ({
 
     db.collection( pathArray[ 2 ])
       .doc( pathArray[ 3 ])
-      .update({ answers: firestore.FieldValue.arrayUnion( ans ) })
+      .update({ answers: firestore.FieldValue.arrayUnion( ans ) }) // ToDo move to hook
       .then(() => alert( 'Dane zostały zapisane' ))
-      .catch(( error ) => console.log( 'Error!', error ));
+      .catch(( error ) => console.log( 'Error!', error )); // ToDo change then().catch() to async/await with try/catch
   };
 
   useEffect(() => {

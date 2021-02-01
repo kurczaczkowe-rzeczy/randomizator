@@ -5,6 +5,7 @@ import IconButton from 'components/iconButton/IconButton.view';
 import DrawResult from 'components/drawResult/DrawResult.view';
 import SelectFilter from 'components/selectFilter';
 
+// ToDo make this component more global
 const Draw = ({
   loadedData,
   result,

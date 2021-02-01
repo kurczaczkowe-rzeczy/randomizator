@@ -11,6 +11,7 @@ const getValue = (
   value,
   defaultValue,
 ) => {
+  // ToDo refactor this
   if ( value === '' ) {
     if ( options ) {
       const find = _find( options, ( opt ) => opt.id === defaultValue );
@@ -36,7 +37,7 @@ const createOptions = (
     { option.name }
   </MenuItem>
 ));
-
+// ToDo change name
 const prepareID = ( label ) => _toLower( _replace(
   label, /\s/g, '-',
 ));

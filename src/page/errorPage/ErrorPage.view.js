@@ -10,7 +10,7 @@ import { ReactComponent as Unicorn } from 'assets/unicorn.svg';
 import classes from './errorPage.module.scss';
 
 const ErrorPage = ({ formName, userName }) => {
-  const whatWrong = [];
+  const whatWrong = []; // ToDo maybe change name
 
   if ( formName ) {
     whatWrong.push( 'Nie istnieje taki formularz tego użytkownika' );

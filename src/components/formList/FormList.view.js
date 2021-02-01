@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Select from 'components/select';
-
+// ToDo maybe this component is not necessary
 const FormList = ({
   label,
   classes,

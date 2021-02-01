@@ -11,3 +11,4 @@ export const filterArrayByTag = ( array, tags ) => {
 
   return _filter( array, filterFunc );
 };
+// ToDo separate randomItem and filterArrayByTag

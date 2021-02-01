@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import classes from './answersCounter.module.scss';
-
+// ToDo move hardcoded strings to messages
 const AnswersCounter = ({ counter }) => (
   <h3 className={ classes.title }>
     Ilość odpowiedzi:
