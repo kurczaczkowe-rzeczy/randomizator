@@ -1,15 +1,16 @@
-# Randomizator [![App Release](https://img.shields.io/badge/dynamic/json?color=blue&label=version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
+# Randomizator [![App Release](https://img.shields.io/badge/dynamic/json?color=blue&label=wersja&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 
-If you want to test check this [link](https://kurczaczkowe-rzeczy.github.io/randomizator/). Test credentials:
-- User name: randomizator@example.com
-- Password: randomizator1234
+Jeśli chcesz przetestować, sprawdź [to łącze](https://kurczaczkowe-rzeczy.github.io/randomizator/). Przykładowy użytkownik:
+- Nazwa użytkownika: randomizator@example.com
+- Hasło: randomizator1234
 
-## Project overview
-You can easily collect answers from unauthorized users. You can randomize from the form fields.
-You can also filter the answers to be taken into account in the draw. Filtering is done by passing 
-a string of characters that begin a given answer in the field.
+## Przegląd projektu
+Możesz łatwo zbierać odpowiedzi przekazane od użytkowników. Każde pole formularza losuje się z osobna.
+Możesz także filtrować odpowiedzi, które zostaną wzięte pod uwagę w losowaniu. Filtrowanie odbywa się 
+poprzez wprowadzenie do pola powyżej wylosowanych odpowiedzi ciągu znaków i zatwierdzeniu go klawiszem 
+**_spacji_** lub "**_,_**".
 
-## Technologies, frameworks and libraries used in app
+## Technologie, frameworki oraz biblioteki użyte w aplikacji
 [![React Release](https://img.shields.io/badge/node-12.18.3-blue)]()
 [![React Release](https://img.shields.io/badge/npm-6.14.5-blue)]()
 [![React Release](https://img.shields.io/badge/dynamic/json?color=blue&label=react&query=%24.dependencies.react&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
@@ -31,49 +32,49 @@ a string of characters that begin a given answer in the field.
 [![Copy to clipboard](https://img.shields.io/badge/dynamic/json?color=blue&label=react-copy-to-clipboard&query=%24.dependencies['react-copy-to-clipboard']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 
 
-## Screenshots
+## Zrzuty ekranu
 
-### Login form
+### Formularz logowania
 ![login-page](https://user-images.githubusercontent.com/33415084/95674977-25bb9000-0bb4-11eb-9175-824f79c2b2e4.png)
 
-### Guest page
+### Strona gościa
 ![form-display](https://user-images.githubusercontent.com/34583194/103149592-1f789100-476b-11eb-8d35-fbce43ab6bd5.png)
 
-### Creator page
+### Strona twórcy
 ![after-login](https://user-images.githubusercontent.com/34583194/103149942-e8a47a00-476e-11eb-9601-13cbf2b06b15.png)
 ![show-list-forms](https://user-images.githubusercontent.com/33415084/96367974-3e4a1e00-1151-11eb-8fbc-ef82d197b314.png)
 
-### Error page
+### Strona błędu
 ![form-not-exist](https://user-images.githubusercontent.com/33415084/95674980-26542680-0bb4-11eb-8f30-a7d7e7a36c50.png)
 
 ![user-and-form-not-exist](https://user-images.githubusercontent.com/33415084/95674981-26ecbd00-0bb4-11eb-863a-9fd83ccd9fc5.png)
 
-## Installation
+## Instalacja
 
-To install this project you have to clone it with SSH/HTTPS. After cloning in the root directory of the project,
-run `npm install` to install dependencies and now you can use one of [available scripts](https://github.com/kurczaczkowe-rzeczy/randomizator#available-scripts).
+Aby zainstalować projekt, sklonuj go za pomocą gita poprzez SSH/HTTPS. Po sklonowaniu w głównym katalogu projektu
+w terminalu uruchom polecenie `npm install` by zainstalować zależności. Po zainstalowaniu możesz użyć jednej z dostępnych [komend](https://github.com/kurczaczkowe-rzeczy/randomizator#available-scripts).
 
-## Available Scripts
+## Dostępne komendy
 
 ### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Uruchamia aplikację w trybie deweloperskim.<br>
+Otwórz [http://localhost:3000](http://localhost:3000) w przeglądarce stron WWW.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Strona odświeży się za każdym razem gdy kompilator wykryje zmiany.<br>
+Jeśli wystąpią błędy, zobaczysz je w konsoli.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Ta komenda buduje aplikacje do folderu `build`.<br>
+Tworzy właściwą paczkę Reacta w trybie produkcji i optymalizuje ją, tak by osiągnąć najlepszy rezultat.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Build jest zminimalizowany i pliki zawierają hashe.<br>
+Twoja aplikacja jest gotowa do wypuszczenia na serwer!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Zobacz sekcję [deployment](https://facebook.github.io/create-react-app/docs/deployment) by zasięgnąć więcej informacji.
 
-## Credits
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). <br>
-Special thanks for [rafgraph](https://github.com/rafgraph) and his [repo](https://github.com/rafgraph/spa-github-pages) that helps me
-with routes redirect to 404. 
+## Uwagi od autorów
+Projekt został utworzony z [Create React App](https://github.com/facebook/create-react-app). <br>
+Podziękowania dla [rafgraph](https://github.com/rafgraph) i jego [repo](https://github.com/rafgraph/spa-github-pages),
+które pomogło nam rozwiązać problem z przekierowaniem ścieżek do 404. 

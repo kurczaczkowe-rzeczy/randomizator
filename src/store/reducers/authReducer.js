@@ -20,7 +20,7 @@ const reducer = ( state = initState, action = {}) => {
     case LOGIN_ERROR:
       return {
         ...state,
-        authError: 'Logowanie nie powiodło się',
+        authError: 'Logowanie nie powiodło się', // ToDo put this into global messages files
         isLogin: false,
       };
     case LOGOUT_SUCCESS:

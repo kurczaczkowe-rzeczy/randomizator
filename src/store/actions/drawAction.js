@@ -21,13 +21,13 @@ export const clearDraw = () => ( dispatch ) => {
 
 export const setDrawResult = () => ( dispatch, getState ) => {
   const draw = {};
-  const { answers } = getState().ans;
+  const { answers } = getState().ans; // ToDo replace abbreviations with words
   const tags = _map( _get(
     getState(), 'draw.tags', '',
   ), ( value ) => value.text );
 
   _forEach( answers, ( arrayOfAnswer, key ) => {
-    if ( tags.length !== 0 ) {
+    if ( tags.length !== 0 ) { // ToDo refactor this, it could be short
       const filteredArray = filterArrayByTag( arrayOfAnswer, tags );
 
       if ( _isEmpty( filteredArray )) {

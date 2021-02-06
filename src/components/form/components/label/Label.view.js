@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import classes from './label.module.scss';
-
+// ToDo move to global scope
 const Label = ({
   content,
   required,

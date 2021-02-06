@@ -12,15 +12,12 @@ const Login = ({
   auth,
   signIn,
 }) => {
-
   const handleLogin = ( event ) => {
     event.preventDefault();
     const data = new FormData( event.target );
 
     signIn({ email: data.get( 'email' ), password: data.get( 'password' ) });
   };
-
-  // signOut();
 
   return (
     <CheckAuth path={ auth.uid }>

@@ -8,7 +8,7 @@ const CheckAuth = ({
   path,
   auth,
   children,
-}) => {
+}) => { // ToDo refactor this
   if ( !isLogged ) {
     return ( auth.uid === undefined )
       ? ( children )

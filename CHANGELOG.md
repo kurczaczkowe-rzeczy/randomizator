@@ -5,7 +5,7 @@
 - Form name now highlight on idle
 
 ## 1.1.1 (October 19, 2020)
-- Fix problem with redux
+- Fix problem with Redux DevTools
 
 ## 1.1.0 (October 18, 2020)
 - Add copy link functionality

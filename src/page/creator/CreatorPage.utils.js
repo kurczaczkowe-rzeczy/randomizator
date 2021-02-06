@@ -6,7 +6,7 @@ export const formsSubscription = (
   snapshotFunction,
   setFormID,
 ) => db.collection( userID )
-  .onSnapshot(( snap ) => {
+  .onSnapshot(( snap ) => { // ToDo should put this into hook
     if ( setFormID ) {
       setFormID( snap.docs );
     }

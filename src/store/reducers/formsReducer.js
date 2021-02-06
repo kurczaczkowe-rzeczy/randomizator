@@ -15,7 +15,7 @@ const reducer = ( state = initState, action = {}) => {
         ...state,
         forms: _unionWith(
           state.forms,
-          [ action.forms ],
+          [ action.forms ], // ToDo why plural?
           _isEqual,
         ),
         errors: null,
