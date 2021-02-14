@@ -16,7 +16,12 @@ const isLocalhost = Boolean( window.location.hostname === 'localhost' ||
     // 127.0.0.0/8 are considered localhost for IPv4.
     window.location.hostname.match( /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/ ));
 
-const registerValidSW = ( swUrl, config ) => {
+interface Config {
+  onUpdate: ( arg0: ServiceWorkerRegistration ) => void;
+  onSuccess: ( arg0: ServiceWorkerRegistration ) => void;
+}
+
+const registerValidSW = ( swUrl: string, config: Config ) => {
   navigator.serviceWorker
     .register( swUrl )
     .then(( registration ) => {
@@ -59,7 +64,7 @@ const registerValidSW = ( swUrl, config ) => {
     });
 };
 
-const checkValidServiceWorker = ( swUrl, config ) => {
+const checkValidServiceWorker = ( swUrl: string, config: Config ) => {
   // Check if the service worker can be found. If it can't reload the page.
   fetch( swUrl, { headers: { 'Service-Worker': 'script' }})
     .then(( response ) => {
@@ -86,10 +91,10 @@ const checkValidServiceWorker = ( swUrl, config ) => {
     });
 };
 
-export const register = ( config ) => {
+export const register = ( config: Config ): void => {
   if ( process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator ) {
     // The URL constructor is available in all browsers that support SW.
-    const publicUrl = new URL( process.env.PUBLIC_URL, window.location.href );
+    const publicUrl = new URL( process.env.PUBLIC_URL as string, window.location.href );
 
     if ( publicUrl.origin !== window.location.origin ) {
       /* Our service worker won't work if PUBLIC_URL is on a different origin
@@ -119,7 +124,8 @@ export const register = ( config ) => {
   }
 };
 
-export const unregister = () => {
+// ToDo: change to async/awaits if possible
+export const unregister = (): void => {
   if ( 'serviceWorker' in navigator ) {
     navigator.serviceWorker.ready
       .then(( registration ) => {
