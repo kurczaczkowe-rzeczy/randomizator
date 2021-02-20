@@ -17,21 +17,21 @@ const isLocalhost = Boolean( window.location.hostname === 'localhost' ||
     window.location.hostname.match( /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/ ));
 
 interface Config {
-  onUpdate: ( arg0: ServiceWorkerRegistration ) => void;
   onSuccess: ( arg0: ServiceWorkerRegistration ) => void;
+  onUpdate: ( arg0: ServiceWorkerRegistration ) => void;
 }
 
-const registerValidSW = ( swUrl: string, config: Config ) => {
+const registerValidSW = ( swUrl: string, config: Config ): void => {
   navigator.serviceWorker
     .register( swUrl )
     .then(( registration ) => {
-      registration.onupdatefound = () => {
+      registration.onupdatefound = (): void => {
         const installingWorker = registration.installing;
 
         if ( installingWorker == null ) {
           return;
         }
-        installingWorker.onstatechange = () => {
+        installingWorker.onstatechange = (): void => {
           if ( installingWorker.state === 'installed' ) {
             if ( navigator.serviceWorker.controller ) {
               /* At this point, the updated precached content has been fetched,
@@ -41,7 +41,7 @@ const registerValidSW = ( swUrl: string, config: Config ) => {
                   'tabs for this page are closed. See https://bit.ly/CRA-PWA.' );
 
               // Execute callback
-              if ( config && config.onUpdate ) {
+              if ( config?.onUpdate ) {
                 config.onUpdate( registration );
               }
             } else {
@@ -51,7 +51,7 @@ const registerValidSW = ( swUrl: string, config: Config ) => {
               console.log( 'Content is cached for offline use.' );
 
               // Execute callback
-              if ( config && config.onSuccess ) {
+              if ( config?.onSuccess ) {
                 config.onSuccess( registration );
               }
             }
@@ -64,7 +64,7 @@ const registerValidSW = ( swUrl: string, config: Config ) => {
     });
 };
 
-const checkValidServiceWorker = ( swUrl: string, config: Config ) => {
+const checkValidServiceWorker = ( swUrl: string, config: Config ): void => {
   // Check if the service worker can be found. If it can't reload the page.
   fetch( swUrl, { headers: { 'Service-Worker': 'script' }})
     .then(( response ) => {
@@ -73,7 +73,7 @@ const checkValidServiceWorker = ( swUrl: string, config: Config ) => {
 
       if (
         response.status === 404 ||
-        ( contentType != null && contentType.indexOf( 'javascript' ) === -1 )
+        contentType?.indexOf( 'javascript' ) === -1
       ) {
         // No service worker found. Probably a different app. Reload the page.
         navigator.serviceWorker.ready.then(( registration ) => {
