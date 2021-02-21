@@ -31,6 +31,14 @@ poprzez wprowadzenie do pola powyżej wylosowanych odpowiedzi ciągu znaków i�
 [![Material-UI icon Release](https://img.shields.io/badge/dynamic/json?color=blue&label=material-ui&query=%24.dependencies['@material-ui/core']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![Copy to clipboard](https://img.shields.io/badge/dynamic/json?color=blue&label=react-copy-to-clipboard&query=%24.dependencies['react-copy-to-clipboard']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 
+## Opis głównych gałęzi
+
+Na gałęzi `master` znajduje się wersja aplikacji z najnowszymi funkcjonalnościami i poprawkami.
+
+Gałąź `gh-pages` zawiera zbudowany kod aplikacji z gałęzi `prod`.
+
+Na gałęzi `prod` znajduje się wersja kodu aplikacji, odpowiadająca wersji, która została zbudowana i udostępniona
+w usłudze GitHub Pages pod linkiem https://kurczaczkowe-rzeczy.github.io/randomizator/.
 
 ## Zrzuty ekranu
 
