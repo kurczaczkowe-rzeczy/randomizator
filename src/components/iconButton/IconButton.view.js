@@ -6,6 +6,7 @@ import classNames from 'classnames';
 
 import classes from './iconButton.module.scss';
 
+// ToDo: to refactor
 const IconButton = ({
   value,
   icon,

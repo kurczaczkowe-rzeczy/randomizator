@@ -42,6 +42,7 @@ const SelectFilter = ({
   ) => {
     const newTags = [ ...tags ];
 
+    // ToDo use lodash splice
     newTags.splice( currPos, 1 );
     newTags.splice(
       newPos, 0, tag,
