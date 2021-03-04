@@ -9,15 +9,14 @@
     "@material-ui/styles": "^4.11.3",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.6.3",
-    "@typescript-eslint/eslint-plugin": "^4.15.0",
-    "@typescript-eslint/parser": "^4.15.0",
+    "@testing-library/user-event": "^12.7.3",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
     "classnames": "^2.2.6",
     "eslint": "^7.19.0",
     "firebase": "^8.2.6",
     "gh-pages": "^3.1.0",
     "lodash": "^4.17.20",
-    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-copy-to-clipboard": "^5.0.3",
     "react-dnd": "^8.0.3",
@@ -28,22 +27,25 @@
     "react-redux": "^7.2.2",
     "react-redux-firebase": "^3.10.0",
     "react-router": "^5.2.0",
-    "react-scripts": "^4.0.2",
+    "react-scripts": "^4.0.3",
     "react-tag-input": "^6.5.2",
     "react-uuid": "^1.0.2",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "redux-firestore": "^0.14.0",
-    "redux-thunk": "^2.3.0"
+    "redux-firestore": "^0.15.0",
+    "redux-thunk": "^2.3.0",
+    "sass": "^1.32.8"
   },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
+    "start": "concurrently --kill-others \"react-scripts start\" \"npm run tsm\"",
+    "start:react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint:ts": "eslint --ext=js,jsx,ts,tsx src"
+    "lint:ts": "eslint --ext=js,jsx,ts,tsx src",
+    "tsm": "./node_modules/.bin/tsm src/ -w"
   },
   "browserslist": {
     "production": [
@@ -58,14 +60,20 @@
     ]
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.11",
+    "@types/lodash": "^4.14.168",
     "@types/node": "^14.14.25",
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
+    "@types/react-tag-input": "^6.1.2",
+    "@types/redux-thunk": "^2.1.0",
+    "concurrently": "^6.0.0",
     "prop-types": "^15.7.2",
     "react-router-dom": "^5.2.0",
-    "typescript": "^4.1.3",
+    "typed-scss-modules": "^4.1.0",
+    "typescript": "^4.2.2",
     "use-state-with-callback": "^2.0.3"
   }
 }
