@@ -1,17 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import ScatterPlotIcon from '@material-ui/icons/ScatterPlot';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import classNames from 'classnames';
 
 import classes from './iconButton.module.scss';
 
+interface IIconButton {
+  icon?: string | null; // ToDo: icon should be React.ReactNode
+  onClick: () => void;
+  value: string;
+}
 // ToDo: to refactor
 const IconButton = ({
   value,
-  icon,
-  onClick,
-}) => (
+  icon = null,
+  onClick = (): void => {},
+}: IIconButton ): JSX.Element => (
   <button
     type="button"
     className={ classes.button }
@@ -23,15 +26,5 @@ const IconButton = ({
     <span>{ value }</span>
   </button>
 );
-
-IconButton.propTypes = {
-  value: PropTypes.string.isRequired,
-  icon: PropTypes.string,
-  onClick: PropTypes.func,
-};
-IconButton.defaultProps = {
-  icon: null,
-  onClick: () => {},
-};
 
 export default IconButton;
