@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
@@ -31,13 +31,13 @@ const reactReduxFirebaseProps = {
 };
 
 const render = (
-  <React.StrictMode>
+  <StrictMode>
     <Provider store={ store }>
       <ReactReduxFirebaseProvider { ...reactReduxFirebaseProps }>
         <App />
       </ReactReduxFirebaseProvider>
     </Provider>
-  </React.StrictMode>
+  </StrictMode>
 );
 
 ReactDOM.render( render, document.getElementById( 'root' ));

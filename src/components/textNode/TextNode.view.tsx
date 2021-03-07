@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface ITextNode {
   classes: string;
   required?: boolean;
