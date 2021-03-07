@@ -35,7 +35,14 @@
   cursor: default !important;
 }
 .ReactTags__remove {
-  padding-left: 8px;
+  padding: 0 0 0 8px;
   color: #ff3c3c;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  box-sizing: content-box;
+  display: inline;
+  vertical-align: middle;
+  line-height: 16px;
 }

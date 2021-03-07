@@ -16,7 +16,7 @@ export const getFormName = ( userID, formID ) => // ToDo change function name
       .get()
       .then(( doc ) => {
         if ( doc.exists ) {
-          dispatch({ type: GET_FORM_NAME, name: doc.data().name }); // ToDo change action action
+          dispatch({ type: GET_FORM_NAME, name: doc.data().name }); // ToDo change action name
         } else {
           dispatch({ type: ERROR_FORM_DONT_EXIST, errorMsg: 'Form don\'t exist' });
         }
@@ -25,6 +25,6 @@ export const getFormName = ( userID, formID ) => // ToDo change function name
 
 export const setFormName = ( formName, docID ) => ( dispatch ) => {
   dispatch({
-    type: GET_FORM_NAME, name: formName, docID, // ToDo change action action
+    type: GET_FORM_NAME, name: formName, docID, // ToDo change action name
   });
 };

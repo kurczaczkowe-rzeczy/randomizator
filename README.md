@@ -30,6 +30,14 @@ a string of characters that begin a given answer in the field.
 [![Material-UI icon Release](https://img.shields.io/badge/dynamic/json?color=blue&label=material-ui&query=%24.dependencies['@material-ui/core']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![Copy to clipboard](https://img.shields.io/badge/dynamic/json?color=blue&label=react-copy-to-clipboard&query=%24.dependencies['react-copy-to-clipboard']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 
+## Description of major branches
+
+The `master` branch contains the application version with the newest functionalities and bug fixes.
+
+The `gh-pages` branch contains the built-in application code from the` prod` branch.
+
+The `prod` branch contains the application code version that corresponds to the version that was built and released
+in the GitHub Pages service under the link https://kuraczaczkowe-rzeczy.github.io/randomizator/.
 
 ## Screenshots
 
