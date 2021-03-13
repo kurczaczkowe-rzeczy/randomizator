@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
@@ -12,6 +12,11 @@ import rootReducer from 'store/reducers/rootReducer';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { theme } from './theme';
+
+import { ThemeProvider } from '@material-ui/styles';
+import { BrowserRouter } from 'react-router-dom';
+import Footer from './components/footer/Footer.view';
 
 const store = createStore( rootReducer,
   composeWithDevTools( applyMiddleware( thunk.withExtraArgument({
@@ -34,7 +39,12 @@ const render = (
   <StrictMode>
     <Provider store={ store }>
       <ReactReduxFirebaseProvider { ...reactReduxFirebaseProps }>
-        <App />
+        <ThemeProvider theme={ theme }>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+          <Footer />
+        </ThemeProvider>
       </ReactReduxFirebaseProvider>
     </Provider>
   </StrictMode>
