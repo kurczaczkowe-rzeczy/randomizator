@@ -5,6 +5,7 @@ import { firestoreReducer } from 'redux-firestore';
 import { LOGOUT_SUCCESS } from 'store/actions';
 import { LogoutAction } from 'store/types';
 
+import globalReducer from './globalReducer';
 import authReducer from './authReducer';
 import userReducer from './userReducer';
 import formReducer from './formReducer';
@@ -13,6 +14,7 @@ import answersReducer from './answersReducer';
 import drawReducer from './drawReducer';
 
 const appReducer = combineReducers({
+  global: globalReducer,
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   auth: authReducer,

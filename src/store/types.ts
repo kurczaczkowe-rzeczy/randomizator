@@ -1,4 +1,4 @@
-import { LogoutActionsTypes } from 'store/actions';
+import { LogoutActionsTypes, GlobalActionsTypes } from 'store/actions';
 
 export interface Action<Type, Payload = undefined> {
   payload?: Payload;
@@ -6,3 +6,4 @@ export interface Action<Type, Payload = undefined> {
 }
 
 export type LogoutAction = Action<LogoutActionsTypes>;
+export type GlobalAction = Action<GlobalActionsTypes>;
