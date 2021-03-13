@@ -1,0 +1,29 @@
+$size: 45px;
+$circumference: 3.14 * 2 * $size;
+
+.circle{
+  stroke: url('#linear-loading-gradient');
+  stroke-width: 8px;
+  fill: none;
+  stroke-dashoffset: -$circumference;
+  stroke-dasharray: $circumference;
+  animation: loading1 alternate 2.4s infinite;
+  transform: rotateZ(270deg);
+  transform-origin: center;
+}
+
+@keyframes loading1 {
+  0% {
+    stroke-dashoffset: $circumference;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -$circumference;
+  }
+}
+
+.circleStorybook{
+  font-size: 80px;
+}
