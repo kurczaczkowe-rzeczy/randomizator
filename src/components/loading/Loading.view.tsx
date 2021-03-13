@@ -4,7 +4,7 @@ export interface ILoading{
   classes?: { root: string };
 }
 
-const LoadingView = ({ classes = { root: '' }}: ILoading ): JSX.Element => (
+const Loading = ({ classes = { root: '' }}: ILoading ): JSX.Element => (
   <svg
     className={ classes.root }
     xmlns="http://www.w3.org/2000/svg"
@@ -34,4 +34,4 @@ const LoadingView = ({ classes = { root: '' }}: ILoading ): JSX.Element => (
   </svg>
 );
 
-export default LoadingView;
+export default Loading;
