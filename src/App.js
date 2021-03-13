@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { showLoader, hideLoader } from 'store/actions/globalActions';
 import _endsWith from 'lodash/endsWith';
-import Loading from 'components/loading';
+import LoadingScreen from 'components/loadingScreen/LoadingScreen.view';
 
 const authenticatedRoutes = <Route exact path="/randomizator/:creator_id" component={ Creator } />;
 
@@ -31,8 +31,6 @@ const App = ({
   const history = useHistory();
   const endWithSlash = useMemo(() => _endsWith( history?.location?.pathname, '/' ), [ history ]);
   const [ isAuthenticated, setAuthenticated ] = useState( false );
-
-  console.log( history.location.pathname, isLoading );
 
   useEffect(() => {
     if ( auth.uid !== undefined ) {
@@ -63,7 +61,7 @@ const App = ({
   ]);
 
   return isLoading
-    ? ( <Loading /> )
+    ? ( <LoadingScreen /> )
     : (
       <Switch>
         { isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes }
@@ -89,9 +87,11 @@ App.defaultProps = {
     uid: '',
     isLoaded: false,
   },
-  hideLoader: () => {},
+  hideLoader: () => {
+  },
   isLoading: false,
-  showLoader: () => {},
+  showLoader: () => {
+  },
 };
 
 const mapStateToProps = ( state ) => ({
