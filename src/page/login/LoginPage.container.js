@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { signIn, signOut } from 'store/actions/authAction';
-import CheckAuth from 'hoc/checkAuth/CheckAuth';
+import { signIn } from 'store/actions/authAction';
 
 import LoginPageView from 'page/login/LoginPage.view';
 
 const Login = ({
   authError,
-  auth,
   signIn,
 }) => {
   const handleLogin = ( event ) => {
@@ -20,31 +18,21 @@ const Login = ({
   };
 
   return (
-    <CheckAuth path={ auth.uid }>
-      <LoginPageView authError={ authError } onLogin={ handleLogin } />
-    </CheckAuth>
+    <LoginPageView authError={ authError } onLogin={ handleLogin } />
   );
 };
 
 Login.propTypes = {
-  auth: PropTypes.shape({ uid: PropTypes.string }),
   authError: PropTypes.string,
   signIn: PropTypes.func,
 };
 
 Login.defaultProps = {
-  auth: { uid: '' },
   authError: '',
   signIn: () => {},
 };
 
-export const mapStateToProps = ( state ) => ({
-  authError: state.auth.authError,
-  auth: state.firebase.auth,
-});
-export const mapActionToProps = ( dispatch ) => ({
-  signIn: ( credential ) => dispatch( signIn( credential )),
-  signOut: () => dispatch( signOut()),
-});
+export const mapStateToProps = ( state ) => ({ authError: state.auth.authError });
+export const mapActionToProps = ( dispatch ) => ({ signIn: ( credential ) => dispatch( signIn( credential )) });
 
 export default connect( mapStateToProps, mapActionToProps )( Login );

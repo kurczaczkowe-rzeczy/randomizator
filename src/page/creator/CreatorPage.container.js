@@ -13,8 +13,6 @@ import { signOut } from 'store/actions/authAction';
 import { addForm } from 'store/actions/formsActions';
 import { FORM_ID_KEY, HOME_PAGE } from 'constans';
 
-import CheckAuth from 'hoc/checkAuth/CheckAuth';
-
 import CreatorView from 'page/creator/CreatorPage.view';
 import { formsSubscription } from 'page/creator/CreatorPage.utils';
 
@@ -102,14 +100,12 @@ const Creator = ({
   };
 
   return (
-    <CheckAuth isLogged>
-      <CreatorView
-        link={ link }
-        onRandomClick={ drawResult }
-        logout={ logout }
-        onFormIdChange={ ( formID ) => onFormIdChange( formID ) }
-      />
-    </CheckAuth>
+    <CreatorView
+      link={ link }
+      onRandomClick={ drawResult }
+      logout={ logout }
+      onFormIdChange={ ( formID ) => onFormIdChange( formID ) }
+    />
   );
 };
 
