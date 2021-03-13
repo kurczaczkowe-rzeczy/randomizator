@@ -51,8 +51,6 @@ const SelectFilter = (): JSX.Element => {
     dispatch( setTags( newTags ));
   }, [ dispatch, tags ]);
 
-  console.log( 'render' );
-
   return (
     <SelectFilterView
       tags={ tags }
