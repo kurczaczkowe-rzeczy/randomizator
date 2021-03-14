@@ -11,7 +11,8 @@ import CopyText from 'components/copyText';
 
 import classes from './creatorPage.module.scss';
 
-interface ICreator{
+export interface ICreator{
+  answersCounter: number;
   link: string;
   logout: () => void;
   onFormIdChange?: ( formID: string ) => void;
@@ -19,6 +20,7 @@ interface ICreator{
 }
 
 const Creator = ({
+  answersCounter,
   link,
   onRandomClick,
   logout,
@@ -49,7 +51,7 @@ const Creator = ({
     </div>
     <div className={ classes.rightSpace }>
       <div className={ classes.inline }>
-        <AnswersCounter />
+        <AnswersCounter counter={ answersCounter } />
         <IconButton
           value="Wyloguj się"
           icon="logout"

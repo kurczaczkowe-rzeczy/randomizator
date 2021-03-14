@@ -40,6 +40,7 @@ const Creator = (): JSX.Element => {
   const [ link, setLink ] = useState( '' );
 
   const auth = useSelector(( state: RootState ) => state?.firebase.auth, shallowEqual );
+  const answersCounter = useSelector(( state: RootState ) => state?.ans.counter );
   const dispatch = useDispatch();
 
   const updateFormID = ( forms: IForm[]): void => {
@@ -122,6 +123,7 @@ const Creator = (): JSX.Element => {
 
   return (
     <CreatorView
+      answersCounter={ answersCounter }
       link={ link }
       onRandomClick={ onRandomClick }
       logout={ onLogout }
