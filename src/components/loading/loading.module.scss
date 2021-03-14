@@ -7,12 +7,12 @@ $circumference: 3.14 * 2 * $size;
   fill: none;
   stroke-dashoffset: -$circumference;
   stroke-dasharray: $circumference;
-  animation: loading1 alternate 2.4s infinite;
+  animation: loadingAnimation alternate 2.4s infinite;
   transform: rotateZ(270deg);
   transform-origin: center;
 }
 
-@keyframes loading1 {
+@keyframes loadingAnimation {
   0% {
     stroke-dashoffset: $circumference;
   }
