@@ -12,4 +12,3 @@ const Template: Story<IAnswersCounter> = ( args ) => <Component { ...args } />;
 
 export const Default = Template.bind({});
 Default.args = { counter: 0 };
-

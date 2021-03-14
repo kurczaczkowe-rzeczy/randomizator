@@ -12,13 +12,31 @@ import CopyText from 'components/copyText';
 import classes from './creatorPage.module.scss';
 
 export interface ICreator{
+  /**
+   * Number of form answers
+   */
   answersCounter: number;
+  /**
+   * Link to current form
+   */
   link: string;
+  /**
+   * Method for sing out users
+   */
   logout: () => void;
+  /**
+   * Method for change current displays form
+   */
   onFormIdChange?: ( formID: string ) => void;
+  /**
+   * Method for draw answers
+   */
   onRandomClick: () => void;
 }
 
+/**
+ * Page displaying panel for authenticated users
+ */
 const Creator = ({
   answersCounter,
   link,

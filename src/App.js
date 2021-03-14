@@ -15,16 +15,18 @@ import _endsWith from 'lodash/endsWith';
 
 import { showLoader, hideLoader } from 'store/actions/globalActions';
 
-import LoadingScreen from 'components/loadingScreen/LoadingScreen.view';
+import LoadingScreen from 'components/loadingScreen';
 import Creator from 'page/creator';
 import GuestPage from 'page/guest';
 import ErrorPage from 'page/errorPage/ErrorPage.view';
 
 import Login from 'page/login';
 
-const authenticatedRoutes = <Route exact path="/randomizator/:creator_id" component={ Creator } />;
+const APP_NAME = 'randomizator';
 
-const unauthenticatedRoutes = <Route exact path="/randomizator/" component={ Login } />;
+const authenticatedRoutes = <Route exact path={ `/${ APP_NAME }/:creator_id` } component={ Creator } />;
+
+const unauthenticatedRoutes = <Route exact path={ `/${ APP_NAME }/` } component={ Login } />;
 
 const App = ({
   auth,
@@ -40,7 +42,7 @@ const App = ({
     if ( auth.uid !== undefined ) {
       setAuthenticated( true );
 
-      const prefix = endWithSlash ? '' : 'randomizator/';
+      const prefix = endWithSlash ? '' : `${ APP_NAME }/`;
 
       history.push( prefix + auth.uid );
     } else {
@@ -64,14 +66,16 @@ const App = ({
     showLoader,
   ]);
 
+  console.log( 'byle co' );
+
   return isLoading
     ? ( <LoadingScreen /> )
     : (
       <Switch>
-        <Route exact path="/randomizator/not_found" component={ ErrorPage } />
+        <Route exact path={ `/${ APP_NAME }/not_found` } component={ ErrorPage } />
         { isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes }
-        <Route exact path="/randomizator/:creator_id/:list_id" component={ GuestPage } />
-        <Redirect from="/*" to="/randomizator" />
+        <Route exact path={ `/${ APP_NAME }/:creator_id/:list_id` } component={ GuestPage } />
+        <Redirect from="/*" to={ `/${ APP_NAME }` } />
       </Switch>
     );
 };

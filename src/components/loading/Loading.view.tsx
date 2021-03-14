@@ -1,9 +1,15 @@
 import styles from './loading.module.scss';
 
 export interface ILoading{
+  /**
+   * Specify class for loading element. Set only font-size attribute to change size of loading.
+   */
   classes?: { root: string };
 }
 
+/**
+ * UI component displaying loader
+ */
 const Loading = ({ classes = { root: '' }}: ILoading ): JSX.Element => (
   <svg
     className={ classes.root }

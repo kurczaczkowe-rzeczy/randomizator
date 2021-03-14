@@ -7,6 +7,6 @@ export default{
   component: Component,
 } as Meta;
 
-const Template: Story<any> = () => <Component />;
+const Template: Story = () => <Component />;
 
 export const Default = Template.bind({});

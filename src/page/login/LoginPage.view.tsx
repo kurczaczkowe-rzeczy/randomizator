@@ -6,10 +6,19 @@ import TextInput from 'components/form/components/textInput/TextInput.view';
 import classes from 'page/login/loginPage.module.scss';
 
 interface ILogin{
+  /**
+   * Specifies the error messages when logging in fail
+   */
   authError?: string | null;
+  /**
+   * Method for login user
+   */
   onLogin: ( event: SyntheticEvent ) => void;
 }
 
+/**
+ * Page displaying login form
+ */
 const Login = ({ onLogin, authError = null }: ILogin ): JSX.Element => (
   <div className={ classes.center }>
     <Card
