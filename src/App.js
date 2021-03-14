@@ -1,5 +1,7 @@
-import React, {
-  useEffect, useState, useMemo,
+import {
+  useEffect,
+  useState,
+  useMemo,
 } from 'react';
 import {
   Switch,
@@ -7,16 +9,18 @@ import {
   Redirect,
   useHistory,
 } from 'react-router';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import _endsWith from 'lodash/endsWith';
 
+import { showLoader, hideLoader } from 'store/actions/globalActions';
+
+import LoadingScreen from 'components/loadingScreen/LoadingScreen.view';
 import Creator from 'page/creator';
 import GuestPage from 'page/guest';
 import ErrorPage from 'page/errorPage/ErrorPage.view';
+
 import Login from 'page/login';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { showLoader, hideLoader } from 'store/actions/globalActions';
-import _endsWith from 'lodash/endsWith';
-import LoadingScreen from 'components/loadingScreen/LoadingScreen.view';
 
 const authenticatedRoutes = <Route exact path="/randomizator/:creator_id" component={ Creator } />;
 
@@ -64,8 +68,8 @@ const App = ({
     ? ( <LoadingScreen /> )
     : (
       <Switch>
-        { isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes }
         <Route exact path="/randomizator/not_found" component={ ErrorPage } />
+        { isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes }
         <Route exact path="/randomizator/:creator_id/:list_id" component={ GuestPage } />
         <Redirect from="/*" to="/randomizator" />
       </Switch>
