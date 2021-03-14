@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import _noop from 'lodash/noop';
 
 import Card from 'components/card/Card.view';
 import FileContainer from 'components/fileContainer/FileContainer.container';
@@ -8,16 +7,23 @@ import Form from 'components/form';
 import Draw from 'components/draw';
 import AnswersCounter from 'components/answersCounter/AnswersCounter.view';
 import IconButton from 'components/iconButton/IconButton.view';
+import CopyText from 'components/copyText';
 
 import classes from './creatorPage.module.scss';
-import CopyText from 'components/copyText';
+
+interface ICreator{
+  link: string;
+  logout: () => void;
+  onFormIdChange?: ( formID: string ) => void;
+  onRandomClick: () => void;
+}
 
 const Creator = ({
   link,
   onRandomClick,
   logout,
-  onFormIdChange,
-}) => (
+  onFormIdChange = _noop,
+}: ICreator ): JSX.Element => (
   <div className={ classes.creator }>
     <div className={ classes.leftSpace }>
       <Card
@@ -61,14 +67,5 @@ const Creator = ({
     </div>
   </div>
 );
-
-Creator.propTypes = {
-  link: PropTypes.string.isRequired,
-  logout: PropTypes.func.isRequired,
-  onRandomClick: PropTypes.func.isRequired,
-  onFormIdChange: PropTypes.func,
-};
-
-Creator.defaultProps = { onFormIdChange: () => {} };
 
 export default Creator;
