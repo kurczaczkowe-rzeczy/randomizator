@@ -1,11 +1,13 @@
 import { db } from 'config/firebaseConfig';
 import _forEach from 'lodash/forEach';
 
+type returnedType = () => void;
+
 export const formsSubscription = (
-  userID,
-  snapshotFunction,
-  setFormID,
-) => db.collection( userID )
+  userID: string,
+  snapshotFunction: ( doc: any ) => void,
+  setFormID?: ( formID: any ) => void,
+): returnedType => db.collection( userID )
   .onSnapshot(( snap ) => { // ToDo should put this into hook
     if ( setFormID ) {
       setFormID( snap.docs );

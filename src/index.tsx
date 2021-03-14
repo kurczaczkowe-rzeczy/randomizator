@@ -6,9 +6,15 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createFirestoreInstance, getFirestore } from 'redux-firestore';
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
+import { BrowserRouter } from 'react-router-dom';
+
+import { ThemeProvider } from '@material-ui/styles';
 
 import { firebase } from 'config/firebaseConfig';
 import rootReducer from 'store/reducers/rootReducer';
+import { theme } from 'theme';
+
+import Footer from 'components/footer/Footer.view';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -34,7 +40,12 @@ const render = (
   <StrictMode>
     <Provider store={ store }>
       <ReactReduxFirebaseProvider { ...reactReduxFirebaseProps }>
-        <App />
+        <ThemeProvider theme={ theme }>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+          <Footer />
+        </ThemeProvider>
       </ReactReduxFirebaseProvider>
     </Provider>
   </StrictMode>

@@ -1,23 +1,49 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import _noop from 'lodash/noop';
 
 import Card from 'components/card/Card.view';
 import FileContainer from 'components/fileContainer/FileContainer.container';
 import FormList from 'components/formList';
 import Form from 'components/form';
 import Draw from 'components/draw';
-import AnswersCounter from 'components/answersCounter/AnswersCounter.view';
+import AnswersCounter from 'components/answersCounter';
 import IconButton from 'components/iconButton/IconButton.view';
-
-import classes from './creatorPage.module.scss';
 import CopyText from 'components/copyText';
 
+import classes from './creatorPage.module.scss';
+
+export interface ICreator{
+  /**
+   * Number of form answers
+   */
+  answersCounter: number;
+  /**
+   * Link to current form
+   */
+  link: string;
+  /**
+   * Method for sing out users
+   */
+  logout: () => void;
+  /**
+   * Method for change current displays form
+   */
+  onFormIdChange?: ( formID: string ) => void;
+  /**
+   * Method for draw answers
+   */
+  onRandomClick: () => void;
+}
+
+/**
+ * Page displaying panel for authenticated users
+ */
 const Creator = ({
+  answersCounter,
   link,
   onRandomClick,
   logout,
-  onFormIdChange,
-}) => (
+  onFormIdChange = _noop,
+}: ICreator ): JSX.Element => (
   <div className={ classes.creator }>
     <div className={ classes.leftSpace }>
       <Card
@@ -43,7 +69,7 @@ const Creator = ({
     </div>
     <div className={ classes.rightSpace }>
       <div className={ classes.inline }>
-        <AnswersCounter />
+        <AnswersCounter counter={ answersCounter } />
         <IconButton
           value="Wyloguj się"
           icon="logout"
@@ -61,14 +87,5 @@ const Creator = ({
     </div>
   </div>
 );
-
-Creator.propTypes = {
-  link: PropTypes.string.isRequired,
-  logout: PropTypes.func.isRequired,
-  onRandomClick: PropTypes.func.isRequired,
-  onFormIdChange: PropTypes.func,
-};
-
-Creator.defaultProps = { onFormIdChange: () => {} };
 
 export default Creator;

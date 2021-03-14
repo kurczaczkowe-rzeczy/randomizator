@@ -31,3 +31,7 @@ export type DrawActionsTypes = typeof DRAW_RESULT
   | typeof ERROR_DRAW_RESULT
   | typeof SET_ERROR_DRAW_RESULT;
 
+export const SHOW_LOADER = 'SHOW_LOADER';
+export const HIDE_LOADER = 'HIDE_LOADER';
+export const CLEAR_GLOBAL = 'CLEAR_GLOBAL';
+export type GlobalActionsTypes = typeof SHOW_LOADER | typeof HIDE_LOADER | typeof CLEAR_GLOBAL;
