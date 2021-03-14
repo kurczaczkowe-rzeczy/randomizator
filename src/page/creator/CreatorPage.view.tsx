@@ -5,7 +5,7 @@ import FileContainer from 'components/fileContainer/FileContainer.container';
 import FormList from 'components/formList';
 import Form from 'components/form';
 import Draw from 'components/draw';
-import AnswersCounter from 'components/answersCounter/AnswersCounter.view';
+import AnswersCounter from 'components/answersCounter';
 import IconButton from 'components/iconButton/IconButton.view';
 import CopyText from 'components/copyText';
 
