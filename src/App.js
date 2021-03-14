@@ -66,8 +66,6 @@ const App = ({
     showLoader,
   ]);
 
-  console.log( 'byle co' );
-
   return isLoading
     ? ( <LoadingScreen /> )
     : (

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import _isNil from 'lodash/isNil';
-import _forEach from 'lodash/forEach';
-import _union from 'lodash/union';
 import {
   useSelector,
   shallowEqual,
   useDispatch,
 } from 'react-redux';
+import _isNil from 'lodash/isNil';
+import _forEach from 'lodash/forEach';
+import _union from 'lodash/union';
 
 import { clearDraw, setDrawResult } from 'store/actions/drawAction';
 import { setAnswers } from 'store/actions/answersAction';
@@ -56,7 +56,6 @@ const Creator = (): JSX.Element => {
     const subscription = formsSubscription(
       pathArray[ 2 ], // ToDo maybe call array elements
       ( doc ) => { // ToDo maybe puts this function into const
-        console.log( '', doc.data());
         const form = {
           name: doc.data()?.name,
           id: doc.id,

@@ -2,11 +2,14 @@ import {
   HIDE_LOADER,
   LOGIN_ERROR,
   LOGIN_SUCCESS,
-  LOGOUT_SUCCESS, SHOW_LOADER,
+  LOGOUT_SUCCESS,
+  SHOW_LOADER,
 } from 'store/actions';
 
 export const signIn = ( credentials ) => (
-  dispatch, _, { getFirebase },
+  dispatch,
+  _,
+  { getFirebase },
 ) => {
   const firebase = getFirebase();
 
@@ -21,7 +24,9 @@ export const signIn = ( credentials ) => (
 };
 
 export const signOut = () => (
-  dispatch, _, { getFirebase },
+  dispatch,
+  _,
+  { getFirebase },
 ) => {
   dispatch({ type: SHOW_LOADER });
   const firebase = getFirebase();

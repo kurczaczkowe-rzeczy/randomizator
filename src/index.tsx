@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
@@ -6,17 +6,18 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createFirestoreInstance, getFirestore } from 'redux-firestore';
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
+import { BrowserRouter } from 'react-router-dom';
+
+import { ThemeProvider } from '@material-ui/styles';
 
 import { firebase } from 'config/firebaseConfig';
 import rootReducer from 'store/reducers/rootReducer';
+import { theme } from 'theme';
+
+import Footer from 'components/footer/Footer.view';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { theme } from './theme';
-
-import { ThemeProvider } from '@material-ui/styles';
-import { BrowserRouter } from 'react-router-dom';
-import Footer from './components/footer/Footer.view';
 
 const store = createStore( rootReducer,
   composeWithDevTools( applyMiddleware( thunk.withExtraArgument({

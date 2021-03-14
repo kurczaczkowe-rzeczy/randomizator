@@ -10,8 +10,9 @@ export interface IGlobalState{
 }
 
 const initialState: IGlobalState = { isLoading: false };
+const initialAction: GlobalAction = { type: CLEAR_GLOBAL };
 
-const reducer = ( state = initialState, action: GlobalAction = { type: CLEAR_GLOBAL }): IGlobalState => {
+const reducer = ( state = initialState, action = initialAction ): IGlobalState => {
   switch ( action.type ) {
     case SHOW_LOADER: {
       return {
@@ -24,6 +25,9 @@ const reducer = ( state = initialState, action: GlobalAction = { type: CLEAR_GLO
         ...state,
         isLoading: false,
       };
+    }
+    case CLEAR_GLOBAL: {
+      return initialState;
     }
     default: {
       return state;
