@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "randomizator-7629b"
+  },
+  "targets": {
+    "randomizator-7629b": {
+      "hosting": {
+        "stories": [
+          "randomizator-stories"
+        ]
+      }
+    }
+  }
+}
