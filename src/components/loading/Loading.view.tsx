@@ -10,7 +10,7 @@ export interface ILoading{
 /**
  * UI component displaying loader
  */
-const Loading = ({ classes = { root: '' }}: ILoading ): JSX.Element => (
+export const Loading = ({ classes = { root: '' }}: ILoading ): JSX.Element => (
   <svg
     className={ classes.root }
     xmlns="http://www.w3.org/2000/svg"
