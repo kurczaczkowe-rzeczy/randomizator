@@ -11,7 +11,7 @@ export interface IAnswersCounter{
 /**
  * UI component displaying the number of answers
  */
-const AnswersCounter = ({ counter }: IAnswersCounter ): JSX.Element => (
+export const AnswersCounter = ({ counter }: IAnswersCounter ): JSX.Element => (
   <h3 className={ classes.title }>
     Ilość odpowiedzi:
     {' '}
@@ -19,4 +19,4 @@ const AnswersCounter = ({ counter }: IAnswersCounter ): JSX.Element => (
   </h3>
 );
 
-export default  AnswersCounter;
+export default AnswersCounter;
