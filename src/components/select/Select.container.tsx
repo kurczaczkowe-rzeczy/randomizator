@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import SelectView from './Select.view';
+import SelectView from 'components/select/Select.view';
 
 const Select = ({
   label,

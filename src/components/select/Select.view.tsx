@@ -1,28 +1,43 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import {
-  prepareID,
-  createOptions,
-  getValue,
-} from './Select.utils';
+import _noop from 'lodash/noop';
 
 import SelectUI from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
+import {
+  prepareID,
+  createOptions,
+  getValue,
+} from './Select.utils';
 import useStyle from './Select.styles';
 
+interface IOptions {
+  id: string;
+  name: string;
+}
+
+interface ISelect {
+  defaultValue?: string;
+  label?: string;
+  onClose?: () => void;
+  onItemClick?: () => void;
+  onOpen?: () => void;
+  open?: boolean;
+  options?: IOptions[];
+  valueForm?: string;
+}
+
 const Select = ({
-  open,
-  valueForm,
-  defaultValue,
-  label,
-  options,
-  onClose,
-  onItemClick,
-  onOpen,
-}) => {
+  open = false,
+  valueForm = '',
+  defaultValue = '',
+  label = '',
+  options = [{ id: '', name: '' }],
+  onClose = _noop,
+  onItemClick = _noop,
+  onOpen = _noop,
+}: ISelect ): JSX.Element => {
   const styles = useStyle();
   const selectClasses = {
     root: styles.selected,
@@ -79,32 +94,7 @@ const Select = ({
   );
 };
 
-Select.propTypes = {
-  defaultValue: PropTypes.string,
-  label: PropTypes.string,
-  open: PropTypes.bool,
-  options: PropTypes.arrayOf( PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-  })),
-  valueForm: PropTypes.string,
-  onClose: PropTypes.func,
-  onItemClick: PropTypes.func,
-  onOpen: PropTypes.func,
-};
-
-Select.defaultProps = {
-  open: false,
-  valueForm: '',
-  defaultValue: '',
-  label: '',
-  options: [{ id: '', name: '' }],
-  onClose: () => {},
-  onItemClick: () => {},
-  onOpen: () => {},
-};
-
-const mapStateToProps = ( state ) => ({
+const mapStateToProps = ( state: any ): any => ({
   defaultValue: state.form.docID,
   options: state.forms.forms,
 });
