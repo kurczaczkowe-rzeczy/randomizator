@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { db } from 'config/firebaseConfig';
 import _forEach from 'lodash/forEach';
 
