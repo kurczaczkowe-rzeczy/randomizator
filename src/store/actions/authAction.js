@@ -20,6 +20,9 @@ export const signIn = ( credentials ) => (
     })
     .catch(() => {
       dispatch({ type: LOGIN_ERROR });
+    })
+    .finally(() => {
+      dispatch({ type: HIDE_LOADER });
     });
 };
 
