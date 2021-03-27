@@ -7,6 +7,9 @@
       "hosting": {
         "stories": [
           "randomizator-stories"
+        ],
+        "app": [
+          "randomizator"
         ]
       }
     }
