@@ -13,9 +13,12 @@ export const ERROR_USER_DONT_EXIST = 'ERROR_USER_DONT_EXIST';
 export type UserActionsTypes = typeof GET_USER_NAME | typeof ERROR_USER_DONT_EXIST;
 
 export const GET_FORM_NAME = 'GET_FORM_NAME';
-export const ADD_FORM = 'ADD_FORM';
 export const ERROR_FORM_DONT_EXIST = 'ERROR_FORM_DONT_EXIST';
-export type FormActionsTypes = typeof GET_FORM_NAME | typeof ADD_FORM | typeof ERROR_FORM_DONT_EXIST;
+export type FormActionsTypes = typeof GET_FORM_NAME | typeof ERROR_FORM_DONT_EXIST;
+
+export const ADD_FORM = 'ADD_FORM';
+export const CLEAR_FORMS = 'CLEAR_FORMS';
+export type FormsActionsTypes = typeof ADD_FORM | typeof CLEAR_FORMS;
 
 export const SET_TAGS = 'SET_TAGS';
 export const ADD_TAG = 'ADD_TAG';

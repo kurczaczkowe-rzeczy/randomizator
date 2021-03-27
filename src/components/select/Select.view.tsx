@@ -1,6 +1,4 @@
-import { connect } from 'react-redux';
-import _noop from 'lodash/noop';
-
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import SelectUI from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -11,34 +9,24 @@ import {
   getValue,
 } from './Select.utils';
 import useStyle from './Select.styles';
+import { ISelect } from './Select.types';
 
-interface IOptions {
-  id: string;
-  name: string;
-}
-
-interface ISelect {
-  defaultValue?: string;
-  label?: string;
-  onClose?: () => void;
-  onItemClick?: () => void;
-  onOpen?: () => void;
-  open?: boolean;
-  options?: IOptions[];
-  valueForm?: string;
-}
-
+/**
+ * UI Components provides input with options list.
+ */
 const Select = ({
-  open = false,
-  valueForm = '',
-  defaultValue = '',
-  label = '',
-  options = [{ id: '', name: '' }],
-  onClose = _noop,
-  onItemClick = _noop,
-  onOpen = _noop,
+  defaultValue,
+  label,
+  name,
+  open = undefined,
+  options = [],
+  value = '',
+  onClose = undefined,
+  onItemClick,
+  onOpen = undefined,
 }: ISelect ): JSX.Element => {
   const styles = useStyle();
+
   const selectClasses = {
     root: styles.selected,
     icon: styles.icon,
@@ -73,12 +61,14 @@ const Select = ({
       <SelectUI
         disableUnderline
         open={ open }
+        name={ name }
         value={ getValue(
           options,
-          valueForm,
+          value,
           defaultValue,
         ) }
         classes={ selectClasses }
+        // @ts-ignore
         MenuProps={ menuProps }
         onClose={ onClose }
         onOpen={ onOpen }
@@ -94,9 +84,5 @@ const Select = ({
   );
 };
 
-const mapStateToProps = ( state: any ): any => ({
-  defaultValue: state.form.docID,
-  options: state.forms.forms,
-});
-
-export default connect( mapStateToProps )( Select );
+export default Select;
+export { Select };

@@ -1,43 +1,35 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-import SelectView from 'components/select/Select.view';
+import { RootState } from 'store/reducers/rootReducer';
+
+import SelectView from './Select.view';
+import { IOption, ISelectContainer } from './Select.types';
 
 const Select = ({
   label,
-  onFormIdChange,
-}) => {
-  const [ open, setOpen ] = useState( false );
+  onFormIdChange: onChange,
+}: ISelectContainer ): JSX.Element => {
   const [ valueForm, setValueForm ] = useState( '' );
 
-  const onOpen = () => setOpen( true );
-  const onClose = () => setOpen( false );
+  const defaultValue = useSelector(( state: RootState ) => state?.form.docID );
+  const options = useSelector(( state: RootState ) => state?.forms.forms );
 
-  const onMenuItemClick = ( option ) => {
+  const onMenuItemClick = ( option: IOption ): void => {
     setValueForm( option.name );
-    onFormIdChange( option.id );
+    onChange( option.id );
   };
 
   return (
     <SelectView
-      open={ open }
-      valueForm={ valueForm }
+      name="forms"
+      defaultValue={ defaultValue }
       label={ label }
-      onClose={ onClose }
+      options={ options }
+      value={ valueForm }
       onItemClick={ onMenuItemClick }
-      onOpen={ onOpen }
     />
   );
-};
-
-Select.propTypes = {
-  label: PropTypes.string,
-  onFormIdChange: PropTypes.func,
-};
-
-Select.defaultProps = {
-  label: '',
-  onFormIdChange: () => {},
 };
 
 export default Select;

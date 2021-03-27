@@ -1,9 +1,27 @@
-import { LogoutActionsTypes, GlobalActionsTypes } from 'store/actions';
+import {
+  LogoutActionsTypes,
+  GlobalActionsTypes,
+  FormsActionsTypes,
+} from 'store/actions';
 
-export interface Action<Type, Payload = undefined> {
+export interface IState { readonly errors: string | null }
+
+export interface IAction<Type, Payload = undefined> {
   payload?: Payload;
   type: Type;
 }
 
-export type LogoutAction = Action<LogoutActionsTypes>;
-export type GlobalAction = Action<GlobalActionsTypes>;
+// STATES
+export interface IGlobalState{ readonly isLoading: boolean }
+export interface IFormState {
+  readonly id: string;
+  readonly name: string;
+}
+export interface IFormsState extends IState {
+  readonly forms: IFormState[];
+}
+
+// ACTIONS
+export type LogoutAction = IAction<LogoutActionsTypes>;
+export type GlobalAction = IAction<GlobalActionsTypes>;
+export type FormsAction = IAction<FormsActionsTypes, IFormState>;
