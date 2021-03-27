@@ -1,29 +1,32 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import SelectUI from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+
 import {
   prepareID,
   createOptions,
   getValue,
 } from './Select.utils';
-
-import SelectUI from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-
 import useStyle from './Select.styles';
+import { ISelect } from './Select.types';
 
+/**
+ * UI Components provides input with options list.
+ */
 const Select = ({
-  open,
-  valueForm,
   defaultValue,
   label,
-  options,
-  onClose,
+  name,
+  open = undefined,
+  options = [],
+  value = '',
+  onClose = undefined,
   onItemClick,
-  onOpen,
-}) => {
+  onOpen = undefined,
+}: ISelect ): JSX.Element => {
   const styles = useStyle();
+
   const selectClasses = {
     root: styles.selected,
     icon: styles.icon,
@@ -58,12 +61,14 @@ const Select = ({
       <SelectUI
         disableUnderline
         open={ open }
+        name={ name }
         value={ getValue(
           options,
-          valueForm,
+          value,
           defaultValue,
         ) }
         classes={ selectClasses }
+        // @ts-ignore
         MenuProps={ menuProps }
         onClose={ onClose }
         onOpen={ onOpen }
@@ -79,34 +84,5 @@ const Select = ({
   );
 };
 
-Select.propTypes = {
-  defaultValue: PropTypes.string,
-  label: PropTypes.string,
-  open: PropTypes.bool,
-  options: PropTypes.arrayOf( PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-  })),
-  valueForm: PropTypes.string,
-  onClose: PropTypes.func,
-  onItemClick: PropTypes.func,
-  onOpen: PropTypes.func,
-};
-
-Select.defaultProps = {
-  open: false,
-  valueForm: '',
-  defaultValue: '',
-  label: '',
-  options: [{ id: '', name: '' }],
-  onClose: () => {},
-  onItemClick: () => {},
-  onOpen: () => {},
-};
-
-const mapStateToProps = ( state ) => ({
-  defaultValue: state.form.docID,
-  options: state.forms.forms,
-});
-
-export default connect( mapStateToProps )( Select );
+export default Select;
+export { Select };

@@ -2,12 +2,8 @@ import {
   HIDE_LOADER,
   SHOW_LOADER,
   CLEAR_GLOBAL,
-} from '../actions';
-import { GlobalAction } from '../types';
-
-export interface IGlobalState{
-  isLoading: boolean;
-}
+} from 'store/actions';
+import { GlobalAction, IGlobalState } from 'store/types';
 
 const initialState: IGlobalState = { isLoading: false };
 const initialAction: GlobalAction = { type: CLEAR_GLOBAL };
