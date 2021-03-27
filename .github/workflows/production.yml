@@ -19,13 +19,13 @@ jobs:
         run: npm install; npm i -g firebase-tools
       - name: Build production page
         env:
-          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
-          REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
-          REACT_APP_AUTH_DOMAIN: ${{ secrets.REACT_APP_AUTH_DOMAIN }}
-          REACT_APP_DATABASE_URL: ${{ secrets.REACT_APP_DATABASE_URL }}
-          REACT_APP_STORAGE_BUCKET: ${{ secrets.REACT_APP_STORAGE_BUCKET }}
-          REACT_APP_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_MESSAGING_SENDER_ID }}
-          REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID }}
+          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY_PROD }}
+          REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID_PROD }}
+          REACT_APP_AUTH_DOMAIN: ${{ secrets.REACT_APP_AUTH_DOMAIN_PROD }}
+          REACT_APP_DATABASE_URL: ${{ secrets.REACT_APP_DATABASE_URL_PROD }}
+          REACT_APP_STORAGE_BUCKET: ${{ secrets.REACT_APP_STORAGE_BUCKET_PROD }}
+          REACT_APP_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_MESSAGING_SENDER_ID_PROD }}
+          REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID_PROD }}
           PUBLIC_URL: "https://randomizator.web.app"
           REACT_APP_ENVIRONMENT: "production"
           BUILD_PATH: "./build.prod"
