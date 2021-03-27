@@ -2,7 +2,7 @@ name: Deployment
 on:
   push:
     branches:
-      - prod
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Packages
-        run: npm install
+        run: npm install; npm i -g firebase-tools
       - name: Build page
         env:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
@@ -34,3 +34,7 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./build
           publish_branch: gh-pages
+      - name: Setup storybook
+        run: npm run build-storybook; firebase target:apply hosting stories randomizator-stories
+      - name: Deploy storybook
+        run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --only hosting:stories
