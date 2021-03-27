@@ -30,9 +30,8 @@ jobs:
           REACT_APP_ENVIRONMENT: "production"
           BUILD_PATH: "./build.prod"
           SKIP_PREFLIGHT_CHECK: true
-        run: npm run build
 
       - name: Setup production page
-        run: npm run build:prod
+        run: npm run build
       - name: Deploy production
         run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --only hosting:app

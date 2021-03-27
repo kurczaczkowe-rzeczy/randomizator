@@ -6,7 +6,7 @@ import Component from '.';
 import { ITextNode } from './TextNode.view';
 
 export default{
-  title: 'test/components/TextNodeView',
+  title: 'components/TextNodeView',
   component: Component,
 } as Meta;
 
