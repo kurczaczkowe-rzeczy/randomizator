@@ -28,11 +28,10 @@ jobs:
           REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID }}
           PUBLIC_URL: "https://randomizator.web.app"
           REACT_APP_ENVIRONMENT: "production"
-          BUILD_PATH: "./build"
+          BUILD_PATH: "./build.prod"
           SKIP_PREFLIGHT_CHECK: true
-        run: npm run build
 
       - name: Setup production page
-        run: npm run build:prod
+        run: npm run build
       - name: Deploy production
         run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --only hosting:app
