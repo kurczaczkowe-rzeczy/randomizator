@@ -2,7 +2,7 @@ name: Deployment
 on:
   push:
     branches:
-      - master
+      - prod
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -17,17 +17,20 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Packages
         run: npm install; npm i -g firebase-tools
-      - name: Build page
-        env:
-          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
-          REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
-          REACT_APP_AUTH_DOMAIN: ${{ secrets.REACT_APP_AUTH_DOMAIN }}
-          REACT_APP_DATABASE_URL: ${{ secrets.REACT_APP_DATABASE_URL }}
-          REACT_APP_STORAGE_BUCKET: ${{ secrets.REACT_APP_STORAGE_BUCKET }}
-          REACT_APP_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_MESSAGING_SENDER_ID }}
-          REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID }}
-          SKIP_PREFLIGHT_CHECK: true
-        run: npm run build
+#      - name: Build page
+#        env:
+#          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+#          REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
+#          REACT_APP_AUTH_DOMAIN: ${{ secrets.REACT_APP_AUTH_DOMAIN }}
+#          REACT_APP_DATABASE_URL: ${{ secrets.REACT_APP_DATABASE_URL }}
+#          REACT_APP_STORAGE_BUCKET: ${{ secrets.REACT_APP_STORAGE_BUCKET }}
+#          REACT_APP_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_MESSAGING_SENDER_ID }}
+#          REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID }}
+#          PUBLIC_URL: "https://kurczaczkowe-rzeczy.github.io/randomizator"
+#          REACT_APP_ENVIRONMENT: "development"
+#          BUILD_PATH: "./build"
+#          SKIP_PREFLIGHT_CHECK: true
+#        run: npm run build
 #      - name: Deploy to gh-pages
 #        uses: peaceiris/actions-gh-pages@v3
 #        with:

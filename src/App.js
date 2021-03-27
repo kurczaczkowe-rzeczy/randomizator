@@ -34,6 +34,9 @@ const App = ({
   isLoading,
   showLoader,
 }) => {
+
+  console.log( 'jestem tu!!' );
+
   const history = useHistory();
   const endWithSlash = useMemo(() => _endsWith( history?.location?.pathname, '/' ), [ history ]);
   const [ isAuthenticated, setAuthenticated ] = useState( false );
