@@ -1,4 +1,4 @@
-name: Deployment Production
+name: Production
 on:
   push:
     branches:
@@ -17,7 +17,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Packages
         run: npm install; npm i -g firebase-tools
-      - name: Build page
+      - name: Build production page
         env:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
           REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
@@ -30,8 +30,6 @@ jobs:
           REACT_APP_ENVIRONMENT: "production"
           BUILD_PATH: "./build.prod"
           SKIP_PREFLIGHT_CHECK: true
-
-      - name: Setup production page
-        run: npm run build
+          run: npm run build
       - name: Deploy production
         run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --only hosting:app
