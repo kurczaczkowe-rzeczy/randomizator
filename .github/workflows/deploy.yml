@@ -28,12 +28,12 @@ jobs:
           REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID }}
           SKIP_PREFLIGHT_CHECK: true
         run: npm run build
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./build
-          publish_branch: gh-pages
+#      - name: Deploy to gh-pages
+#        uses: peaceiris/actions-gh-pages@v3
+#        with:
+#          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+#          publish_dir: ./build
+#          publish_branch: gh-pages
       - name: Setup storybook
         run: npm run build-storybook; firebase target:apply hosting stories randomizator-stories
       - name: Deploy storybook
