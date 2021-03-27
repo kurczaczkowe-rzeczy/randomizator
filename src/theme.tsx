@@ -20,12 +20,14 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     borders: IBorders;
     fonts: IFonts;
     gradient: IGradients;
+    themeName: string;
   }
 
   interface ThemeOptions {
     borders: IBorders;
     fonts: IFonts;
     gradient: IGradients;
+    themeName: string;
   }
 }
 /*
@@ -52,6 +54,7 @@ const accent = '#771e76';
 const backgroundLight = '#222';
 
 export const theme = createMuiTheme({
+  themeName: 'randoTheme',
   palette: {
     primary: {
       main: accent,
