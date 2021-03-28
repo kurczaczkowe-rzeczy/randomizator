@@ -4,6 +4,8 @@ If you want to test check this [link](https://kurczaczkowe-rzeczy.github.io/rand
 - User name: randomizator@example.com
 - Password: randomizator1234
 
+We use storybook to present our components. If you want to see them check [this](https://randomizator-stories.web.app).
+
 ## Project overview
 You can easily collect answers from unauthorized users. You can randomize from the form fields.
 You can also filter the answers to be taken into account in the draw. Filtering is done by passing 

@@ -4,6 +4,8 @@ Jeśli chcesz przetestować, sprawdź [to łącze](https://kurczaczkowe-rzeczy.g
 - Nazwa użytkownika: randomizator@example.com
 - Hasło: randomizator1234
 
+Używamy storybook'a do prezentacji i wydzielenia komponentów. Jeśli chcesz sprawdzić je wejdź [tutaj](https://randomizator-stories.web.app).
+
 ## Przegląd projektu
 Możesz łatwo zbierać odpowiedzi przekazane od użytkowników. Każde pole formularza losuje się z osobna.
 Możesz także filtrować odpowiedzi, które zostaną wzięte pod uwagę w losowaniu. Filtrowanie odbywa się 
