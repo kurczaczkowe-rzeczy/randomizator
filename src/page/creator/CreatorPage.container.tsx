@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
 import {
   useSelector,
   shallowEqual,
@@ -34,8 +33,6 @@ interface IAnswersStore{
 }
 
 const Creator = (): JSX.Element => {
-  const history = useLocation();
-  const pathArray = history.pathname.split( '/' );
   const [ formID, setFormID ] = useState( localStorage.getItem( FORM_ID_KEY )); // ToDo create localstorage hook
   const [ link, setLink ] = useState( '' );
 
@@ -53,29 +50,31 @@ const Creator = (): JSX.Element => {
   };
 
   useEffect(() => {
-    const subscription = formsSubscription(
-      pathArray[ 2 ], // ToDo maybe call array elements
-      ( doc ) => { // ToDo maybe puts this function into const
-        const form = {
-          name: doc.data()?.name,
-          id: doc.id,
-        };
+    if ( auth ) {
+      const subscription = formsSubscription(
+        auth.uid,
+        ( doc ) => { // ToDo maybe puts this function into const
+          const form = {
+            name: doc.data()?.name,
+            id: doc.id,
+          };
 
-        dispatch( addForm( form )); // ToDo we can add all forms at once?
-        if ( _isNil( formID )) {
-          localStorage.setItem( FORM_ID_KEY, form.id );
-          setFormID( form.id );
-        }
-      },
-      updateFormID,
-    );
+          dispatch( addForm( form )); // ToDo we can add all forms at once?
+          if ( _isNil( formID )) {
+            localStorage.setItem( FORM_ID_KEY, form.id );
+            setFormID( form.id );
+          }
+        },
+        updateFormID,
+      );
 
-    return (): void => subscription();
+      return (): void => subscription();
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if ( formID !== null ) {
-      const subscription = formsSubscription( pathArray[ 2 ], ( doc ) => {
+    if ( auth && formID !== null ) {
+      const subscription = formsSubscription( auth.uid, ( doc ) => {
         const ans = doc.data()?.answers;
 
         if ( formID === doc.id ) {
@@ -84,7 +83,7 @@ const Creator = (): JSX.Element => {
         }
       });
 
-      setLink( `${ HOME_PAGE }/${ auth?.uid }/${ formID }` );
+      setLink( `${ HOME_PAGE }/${ auth.uid }/${ formID }` );
 
       return (): void => subscription();
     }
