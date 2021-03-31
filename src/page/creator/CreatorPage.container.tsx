@@ -18,19 +18,11 @@ import { FORM_ID_KEY, HOME_PAGE } from 'constans';
 
 import CreatorView from 'page/creator/CreatorPage.view';
 import { formsSubscription } from 'page/creator/CreatorPage.utils';
-
-interface IForm{
-  id: string;
-  name: string;
-}
-
-interface IAnswers{
-  [key: string]: string;
-}
-
-interface IAnswersStore{
-  [key: string]: string[];
-}
+import {
+  IForm,
+  IAnswers,
+  IAnswersStore,
+} from 'page/creator/CreatorPage.types';
 
 const Creator = (): JSX.Element => {
   const [ formID, setFormID ] = useState( localStorage.getItem( FORM_ID_KEY )); // ToDo create localstorage hook
@@ -78,7 +70,12 @@ const Creator = (): JSX.Element => {
         const ans = doc.data()?.answers;
 
         if ( formID === doc.id ) {
-          dispatch( setFormName( doc.data()?.name, doc.id ));
+          const form = {
+            id: doc.id,
+            name: doc.data()?.name,
+          };
+
+          dispatch( setFormName( form ));
           getData( ans );
         }
       });

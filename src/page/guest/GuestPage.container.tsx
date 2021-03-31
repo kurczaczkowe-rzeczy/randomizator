@@ -3,28 +3,28 @@ import {
   useEffect,
   useState,
 } from 'react';
-import PropTypes from 'prop-types';
 import { Redirect, useParams } from 'react-router';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import useTimeout from 'hooks/useTimeout';
 import { db, firestore } from 'config/firebaseConfig';
 import { getUserName } from 'store/actions/userActions';
-import { getFormName } from 'store/actions/formAction';
+import { fetchFormName } from 'store/actions/formAction';
+import { RootState } from 'store/reducers/rootReducer';
 import { APP_NAME, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
 
 import GuestPageView from 'page/guest/GuestPage.view';
 
-const GuestPage = ({
-  userName,
-  formName,
-  getUser,
-  getFormName,
-  errorFormName,
-  errorUserName,
-}) => {
+const GuestPage = (): JSX.Element => {
+
+  const userName = useSelector(( state: RootState ) => state?.usr.userName );
+  const formName = useSelector(( state: RootState ) => state?.form.name );
+  const errorFormName = useSelector(( state: RootState ) => state?.form.errors );
+  const errorUserName = useSelector(( state: RootState ) => state?.usr.errors );
+  const dispatch = useDispatch();
+
   /* ToDo use constants instead of hardcoded strings */
-  const { creatorId, formId } = useParams();
+  const { creatorId, formId } = useParams<{[key: string]: string }>();
   const [ isHighlighted, setIsHighlighted ] = useState( false );
   const { runTimeout, stopTimeout } = useTimeout( DELAY_FORM_NAME_HIGHLIGHT );
 
@@ -42,7 +42,7 @@ const GuestPage = ({
     stopTimeout,
   ]);
 
-  const onSubmit = ( nameMale, nameFemale ) => {
+  const onSubmit = ( nameMale: string, nameFemale: string ): void => {
     const ans = {
       nameMale,
       nameFemale,
@@ -56,8 +56,8 @@ const GuestPage = ({
   };
 
   useEffect(() => {
-    getUser( creatorId );
-    getFormName( creatorId, formId );
+    dispatch( getUserName( creatorId ));
+    dispatch( fetchFormName( creatorId, formId ));
   }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
   const displayPage = (
@@ -76,34 +76,4 @@ const GuestPage = ({
 
 };
 
-GuestPage.propTypes = {
-  errorFormName: PropTypes.string,
-  errorUserName: PropTypes.string,
-  formName: PropTypes.string,
-  getFormName: PropTypes.func,
-  getUser: PropTypes.func,
-  userName: PropTypes.string,
-};
-
-GuestPage.defaultProps = {
-  getFormName: () => {},
-  getUser: () => {},
-  formName: '',
-  userName: '',
-  errorFormName: '',
-  errorUserName: '',
-};
-
-const mapStateToProps = ( state ) => ({
-  userName: state.usr.userName,
-  formName: state.form.formName,
-  errorFormName: state.form.errors,
-  errorUserName: state.usr.errors,
-});
-
-const mapDispatchToProps = ( dispatch ) => ({
-  getUser: ( id ) => dispatch( getUserName( id )),
-  getFormName: ( userID, formID ) => dispatch( getFormName( userID, formID )),
-});
-
-export default connect( mapStateToProps, mapDispatchToProps )( GuestPage );
+export default GuestPage;

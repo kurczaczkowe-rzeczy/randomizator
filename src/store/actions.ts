@@ -12,9 +12,10 @@ export const GET_USER_NAME = 'GET_USER_NAME';
 export const ERROR_USER_DONT_EXIST = 'ERROR_USER_DONT_EXIST';
 export type UserActionsTypes = typeof GET_USER_NAME | typeof ERROR_USER_DONT_EXIST;
 
-export const GET_FORM_NAME = 'GET_FORM_NAME';
+export const SET_FORM_NAME = 'SET_FORM_NAME';
 export const ERROR_FORM_DONT_EXIST = 'ERROR_FORM_DONT_EXIST';
-export type FormActionsTypes = typeof GET_FORM_NAME | typeof ERROR_FORM_DONT_EXIST;
+export const CLEAR_FORM = 'CLEAR_FORM';
+export type FormActionsTypes = typeof SET_FORM_NAME | typeof ERROR_FORM_DONT_EXIST | typeof CLEAR_FORM;
 
 export const ADD_FORM = 'ADD_FORM';
 export const CLEAR_FORMS = 'CLEAR_FORMS';

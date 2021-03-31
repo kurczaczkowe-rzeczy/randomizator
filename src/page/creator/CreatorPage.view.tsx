@@ -9,30 +9,9 @@ import AnswersCounter from 'components/answersCounter';
 import IconButton from 'components/iconButton/IconButton.view';
 import CopyText from 'components/copyText';
 
-import classes from './creatorPage.module.scss';
+import { ICreator } from 'page/creator/CreatorPage.types';
 
-export interface ICreator{
-  /**
-   * Number of form answers
-   */
-  answersCounter: number;
-  /**
-   * Link to current form
-   */
-  link: string;
-  /**
-   * Method for sing out users
-   */
-  logout: () => void;
-  /**
-   * Method for change current displays form
-   */
-  onFormIdChange?: ( formID: string ) => void;
-  /**
-   * Method for draw answers
-   */
-  onRandomClick: () => void;
-}
+import classes from './creatorPage.module.scss';
 
 /**
  * Page displaying panel for authenticated users

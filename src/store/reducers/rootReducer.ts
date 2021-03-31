@@ -8,7 +8,7 @@ import { LogoutAction } from 'store/types';
 import globalReducer from './globalReducer';
 import authReducer from './authReducer';
 import userReducer from './userReducer';
-import formReducer from './formReducer';
+import formReducer from 'store/reducers/formReducer';
 import formsReducer from './formsReducer';
 import answersReducer from './answersReducer';
 import drawReducer from './drawReducer';

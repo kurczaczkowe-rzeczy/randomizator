@@ -59,7 +59,7 @@ const App = ({
         <Route exact path={ `${ APP_NAME }/not_found` } component={ ErrorPage } />
         <Route exact path={ `${ APP_NAME }/:creatorId/:formId` } component={ GuestPage } />
         { ( isAuthenticated && isLogin ) ? authenticatedRoutes : unauthenticatedRoutes }
-        <Redirect from="/*" to={ `${ APP_NAME }` } />
+        <Redirect from="/*" to={ `${ APP_NAME }/not_found` } />
       </Switch>
     );
 };

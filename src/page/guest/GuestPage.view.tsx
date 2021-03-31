@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import Card from 'components/card/Card.view';
@@ -9,15 +7,17 @@ import Form from 'components/form';
 import FormName from 'components/guestFormDescription/FormName.view';
 import TextBox from 'components/textBox/TextBox.view';
 
+import { IGuest } from 'page/guest/GuestPage.types';
+
 import classes from './guestPage.module.scss';
 
 const GuestPageView = ({
   creatorName,
-  formName,
+  formName = '',
   onSubmit,
   isHighlighted,
   highlightFormName,
-}) => (
+}: IGuest ): JSX.Element => (
   /* ToDo use constants instead of hardcoded strings */
   <div className={ classes.guest }>
     <div className={ classes.description }>
@@ -49,19 +49,5 @@ const GuestPageView = ({
     <Card title="FORMULARZ" body={ <Form onSubmit={ onSubmit } additionalFunction={ highlightFormName } /> } />
   </div>
 );
-
-GuestPageView.propTypes = {
-  creatorName: PropTypes.string.isRequired,
-  formName: PropTypes.string.isRequired,
-  highlightFormName: PropTypes.func,
-  isHighlighted: PropTypes.bool,
-  onSubmit: PropTypes.func,
-};
-
-GuestPageView.defaultProps = {
-  isHighlighted: false,
-  highlightFormName: () => {},
-  onSubmit: () => {},
-};
 
 export default GuestPageView;
