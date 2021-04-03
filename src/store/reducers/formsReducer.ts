@@ -8,9 +8,8 @@ const initialState: IFormsState = {
   forms: [],
   errors: null,
 };
-const initialAction: FormsAction = { type: CLEAR_FORMS };
 
-const reducer = ( state = initialState, action = initialAction ): IFormsState => {
+const reducer = ( state = initialState, action: FormsAction = { type: CLEAR_FORMS }): IFormsState => {
   switch ( action.type ) {
     case ADD_FORM:
       return {

@@ -1,10 +1,11 @@
 import {
   LogoutActionsTypes,
   GlobalActionsTypes,
-  FormsActionsTypes,
   ERROR_FORM_DONT_EXIST,
   SET_FORM_NAME,
   CLEAR_FORM,
+  CLEAR_FORMS,
+  ADD_FORM,
 } from 'store/actions';
 
 export interface IState { readonly errors: string | null }
@@ -33,7 +34,7 @@ export type FormState = IForm & IState;
 // ACTIONS
 export type LogoutAction = IAction<LogoutActionsTypes>;
 export type GlobalAction = IAction<GlobalActionsTypes>;
-export type FormsAction = IActionWithPayload<FormsActionsTypes, IForm>;
+export type FormsAction = IAction<typeof CLEAR_FORMS> | IActionWithPayload<typeof ADD_FORM, IForm>;
 export type FormAction =
   | IAction<typeof CLEAR_FORM>
   | IActionWithPayload<typeof SET_FORM_NAME, IForm>
