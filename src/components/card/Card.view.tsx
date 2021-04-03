@@ -4,14 +4,16 @@ import classNames from 'classnames';
 
 import { ICard } from 'components/card/Card.types';
 
-import classes from './card.module.scss';
+import useStyles from './Card.styles';
 
+/** Box that warps other components. */
 const Card = ({
   title,
   cardClass = '',
   body,
   id,
 }: ICard ): JSX.Element => {
+  const styles = useStyles();
   let titleId = undefined;
   let titleContent = title;
 
@@ -22,7 +24,7 @@ const Card = ({
 
   return (
     <div
-      className={ classNames( classes.card, { [ cardClass ]: !_isEmpty( cardClass ) }) }
+      className={ classNames( styles.card, { [ cardClass ]: !_isEmpty( cardClass ) }) }
       id={ id }
     >
       { ( title && !_isEmpty( title )) && <h3 id={ titleId }>{ titleContent }</h3> }
@@ -32,3 +34,4 @@ const Card = ({
 };
 
 export default Card;
+export { Card };
