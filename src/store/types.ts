@@ -12,7 +12,10 @@ export interface IAction<Type, Payload = undefined> {
 }
 
 // STATES
-export interface IGlobalState{ readonly isLoading: boolean }
+export interface IGlobalState{
+  readonly isLoading: boolean;
+  readonly isModalOpen: boolean;
+}
 export interface IFormState {
   readonly id: string;
   readonly name: string;

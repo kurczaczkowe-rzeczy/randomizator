@@ -36,5 +36,11 @@ export type DrawActionsTypes = typeof DRAW_RESULT
 
 export const SHOW_LOADER = 'SHOW_LOADER';
 export const HIDE_LOADER = 'HIDE_LOADER';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
 export const CLEAR_GLOBAL = 'CLEAR_GLOBAL';
-export type GlobalActionsTypes = typeof SHOW_LOADER | typeof HIDE_LOADER | typeof CLEAR_GLOBAL;
+export type GlobalActionsTypes = typeof SHOW_LOADER
+  | typeof HIDE_LOADER
+  | typeof SHOW_MODAL
+  | typeof HIDE_MODAL
+  | typeof CLEAR_GLOBAL;
