@@ -9,11 +9,9 @@ import ModalView from './Modal.view';
 
 const Modal = ( props: IModal ): JSX.Element => {
   const dispatch = useDispatch();
-  let isModalOpen = useSelector(( state: RootState ) => state.global.isModalOpen );
+  const isModalOpen = useSelector(( state: RootState ) => state.global.isModalOpen );
 
   const handleClose = useCallback(() => dispatch( hideModal()), [ dispatch ]);
-
-  isModalOpen = true;
 
   return (
     <ModalView
