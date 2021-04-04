@@ -48,8 +48,7 @@ export default makeStyles(({
 
   icon: {
     fill: palette.primary.main,
-    paddingRight: spacing( 1 ),
-    paddingLeft: spacing( 1 ),
+    marginRight: spacing( 1 ),
   },
 
   selected: {
