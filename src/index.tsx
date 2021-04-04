@@ -8,7 +8,8 @@ import { createFirestoreInstance, getFirestore } from 'redux-firestore';
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
 import { BrowserRouter } from 'react-router-dom';
 
-import { ThemeProvider } from '@material-ui/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
 
 import { firebase } from 'config/firebaseConfig';
 import rootReducer from 'store/reducers/rootReducer';
@@ -41,6 +42,7 @@ const render = (
     <Provider store={ store }>
       <ReactReduxFirebaseProvider { ...reactReduxFirebaseProps }>
         <ThemeProvider theme={ theme }>
+          <CssBaseline />
           <BrowserRouter>
             <App />
           </BrowserRouter>

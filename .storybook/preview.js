@@ -1,10 +1,16 @@
-import { muiTheme } from 'storybook-addon-material-ui';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
 
 import randoTheme from './randoTheme';
 import { theme } from 'theme';
 
 const decorators = [
-  muiTheme([theme]),
+  (story) => (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      { story() }
+    </ThemeProvider>
+  ),
 ];
 
 const parameters = {

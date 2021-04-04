@@ -1,9 +1,7 @@
 import { CSSProperties } from 'react';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
-interface IGradients {
-  [ key: string ]: CSSProperties['backgroundImage'];
-}
+interface IGradients {[ key: string ]: CSSProperties['backgroundImage']}
 
 interface IFonts {
   size: {
@@ -11,15 +9,16 @@ interface IFonts {
   };
 }
 
-interface IBorders {
-  [ key: string ]: CSSProperties['border'];
-}
+interface IBorders {[ key: string ]: CSSProperties['border']}
+
+interface IShadows {[ key: string ]: CSSProperties['boxShadow']}
 
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
     borders: IBorders;
     fonts: IFonts;
     gradient: IGradients;
+    shadow: IShadows;
     themeName: string;
   }
 
@@ -27,6 +26,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     borders: IBorders;
     fonts: IFonts;
     gradient: IGradients;
+    shadow: IShadows;
     themeName: string;
   }
 }
@@ -50,28 +50,32 @@ declare module '@material-ui/core/styles/createPalette' {
   }
 }
 
-const accent = '#771e76';
-const backgroundLight = '#222';
+const palette = {
+  primary: {
+    main: '#771e76',
+    light: '#765076',
+  },
+  backgroundLight: '#222',
+  backgroundDark: '#1b1b1b',
+  colorText: '#bdaeae',
+  colorTextSelected: '#fff',
+};
+
+const shadow = {
+  card: `0 0 5px ${ palette.primary.main }`,
+  focus: `0 0 10px ${ palette.primary.main }`,
+};
 
 export const theme = createMuiTheme({
   themeName: 'randoTheme',
-  palette: {
-    primary: {
-      main: accent,
-      light: '#765076',
-    },
-    backgroundLight,
-    backgroundDark: '#1b1b1b',
-    colorText: '#bdaeae',
-    colorTextSelected: '#fff',
-  },
+  palette,
   gradient: {
     input: `linear-gradient(
         180deg,
-        ${ backgroundLight } 0%,
-        ${ backgroundLight } 49%,
-        ${ accent } 50%,
-        ${ accent } 100%
+        ${ palette.backgroundLight } 0%,
+        ${ palette.backgroundLight } 49%,
+        ${ palette.primary.main } 50%,
+        ${ palette.primary.main } 100%
       ) 1`,
   },
   fonts: {
@@ -80,5 +84,59 @@ export const theme = createMuiTheme({
       base: '17px',
     },
   },
-  borders: { input: '2px solid' },
+  borders: {
+    input: '2px solid',
+    separator: `2px solid ${ palette.primary.main }`,
+  },
+  shadow,
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        '*': {
+          scrollbarColor: `${ palette.primary.main } ${ palette.backgroundDark }`,
+          scrollbarWidth: 'thin',
+
+          '&::-webkit-scrollbar-track': { backgroundColor: palette.backgroundDark },
+          '&::-webkit-scrollbar': {
+            height: 4,
+            width: 8,
+            backgroundColor: palette.backgroundDark,
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: palette.primary.main,
+            borderRadius: 10,
+          },
+        },
+        body: {
+          backgroundColor: palette.backgroundDark,
+          margin: 0,
+          position: 'relative',
+          minHeight: '100vh',
+        },
+        button: {
+          transition: 'all 0.6s linear',
+
+          '&:focus': {
+            outline: 'none',
+            boxShadow: shadow.focus,
+          },
+        },
+        input: {
+          transition: 'all 0.6s linear',
+
+          '&:focus': {
+            borderImage: `linear-gradient(
+                 0deg,
+                 ${ palette.primary.main } 0%,
+                 ${ palette.primary.main } 49%,
+                 ${ palette.backgroundDark } 50%,
+                 ${ palette.backgroundDark } 100%
+               ) 1`,
+            outline: 'none',
+            boxShadow: shadow.focus,
+          },
+        },
+      },
+    },
+  },
 });
