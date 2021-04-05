@@ -10,7 +10,7 @@ import {
 
 export interface IState { readonly errors: string | null }
 
-export interface IErrorMessage {errorMessage: string }
+export interface IErrorMessage { errorMessage: string }
 
 export interface IAction<Type> {
   type: Type;

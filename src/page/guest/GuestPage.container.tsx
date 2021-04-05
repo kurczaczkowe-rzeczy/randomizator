@@ -13,7 +13,7 @@ import { fetchFormName } from 'store/actions/formAction';
 import { RootState } from 'store/reducers/rootReducer';
 import { APP_NAME, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
 
-import GuestPageView from 'page/guest/GuestPage.view';
+import GuestPageView from './GuestPage.view';
 
 const GuestPage = (): JSX.Element => {
 
