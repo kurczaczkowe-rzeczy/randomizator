@@ -17,11 +17,11 @@ export interface ICreator{
    */
   answersCounter: number;
   /**
-   * Link to current form
+   * Link to specific form
    */
   link: string;
   /**
-   * Method for sing out users
+   * Method for sign out users
    */
   logout: () => void;
   /**
