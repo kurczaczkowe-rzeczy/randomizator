@@ -7,8 +7,7 @@ import {
   Route,
   Redirect,
 } from 'react-router';
-import { connect, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { showLoader, hideLoader } from 'store/actions/globalActions';
 import { APP_NAME } from 'constans';
@@ -23,12 +22,10 @@ const authenticatedRoutes = <Route exact path={ `${ APP_NAME }/` } component={ C
 
 const unauthenticatedRoutes = <Route exact path={ `${ APP_NAME }/` } component={ Login } />;
 
-const App = ({
-  auth,
-  hideLoader,
-  isLoading,
-  showLoader,
-}) => {
+const App = () => {
+  const dispatch = useDispatch();
+  const auth = useSelector(( state ) => state?.firebase.auth );
+  const isLoading = useSelector(( state ) => state?.global.isLoading );
   const isLogin = useSelector(( state ) => state?.auth.isLogin );
   const [ isAuthenticated, setAuthenticated ] = useState( false );
 
@@ -42,9 +39,9 @@ const App = ({
 
   useEffect(() => {
     if ( !auth.isLoaded ) {
-      showLoader();
+      dispatch( showLoader());
     } else {
-      hideLoader();
+      dispatch( hideLoader());
     }
   }, [
     auth.isLoaded,
@@ -64,36 +61,4 @@ const App = ({
     );
 };
 
-App.propTypes = {
-  auth: PropTypes.shape({
-    isLoaded: PropTypes.bool,
-    uid: PropTypes.string,
-  }),
-  hideLoader: PropTypes.func,
-  isLoading: PropTypes.bool,
-  showLoader: PropTypes.func,
-};
-
-App.defaultProps = {
-  auth: {
-    uid: '',
-    isLoaded: false,
-  },
-  hideLoader: () => {
-  },
-  isLoading: false,
-  showLoader: () => {
-  },
-};
-
-const mapStateToProps = ( state ) => ({
-  auth: state.firebase.auth,
-  isLoading: state.global.isLoading,
-});
-
-const mapDispatchToProps = ( dispatch ) => ({
-  hideLoader: () => dispatch( hideLoader()),
-  showLoader: () => dispatch( showLoader()),
-});
-
-export default connect( mapStateToProps, mapDispatchToProps )( App );
+export default App;
