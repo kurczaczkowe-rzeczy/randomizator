@@ -25,7 +25,7 @@ const appReducer = combineReducers({
   draw: drawReducer,
 });
 
-export type RootState = ReturnType<typeof appReducer> | undefined;
+export type RootState = ReturnType<typeof appReducer>;
 
 const rootReducer: Reducer<RootState, LogoutAction> = ( state, action ) => {
   if ( action.type === LOGOUT_SUCCESS ) {

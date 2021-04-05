@@ -2,10 +2,12 @@ import {
   HIDE_LOADER,
   SHOW_LOADER,
   CLEAR_GLOBAL,
+  HIDE_MODAL,
+  SHOW_MODAL,
 } from 'store/actions';
 import { GlobalAction, IGlobalState } from 'store/types';
 
-const initialState: IGlobalState = { isLoading: false };
+const initialState: IGlobalState = { isLoading: false, isModalOpen: false };
 const initialAction: GlobalAction = { type: CLEAR_GLOBAL };
 
 const reducer = ( state = initialState, action = initialAction ): IGlobalState => {
@@ -20,6 +22,18 @@ const reducer = ( state = initialState, action = initialAction ): IGlobalState =
       return {
         ...state,
         isLoading: false,
+      };
+    }
+    case SHOW_MODAL: {
+      return {
+        ...state,
+        isModalOpen: true,
+      };
+    }
+    case HIDE_MODAL: {
+      return {
+        ...state,
+        isModalOpen: false,
       };
     }
     case CLEAR_GLOBAL: {

@@ -20,7 +20,10 @@ export interface IActionWithPayload<Type, Payload> extends IAction<Type>{
 }
 
 // STATES
-export interface IGlobalState{ readonly isLoading: boolean }
+export interface IGlobalState{
+  readonly isLoading: boolean;
+  readonly isModalOpen: boolean;
+}
 export interface IForm {
   readonly id: string;
   readonly name: string;
