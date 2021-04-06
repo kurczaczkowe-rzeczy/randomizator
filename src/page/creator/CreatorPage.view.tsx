@@ -10,12 +10,17 @@ import IconButton from 'components/iconButton/IconButton.view';
 import CopyText from 'components/copyText';
 
 import classes from './creatorPage.module.scss';
+import Button from 'components/button/Button.view';
 
 export interface ICreator{
   /**
    * Number of form answers
    */
   answersCounter: number;
+  /**
+   * Method for convert answers to csv file
+   */
+  getAnswersToFile: () => void;
   /**
    * Link to current form
    */
@@ -43,6 +48,7 @@ const Creator = ({
   onRandomClick,
   logout,
   onFormIdChange = _noop,
+  getAnswersToFile,
 }: ICreator ): JSX.Element => (
   <div className={ classes.creator }>
     <div className={ classes.leftSpace }>
@@ -58,12 +64,17 @@ const Creator = ({
               text={ link }
               content={ (
                 <p className={ classes.copyText }>
-                  { link }
+                  {link}
                 </p>
               ) }
             />
           </div>
         ) }
+      />
+      <Button
+        type="button"
+        value="Pobierz odpowiedzi"
+        onClick={ getAnswersToFile }
       />
       <FileContainer />
     </div>

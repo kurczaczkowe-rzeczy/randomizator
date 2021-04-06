@@ -8,6 +8,7 @@ import {
 import _isNil from 'lodash/isNil';
 import _forEach from 'lodash/forEach';
 import _union from 'lodash/union';
+import { jsonToCSV } from 'react-papaparse';
 
 import { clearDraw, setDrawResult } from 'store/actions/drawAction';
 import { setAnswers } from 'store/actions/answersAction';
@@ -18,7 +19,9 @@ import { RootState } from 'store/reducers/rootReducer';
 import { FORM_ID_KEY, HOME_PAGE } from 'constans';
 
 import CreatorView from 'page/creator/CreatorPage.view';
-import { formsSubscription } from 'page/creator/CreatorPage.utils';
+import {
+  fomCollection, formsSubscription, getNewFileName,
+} from 'page/creator/CreatorPage.utils';
 
 interface IForm{
   id: string;
@@ -41,6 +44,7 @@ const Creator = (): JSX.Element => {
 
   const auth = useSelector(( state: RootState ) => state?.firebase.auth, shallowEqual );
   const answersCounter = useSelector(( state: RootState ) => state?.ans.counter );
+  const answers = useSelector(( state: RootState ) => state?.ans.answers );
   const dispatch = useDispatch();
 
   const updateFormID = ( forms: IForm[]): void => {
@@ -120,6 +124,28 @@ const Creator = (): JSX.Element => {
     dispatch( signOut());
   };
 
+  const getAnswersToFile = async () => {
+    if ( formID ) {
+      const savedForm = await fomCollection( auth.uid, formID );
+      const answersOfForm = savedForm?.answers;
+      const formName = savedForm ? savedForm.name.replaceAll( ' ', '_' ) : getNewFileName();
+
+      answersOfForm[ 0 ] = {
+        emptyColumn: '',
+        ...answersOfForm[ 0 ],
+      };
+
+      const csvContent = `data:text/csv;charset=utf-8,${ jsonToCSV( answersOfForm ) }`;
+      const encodedUri = encodeURI( csvContent );
+      const link = document.createElement( 'a' );
+
+      link.setAttribute( 'href', encodedUri );
+      link.setAttribute( 'download', `${ formName }.csv` );
+
+      link.click();
+    }
+  };
+
   return (
     <CreatorView
       answersCounter={ answersCounter }
@@ -127,6 +153,7 @@ const Creator = (): JSX.Element => {
       onRandomClick={ onRandomClick }
       logout={ onLogout }
       onFormIdChange={ ( formID ): void => onFormIdChange( formID ) }
+      getAnswersToFile={ getAnswersToFile }
     />
   );
 };
