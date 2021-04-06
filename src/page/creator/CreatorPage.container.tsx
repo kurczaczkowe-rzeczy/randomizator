@@ -44,7 +44,6 @@ const Creator = (): JSX.Element => {
 
   const auth = useSelector(( state: RootState ) => state?.firebase.auth, shallowEqual );
   const answersCounter = useSelector(( state: RootState ) => state?.ans.counter );
-  const answers = useSelector(( state: RootState ) => state?.ans.answers );
   const dispatch = useDispatch();
 
   const updateFormID = ( forms: IForm[]): void => {
