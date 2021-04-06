@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import Label from './components/label/Label.view';
 import TextInput from './components/textInput/TextInput.view';
-import Button from './components/button/Button.view';
+import Button from 'components/button/Button.view';
 import classes from './form.module.scss';
 
 // ToDo create component that wraps label and textInput

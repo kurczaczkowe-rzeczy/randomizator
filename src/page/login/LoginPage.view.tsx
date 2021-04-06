@@ -1,7 +1,7 @@
 import { SyntheticEvent } from 'react';
 
 import Card from 'components/card/Card.view';
-import Button from 'components/form/components/button/Button.view';
+import Button from 'components/button/Button.view';
 import TextInput from 'components/form/components/textInput/TextInput.view';
 import classes from 'page/login/loginPage.module.scss';
 
