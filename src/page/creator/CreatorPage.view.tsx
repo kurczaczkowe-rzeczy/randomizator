@@ -72,7 +72,6 @@ const Creator = ({
         ) }
       />
       <Button
-        type="button"
         value="Pobierz odpowiedzi"
         onClick={ getAnswersToFile }
       />
