@@ -20,7 +20,9 @@ import { FORM_ID_KEY, HOME_PAGE } from 'constans';
 
 import CreatorView from 'page/creator/CreatorPage.view';
 import {
-  fomCollection, formsSubscription, getNewFileName,
+  fomCollection,
+  formsSubscription,
+  getNewFileName,
 } from 'page/creator/CreatorPage.utils';
 
 interface IForm{
