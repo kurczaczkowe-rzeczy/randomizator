@@ -1,27 +1,36 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import Label from './components/label/Label.view';
 import TextInput from './components/textInput/TextInput.view';
 import Button from './components/button/Button.view';
+
 import classes from './form.module.scss';
+import { IForm } from './Form.types';
 
 // ToDo create component that wraps label and textInput
-const Form = ({
+/**
+ * Components represents a document section containing interactive controls for submitting information
+ */
+export const Form = ({
   preview,
   additionalFunction,
   onSubmit,
-}) => (
-  <form className={ classNames( classes.form, { [ classes.disabled ]: preview }) } onSubmit={ onSubmit }>
+}: IForm ): JSX.Element => (
+  <form
+    className={ classNames( classes.form, { [ classes.disabled ]: preview }) }
+    onSubmit={ ( event ) => {
+      event.preventDefault();
+      onSubmit( event );
+    } }
+  >
     {/* ToDo use constants instead of hardcoded strings */}
-    <div className={ classes[ 'align-bottom' ] }>
-      <Label required content="Imie męskie" />
-      <TextInput required name="name_male" />
+    <div className={ classes.alignBottom }>
+      <Label content="Imie męskie" />
+      <TextInput name="name_male" />
     </div>
-    <div className={ classes[ 'align-bottom' ] }>
-      <Label required content="Imie damskie" />
-      <TextInput required name="name_female" />
+    <div className={ classes.alignBottom }>
+      <Label content="Imie damskie" />
+      <TextInput name="name_female" />
     </div>
     <TextInput
       required
@@ -35,15 +44,4 @@ const Form = ({
   </form>
 );
 
-Form.propTypes = {
-  additionalFunction: PropTypes.func,
-  preview: PropTypes.bool,
-  onSubmit: PropTypes.func,
-};
-
-Form.defaultProps = {
-  additionalFunction: () => {},
-  onSubmit: () => {},
-  preview: false,
-};
 export default Form;
