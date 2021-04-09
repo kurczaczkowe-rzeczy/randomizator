@@ -40,8 +40,10 @@ export const HIDE_LOADER = 'HIDE_LOADER';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const CLEAR_GLOBAL = 'CLEAR_GLOBAL';
-export type GlobalActionsTypes = typeof SHOW_LOADER
-  | typeof HIDE_LOADER
+export type GlobalActionsTypes =
   | typeof SHOW_MODAL
   | typeof HIDE_MODAL
   | typeof CLEAR_GLOBAL;
+export type GlobalActionsTypesWithPayload =
+  | typeof SHOW_LOADER
+  | typeof HIDE_LOADER;

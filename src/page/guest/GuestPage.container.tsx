@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
   useCallback,
   useEffect,
@@ -5,9 +6,11 @@ import {
 } from 'react';
 import { Redirect, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import _isEmpty from 'lodash/isEmpty';
 
 import useTimeout from 'hooks/useTimeout';
 import { db, firestore } from 'config/firebaseConfig';
+import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { getUserName } from 'store/actions/userActions';
 import { fetchFormName } from 'store/actions/formAction';
 import { RootState } from 'store/reducers/rootReducer';
@@ -17,9 +20,11 @@ import GuestPageView from './GuestPage.view';
 
 const GuestPage = (): JSX.Element => {
 
+  // @ts-ignore
   const userName = useSelector(( state: RootState ) => state?.usr.userName );
   const formName = useSelector(( state: RootState ) => state?.form.name );
   const errorFormName = useSelector(( state: RootState ) => state?.form.errors );
+  // @ts-ignore
   const errorUserName = useSelector(( state: RootState ) => state?.usr.errors );
   const dispatch = useDispatch();
 
@@ -27,6 +32,18 @@ const GuestPage = (): JSX.Element => {
   const { creatorId, formId } = useParams<{[key: string]: string }>();
   const [ isHighlighted, setIsHighlighted ] = useState( false );
   const { runTimeout, stopTimeout } = useTimeout( DELAY_FORM_NAME_HIGHLIGHT );
+
+  useEffect(() => {
+    if ( _isEmpty( userName ) || _isEmpty( formName )) {
+      dispatch( showLoader( 'GUEST_PAGE' ));
+    } else {
+      dispatch( hideLoader( 'GUEST_PAGE' ));
+    }
+  }, [
+    dispatch,
+    userName,
+    formName,
+  ]);
 
   const highlightFormName = useCallback(( event ) => {
     const { target: { value }} = event;
@@ -63,7 +80,7 @@ const GuestPage = (): JSX.Element => {
   const displayPage = (
     <GuestPageView
       creatorName={ userName }
-      formName={ formName }
+      formName={ formName as string }
       isHighlighted={ isHighlighted }
       highlightFormName={ highlightFormName }
       onSubmit={ ( nameMale, nameFemale ) => onSubmit( nameMale, nameFemale ) }

@@ -5,24 +5,21 @@ import {
   SET_FORM_NAME,
   CLEAR_FORM,
   CLEAR_FORMS,
-  ADD_FORM,
+  ADD_FORM, SHOW_LOADER, GlobalActionsTypesWithPayload,
 } from 'store/actions';
 
 export interface IState { readonly errors: string | null }
 
 export interface IErrorMessage { errorMessage: string }
 
-export interface IAction<Type> {
-  type: Type;
-}
-export interface IActionWithPayload<Type, Payload> extends IAction<Type>{
-  payload: Payload;
-}
+export interface IAction<Type> { type: Type }
+export interface IActionWithPayload<Type, Payload> extends IAction<Type>{ payload: Payload }
 
 // STATES
 export interface IGlobalState{
   readonly isLoading: boolean;
   readonly isModalOpen: boolean;
+  readonly loadingsQueue: string[];
 }
 export interface IForm {
   readonly id: string;
@@ -36,7 +33,9 @@ export type FormState = IForm & IState;
 
 // ACTIONS
 export type LogoutAction = IAction<LogoutActionsTypes>;
-export type GlobalAction = IAction<GlobalActionsTypes>;
+export type GlobalAction =
+  | IAction<GlobalActionsTypes>
+  | IActionWithPayload<GlobalActionsTypesWithPayload, { callFrom: string }>;
 export type FormsAction = IAction<typeof CLEAR_FORMS> | IActionWithPayload<typeof ADD_FORM, IForm>;
 export type FormAction =
   | IAction<typeof CLEAR_FORM>

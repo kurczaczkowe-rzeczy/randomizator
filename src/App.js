@@ -1,7 +1,4 @@
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useRef } from 'react';
 import {
   Switch,
   Route,
@@ -26,39 +23,35 @@ const App = () => {
   const dispatch = useDispatch();
   const auth = useSelector(( state ) => state?.firebase.auth );
   const isLoading = useSelector(( state ) => state?.global.isLoading );
-  const isLogin = useSelector(( state ) => state?.auth.isLogin );
-  const [ isAuthenticated, setAuthenticated ] = useState( false );
-
-  useEffect(() => {
-    if ( auth.uid !== undefined ) {
-      setAuthenticated( true );
-    } else {
-      setAuthenticated( false );
-    }
-  }, [ auth.uid, isLogin ]);
+  const bodyRef = useRef( document.body );
 
   useEffect(() => {
     if ( !auth.isLoaded ) {
-      dispatch( showLoader());
+      dispatch( showLoader( 'APP' ));
     } else {
-      dispatch( hideLoader());
+      dispatch( hideLoader( 'APP' ));
     }
-  }, [
-    auth.isLoaded,
-    hideLoader,
-    showLoader,
-  ]);
+  }, [ auth.isLoaded, dispatch ]);
 
-  return isLoading
-    ? ( <LoadingScreen /> )
-    : (
+  useEffect(() => {
+    if ( isLoading ) {
+      bodyRef.current.style = 'overflow: hidden';
+    } else {
+      bodyRef.current.removeAttribute( 'style' );
+    }
+  }, [ isLoading ]);
+
+  return (
+    <>
+      { isLoading && <LoadingScreen /> }
       <Switch>
         <Route exact path={ `${ APP_NAME }/not_found` } component={ ErrorPage } />
         <Route exact path={ `${ APP_NAME }/:creatorId/:formId` } component={ GuestPage } />
-        { ( isAuthenticated && isLogin ) ? authenticatedRoutes : unauthenticatedRoutes }
+        { ( auth.uid !== undefined ) ? authenticatedRoutes : unauthenticatedRoutes }
         <Redirect from="/*" to={ `${ APP_NAME }/not_found` } />
       </Switch>
-    );
+    </>
+  );
 };
 
 export default App;

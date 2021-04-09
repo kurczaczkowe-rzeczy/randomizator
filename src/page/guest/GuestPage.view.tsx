@@ -1,17 +1,17 @@
 import classNames from 'classnames';
 
-import Card from 'components/card/Card.view';
+import Card from 'components/card';
 import CopyText from 'components/copyText';
-import CreatorDescription from 'components/creatorDescription/CreatorDescription.view';
+import CreatorDescription from 'components/creatorDescription';
 import Form from 'components/form';
-import FormName from 'components/guestFormDescription/FormName.view';
-import TextBox from 'components/textBox/TextBox.view';
+import FormName from 'components/guestFormDescription';
+import TextBox from 'components/textBox';
 
-import { IGuest } from 'page/guest/GuestPage.types';
+import { IGuest } from './GuestPage.types';
 
 import classes from './guestPage.module.scss';
 
-const GuestPageView = ({
+export const GuestPageView = ({
   creatorName,
   formName = '',
   onSubmit,

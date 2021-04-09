@@ -7,12 +7,14 @@ import {
 import _isNil from 'lodash/isNil';
 import _forEach from 'lodash/forEach';
 import _union from 'lodash/union';
+import _isNull from 'lodash/isNull';
 
 import { clearDraw, setDrawResult } from 'store/actions/drawAction';
 import { setAnswers } from 'store/actions/answersAction';
 import { setFormName } from 'store/actions/formAction';
 import { signOut } from 'store/actions/authAction';
 import { addForm } from 'store/actions/formsActions';
+import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { RootState } from 'store/reducers/rootReducer';
 import { FORM_ID_KEY, HOME_PAGE } from 'constans';
 
@@ -115,6 +117,14 @@ const Creator = (): JSX.Element => {
   const onLogout = (): void => {
     dispatch( signOut());
   };
+
+  useEffect(() => {
+    if ( _isNull( answersCounter )) {
+      dispatch( showLoader( 'CREATOR_PAGE' ));
+    } else {
+      dispatch( hideLoader( 'CREATOR_PAGE' ));
+    }
+  }, [ answersCounter, dispatch ]);
 
   return (
     <CreatorView
