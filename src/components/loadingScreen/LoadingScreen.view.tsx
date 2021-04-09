@@ -1,14 +1,18 @@
 import Loading from 'components/loading';
 
-import classes from './loadingScreen.module.scss';
+import useStyles from './LoadingScreen.styles';
 
 /**
- * Displays a large loader across the screen
+ * Displays a large loader over the whole page.
  */
-export const LoadingScreen = (): JSX.Element => (
-  <div className={ classes.screen }>
-    <Loading classes={{ root: classes.loadingScreen }} />
-  </div>
-);
+export const LoadingScreen = (): JSX.Element => {
+  const classes = useStyles();
+
+  return (
+    <div className={ classes.screen }>
+      <Loading classes={{ root: classes.loadingScreen }} />
+    </div>
+  );
+};
 
 export default LoadingScreen;
