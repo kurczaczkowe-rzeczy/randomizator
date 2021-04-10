@@ -14,7 +14,7 @@ const Form = ({
   additionalFunction = ():void => {},
 }: FormContainer ): JSX.Element => {
 
-  const nameOfForm = useSelector(( state: RootState ) => state.form.formName );
+  const nameOfForm = useSelector(( state: RootState ) => state.form.name );
 
   const someFieldFill = ( ...args: any[]): boolean => _some( args, ( field ) => !_isEmpty( field ));
 

@@ -1,33 +1,33 @@
 import _isEmpty from 'lodash/isEmpty';
 import classNames from 'classnames';
 
-import { ICard } from 'components/card/Card.types';
-
+import { ICard } from './Card.types';
 import useStyles from './Card.styles';
+import { getTitleContent } from './Cars.utils';
 
 /** Box that warps other components. */
 const Card = ({
   title,
   cardClass = '',
+  centerBody = true,
   body,
   id,
 }: ICard ): JSX.Element => {
   const styles = useStyles();
-  let titleId = undefined;
-  let titleContent = title;
-
-  if ( typeof title !== 'string' && title ) {
-    titleId = title.id;
-    titleContent = title.content;
-  }
 
   return (
     <div
-      className={ classNames( styles.card, { [ cardClass ]: !_isEmpty( cardClass ) }) }
+      className={ classNames(
+        styles.card,
+        { [ cardClass ]: !_isEmpty( cardClass ) },
+        { [ styles.center ]: centerBody },
+      ) }
       id={ id }
     >
-      { ( title && !_isEmpty( title )) && <h3 id={ titleId }>{ titleContent }</h3> }
-      { body }
+      {getTitleContent( title )}
+      <div>
+        {body}
+      </div>
     </div>
   );
 };
