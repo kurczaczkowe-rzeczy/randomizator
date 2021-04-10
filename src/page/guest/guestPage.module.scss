@@ -1,16 +1,13 @@
 .guest{
+  display: grid;
   padding-top: 48px;
-  display: flex;
-  justify-content: space-around;
+  padding-left: 78px;
+  padding-right: 78px;
+  grid-template-columns: 30% 60%;
+  column-gap: 10%;
 
-  .description{
-    min-width: 30%;
-    div:first-child {
-      margin-bottom: 25px;
-    }
-  }
-  .form{
-    min-width: 50%;
+  .descriptor > div:first-child{
+    margin-bottom: 26px;
   }
 }
 
