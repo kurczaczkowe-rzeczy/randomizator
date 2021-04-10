@@ -1,16 +1,15 @@
 import _noop from 'lodash/noop';
 
-import Card from 'components/card/Card.view';
+import Card from 'components/card';
 import FileContainer from 'components/fileContainer/FileContainer.container';
 import FormList from 'components/formList';
 import Form from 'components/form';
 import Draw from 'components/draw';
 import AnswersCounter from 'components/answersCounter';
-import IconButton from 'components/iconButton/IconButton.view';
+import IconButton from 'components/iconButton';
 import CopyText from 'components/copyText';
 
-import { ICreator } from 'page/creator/CreatorPage.types';
-
+import { ICreator } from './CreatorPage.types';
 import classes from './creatorPage.module.scss';
 
 /**
