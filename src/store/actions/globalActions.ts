@@ -9,13 +9,11 @@ import {
 } from 'store/actions';
 import { GlobalAction, IGlobalState } from 'store/types';
 
-export const showLoader = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {
-  dispatch({ type: SHOW_LOADER });
-};
+export const showLoader = ( callFrom: string ): ThunkAction<void, IGlobalState, unknown, GlobalAction> =>
+  ( dispatch ): void => { dispatch({ type: SHOW_LOADER, payload: { callFrom }}); };
 
-export const hideLoader = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {
-  dispatch({ type: HIDE_LOADER });
-};
+export const hideLoader = ( callFrom: string ): ThunkAction<void, IGlobalState, unknown, GlobalAction> =>
+  ( dispatch ): void => { dispatch({ type: HIDE_LOADER, payload: { callFrom }}); };
 
 export const showModal = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {
   dispatch({ type: SHOW_MODAL });

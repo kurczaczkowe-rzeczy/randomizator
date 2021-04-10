@@ -1,38 +1,16 @@
 import _noop from 'lodash/noop';
 
-import Card from 'components/card/Card.view';
+import Card from 'components/card';
 import FileContainer from 'components/fileContainer/FileContainer.container';
 import FormList from 'components/formList';
 import Form from 'components/form';
 import Draw from 'components/draw';
 import AnswersCounter from 'components/answersCounter';
-import IconButton from 'components/iconButton/IconButton.view';
+import IconButton from 'components/iconButton';
 import CopyText from 'components/copyText';
 
+import { ICreator } from './CreatorPage.types';
 import classes from './creatorPage.module.scss';
-
-export interface ICreator{
-  /**
-   * Number of form answers
-   */
-  answersCounter: number;
-  /**
-   * Link to current form
-   */
-  link: string;
-  /**
-   * Method for sing out users
-   */
-  logout: () => void;
-  /**
-   * Method for change current displays form
-   */
-  onFormIdChange?: ( formID: string ) => void;
-  /**
-   * Method for draw answers
-   */
-  onRandomClick: () => void;
-}
 
 /**
  * Page displaying panel for authenticated users

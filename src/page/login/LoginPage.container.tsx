@@ -2,7 +2,6 @@ import { SyntheticEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { signIn } from 'store/actions/authAction';
-import { showLoader } from 'store/actions/globalActions';
 import { RootState } from 'store/reducers/rootReducer';
 
 import LoginPageView from 'page/login/LoginPage.view';
@@ -23,7 +22,6 @@ const Login = (): JSX.Element => {
     const email = target.email.value;
     const password = target.password.value;
 
-    dispatch( showLoader());
     dispatch( signIn({ email, password }));
   };
 
