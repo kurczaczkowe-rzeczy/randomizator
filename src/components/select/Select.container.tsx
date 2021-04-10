@@ -12,7 +12,7 @@ const Select = ({
 }: ISelectContainer ): JSX.Element => {
   const [ valueForm, setValueForm ] = useState( '' );
 
-  const defaultValue = useSelector(( state: RootState ) => state?.form.docID );
+  const defaultValue = useSelector(( state: RootState ) => state?.form.id as string );
   const options = useSelector(( state: RootState ) => state?.forms.forms );
 
   const onMenuItemClick = ( option: IOption ): void => {

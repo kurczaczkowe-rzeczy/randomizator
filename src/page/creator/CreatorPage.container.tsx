@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
 import {
   useSelector,
   shallowEqual,
@@ -8,34 +7,26 @@ import {
 import _isNil from 'lodash/isNil';
 import _forEach from 'lodash/forEach';
 import _union from 'lodash/union';
+import _isNull from 'lodash/isNull';
 
 import { clearDraw, setDrawResult } from 'store/actions/drawAction';
 import { setAnswers } from 'store/actions/answersAction';
 import { setFormName } from 'store/actions/formAction';
 import { signOut } from 'store/actions/authAction';
 import { addForm } from 'store/actions/formsActions';
+import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { RootState } from 'store/reducers/rootReducer';
 import { FORM_ID_KEY, HOME_PAGE } from 'constans';
 
 import CreatorView from 'page/creator/CreatorPage.view';
 import { formsSubscription } from 'page/creator/CreatorPage.utils';
-
-interface IForm{
-  id: string;
-  name: string;
-}
-
-interface IAnswers{
-  [key: string]: string;
-}
-
-interface IAnswersStore{
-  [key: string]: string[];
-}
+import {
+  IForm,
+  IAnswers,
+  IAnswersStore,
+} from 'page/creator/CreatorPage.types';
 
 const Creator = (): JSX.Element => {
-  const history = useLocation();
-  const pathArray = history.pathname.split( '/' );
   const [ formID, setFormID ] = useState( localStorage.getItem( FORM_ID_KEY )); // ToDo create localstorage hook
   const [ link, setLink ] = useState( '' );
 
@@ -53,38 +44,45 @@ const Creator = (): JSX.Element => {
   };
 
   useEffect(() => {
-    const subscription = formsSubscription(
-      pathArray[ 2 ], // ToDo maybe call array elements
-      ( doc ) => { // ToDo maybe puts this function into const
-        const form = {
-          name: doc.data()?.name,
-          id: doc.id,
-        };
+    if ( auth ) {
+      const subscription = formsSubscription(
+        auth.uid,
+        ( doc ) => { // ToDo maybe puts this function into const
+          const form = {
+            name: doc.data()?.name,
+            id: doc.id,
+          };
 
-        dispatch( addForm( form )); // ToDo we can add all forms at once?
-        if ( _isNil( formID )) {
-          localStorage.setItem( FORM_ID_KEY, form.id );
-          setFormID( form.id );
-        }
-      },
-      updateFormID,
-    );
+          dispatch( addForm( form )); // ToDo we can add all forms at once?
+          if ( _isNil( formID )) {
+            localStorage.setItem( FORM_ID_KEY, form.id );
+            setFormID( form.id );
+          }
+        },
+        updateFormID,
+      );
 
-    return (): void => subscription();
+      return (): void => subscription();
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if ( formID !== null ) {
-      const subscription = formsSubscription( pathArray[ 2 ], ( doc ) => {
+    if ( auth && formID !== null ) {
+      const subscription = formsSubscription( auth.uid, ( doc ) => {
         const ans = doc.data()?.answers;
 
         if ( formID === doc.id ) {
-          dispatch( setFormName( doc.data()?.name, doc.id ));
+          const form = {
+            id: doc.id,
+            name: doc.data()?.name,
+          };
+
+          dispatch( setFormName( form ));
           getData( ans );
         }
       });
 
-      setLink( `${ HOME_PAGE }/${ auth?.uid }/${ formID }` );
+      setLink( `${ HOME_PAGE }/${ auth.uid }/${ formID }` );
 
       return (): void => subscription();
     }
@@ -119,6 +117,14 @@ const Creator = (): JSX.Element => {
   const onLogout = (): void => {
     dispatch( signOut());
   };
+
+  useEffect(() => {
+    if ( _isNull( answersCounter )) {
+      dispatch( showLoader( 'CREATOR_PAGE' ));
+    } else {
+      dispatch( hideLoader( 'CREATOR_PAGE' ));
+    }
+  }, [ answersCounter, dispatch ]);
 
   return (
     <CreatorView
