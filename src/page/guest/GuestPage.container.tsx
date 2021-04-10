@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
   useCallback,
   useEffect,
@@ -20,11 +19,9 @@ import GuestPageView from './GuestPage.view';
 
 const GuestPage = (): JSX.Element => {
 
-  // @ts-ignore
   const userName = useSelector(( state: RootState ) => state?.usr.userName );
   const formName = useSelector(( state: RootState ) => state?.form.name );
   const errorFormName = useSelector(( state: RootState ) => state?.form.errors );
-  // @ts-ignore
   const errorUserName = useSelector(( state: RootState ) => state?.usr.errors );
   const dispatch = useDispatch();
 
