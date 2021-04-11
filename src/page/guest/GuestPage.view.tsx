@@ -20,14 +20,16 @@ export const GuestPageView = ({
 }: IGuest ): JSX.Element => (
   /* ToDo use constants instead of hardcoded strings */
   <div className={ classes.guest }>
-    <div className={ classes.description }>
+    <div className={ classes.descriptor }>
       <Card
         cardClass={ classes.baseLine }
+        centerBody={ false }
         body={ <CreatorDescription content={ creatorName } /> }
       />
       <Card
         id="formName"
         cardClass={ classNames( classes.baseLine, { [ classes.highlightCard ]: isHighlighted }) }
+        centerBody={ false }
         body={ (
           <FormName content={ (
             <CopyText
@@ -46,7 +48,15 @@ export const GuestPageView = ({
         ) }
       />
     </div>
-    <Card title="FORMULARZ" body={ <Form onSubmit={ onSubmit } additionalFunction={ highlightFormName } /> } />
+    <Card
+      title={ (
+        <>
+          <h3>FORMULARZ</h3>
+          <p>Aby wysłać formularz podaj dane przynajmniej w jedym polu. Dodatkowo napisz nazwę formularza.</p>
+        </>
+      ) }
+      body={ <Form onSubmit={ onSubmit } additionalFunction={ highlightFormName } /> }
+    />
   </div>
 );
 

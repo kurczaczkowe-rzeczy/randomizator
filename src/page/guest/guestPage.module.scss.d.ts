@@ -1,6 +1,5 @@
 export const baseLine: string;
-export const description: string;
-export const form: string;
+export const descriptor: string;
 export const guest: string;
 export const highLight: string;
 export const highLightAfter: string;
