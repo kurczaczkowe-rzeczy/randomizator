@@ -80,7 +80,7 @@ const GuestPage = (): JSX.Element => {
       formName={ formName as string }
       isHighlighted={ isHighlighted }
       highlightFormName={ highlightFormName }
-      onSubmit={ ( nameMale, nameFemale ) => onSubmit( nameMale, nameFemale ) }
+      onSubmit={ ( nameMale, nameFemale ): void => onSubmit( nameMale, nameFemale ) }
     />
   );
 
