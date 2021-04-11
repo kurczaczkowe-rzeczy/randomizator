@@ -55,6 +55,7 @@ const palette = {
     main: '#771e76',
     light: '#765076',
   },
+  secondary: { main: '#e28521' },
   backgroundLight: '#222',
   backgroundDark: '#1b1b1b',
   colorText: '#bdaeae',
@@ -112,6 +113,11 @@ export const theme = createMuiTheme({
           margin: 0,
           position: 'relative',
           minHeight: '100vh',
+          '& div#root': {
+            paddingTop: '48px',
+            paddingLeft: '78px',
+            paddingRight: '78px',
+          },
         },
         button: {
           transition: 'all 0.6s linear',

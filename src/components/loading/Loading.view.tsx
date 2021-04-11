@@ -26,7 +26,7 @@ export const Loading = ({ classes = { root: '' }}: ILoading ): JSX.Element => (
         y1="0"
         y2="1"
       >
-        <stop offset="0%" stopColor="#765076" />
+        <stop offset="0%" stopColor="#e28521" />
         <stop offset="65%" stopColor="#771e76" />
       </linearGradient>
     </defs>

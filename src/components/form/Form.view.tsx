@@ -18,7 +18,7 @@ export const Form = ({
 }: IForm ): JSX.Element => (
   <form
     className={ classNames( classes.form, { [ classes.disabled ]: preview }) }
-    onSubmit={ ( event ) => {
+    onSubmit={ ( event ): void => {
       event.preventDefault();
       onSubmit( event );
     } }

@@ -1,11 +1,10 @@
 .center{
-  height: 100vh;
+  height: calc(100vh - 48px);
   display: flex;
   justify-content: center;
   align-items: center;
 
   form{
-    width: 60%;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -17,13 +16,16 @@
     }
   }
 
-  .error{
-    background-color: #ff3c3c;
+  .card{
     width: 60%;
+  }
+
+  .error{
+    background-color: #b02d2d;
     text-align: center;
     padding: 7px;
     box-sizing: border-box;
-    color: #991414;
-    box-shadow: 0 0 5px #ff3c3c;
+    color: #ffffff;
+    box-shadow: 0 0 5px #b02d2d;
   }
 }
