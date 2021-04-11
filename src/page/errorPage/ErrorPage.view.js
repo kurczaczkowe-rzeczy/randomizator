@@ -7,6 +7,8 @@ import uuid from 'react-uuid';
 
 import { ReactComponent as Unicorn } from 'assets/unicorn.svg';
 
+import Link from 'components/Link';
+
 import classes from './errorPage.module.scss';
 
 const ErrorPage = ({ formName, userName }) => {
@@ -25,8 +27,9 @@ const ErrorPage = ({ formName, userName }) => {
   return (
     <>
       <div className={ classes.center }>
-        <Unicorn />
+        <Unicorn width="200px" />
         <Card
+          cardClass={ classes.card }
           title="Nie znaleziono strony"
           body={ <ul>{ displayErrors }</ul> }
         />
@@ -34,11 +37,19 @@ const ErrorPage = ({ formName, userName }) => {
       <div className={ classes.bottom }>
         Icons made by
         {' '}
-        <a href="https://www.flaticon.local/authors/freepik" title="Freepik">Freepik</a>
+        <Link
+          href="https://www.flaticon.local/authors/freepik"
+          title="Freepik"
+          label="Freepik"
+        />
         {' '}
         from
         {' '}
-        <a href="https://www.flaticon.local/" title="Flaticon">www.flaticon.local</a>
+        <Link
+          href="https://www.flaticon.local/"
+          title="Flaticon"
+          label="www.flaticon.local"
+        />
       </div>
     </>
   );

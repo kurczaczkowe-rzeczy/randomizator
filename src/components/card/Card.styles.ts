@@ -16,4 +16,5 @@ export default makeStyles(({
     '& h3': { textAlign: 'center' },
   },
   center: { alignItems: 'center' },
+  bodyWrapper: { width: '100%' },
 }));

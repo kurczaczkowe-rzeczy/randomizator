@@ -1,20 +1,18 @@
-import React from 'react';
+import Link from 'components/Link';
 
 import { APP_VERSION } from 'constans';
 
 import classes from './footer.module.scss';
+
 // ToDo href to config
 const Footer = () => (
   <div className={ classes.footer }>
     Stworzono przez
     {' '}
-    <a
+    <Link
       href="https://github.com/kurczaczkowe-rzeczy"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Kurczaczkowe rzeczy
-    </a>
+      label="Kurczaczkowe rzeczy"
+    />
     { `. Wersja: ${ APP_VERSION } ` }
   </div>
 );
