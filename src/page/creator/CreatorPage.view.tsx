@@ -1,43 +1,17 @@
 import _noop from 'lodash/noop';
 
-import Card from 'components/card/Card.view';
+import Card from 'components/card';
 import FileContainer from 'components/fileContainer/FileContainer.container';
 import FormList from 'components/formList';
 import Form from 'components/form';
 import Draw from 'components/draw';
 import AnswersCounter from 'components/answersCounter';
-import IconButton from 'components/iconButton/IconButton.view';
+import IconButton from 'components/iconButton';
 import CopyText from 'components/copyText';
+import Button from 'components/Button';
 
+import { ICreator } from './CreatorPage.types';
 import classes from './creatorPage.module.scss';
-import Button from 'components/button/Button.view';
-
-export interface ICreator{
-  /**
-   * Number of form answers
-   */
-  answersCounter: number;
-  /**
-   * Method for convert answers to csv file
-   */
-  getAnswersToFile: () => void;
-  /**
-   * Link to current form
-   */
-  link: string;
-  /**
-   * Method for sing out users
-   */
-  logout: () => void;
-  /**
-   * Method for change current displays form
-   */
-  onFormIdChange?: ( formID: string ) => void;
-  /**
-   * Method for draw answers
-   */
-  onRandomClick: () => void;
-}
 
 /**
  * Page displaying panel for authenticated users
@@ -53,6 +27,7 @@ const Creator = ({
   <div className={ classes.creator }>
     <div className={ classes.leftSpace }>
       <Card
+        centerBody={ false }
         body={ (
           <div className={ classes.formNameWrapper }>
             <FormList
@@ -64,7 +39,7 @@ const Creator = ({
               text={ link }
               content={ (
                 <p className={ classes.copyText }>
-                  {link}
+                  { link }
                 </p>
               ) }
             />

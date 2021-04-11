@@ -1,3 +1,7 @@
+import _union from 'lodash/union';
+import _pull from 'lodash/pull';
+import _isEmpty from 'lodash/isEmpty';
+
 import {
   HIDE_LOADER,
   SHOW_LOADER,
@@ -7,21 +11,28 @@ import {
 } from 'store/actions';
 import { GlobalAction, IGlobalState } from 'store/types';
 
-const initialState: IGlobalState = { isLoading: false, isModalOpen: false };
-const initialAction: GlobalAction = { type: CLEAR_GLOBAL };
+const initialState: IGlobalState = {
+  isLoading: true,
+  isModalOpen: false,
+  loadingsQueue: [],
+};
 
-const reducer = ( state = initialState, action = initialAction ): IGlobalState => {
+const reducer = ( state = initialState, action: GlobalAction = { type: CLEAR_GLOBAL }): IGlobalState => {
   switch ( action.type ) {
     case SHOW_LOADER: {
       return {
         ...state,
+        loadingsQueue: _union( state.loadingsQueue, [ action.payload.callFrom ]),
         isLoading: true,
       };
     }
     case HIDE_LOADER: {
+      const newLoadingQueue = _pull( state.loadingsQueue, action.payload.callFrom );
+
       return {
         ...state,
-        isLoading: false,
+        loadingsQueue: newLoadingQueue,
+        isLoading: !_isEmpty( newLoadingQueue ),
       };
     }
     case SHOW_MODAL: {

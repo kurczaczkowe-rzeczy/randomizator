@@ -1,5 +1,5 @@
-import { IButton } from 'components/button/Button.types';
-import classes from 'components/button/button.module.scss';
+import { IButton } from './Button.types';
+import classes from './button.module.scss';
 
 /**
  * Clickable element that trigger some action

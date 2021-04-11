@@ -6,14 +6,15 @@ export default makeStyles(({
   card: {
     backgroundColor: palette.backgroundLight,
     borderRadius: 4,
-    minWidth: '50%',
+    width: '100%',
     padding: spacing( 2.5, 4.5 ),
     color: palette.colorText,
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
     boxShadow: shadow.card,
 
     '& h3': { textAlign: 'center' },
   },
+  center: { alignItems: 'center' },
+  bodyWrapper: { width: '100%' },
 }));

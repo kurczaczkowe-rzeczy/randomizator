@@ -1,33 +1,35 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import Card from 'components/card/Card.view';
+import Card from 'components/card';
 import CopyText from 'components/copyText';
-import CreatorDescription from 'components/creatorDescription/CreatorDescription.view';
+import CreatorDescription from 'components/creatorDescription';
 import Form from 'components/form';
-import FormName from 'components/guestFormDescription/FormName.view';
-import TextBox from 'components/textBox/TextBox.view';
+import FormName from 'components/guestFormDescription';
+import TextBox from 'components/textBox';
+
+import { IGuest } from './GuestPage.types';
 
 import classes from './guestPage.module.scss';
 
-const GuestPageView = ({
+export const GuestPageView = ({
   creatorName,
-  formName,
+  formName = '',
   onSubmit,
   isHighlighted,
   highlightFormName,
-}) => (
+}: IGuest ): JSX.Element => (
   /* ToDo use constants instead of hardcoded strings */
   <div className={ classes.guest }>
-    <div className={ classes.description }>
+    <div className={ classes.descriptor }>
       <Card
         cardClass={ classes.baseLine }
+        centerBody={ false }
         body={ <CreatorDescription content={ creatorName } /> }
       />
       <Card
         id="formName"
         cardClass={ classNames( classes.baseLine, { [ classes.highlightCard ]: isHighlighted }) }
+        centerBody={ false }
         body={ (
           <FormName content={ (
             <CopyText
@@ -46,22 +48,16 @@ const GuestPageView = ({
         ) }
       />
     </div>
-    <Card title="FORMULARZ" body={ <Form onSubmit={ onSubmit } additionalFunction={ highlightFormName } /> } />
+    <Card
+      title={ (
+        <>
+          <h3>FORMULARZ</h3>
+          <p>Aby wysłać formularz podaj dane przynajmniej w jedym polu. Dodatkowo napisz nazwę formularza.</p>
+        </>
+      ) }
+      body={ <Form onSubmit={ onSubmit } additionalFunction={ highlightFormName } /> }
+    />
   </div>
 );
-
-GuestPageView.propTypes = {
-  creatorName: PropTypes.string.isRequired,
-  formName: PropTypes.string.isRequired,
-  highlightFormName: PropTypes.func,
-  isHighlighted: PropTypes.bool,
-  onSubmit: PropTypes.func,
-};
-
-GuestPageView.defaultProps = {
-  isHighlighted: false,
-  highlightFormName: () => {},
-  onSubmit: () => {},
-};
 
 export default GuestPageView;

@@ -4,3 +4,6 @@ export const FORM_ID_KEY = 'FORM_ID';
 export { version as APP_VERSION } from '../package.json';
 export const HOME_PAGE = process.env.PUBLIC_URL;
 export const BACKDROP_TIMEOUT = 500;
+
+export const IS_DEVELOPMENT = process.env.REACT_APP_ENVIRONMENT === 'development';
+export const APP_NAME = IS_DEVELOPMENT ? '/randomizator' : '';
