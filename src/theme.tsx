@@ -112,6 +112,11 @@ export const theme = createMuiTheme({
           margin: 0,
           position: 'relative',
           minHeight: '100vh',
+          '& div#root': {
+            paddingTop: '48px',
+            paddingLeft: '78px',
+            paddingRight: '78px',
+          },
         },
         button: {
           transition: 'all 0.6s linear',
