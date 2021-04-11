@@ -25,7 +25,7 @@ const Card = ({
       id={ id }
     >
       {getTitleContent( title )}
-      <div>
+      <div className={ classNames( !centerBody && styles.bodyWrapper ) }>
         {body}
       </div>
     </div>
