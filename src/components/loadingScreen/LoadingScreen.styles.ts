@@ -1,19 +1,18 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 export default makeStyles(({ palette }) => ({
-  loadingScreen: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    fontSize: 60,
-  },
   screen: {
-    position: 'relative',
-    height: '100vh',
-    width: '100%',
+    position: 'absolute',
     backgroundColor: palette.backgroundDark,
     zIndex: 1000,
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+  loadingScreen: { fontSize: 60 },
 }));
 
