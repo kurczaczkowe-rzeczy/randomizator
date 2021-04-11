@@ -27,9 +27,7 @@ const ErrorPage = ({ formName, userName }) => {
   return (
     <>
       <div className={ classes.center }>
-        <Unicorn
-          width="200px"
-        />
+        <Unicorn width="200px" />
         <Card
           cardClass={ classes.card }
           title="Nie znaleziono strony"
