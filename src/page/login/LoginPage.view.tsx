@@ -11,7 +11,9 @@ import { ILogin } from './LoginPage.types';
 export const Login = ({ onLogin, authError = null }: ILogin ): JSX.Element => (
   <div className={ classes.center }>
     <Card
-      title="Zaloguj się" body={ (
+      cardClass={ classes.card }
+      title="Zaloguj się"
+      body={ (
         <>
           <form onSubmit={ onLogin } method="post">
             <TextInput
