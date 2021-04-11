@@ -1,5 +1,7 @@
 import _noop from 'lodash/noop';
 
+import { IS_DEVELOPMENT } from 'constans';
+
 import Card from 'components/card';
 import FileContainer from 'components/fileContainer/FileContainer.container';
 import FormList from 'components/formList';
@@ -46,10 +48,12 @@ const Creator = ({
           </div>
         ) }
       />
-      <Button
-        value="Pobierz odpowiedzi"
-        onClick={ getAnswersToFile }
-      />
+      { IS_DEVELOPMENT && (
+        <Button
+          value="Pobierz odpowiedzi"
+          onClick={ getAnswersToFile }
+        />
+      )}
       <FileContainer />
     </div>
     <div className={ classes.rightSpace }>
