@@ -12,6 +12,7 @@ export default makeStyles(({ palette }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    height: '100vh',
   },
   loadingScreen: { fontSize: 60 },
 }));

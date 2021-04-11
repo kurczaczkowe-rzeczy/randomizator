@@ -19,13 +19,13 @@ import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { RootState } from 'store/reducers/rootReducer';
 import { FORM_ID_KEY, HOME_PAGE } from 'constans';
 
-import CreatorView from 'page/creator/CreatorPage.view';
-import { formsSubscription } from 'page/creator/CreatorPage.utils';
+import CreatorView from './CreatorPage.view';
+import { formsSubscription } from './CreatorPage.utils';
 import {
   IForm,
   IAnswers,
   IAnswersStore,
-} from 'page/creator/CreatorPage.types';
+} from './CreatorPage.types';
 
 const Creator = (): JSX.Element => {
   const [ formID, setFormID ] = useLocalStorage<string>( FORM_ID_KEY );

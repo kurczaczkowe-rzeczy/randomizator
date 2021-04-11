@@ -81,8 +81,8 @@ export const theme = createMuiTheme({
   },
   fonts: {
     size: {
-      label: '19px',
-      base: '17px',
+      label: 19,
+      base: 17,
     },
   },
   borders: {

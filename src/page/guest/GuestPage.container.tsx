@@ -13,7 +13,7 @@ import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { getUserName } from 'store/actions/userActions';
 import { fetchFormName } from 'store/actions/formAction';
 import { RootState } from 'store/reducers/rootReducer';
-import { APP_NAME, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
+import { APP_SUFFIX, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
 
 import GuestPageView from './GuestPage.view';
 
@@ -84,7 +84,7 @@ const GuestPage = (): JSX.Element => {
     />
   );
 
-  const redirect = ( <Redirect from="/*" to={ `${ APP_NAME }/not_found` } /> );
+  const redirect = ( <Redirect from="/*" to={ `${ APP_SUFFIX }/not_found` } /> );
 
   return ( errorFormName || errorUserName ) ? redirect : displayPage;
 
