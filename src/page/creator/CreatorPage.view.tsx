@@ -25,6 +25,7 @@ const Creator = ({
   <div className={ classes.creator }>
     <div className={ classes.leftSpace }>
       <Card
+        centerBody={ false }
         body={ (
           <div className={ classes.formNameWrapper }>
             <FormList

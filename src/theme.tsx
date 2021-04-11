@@ -55,6 +55,7 @@ const palette = {
     main: '#771e76',
     light: '#765076',
   },
+  secondary: { main: '#e28521' },
   backgroundLight: '#222',
   backgroundDark: '#1b1b1b',
   colorText: '#bdaeae',
