@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { jsonToCSV } from 'react-papaparse';
 import {
   useSelector,
   shallowEqual,
@@ -18,13 +19,17 @@ import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { RootState } from 'store/reducers/rootReducer';
 import { FORM_ID_KEY, HOME_PAGE } from 'constans';
 
-import CreatorView from 'page/creator/CreatorPage.view';
-import { formsSubscription } from 'page/creator/CreatorPage.utils';
+import CreatorView from './CreatorPage.view';
 import {
   IForm,
   IAnswers,
   IAnswersStore,
-} from 'page/creator/CreatorPage.types';
+} from './CreatorPage.types';
+import {
+  fomCollection,
+  formsSubscription,
+  getNewFileName,
+} from './CreatorPage.utils';
 
 const Creator = (): JSX.Element => {
   const [ formID, setFormID ] = useState( localStorage.getItem( FORM_ID_KEY )); // ToDo create localstorage hook
@@ -126,6 +131,28 @@ const Creator = (): JSX.Element => {
     }
   }, [ answersCounter, dispatch ]);
 
+  const getAnswersToFile = async (): Promise<void> => {
+    if ( formID ) {
+      const savedForm = await fomCollection( auth.uid, formID );
+      const answersOfForm = savedForm?.answers;
+      const formName = savedForm ? savedForm.name.replaceAll( ' ', '_' ) : getNewFileName();
+
+      answersOfForm[ 0 ] = {
+        emptyColumn: '',
+        ...answersOfForm[ 0 ],
+      };
+
+      const csvContent = `data:text/csv;charset=utf-8,${ jsonToCSV( answersOfForm ) }`;
+      const encodedUri = encodeURI( csvContent );
+      const link = document.createElement( 'a' );
+
+      link.setAttribute( 'href', encodedUri );
+      link.setAttribute( 'download', `${ formName }.csv` );
+
+      link.click();
+    }
+  };
+
   return (
     <CreatorView
       answersCounter={ answersCounter }
@@ -133,6 +160,7 @@ const Creator = (): JSX.Element => {
       onRandomClick={ onRandomClick }
       logout={ onLogout }
       onFormIdChange={ ( formID ): void => onFormIdChange( formID ) }
+      getAnswersToFile={ getAnswersToFile }
     />
   );
 };

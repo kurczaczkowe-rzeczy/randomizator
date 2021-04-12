@@ -1,5 +1,5 @@
 import Card from 'components/card';
-import Button from 'components/form/components/button';
+import Button from 'components/Button';
 import TextInput from 'components/form/components/textInput';
 
 import classes from './loginPage.module.scss';
