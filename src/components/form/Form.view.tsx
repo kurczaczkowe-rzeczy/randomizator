@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import Label from './components/label/Label.view';
 import TextInput from './components/textInput/TextInput.view';
-import Button from './components/button/Button.view';
+import Button from 'components/Button';
 
 import classes from './form.module.scss';
 import { IForm } from './Form.types';

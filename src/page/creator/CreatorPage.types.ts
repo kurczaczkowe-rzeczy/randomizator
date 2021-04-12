@@ -17,6 +17,10 @@ export interface ICreator{
    */
   answersCounter: number;
   /**
+   * Method for convert answers to csv file
+   */
+  getAnswersToFile: () => void;
+  /**
    * Link to specific form
    */
   link: string;

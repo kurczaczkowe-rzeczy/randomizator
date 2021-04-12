@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { jsonToCSV } from 'react-papaparse';
 import {
   useSelector,
   shallowEqual,
@@ -20,12 +21,16 @@ import { RootState } from 'store/reducers/rootReducer';
 import { FORM_ID_KEY, HOME_PAGE } from 'constans';
 
 import CreatorView from './CreatorPage.view';
-import { formsSubscription } from './CreatorPage.utils';
 import {
   IForm,
   IAnswers,
   IAnswersStore,
 } from './CreatorPage.types';
+import {
+  fomCollection,
+  formsSubscription,
+  getNewFileName,
+} from './CreatorPage.utils';
 
 const Creator = (): JSX.Element => {
   const [ formID, setFormID ] = useLocalStorage<string>( FORM_ID_KEY );
@@ -49,7 +54,7 @@ const Creator = (): JSX.Element => {
         auth.uid,
         ( doc ) => { // ToDo maybe puts this function into const
           const form = {
-            name: doc.data().name ?? 'Brak nazwy',
+            name: doc.data()?.name ?? 'Brak nazwy',
             id: doc.id,
           };
 
@@ -124,6 +129,28 @@ const Creator = (): JSX.Element => {
     }
   }, [ answersCounter, dispatch ]);
 
+  const getAnswersToFile = async (): Promise<void> => {
+    if ( formID ) {
+      const savedForm = await fomCollection( auth.uid, formID );
+      const answersOfForm = savedForm?.answers;
+      const formName = savedForm ? savedForm.name.replaceAll( ' ', '_' ) : getNewFileName();
+
+      answersOfForm[ 0 ] = {
+        emptyColumn: '',
+        ...answersOfForm[ 0 ],
+      };
+
+      const csvContent = `data:text/csv;charset=utf-8,${ jsonToCSV( answersOfForm ) }`;
+      const encodedUri = encodeURI( csvContent );
+      const link = document.createElement( 'a' );
+
+      link.setAttribute( 'href', encodedUri );
+      link.setAttribute( 'download', `${ formName }.csv` );
+
+      link.click();
+    }
+  };
+
   return (
     <CreatorView
       answersCounter={ answersCounter }
@@ -131,6 +158,7 @@ const Creator = (): JSX.Element => {
       onRandomClick={ onRandomClick }
       logout={ onLogout }
       onFormIdChange={ ( formID ): void => onFormIdChange( formID ) }
+      getAnswersToFile={ getAnswersToFile }
     />
   );
 };

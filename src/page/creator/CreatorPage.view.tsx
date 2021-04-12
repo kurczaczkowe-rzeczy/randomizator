@@ -1,5 +1,7 @@
 import _noop from 'lodash/noop';
 
+import { IS_DEVELOPMENT } from 'constans';
+
 import Card from 'components/card';
 import FileContainer from 'components/fileContainer/FileContainer.container';
 import FormList from 'components/formList';
@@ -8,6 +10,7 @@ import Draw from 'components/draw';
 import AnswersCounter from 'components/answersCounter';
 import IconButton from 'components/iconButton';
 import CopyText from 'components/copyText';
+import Button from 'components/Button';
 
 import { ICreator } from './CreatorPage.types';
 import classes from './creatorPage.module.scss';
@@ -21,6 +24,7 @@ const Creator = ({
   onRandomClick,
   logout,
   onFormIdChange = _noop,
+  getAnswersToFile,
 }: ICreator ): JSX.Element => (
   <div className={ classes.creator }>
     <div className={ classes.leftSpace }>
@@ -44,6 +48,12 @@ const Creator = ({
           </div>
         ) }
       />
+      { IS_DEVELOPMENT && (
+        <Button
+          value="Pobierz odpowiedzi"
+          onClick={ getAnswersToFile }
+        />
+      )}
       <FileContainer />
     </div>
     <div className={ classes.rightSpace }>
