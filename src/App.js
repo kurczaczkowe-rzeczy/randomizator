@@ -76,20 +76,18 @@ const App = () => {
   }, [ isLoading ]);
 
   const body = (
-    <div className={ styles.modalBodyRoot }>
+    <div>
       <Typography classes={{ root: styles.modalParagraph }}>
-        A to Ci heca!!!
+        {messages.firstParagraph}
       </Typography>
       <Typography classes={{ root: styles.modalParagraph }}>
-        Randomizator spakował swoje rzeczy i teraz jest dostępny pod adresem
+        {messages.secondParagraphTop}
         {' '}
         <Link href={ messages.link } label={ messages.link } />
-        . Tam znajdziesz stabilną wersję aplikacji.
+        {messages.secondParagraphBottom}
       </Typography>
       <Typography classes={{ root: styles.modalParagraph }}>
-        Na obecnej stronie znajduje się wersja deweloperska. To oznacza, że znajdziesz tutaj najnowsze funkcjonalności.
-        Sprawdzamy je tutaj czy nie popsują stabilnej wersji dostępnej pod nowym adresem. Podczas użytkowania tej wersji
-        możesz napotkać problemy. Zachęcamy do korzystania z nowego adresu.
+        {messages.thirdParagraph}
       </Typography>
     </div>
   );

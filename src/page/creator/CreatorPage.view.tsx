@@ -1,6 +1,6 @@
 import _noop from 'lodash/noop';
 
-import { IS_DEVELOPMENT } from 'constans';
+import { IS_DEVELOPMENT_MODE } from 'constans';
 
 import Card from 'components/card';
 import FileContainer from 'components/fileContainer/FileContainer.container';
@@ -48,7 +48,7 @@ const Creator = ({
           </div>
         ) }
       />
-      { IS_DEVELOPMENT && (
+      { IS_DEVELOPMENT_MODE && (
         <Button
           value="Pobierz odpowiedzi"
           onClick={ getAnswersToFile }
