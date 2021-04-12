@@ -131,7 +131,7 @@ const Creator = (): JSX.Element => {
     }
   }, [ answersCounter, dispatch ]);
 
-  const getAnswersToFile = async () => {
+  const getAnswersToFile = async (): Promise<void> => {
     if ( formID ) {
       const savedForm = await fomCollection( auth.uid, formID );
       const answersOfForm = savedForm?.answers;
