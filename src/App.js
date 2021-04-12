@@ -103,7 +103,7 @@ const App = () => {
         { ( auth.uid !== undefined ) ? authenticatedRoutes : unauthenticatedRoutes }
         <Redirect from="/*" to={ `${ APP_SUFFIX }/not_found` } />
       </Switch>
-      <Modal body={ body } title={ messages.modalTitle } />
+      <Modal body={ body } title={ messages.modalTitle } classes={{ title: styles.modalTitle }} />
     </>
   );
 };

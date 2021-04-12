@@ -1,5 +1,8 @@
 import { CSSProperties } from 'react';
+
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+
+import fonts from 'assets/fonts';
 
 interface IGradients {[ key: string ]: CSSProperties['backgroundImage']}
 
@@ -67,6 +70,16 @@ const shadow = {
   focus: `0 0 10px ${ palette.primary.main }`,
 };
 
+const typography = {
+  fontFamily: 'Montserrat',
+  h1: { fontFamily: 'FiraSans' },
+  h2: { fontFamily: 'FiraSans' },
+  h3: { fontFamily: 'FiraSans' },
+  h4: { fontFamily: 'FiraSans' },
+  h5: { fontFamily: 'FiraSans' },
+  h6: { fontFamily: 'FiraSans' },
+};
+
 export const theme = createMuiTheme({
   themeName: 'randoTheme',
   palette,
@@ -90,9 +103,11 @@ export const theme = createMuiTheme({
     separator: `2px solid ${ palette.primary.main }`,
   },
   shadow,
+  typography,
   overrides: {
     MuiCssBaseline: {
       '@global': {
+        '@font-face': [ ...fonts ],
         '*': {
           scrollbarColor: `${ palette.primary.main } ${ palette.backgroundDark }`,
           scrollbarWidth: 'thin',
