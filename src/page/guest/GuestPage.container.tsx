@@ -18,7 +18,6 @@ import { APP_SUFFIX, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
 import GuestPageView from './GuestPage.view';
 
 const GuestPage = (): JSX.Element => {
-
   const userName = useSelector(( state: RootState ) => state?.usr.userName );
   const formName = useSelector(( state: RootState ) => state?.form.name );
   const errorFormName = useSelector(( state: RootState ) => state?.form.errors );

@@ -4,12 +4,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  ul {
-    list-style: none;
+
+  p {
+    margin: 8px 0;
     text-align: center;
-    li {
-      margin: 8px 0;
-    }
   }
 
   .card{

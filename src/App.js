@@ -26,7 +26,7 @@ import LoadingScreen from 'components/loadingScreen';
 import Link from 'components/Link';
 import Creator from 'page/creator';
 import GuestPage from 'page/guest';
-import ErrorPage from 'page/errorPage/ErrorPage.view';
+import ErrorPage from 'page/errorPage';
 import Login from 'page/login';
 
 import messages from './App.messages';
