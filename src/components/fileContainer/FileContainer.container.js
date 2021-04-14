@@ -23,7 +23,6 @@ const FileContainer = ({ formID }) => {
   const [ answers, setAnswers ] = useState([]);
 
   const sendFile = () => {
-    console.log( formID ); // FixMe please
     if ( !_isEmpty( answers )) {
       db.collection( pathArray[ 2 ])
         .doc( formID )
@@ -67,6 +66,6 @@ FileContainer.propTypes = { formID: PropTypes.string };
 
 FileContainer.defaultProps = { formID: '' };
 
-const mapStateToProps = ( state ) => ({ formID: state.form.docID });
+const mapStateToProps = ( state ) => ({ formID: state.form.id });
 
 export default connect( mapStateToProps )( FileContainer );
