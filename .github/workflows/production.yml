@@ -2,7 +2,7 @@ name: Deploy Production Page
 on:
   push:
     branches:
-      - master
+      - prod
 jobs:
   deploy:
     runs-on: ubuntu-latest
