@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import _isEmpty from 'lodash/isEmpty';
 import _map from 'lodash/map';
 
@@ -10,10 +8,9 @@ import { db, firestore } from 'config/firebaseConfig';
 import parseText from './FileContainer.utils';
 import FileContainerView from './FileContainer.view';
 
-const FileContainer = ({ formID }) => {
-  const history = useLocation();
-  const pathArray = history.pathname.split( '/' );
-
+const FileContainer = () => {
+  const auth = useSelector(( state ) => state?.firebase.auth );
+  const formID = useSelector(( state ) => state.form.id );
   const [ acceptedFile, setAcceptedFile ] = useState([]);
 
   const removeFile = () => {
@@ -24,7 +21,7 @@ const FileContainer = ({ formID }) => {
 
   const sendFile = () => {
     if ( !_isEmpty( answers )) {
-      db.collection( pathArray[ 2 ])
+      db.collection( auth.uid )
         .doc( formID )
         .update({ answers: firestore.FieldValue.arrayUnion( ...answers ) }) // ToDo move to hook
         .then(() => {
@@ -62,10 +59,4 @@ const FileContainer = ({ formID }) => {
   );
 };
 
-FileContainer.propTypes = { formID: PropTypes.string };
-
-FileContainer.defaultProps = { formID: '' };
-
-const mapStateToProps = ( state ) => ({ formID: state.form.id });
-
-export default connect( mapStateToProps )( FileContainer );
+export default FileContainer;
