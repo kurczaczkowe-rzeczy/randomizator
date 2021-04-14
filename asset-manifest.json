@@ -1,23 +1,29 @@
 {
   "files": {
-    "main.css": "/randomizator/static/css/main.b615a43f.chunk.css",
-    "main.js": "/randomizator/static/js/main.ef7bb459.chunk.js",
-    "main.js.map": "/randomizator/static/js/main.ef7bb459.chunk.js.map",
-    "runtime-main.js": "/randomizator/static/js/runtime-main.c8d2544f.js",
-    "runtime-main.js.map": "/randomizator/static/js/runtime-main.c8d2544f.js.map",
-    "static/js/2.66ca033f.chunk.js": "/randomizator/static/js/2.66ca033f.chunk.js",
-    "static/js/2.66ca033f.chunk.js.map": "/randomizator/static/js/2.66ca033f.chunk.js.map",
-    "index.html": "/randomizator/index.html",
-    "precache-manifest.5c2ea489598472d2977332e3e25d58a6.js": "/randomizator/precache-manifest.5c2ea489598472d2977332e3e25d58a6.js",
-    "service-worker.js": "/randomizator/service-worker.js",
-    "static/css/main.b615a43f.chunk.css.map": "/randomizator/static/css/main.b615a43f.chunk.css.map",
-    "static/js/2.66ca033f.chunk.js.LICENSE.txt": "/randomizator/static/js/2.66ca033f.chunk.js.LICENSE.txt",
-    "static/media/unicorn.fb72f883.svg": "/randomizator/static/media/unicorn.fb72f883.svg"
+    "main.css": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/css/main.2a3c29cf.chunk.css",
+    "main.js": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/main.2db357d1.chunk.js",
+    "main.js.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/main.2db357d1.chunk.js.map",
+    "runtime-main.js": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/runtime-main.45b52233.js",
+    "runtime-main.js.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/runtime-main.45b52233.js.map",
+    "static/js/2.7cb2d9a8.chunk.js": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.7cb2d9a8.chunk.js",
+    "static/js/2.7cb2d9a8.chunk.js.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.7cb2d9a8.chunk.js.map",
+    "index.html": "https://kurczaczkowe-rzeczy.github.io/randomizator/index.html",
+    "static/css/main.2a3c29cf.chunk.css.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/css/main.2a3c29cf.chunk.css.map",
+    "static/js/2.7cb2d9a8.chunk.js.LICENSE.txt": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.7cb2d9a8.chunk.js.LICENSE.txt",
+    "static/media/FiraSans-Bold.3919333f.ttf": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/FiraSans-Bold.3919333f.ttf",
+    "static/media/FiraSans-BoldItalic.b17b4285.ttf": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/FiraSans-BoldItalic.b17b4285.ttf",
+    "static/media/FiraSans-Italic.3b21f231.ttf": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/FiraSans-Italic.3b21f231.ttf",
+    "static/media/FiraSans-Regular.1c0bf072.ttf": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/FiraSans-Regular.1c0bf072.ttf",
+    "static/media/Montserrat-Bold.079ca05d.ttf": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/Montserrat-Bold.079ca05d.ttf",
+    "static/media/Montserrat-BoldItalic.a32ae5d9.ttf": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/Montserrat-BoldItalic.a32ae5d9.ttf",
+    "static/media/Montserrat-Italic.e7728c27.ttf": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/Montserrat-Italic.e7728c27.ttf",
+    "static/media/Montserrat-Regular.3cd78665.ttf": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/Montserrat-Regular.3cd78665.ttf",
+    "static/media/unicorn.1decd0ae.svg": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/unicorn.1decd0ae.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.c8d2544f.js",
-    "static/js/2.66ca033f.chunk.js",
-    "static/css/main.b615a43f.chunk.css",
-    "static/js/main.ef7bb459.chunk.js"
+    "static/js/runtime-main.45b52233.js",
+    "static/js/2.7cb2d9a8.chunk.js",
+    "static/css/main.2a3c29cf.chunk.css",
+    "static/js/main.2db357d1.chunk.js"
   ]
 }
