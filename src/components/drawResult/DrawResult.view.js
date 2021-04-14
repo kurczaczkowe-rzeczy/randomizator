@@ -12,7 +12,7 @@ const DrawResult = ({
   femaleName,
   errors,
 }) => (
-  <div>
+  <div className={ classes.smallWidthInCenter }>
     <div className={ classes.alignCenterRight }>
       <TextNode
         required
@@ -21,7 +21,7 @@ const DrawResult = ({
       />
       <TextNode
         required
-        value={ maleName }
+        value={ maleName || ' ' }
         classes={ classes.input }
         type="input-text"
       />

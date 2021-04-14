@@ -70,8 +70,14 @@ const Creator = ({
         body={ <Form preview /> }
       />
       <Card
+        cardClass={ classes.fullWidth }
         title="Losowanie"
-        body={ <Draw onRandomClick={ onRandomClick } /> }
+        body={ (
+          <Draw
+
+            onRandomClick={ onRandomClick }
+          />
+        ) }
       />
     </div>
   </div>
