@@ -4,23 +4,23 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  ul {
-    list-style: none;
+
+  p {
+    margin: 8px 0;
     text-align: center;
-    li {
-      margin: 8px 0;
-    }
+  }
+
+  .card{
+    width: 60%;
   }
 }
 
 .bottom{
   position: absolute;
-  width: 100%;
   bottom: 8px;
+  left: 0;
+  right: 0;
   font-size: 0.8em;
   text-align: center;
   color: #bdaeae;
-  a{
-    color: #771e76;
-  }
 }

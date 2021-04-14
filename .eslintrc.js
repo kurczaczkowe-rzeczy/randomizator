@@ -480,10 +480,10 @@ const rules = {
 
 const orderConfig = {
   memberTypes: [
-    'signature',
     'field',
     'method',
     'constructor',
+    'signature',
   ],
   order: 'alphabetically',
 };

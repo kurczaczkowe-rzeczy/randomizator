@@ -1,18 +1,31 @@
+import { ThunkAction } from 'redux-thunk';
+
 import {
   SHOW_LOADER,
   HIDE_LOADER,
   CLEAR_GLOBAL,
+  HIDE_MODAL,
+  SHOW_MODAL,
+  FORCE_HIDE_LOADER,
 } from 'store/actions';
-import { ThunkAction } from 'redux-thunk';
-import { GlobalAction } from '../types';
-import { IGlobalState } from '../reducers/globalReducer';
+import { GlobalAction, IGlobalState } from 'store/types';
 
-export const showLoader = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {
-  dispatch({ type: SHOW_LOADER });
+export const showLoader = ( callFrom: string ): ThunkAction<void, IGlobalState, unknown, GlobalAction> =>
+  ( dispatch ): void => { dispatch({ type: SHOW_LOADER, payload: { callFrom }}); };
+
+export const hideLoader = ( callFrom: string ): ThunkAction<void, IGlobalState, unknown, GlobalAction> =>
+  ( dispatch ): void => { dispatch({ type: HIDE_LOADER, payload: { callFrom }}); };
+
+export const forceHideLoader = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {
+  dispatch({ type: FORCE_HIDE_LOADER });
 };
 
-export const hideLoader = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {
-  dispatch({ type: HIDE_LOADER });
+export const showModal = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {
+  dispatch({ type: SHOW_MODAL });
+};
+
+export const hideModal = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {
+  dispatch({ type: HIDE_MODAL });
 };
 
 export const clearGlobal = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {

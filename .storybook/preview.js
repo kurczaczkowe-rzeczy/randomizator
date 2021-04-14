@@ -1,5 +1,27 @@
+import CssBaseline from '@material-ui/core/CssBaseline';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
 
-export const parameters = {
+import randoTheme from './randoTheme';
+import { theme } from 'theme';
+
+const decorators = [
+  (story) => (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      { story() }
+    </ThemeProvider>
+  ),
+];
+
+const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
-  docs: { source: { type: 'dynamic' }},
-}
+  docs: {
+    theme: randoTheme,
+    source: { type: 'dynamic' },
+  },
+};
+
+export {
+  parameters,
+  decorators,
+};

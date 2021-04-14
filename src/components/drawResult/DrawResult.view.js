@@ -6,7 +6,7 @@ import TextNode from 'components/textNode/TextNode.view';
 
 import classes from './drawResult.module.scss';
 
-// ToDo create component that wraps textNodes (ref to ToDo in Form.view.js)
+// ToDo create component that wraps textNodes (ref to ToDo in Form.view.tsx)
 const DrawResult = ({
   maleName,
   femaleName,

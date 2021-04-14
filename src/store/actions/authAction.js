@@ -11,6 +11,7 @@ export const signIn = ( credentials ) => (
   _,
   { getFirebase },
 ) => {
+  dispatch({ type: SHOW_LOADER, payload: { callFrom: 'SIGN_IN' }});
   const firebase = getFirebase();
 
   firebase.auth()
@@ -20,6 +21,9 @@ export const signIn = ( credentials ) => (
     })
     .catch(() => {
       dispatch({ type: LOGIN_ERROR });
+    })
+    .finally(() => {
+      dispatch({ type: HIDE_LOADER, payload: { callFrom: 'SIGN_IN' }});
     });
 };
 
@@ -28,7 +32,7 @@ export const signOut = () => (
   _,
   { getFirebase },
 ) => {
-  dispatch({ type: SHOW_LOADER });
+  dispatch({ type: SHOW_LOADER, payload: { callFrom: 'SIGN_OUT' }});
   const firebase = getFirebase();
 
   firebase.auth().signOut()
@@ -36,6 +40,6 @@ export const signOut = () => (
       dispatch({ type: LOGOUT_SUCCESS });
     })
     .finally(() => {
-      dispatch({ type: HIDE_LOADER });
+      dispatch({ type: HIDE_LOADER, payload: { callFrom: 'SIGN_OUT' }});
     }); // ToDo add error catching
 };

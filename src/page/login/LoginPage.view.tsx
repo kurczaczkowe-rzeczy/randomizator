@@ -1,28 +1,19 @@
-import { SyntheticEvent } from 'react';
+import Card from 'components/card';
+import Button from 'components/Button';
+import TextInput from 'components/form/components/textInput';
 
-import Card from 'components/card/Card.view';
-import Button from 'components/form/components/button/Button.view';
-import TextInput from 'components/form/components/textInput/TextInput.view';
-import classes from 'page/login/loginPage.module.scss';
-
-interface ILogin{
-  /**
-   * Specifies the error messages when logging in fail
-   */
-  authError?: string | null;
-  /**
-   * Method for login user
-   */
-  onLogin: ( event: SyntheticEvent ) => void;
-}
+import classes from './loginPage.module.scss';
+import { ILogin } from './LoginPage.types';
 
 /**
  * Page displaying login form
  */
-const Login = ({ onLogin, authError = null }: ILogin ): JSX.Element => (
+export const Login = ({ onLogin, authError = null }: ILogin ): JSX.Element => (
   <div className={ classes.center }>
     <Card
-      title="Zaloguj się" body={ (
+      cardClass={ classes.card }
+      title="Zaloguj się"
+      body={ (
         <>
           <form onSubmit={ onLogin } method="post">
             <TextInput
