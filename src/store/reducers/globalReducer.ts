@@ -4,6 +4,7 @@ import _isEmpty from 'lodash/isEmpty';
 
 import {
   HIDE_LOADER,
+  FORCE_HIDE_LOADER,
   SHOW_LOADER,
   CLEAR_GLOBAL,
   HIDE_MODAL,
@@ -33,6 +34,13 @@ const reducer = ( state = initialState, action: GlobalAction = { type: CLEAR_GLO
         ...state,
         loadingsQueue: newLoadingQueue,
         isLoading: !_isEmpty( newLoadingQueue ),
+      };
+    }
+    case FORCE_HIDE_LOADER: {
+      return {
+        ...state,
+        loadingsQueue: [],
+        isLoading: false,
       };
     }
     case SHOW_MODAL: {

@@ -4,7 +4,7 @@ import { TitleWithContentAndId, StringOrNode } from 'types';
 
 export interface ICard {
   /** Specify content of card */
-  body: ReactNode;
+  body: ReactNode | ReactNode[];
   /** Class overrides or extend root element styles */
   cardClass?: string;
   /**
