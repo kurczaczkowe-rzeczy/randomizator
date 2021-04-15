@@ -2,7 +2,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 export default makeStyles(({ palette }) => ({
   screen: {
-    position: 'absolute',
+    position: 'fixed',
     backgroundColor: palette.backgroundDark,
     zIndex: 1000,
     top: 0,
