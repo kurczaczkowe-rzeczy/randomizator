@@ -13,13 +13,13 @@ poprzez wprowadzenie do pola powyżej wylosowanych odpowiedzi ciągu znaków i�
 **_spacji_** lub "**_,_**".
 
 ## Technologie, frameworki oraz biblioteki użyte w aplikacji
-[![React Release](https://img.shields.io/badge/node-12.18.3-blue)]()
-[![React Release](https://img.shields.io/badge/npm-6.14.5-blue)]()
+[![React Release](https://img.shields.io/badge/node-15.14.0-blue)]()
+[![React Release](https://img.shields.io/badge/npm-7.10.0-blue)]()
 [![React Release](https://img.shields.io/badge/dynamic/json?color=blue&label=react&query=%24.dependencies.react&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![Uuid Release](https://img.shields.io/badge/dynamic/json?color=blue&label=react-uuid&query=%24.dependencies['react-uuid']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![Lodash Release](https://img.shields.io/badge/dynamic/json?color=blue&label=lodash&query=%24.dependencies.lodash&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![ESLint Release](https://img.shields.io/badge/dynamic/json?color=blue&label=eslint&query=%24.dependencies.eslint&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
-[![Node Sass Release](https://img.shields.io/badge/dynamic/json?color=blue&label=node-sass&query=%24.dependencies['node-sass']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
+[![Sass Release](https://img.shields.io/badge/dynamic/json?color=blue&label=sass&query=%24.dependencies['sass']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![React Router Release](https://img.shields.io/badge/dynamic/json?color=blue&label=react-router&query=%24.dependencies['react-router']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![GitHub Pages Release](https://img.shields.io/badge/dynamic/json?color=blue&label=gh-pages&query=%24.dependencies['gh-pages']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![Classnames Release](https://img.shields.io/badge/dynamic/json?color=blue&label=classnames&query=%24.dependencies.classnames&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
