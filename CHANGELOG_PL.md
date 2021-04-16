@@ -1,4 +1,4 @@
-## 1.3.3 (Kwiecień 15, 2021)
+## 1.3.3 (Kwiecień 16, 2021)
 - Poprawienie wyświetlania widgetu losującego odpowiedzi.
 - Poprawienie wyświetlania ekranu ładowania.
 
