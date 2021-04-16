@@ -21,7 +21,7 @@ const DrawResult = ({
       />
       <TextNode
         required
-        value={ maleName || ' ' }
+        value={ maleName }
         classes={ classes.input }
         type="input-text"
       />
