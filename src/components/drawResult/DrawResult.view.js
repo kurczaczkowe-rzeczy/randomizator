@@ -12,7 +12,7 @@ const DrawResult = ({
   femaleName,
   errors,
 }) => (
-  <div>
+  <div className={ classes.smallWidthInCenter }>
     <div className={ classes.alignCenterRight }>
       <TextNode
         required

@@ -50,3 +50,6 @@
 .rowGap {
   margin-bottom: 24px;
 }
+.fullWidth > div:first-of-type {
+  width: 100%;
+}

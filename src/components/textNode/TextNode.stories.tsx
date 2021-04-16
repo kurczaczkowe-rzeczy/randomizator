@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import classes from 'components/drawResult/drawResult.module.scss';
 
 import Component from '.';
-import { ITextNode } from './TextNode.view';
+import { ITextNode } from './TextNode.types';
 
 export default{
   title: 'components/TextNodeView',
