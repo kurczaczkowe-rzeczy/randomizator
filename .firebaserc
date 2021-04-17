@@ -1,9 +1,20 @@
 {
   "projects": {
-    "default": "randomizator-7629b"
+    "default": "randomizator-7629b",
+    "staging": "randomizator-6951b"
   },
   "targets": {
     "randomizator-7629b": {
+      "hosting": {
+        "stories": [
+          "randomizator-stories"
+        ],
+        "app": [
+          "randomizator"
+        ]
+      }
+    },
+    "randomizator-6951b": {
       "hosting": {
         "stories": [
           "randomizator-stories"
