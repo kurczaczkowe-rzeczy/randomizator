@@ -12,4 +12,19 @@ export default{
 
 const Template: Story<ISelect> = ( args ) => <Select { ...args } />;
 
-export const Default = Template.bind({});
+const Default = Template.bind({});
+const Empty = Template.bind({});
+const Open = Template.bind({});
+
+Empty.args = {
+  defaultValue: '',
+  value: '',
+  options: [],
+};
+Open.args = { open: true };
+
+export {
+  Default,
+  Empty,
+  Open,
+};
