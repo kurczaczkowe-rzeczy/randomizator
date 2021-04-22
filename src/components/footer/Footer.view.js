@@ -1,6 +1,6 @@
 import Link from 'components/Link';
 
-import { APP_VERSION } from 'constans';
+import { APP_VERSION, CURRENT_DATE } from 'constans';
 
 import classes from './footer.module.scss';
 
@@ -13,7 +13,7 @@ const Footer = () => (
       href="https://github.com/kurczaczkowe-rzeczy"
       label="Kurczaczkowe rzeczy"
     />
-    { `. Wersja: ${ APP_VERSION } ` }
+    { `. Wersja: ${ APP_VERSION } ( ${ CURRENT_DATE } )` }
   </div>
 );
 
