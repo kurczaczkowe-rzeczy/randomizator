@@ -32,6 +32,7 @@ const Form = ({
     } else {
       if ( someFieldFill( data.get( 'name_male' ), data.get( 'name_female' ))) {
         onSubmit( data.get( 'name_male' ) as string, data.get( 'name_female' ) as string );
+        event.target.reset();
       } else {
         alert( 'Wpisz wartość w pola formularza. Wystarczy jedno pole!' );
       }

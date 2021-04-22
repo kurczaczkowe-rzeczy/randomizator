@@ -15,6 +15,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M:%S')"
       - name: Install Packages
         run: npm install; npm i -g firebase-tools
       - name: Build production page
@@ -30,6 +33,7 @@ jobs:
           REACT_APP_ENVIRONMENT: "production"
           BUILD_PATH: "./build.prod"
           SKIP_PREFLIGHT_CHECK: true
+          REACT_APP_LAST_UPDATE_DATE: ${{ steps.date.outputs.date }}
         run: npm run build
       - name: Deploy production
         run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --only hosting:app
