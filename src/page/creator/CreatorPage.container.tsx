@@ -18,7 +18,12 @@ import { signOut } from 'store/actions/authAction';
 import { addForm } from 'store/actions/formsActions';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { RootState } from 'store/reducers/rootReducer';
-import { FORM_ID_KEY, HOME_PAGE } from 'constans';
+import { IOption } from 'components/select/Select.types';
+import {
+  FORM_ID_KEY,
+  HOME_PAGE,
+  IS_DEVELOPMENT_MODE,
+} from 'constans';
 
 import CreatorView from './CreatorPage.view';
 import {
@@ -32,12 +37,16 @@ import {
   getNewFileName,
 } from './CreatorPage.utils';
 
+// ToDo: issue #150
 const Creator = (): JSX.Element => {
   const [ formID, setFormID ] = useLocalStorage<string>( FORM_ID_KEY );
   const [ link, setLink ] = useState( '' );
+  const [ selectedFormId, setSelectedFormId ] = useState( '' );
 
   const auth = useSelector(( state: RootState ) => state.firebase.auth, shallowEqual );
   const answersCounter = useSelector(( state: RootState ) => state.ans.counter );
+  const defaultFormId = useSelector(( state: RootState ) => state.form.id );
+  const forms = useSelector(( state: RootState ) => state.forms.forms );
   const dispatch = useDispatch();
 
   const updateFormID = ( forms: IForm[]): void => {
@@ -130,11 +139,13 @@ const Creator = (): JSX.Element => {
   }, [ answersCounter, dispatch ]);
 
   const getAnswersToFile = async (): Promise<void> => {
-    if ( formID ) {
+    if ( IS_DEVELOPMENT_MODE && formID ) {
       const savedForm = await fomCollection( auth.uid, formID );
       const answersOfForm = savedForm?.answers;
       const formName = savedForm ? savedForm.name.replaceAll( ' ', '_' ) : getNewFileName();
 
+      /* In database doesn't exist emptyColumn fields that is append in google forms
+         and we want to bo compatibility with it so we added it to header row */
       answersOfForm[ 0 ] = {
         emptyColumn: '',
         ...answersOfForm[ 0 ],
@@ -151,13 +162,27 @@ const Creator = (): JSX.Element => {
     }
   };
 
+  const onMenuItemClick = ( option: IOption ): void => {
+    setSelectedFormId( option.name );
+    onFormIdChange( option.id );
+  };
+
+  const selectFormsProps = {
+    defaultValue: defaultFormId,
+    options: forms,
+    onItemClick: onMenuItemClick,
+    name: 'forms',
+    label: 'Nazwa aktywnego formularza',
+    value: selectedFormId,
+  };
+
   return (
     <CreatorView
       answersCounter={ answersCounter }
       link={ link }
       onRandomClick={ onRandomClick }
       logout={ onLogout }
-      onFormIdChange={ ( formID ): void => onFormIdChange( formID ) }
+      selectFormsProps={ selectFormsProps }
       getAnswersToFile={ getAnswersToFile }
     />
   );

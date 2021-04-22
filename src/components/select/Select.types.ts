@@ -1,16 +1,3 @@
-export interface ISelectContainer {
-  /**
-   * UI layout element that describe input.
-   */
-  label: string;
-  /**
-   * Method fired after click on option and change input value.
-   *
-   * @return undefined
-   */
-  onFormIdChange: ( formID: string ) => void;
-}
-
 export interface IOption {
   /** Identifier for option. */
   id: string;

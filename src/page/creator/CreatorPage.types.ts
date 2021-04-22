@@ -1,3 +1,5 @@
+import { ISelect } from 'components/select/Select.types';
+
 export interface IForm{
   id: string;
   name: string;
@@ -36,4 +38,8 @@ export interface ICreator{
    * Method for draw answers
    */
   onRandomClick: () => void;
+  /**
+   * Props passed to select with forms
+   */
+  selectFormsProps: ISelect;
 }
