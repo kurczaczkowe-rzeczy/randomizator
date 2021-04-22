@@ -12,5 +12,5 @@ export default{
 
 const Template: Story<ICreator> = ( args ) => <Component { ...args } />;
 
-/* ToDo: change this if redux decorator was added or FilesContainer doesn't have connection with redux
+/* ToDo: issue #152
    export const Default = Template.bind({}); */

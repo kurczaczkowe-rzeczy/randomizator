@@ -20,7 +20,9 @@ import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { RootState } from 'store/reducers/rootReducer';
 import { IOption } from 'components/select/Select.types';
 import {
-  FORM_ID_KEY, HOME_PAGE, IS_DEVELOPMENT_MODE,
+  FORM_ID_KEY,
+  HOME_PAGE,
+  IS_DEVELOPMENT_MODE,
 } from 'constans';
 
 import CreatorView from './CreatorPage.view';
@@ -35,7 +37,7 @@ import {
   getNewFileName,
 } from './CreatorPage.utils';
 
-// ToDo: issue #105
+// ToDo: issue #150
 const Creator = (): JSX.Element => {
   const [ formID, setFormID ] = useLocalStorage<string>( FORM_ID_KEY );
   const [ link, setLink ] = useState( '' );
