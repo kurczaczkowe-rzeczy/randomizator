@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import SelectUI from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -14,7 +13,7 @@ import { ISelect } from './Select.types';
 /**
  * UI Components provides input with options list.
  */
-const Select = ({
+export const Select = ({
   defaultValue,
   label,
   name,
@@ -26,6 +25,7 @@ const Select = ({
   onOpen = undefined,
 }: ISelect ): JSX.Element => {
   const styles = useStyle();
+  const labelId = prepareID( label );
 
   const selectClasses = {
     root: styles.selected,
@@ -46,17 +46,12 @@ const Select = ({
       horizontal: 'center',
     },
     getContentAnchorEl: null,
-  };
+  } as const;
 
   return (
     <FormControl fullWidth>
-      <InputLabel
-        id={ prepareID( label ) }
-        classes={{ root: styles.label }}
-      >
-        {/* ToDo refactor this */}
-        {label}
-        :
+      <InputLabel id={ labelId } classes={{ root: styles.label }}>
+        {`${ label }:`}
       </InputLabel>
       <SelectUI
         disableUnderline
@@ -68,11 +63,10 @@ const Select = ({
           defaultValue,
         ) }
         classes={ selectClasses }
-        // @ts-ignore
         MenuProps={ menuProps }
         onClose={ onClose }
         onOpen={ onOpen }
-        labelId={ prepareID( label ) }
+        labelId={ labelId }
       >
         { createOptions(
           options,
@@ -85,4 +79,3 @@ const Select = ({
 };
 
 export default Select;
-export { Select };

@@ -1,16 +1,14 @@
-import _noop from 'lodash/noop';
-
 import { IS_DEVELOPMENT_MODE } from 'constans';
 
 import Card from 'components/card';
 import FileContainer from 'components/fileContainer/FileContainer.container';
-import FormList from 'components/formList';
 import Form from 'components/form';
 import Draw from 'components/draw';
 import AnswersCounter from 'components/answersCounter';
 import IconButton from 'components/iconButton';
 import CopyText from 'components/copyText';
 import Button from 'components/Button';
+import Select from 'components/select';
 
 import { ICreator } from './CreatorPage.types';
 import classes from './creatorPage.module.scss';
@@ -23,7 +21,7 @@ const Creator = ({
   link,
   onRandomClick,
   logout,
-  onFormIdChange = _noop,
+  selectFormsProps,
   getAnswersToFile,
 }: ICreator ): JSX.Element => (
   <div className={ classes.creator }>
@@ -32,11 +30,9 @@ const Creator = ({
         centerBody={ false }
         body={ (
           <div className={ classes.formNameWrapper }>
-            <FormList
-              label="Nazwa aktywnego formularza"
-              classes={ classes.rowGap }
-              onFormIdChange={ onFormIdChange }
-            />
+            <div className={ classes.rowGap }>
+              <Select { ...selectFormsProps } />
+            </div>
             <CopyText
               text={ link }
               content={ (

@@ -4,7 +4,7 @@ import _noop from 'lodash/noop';
 import { ISelectFilter } from './SelectFilter.types';
 import './selectFilter.scss';
 
-const SelectFilter = ({
+export const SelectFilter = ({
   tags,
   delimiters,
   handleDelete = _noop,

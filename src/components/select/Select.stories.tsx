@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react';
 
-import { Select } from './Select.view';
+import Select from '.';
 import { ISelect } from './Select.types';
 import mockData from './Select.mock';
 
@@ -10,6 +10,6 @@ export default{
   args: { ...mockData },
 } as Meta;
 
-const Template : Story<ISelect> = ( args ) => <Select { ...args } />;
+const Template: Story<ISelect> = ( args ) => <Select { ...args } />;
 
 export const Default = Template.bind({});
