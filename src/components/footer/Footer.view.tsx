@@ -8,7 +8,10 @@ import {
 
 import classes from './footer.module.scss';
 
-const Footer = () => (
+/**
+ * Component for display info about creators of application
+ */
+export const Footer = (): JSX.Element => (
   <div className={ classes.footer }>
     Stworzono przez
     {' '}

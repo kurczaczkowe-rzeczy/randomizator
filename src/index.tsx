@@ -15,7 +15,7 @@ import { firebase } from 'config/firebaseConfig';
 import rootReducer from 'store/reducers/rootReducer';
 import { theme } from 'theme';
 
-import Footer from 'components/footer/Footer.view';
+import Footer from 'components/footer';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
