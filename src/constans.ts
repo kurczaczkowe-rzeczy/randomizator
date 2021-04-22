@@ -12,7 +12,6 @@ export { version as APP_VERSION } from '../package.json';
 export const HOME_PAGE = process.env.PUBLIC_URL;
 export const IS_DEVELOPMENT_MODE = process.env.REACT_APP_ENVIRONMENT === 'development';
 export const APP_SUFFIX = IS_DEVELOPMENT_MODE ? '/randomizator' : '';
-
 export const CURRENT_DATE = process.env.REACT_APP_LAST_UPDATE_DATE;
 export const ORGANIZATION_MAIN_PAGE = 'https://github.com/kurczaczkowe-rzeczy';
 
