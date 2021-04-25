@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 
+import ScatterPlotIcon from '@material-ui/icons/ScatterPlot';
+
 import useLocaleString from 'hooks/useLocaleString';
 
 import IconButton from 'components/iconButton/IconButton.view';
 import DrawResult from 'components/drawResult/DrawResult.view';
 import SelectFilter from 'components/selectFilter';
 
-// ToDo make this component more global
+// ToDo: issue #155
 const Draw = ({
   loadedData,
   result,
@@ -18,7 +20,13 @@ const Draw = ({
   return (
     <>
       <SelectFilter />
-      { loadedData && <IconButton value={ getString( 'drawAnswers' ) } onClick={ onRandomClick } /> }
+      { loadedData && (
+        <IconButton
+          value={ getString( 'drawAnswers' ) }
+          icon={ <ScatterPlotIcon /> }
+          onClick={ onRandomClick }
+        />
+      )}
       <DrawResult
         maleName={ result.nameMale }
         femaleName={ result.nameFemale }

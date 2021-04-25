@@ -1,3 +1,4 @@
+export const backIcon: string;
 export const baseLine: string;
 export const descriptor: string;
 export const guest: string;

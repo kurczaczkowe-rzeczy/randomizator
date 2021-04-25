@@ -5,7 +5,8 @@ import {
   SET_FORM_NAME,
   CLEAR_FORM,
   CLEAR_FORMS,
-  ADD_FORM, SHOW_LOADER, GlobalActionsTypesWithPayload,
+  ADD_FORM,
+  GlobalActionsTypesWithPayload,
 } from 'store/actions';
 
 export interface IState { readonly errors: string | null }
