@@ -37,4 +37,9 @@ export default{
   errorUserNotExist: 'Nie istnieje taki użytkownik',
   errorUserFormNotExist: 'Nie istnieje taki formularz tego użytkownika',
   errorPageNotFound: 'Nie znaleziono strony',
+  modalChangeUrlTitle: 'Uwaga! Zmieniamy adres strony.',
+  modalChangeUrlFirst: 'A to Ci heca!!!',
+  modalChangeUrlSecond: 'Randomizator spakował swoje rzeczy i teraz jest dostępny pod adresem',
+  modalChangeUrlThird: '. Tam znajdziesz stabilną wersję aplikacji.',
+  modalChangeUrlFourth: 'Na obecnej stronie znajduje się wersja deweloperska. To oznacza, że znajdziesz tutaj najnowsze funkcjonalności. Sprawdzamy je tutaj czy nie popsują stabilnej wersji dostępnej pod nowym adresem. Podczas użytkowania tej wersji możesz napotkać problemy. Zachęcamy do korzystania z nowego adresu.',
 } as IResourceType;

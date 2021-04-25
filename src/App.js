@@ -29,13 +29,14 @@ import GuestPage from 'page/guest';
 import ErrorPage from 'page/errorPage';
 import Login from 'page/login';
 
-import messages from './App.messages';
 import useStyles from './App.styles';
+import useLocaleString from './hooks/useLocaleString';
 
 const authenticatedRoutes = <Route exact path={ `${ APP_SUFFIX }/` } component={ Creator } />;
 const unauthenticatedRoutes = <Route exact path={ `${ APP_SUFFIX }/` } component={ Login } />;
 
 const App = () => {
+  const getString = useLocaleString();
   const styles = useStyles();
   const dispatch = useDispatch();
   const auth = useSelector(( state ) => state?.firebase.auth );
@@ -78,16 +79,15 @@ const App = () => {
   const body = (
     <div>
       <Typography classes={{ root: styles.modalParagraph }}>
-        {messages.firstParagraph}
+        { getString( 'modalChangeUrlFirst' ) }
       </Typography>
       <Typography classes={{ root: styles.modalParagraph }}>
-        {messages.secondParagraphTop}
-        {' '}
-        <Link href={ messages.link } label={ messages.link } />
-        {messages.secondParagraphBottom}
+        { `${ getString( 'modalChangeUrlSecond' ) } ` }
+        <Link href="https://randomizator.web.app" label="randomizator.web.app" />
+        {getString( 'modalChangeUrlThird' )}
       </Typography>
       <Typography classes={{ root: styles.modalParagraph }}>
-        {messages.thirdParagraph}
+        {getString( 'modalChangeUrlFourth' )}
       </Typography>
     </div>
   );
@@ -101,7 +101,7 @@ const App = () => {
         { ( auth.uid !== undefined ) ? authenticatedRoutes : unauthenticatedRoutes }
         <Redirect from="/*" to={ `${ APP_SUFFIX }/not_found` } />
       </Switch>
-      <Modal body={ body } title={ messages.modalTitle } classes={{ title: styles.modalTitle }} />
+      <Modal body={ body } title={ getString( 'modalChangeUrlTitle' ) } classes={{ title: styles.modalTitle }} />
     </>
   );
 };
