@@ -6,6 +6,7 @@ import Button from 'components/Button';
 
 import classes from './form.module.scss';
 import { IForm } from './Form.types';
+import useLocaleString from '../../hooks/useLocaleString';
 
 // ToDo create component that wraps label and textInput
 /**
@@ -15,33 +16,36 @@ export const Form = ({
   preview,
   additionalFunction,
   onSubmit,
-}: IForm ): JSX.Element => (
-  <form
-    className={ classNames( classes.form, { [ classes.disabled ]: preview }) }
-    onSubmit={ ( event ): void => {
-      event.preventDefault();
-      onSubmit( event );
-    } }
-  >
-    {/* ToDo use constants instead of hardcoded strings */}
-    <div className={ classes.alignBottom }>
-      <Label content="Imie męskie" />
-      <TextInput name="name_male" />
-    </div>
-    <div className={ classes.alignBottom }>
-      <Label content="Imie damskie" />
-      <TextInput name="name_female" />
-    </div>
-    <TextInput
-      required
-      fullWidth
-      name="check_is_not_robot"
-      placeholder="Aby wysłać, wpisz nazwę formularza"
-      onChange={ additionalFunction }
-      onFocus={ additionalFunction }
-    />
-    <Button value="Wyślij" type="submit" />
-  </form>
-);
+}: IForm ): JSX.Element => {
+  const getString = useLocaleString();
+
+  return (
+    <form
+      className={ classNames( classes.form, { [ classes.disabled ]: preview }) }
+      onSubmit={ ( event ): void => {
+        event.preventDefault();
+        onSubmit( event );
+      } }
+    >
+      <div className={ classes.alignBottom }>
+        <Label content={ getString( 'nameMaleLabel' ) } />
+        <TextInput name="name_male" />
+      </div>
+      <div className={ classes.alignBottom }>
+        <Label content={ getString( 'nameFemaleLabel' ) } />
+        <TextInput name="name_female" />
+      </div>
+      <TextInput
+        required
+        fullWidth
+        name="check_is_not_robot"
+        placeholder={ getString( 'formSendPlaceholder' ) }
+        onChange={ additionalFunction }
+        onFocus={ additionalFunction }
+      />
+      <Button value={ getString( 'send' ) } type="submit" />
+    </form>
+  );
+};
 
 export default Form;

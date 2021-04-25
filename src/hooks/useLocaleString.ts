@@ -5,7 +5,7 @@ import stringsPl from 'assets/locale/pl';
 import stringsEng from 'assets/locale/eng';
 import { IResourceType } from 'types/types';
 
-const useLocaleString = (): (( resourceId: string ) => ( string | undefined )) => {
+const useLocaleString = (): (( resourceId: string ) =>  string ) => {
   const language = useSelector(( state: RootState ) => state?.global.language );
   let localeFile: IResourceType;
 
@@ -20,9 +20,7 @@ const useLocaleString = (): (( resourceId: string ) => ( string | undefined )) =
     }
   }
 
-  const getString = ( resourceId: string ): ( string | undefined ) => localeFile[ resourceId ];
-
-  return getString;
+  return ( resourceId: string ): string  => localeFile[ resourceId ] ?? '';
 };
 
 export default useLocaleString;
