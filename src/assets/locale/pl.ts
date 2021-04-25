@@ -22,4 +22,7 @@ export default{
   copied: 'Skopiowano',
   drawAnswers: 'Wylosuj odpowiedzi',
   noValueToDraw: 'Brak wartości do losowania',
+  dropzoneDropFile: 'Tu upuść plik',
+  dropzoneSelectFile: 'Upuść tu plik lub kliknij, aby wybrać z listy',
+  dropzoneOnlyCSV: 'Tylko pliki z rozszerzeniem CSV',
 } as IResourceType;

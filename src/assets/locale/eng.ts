@@ -22,4 +22,7 @@ export default{
   copied: 'Copied',
   drawAnswers: 'Draw answers',
   noValueToDraw: 'No value to draw',
+  dropzoneDropFile: 'Drop file here',
+  dropzoneSelectFile: 'Drop a file here or click to select from the list',
+  dropzoneOnlyCSV: 'Only files with the CSV extension',
 } as IResourceType;
