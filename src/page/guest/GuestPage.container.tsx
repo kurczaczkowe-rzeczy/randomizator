@@ -20,10 +20,10 @@ import GuestPageView from './GuestPage.view';
 
 const GuestPage = (): JSX.Element => {
   const getString = useLocaleString();
-  const userName = useSelector(( state: RootState ) => state?.usr.userName );
-  const formName = useSelector(( state: RootState ) => state?.form.name );
-  const errorFormName = useSelector(( state: RootState ) => state?.form.errors );
-  const errorUserName = useSelector(( state: RootState ) => state?.usr.errors );
+  const userName = useSelector(( state: RootState ) => state.usr.userName );
+  const formName = useSelector(( state: RootState ) => state.form.name );
+  const errorFormName = useSelector(( state: RootState ) => state.form.errors );
+  const errorUserName = useSelector(( state: RootState ) => state.usr.errors );
   const dispatch = useDispatch();
 
   /* ToDo use constants instead of hardcoded strings */
