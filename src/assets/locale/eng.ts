@@ -1,6 +1,6 @@
-import { IResourceType } from 'types/types';
-
 /* eslint-disable max-len */
+import { IResourceType } from 'hooks/types';
+
 export default{
   organizationName: 'Kurczaczkowe rzeczy',
   createBy: 'Create by',

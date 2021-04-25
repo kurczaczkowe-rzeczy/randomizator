@@ -1,4 +1,4 @@
-import { IResourceType } from 'types/types';
+import { IResourceType } from 'hooks/types';
 
 /* eslint-disable max-len */
 export default{
