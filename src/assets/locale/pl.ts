@@ -12,4 +12,10 @@ export default{
   nameFemaleLabel: 'Imie damskie',
   nameMaleLabel: 'Imie męskie',
   formSendPlaceholder: 'Aby wysłać, wpisz nazwę formularza',
+  noName: 'Brak nazwy',
+  activeNameForm: 'Nazwa aktywnego formularza',
+  getAnswers: 'Pobierz odpowiedzi',
+  logout: 'Wyloguj się',
+  draw: 'Losowanie',
+  previewForm: 'Wygląd formularza',
 } as IResourceType;

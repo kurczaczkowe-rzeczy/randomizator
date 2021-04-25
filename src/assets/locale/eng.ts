@@ -12,4 +12,10 @@ export default{
   nameFemaleLabel: 'Name female',
   nameMaleLabel: 'Name male',
   formSendPlaceholder: 'Enter a name for the form to submit',
+  noName: 'No name',
+  activeNameForm: 'Name of active form',
+  getAnswers: 'Get answers',
+  logout: 'Logout',
+  draw: 'Draw',
+  previewForm: 'Preview form',
 } as IResourceType;
