@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react';
 import classes from './loading.module.scss';
 
 import Component from '.';
-import { ILoading } from './Loading.view';
+import { ILoading } from './Loading.types';
 
 export default{
   title: 'components/Loading',

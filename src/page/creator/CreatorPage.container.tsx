@@ -11,6 +11,8 @@ import _union from 'lodash/union';
 import _isNull from 'lodash/isNull';
 
 import useLocalStorage from 'hooks/useLocalStorage';
+import useLocaleString from 'hooks/useLocaleString';
+
 import { clearDraw, setDrawResult } from 'store/actions/drawAction';
 import { setAnswers } from 'store/actions/answersAction';
 import { setFormName } from 'store/actions/formAction';
@@ -18,12 +20,13 @@ import { signOut } from 'store/actions/authAction';
 import { addForm } from 'store/actions/formsActions';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { RootState } from 'store/reducers/rootReducer';
-import { IOption } from 'components/select/Select.types';
 import {
   FORM_ID_KEY,
   HOME_PAGE,
   IS_DEVELOPMENT_MODE,
 } from 'constans';
+
+import { IOption } from 'components/select/Select.types';
 
 import CreatorView from './CreatorPage.view';
 import {
@@ -39,6 +42,7 @@ import {
 
 // ToDo: issue #150
 const Creator = (): JSX.Element => {
+  const getString = useLocaleString();
   const [ formID, setFormID ] = useLocalStorage<string>( FORM_ID_KEY );
   const [ link, setLink ] = useState( '' );
   const [ selectedFormId, setSelectedFormId ] = useState( '' );
@@ -63,7 +67,7 @@ const Creator = (): JSX.Element => {
         auth.uid,
         ( doc ) => { // ToDo maybe puts this function into const
           const form = {
-            name: doc.data()?.name ?? 'Brak nazwy',
+            name: doc.data()?.name ?? getString( 'noName' ),
             id: doc.id,
           };
 
@@ -172,7 +176,7 @@ const Creator = (): JSX.Element => {
     options: forms,
     onItemClick: onMenuItemClick,
     name: 'forms',
-    label: 'Nazwa aktywnego formularza',
+    label: getString( 'activeNameForm' ),
     value: selectedFormId,
   };
 

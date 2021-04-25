@@ -19,6 +19,7 @@ export interface IActionWithPayload<Type, Payload> extends IAction<Type>{ payloa
 export interface IGlobalState{
   readonly isLoading: boolean;
   readonly isModalOpen: boolean;
+  readonly language: string;
   readonly loadingsQueue: string[];
 }
 export interface IForm {

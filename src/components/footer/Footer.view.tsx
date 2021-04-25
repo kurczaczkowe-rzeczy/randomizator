@@ -1,5 +1,6 @@
 import Link from 'components/Link';
 
+import useLocaleString from 'hooks/useLocaleString';
 import {
   APP_VERSION,
   CURRENT_DATE,
@@ -11,16 +12,19 @@ import classes from './footer.module.scss';
 /**
  * Component for display info about creators of application
  */
-export const Footer = (): JSX.Element => (
-  <div className={ classes.footer }>
-    Stworzono przez
-    {' '}
-    <Link
-      href={ ORGANIZATION_MAIN_PAGE }
-      label="Kurczaczkowe rzeczy"
-    />
-    { `. Wersja: ${ APP_VERSION } ( ${ CURRENT_DATE } )` }
-  </div>
-);
+export const Footer = (): JSX.Element => {
+  const getString = useLocaleString();
+
+  return (
+    <div className={ classes.footer }>
+      {`${ getString( 'createBy' ) } `}
+      <Link
+        href={ ORGANIZATION_MAIN_PAGE }
+        label={ getString( 'organizationName' ) }
+      />
+      {`. ${ getString( 'version' ) }: ${ APP_VERSION } ( ${ CURRENT_DATE } )`}
+    </div>
+  );
+};
 
 export default Footer;

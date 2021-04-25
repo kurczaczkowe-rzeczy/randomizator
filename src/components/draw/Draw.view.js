@@ -1,5 +1,6 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+
+import useLocaleString from 'hooks/useLocaleString';
 
 import IconButton from 'components/iconButton/IconButton.view';
 import DrawResult from 'components/drawResult/DrawResult.view';
@@ -11,17 +12,21 @@ const Draw = ({
   result,
   errors,
   onRandomClick,
-}) => (
-  <>
-    <SelectFilter />
-    { loadedData && <IconButton value="Wylosuj odpowiedzi" onClick={ onRandomClick } /> }
-    <DrawResult
-      maleName={ result.nameMale }
-      femaleName={ result.nameFemale }
-      errors={ errors }
-    />
-  </>
-);
+}) => {
+  const getString = useLocaleString();
+
+  return (
+    <>
+      <SelectFilter />
+      { loadedData && <IconButton value={ getString( 'drawAnswers' ) } onClick={ onRandomClick } /> }
+      <DrawResult
+        maleName={ result.nameMale }
+        femaleName={ result.nameFemale }
+        errors={ errors }
+      />
+    </>
+  );
+};
 
 Draw.propTypes = {
   loadedData: PropTypes.bool.isRequired,

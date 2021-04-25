@@ -4,7 +4,7 @@ export interface ILogin{
   /**
    * Specifies the error messages when logging in fail
    */
-  authError?: string | null;
+  authError: string | null;
   /**
    * Method for login user
    */

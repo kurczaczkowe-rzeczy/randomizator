@@ -4,10 +4,13 @@ import uuid from 'react-uuid';
 
 import { RootState } from 'store/reducers/rootReducer';
 import { forceHideLoader } from 'store/actions/globalActions';
+import useLocaleString from 'hooks/useLocaleString';
 
 import ErrorPage from './ErrorPage.view';
 
 const ErrorPageContainer = (): JSX.Element => {
+  const getString = useLocaleString();
+
   // ToDo: change to one selector with all possibly occurrence errors
   const userName = useSelector(( state: RootState ) => state.usr.errors );
   const formName = useSelector(( state: RootState ) => state.form.errors );
@@ -15,7 +18,6 @@ const ErrorPageContainer = (): JSX.Element => {
   const dispatch = useDispatch();
   const errors = [];
 
-  console.log( userName, formName );
   useEffect(() => {
     if ( isLoading ) {
       dispatch( forceHideLoader());
@@ -23,11 +25,11 @@ const ErrorPageContainer = (): JSX.Element => {
   }, [ isLoading, dispatch ]);
 
   if ( formName ) {
-    errors.push( <p key={ uuid() }>Nie istnieje taki formularz tego użytkownika</p> );
+    errors.push( <p key={ uuid() }>{ getString( 'errorUserFormNotExist' ) }</p> );
   }
 
   if ( userName ) {
-    errors.push( <p key={ uuid() }>Nie istnieje taki użytkownik</p> );
+    errors.push( <p key={ uuid() }>{ getString( 'errorUserNotExist' ) }</p> );
   }
 
   return <ErrorPage errors={ errors } />;

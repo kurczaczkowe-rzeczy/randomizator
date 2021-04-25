@@ -5,6 +5,7 @@ import _isEqual from 'lodash/isEqual';
 import _some from 'lodash/some';
 
 import { RootState } from 'store/reducers/rootReducer';
+import useLocaleString from 'hooks/useLocaleString';
 
 import FormView from './Form.view';
 import { FormContainer } from './Form.types';
@@ -14,30 +15,33 @@ const Form = ({
   onSubmit = (): void => {},
   additionalFunction = (): void => {},
 }: FormContainer ): JSX.Element => {
-
+  const getString = useLocaleString();
   const nameOfForm = useSelector(( state: RootState ) => state.form.name );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const someFieldFill = ( ...args: any[]): boolean => _some( args, ( field ) => !_isEmpty( field ));
 
-  /* ToDo use constants instead of hardcoded strings */
   const handleSubmit = useCallback(( event ) => {
     const data = new FormData( event.target );
     const fromInput = data.get( 'check_is_not_robot' );
 
     if ( _isEmpty( fromInput )) {
-      alert( 'Wpisz nazwę formularza we właściwym miejscu' );
+      alert( getString( 'formErrorEmptyFormName' ));
     } else if ( !_isEqual( fromInput, nameOfForm )) {
-      alert( 'Wpisz poprawną nazwę formularza' );
+      alert( getString( 'formErrorWrongFormName' ));
     } else {
       if ( someFieldFill( data.get( 'name_male' ), data.get( 'name_female' ))) {
         onSubmit( data.get( 'name_male' ) as string, data.get( 'name_female' ) as string );
         event.target.reset();
       } else {
-        alert( 'Wpisz wartość w pola formularza. Wystarczy jedno pole!' );
+        alert( getString( 'formErrorEmptyFormFields' ));
       }
     }
-  }, [ nameOfForm, onSubmit ]);
+  }, [
+    nameOfForm,
+    onSubmit,
+    getString,
+  ]);
 
   return (
     <FormView
