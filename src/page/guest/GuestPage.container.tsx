@@ -16,8 +16,10 @@ import { RootState } from 'store/reducers/rootReducer';
 import { APP_SUFFIX, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
 
 import GuestPageView from './GuestPage.view';
+import useLocaleString from '../../hooks/useLocaleString';
 
 const GuestPage = (): JSX.Element => {
+  const getString = useLocaleString();
   const userName = useSelector(( state: RootState ) => state?.usr.userName );
   const formName = useSelector(( state: RootState ) => state?.form.name );
   const errorFormName = useSelector(( state: RootState ) => state?.form.errors );
@@ -64,7 +66,7 @@ const GuestPage = (): JSX.Element => {
     db.collection( creatorId )
       .doc( formId )
       .update({ answers: firestore.FieldValue.arrayUnion( ans ) }) // ToDo move to hook
-      .then(() => alert( 'Dane zostały zapisane' ))
+      .then(() => alert( getString( 'dataSave' )))
       .catch(( error ) => console.log( 'Error!', error )); // ToDo change then().catch() to async/await with try/catch
   };
 

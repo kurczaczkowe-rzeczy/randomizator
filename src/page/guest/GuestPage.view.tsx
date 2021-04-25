@@ -23,7 +23,6 @@ export const GuestPageView = ({
   const getString = useLocaleString();
 
   return (
-        /* ToDo use constants instead of hardcoded strings */
     <div className={ classes.guest }>
       <div className={ classes.descriptor }>
         <Card
