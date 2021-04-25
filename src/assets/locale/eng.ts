@@ -29,4 +29,7 @@ export default{
   dropzoneSelectFile: 'Drop a file here or click to select from the list',
   dropzoneOnlyCSV: 'Only files with the CSV extension',
   typeFilterElements: 'Enter a filtering elements',
+  errorUserNotExist: 'This user is not exist',
+  errorUserFormNotExist: 'This form not exist for this user',
+  errorPageNotFound: 'Page not found',
 } as IResourceType;

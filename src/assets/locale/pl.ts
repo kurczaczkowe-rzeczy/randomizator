@@ -31,4 +31,7 @@ export default{
   errorOnlyCSVAccepted: 'Taki plik nie jest akceptowany. Prosze podać plik z rozszerzeniem CSV',
   dataSave: 'Dane zostały zapisane',
   typeFilterElements: 'Wprowadź składnik filtrowania',
+  errorUserNotExist: 'Nie istnieje taki użytkownik',
+  errorUserFormNotExist: 'Nie istnieje taki formularz tego użytkownika',
+  errorPageNotFound: 'Nie znaleziono strony',
 } as IResourceType;
