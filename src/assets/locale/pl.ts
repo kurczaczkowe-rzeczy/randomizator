@@ -20,4 +20,5 @@ export default{
   previewForm: 'Wygląd formularza',
   countAnswers: 'Ilość odpowiedzi',
   copied: 'Skopiowano',
+  drawAnswers: 'Wylosuj odpowiedzi',
 } as IResourceType;

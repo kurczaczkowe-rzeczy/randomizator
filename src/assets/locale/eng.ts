@@ -20,4 +20,5 @@ export default{
   previewForm: 'Preview form',
   countAnswers: 'Count answers',
   copied: 'Copied',
+  drawAnswers: 'Draw answers',
 } as IResourceType;
