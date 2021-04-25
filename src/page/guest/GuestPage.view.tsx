@@ -55,7 +55,7 @@ export const GuestPageView = ({
       <Card
         title={ (
           <>
-            <h3>{getString( 'form' )?.toUpperCase()}</h3>
+            <h3>{getString( 'form' ).toUpperCase()}</h3>
             <p>
               {getString( 'formOneFieldRequired' )}
             </p>
