@@ -21,4 +21,5 @@ export default{
   countAnswers: 'Count answers',
   copied: 'Copied',
   drawAnswers: 'Draw answers',
+  noValueToDraw: 'No value to draw',
 } as IResourceType;

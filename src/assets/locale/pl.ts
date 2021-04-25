@@ -21,4 +21,5 @@ export default{
   countAnswers: 'Ilość odpowiedzi',
   copied: 'Skopiowano',
   drawAnswers: 'Wylosuj odpowiedzi',
+  noValueToDraw: 'Brak wartości do losowania',
 } as IResourceType;
