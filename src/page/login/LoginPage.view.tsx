@@ -10,7 +10,7 @@ import { ILogin } from './LoginPage.types';
 /**
  * Page displaying login form
  */
-export const Login = ({ onLogin, authError = null }: ILogin ): JSX.Element => {
+export const Login = ({ onLogin, authError }: ILogin ): JSX.Element => {
   const getString = useLocaleString();
 
   return (
@@ -35,7 +35,7 @@ export const Login = ({ onLogin, authError = null }: ILogin ): JSX.Element => {
               />
               <Button value={ getString( 'login' ) } type="submit" />
             </form>
-            {authError !== null && <div className={ classes.error }>{authError}</div>}
+            {authError && <div className={ classes.error }>{authError}</div>}
           </>
         ) }
       />

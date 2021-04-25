@@ -9,7 +9,7 @@ import LoginPageView from 'page/login/LoginPage.view';
 const Login = (): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore todo look at this
-  const authError = useSelector(( state: RootState ) => state?.auth.authError );
+  const authError = useSelector(( state: RootState ) => state.auth.authError );
   const dispatch = useDispatch();
 
   const handleLogin = ( event: SyntheticEvent ): void => {
