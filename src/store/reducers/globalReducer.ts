@@ -15,6 +15,7 @@ import { GlobalAction, IGlobalState } from 'store/types';
 const initialState: IGlobalState = {
   isLoading: true,
   isModalOpen: false,
+  language: 'PL',
   loadingsQueue: [],
 };
 
