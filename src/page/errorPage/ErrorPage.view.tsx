@@ -22,20 +22,11 @@ export const ErrorPage = ({ errors }: IErrors ): JSX.Element => {
         />
       </div>
       <div className={ classes.bottom }>
-        Icons made by
-        {' '}
+        { getString( 'iconMade' ) }
         <Link
           href="https://www.flaticon.local/authors/freepik"
           title="Freepik"
           label="Freepik"
-        />
-        {' '}
-        from
-        {' '}
-        <Link
-          href="https://www.flaticon.local/"
-          title="Flaticon"
-          label="www.flaticon.local"
         />
       </div>
     </>

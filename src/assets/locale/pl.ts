@@ -42,4 +42,5 @@ export default{
   modalChangeUrlSecond: 'Randomizator spakował swoje rzeczy i teraz jest dostępny pod adresem',
   modalChangeUrlThird: '. Tam znajdziesz stabilną wersję aplikacji.',
   modalChangeUrlFourth: 'Na obecnej stronie znajduje się wersja deweloperska. To oznacza, że znajdziesz tutaj najnowsze funkcjonalności. Sprawdzamy je tutaj czy nie popsują stabilnej wersji dostępnej pod nowym adresem. Podczas użytkowania tej wersji możesz napotkać problemy. Zachęcamy do korzystania z nowego adresu.',
+  iconMade: 'Ikona stworzona przez ',
 } as IResourceType;

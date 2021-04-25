@@ -40,5 +40,5 @@ export default{
   modalChangeUrlSecond: 'Randomizer move out and is now available at',
   modalChangeUrlThird: '. There you will find a stable version of the application.',
   modalChangeUrlFourth: 'There is a developer version on the current page. This means you\'ll find the latest features here. We check them here whether they will not break the stable version available at the new address. You may run into problems while using this version. We encourage you to use the new address.',
-
+  iconMade: 'Icon made by ',
 } as IResourceType;
