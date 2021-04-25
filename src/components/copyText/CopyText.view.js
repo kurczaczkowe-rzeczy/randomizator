@@ -1,11 +1,11 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import classNames from 'classnames';
 
+import useLocaleString from 'hooks/useLocaleString';
+
 import classes from 'components/copyText/copyText.module.scss';
-import useLocaleString from '../../hooks/useLocaleString';
 
 const CopyText = ({
   isCopied,

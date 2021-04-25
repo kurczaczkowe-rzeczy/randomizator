@@ -1,5 +1,7 @@
 import { IS_DEVELOPMENT_MODE } from 'constans';
 
+import useLocaleString from 'hooks/useLocaleString';
+
 import Card from 'components/card';
 import FileContainer from 'components/fileContainer/FileContainer.container';
 import Form from 'components/form';
@@ -12,7 +14,6 @@ import Select from 'components/select';
 
 import { ICreator } from './CreatorPage.types';
 import classes from './creatorPage.module.scss';
-import useLocaleString from '../../hooks/useLocaleString';
 
 /**
  * Page displaying panel for authenticated users

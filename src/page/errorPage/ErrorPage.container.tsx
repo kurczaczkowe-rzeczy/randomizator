@@ -4,9 +4,9 @@ import uuid from 'react-uuid';
 
 import { RootState } from 'store/reducers/rootReducer';
 import { forceHideLoader } from 'store/actions/globalActions';
+import useLocaleString from 'hooks/useLocaleString';
 
 import ErrorPage from './ErrorPage.view';
-import useLocaleString from '../../hooks/useLocaleString';
 
 const ErrorPageContainer = (): JSX.Element => {
   const getString = useLocaleString();

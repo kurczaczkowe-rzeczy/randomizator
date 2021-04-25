@@ -11,6 +11,8 @@ import _union from 'lodash/union';
 import _isNull from 'lodash/isNull';
 
 import useLocalStorage from 'hooks/useLocalStorage';
+import useLocaleString from 'hooks/useLocaleString';
+
 import { clearDraw, setDrawResult } from 'store/actions/drawAction';
 import { setAnswers } from 'store/actions/answersAction';
 import { setFormName } from 'store/actions/formAction';
@@ -18,12 +20,13 @@ import { signOut } from 'store/actions/authAction';
 import { addForm } from 'store/actions/formsActions';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { RootState } from 'store/reducers/rootReducer';
-import { IOption } from 'components/select/Select.types';
 import {
   FORM_ID_KEY,
   HOME_PAGE,
   IS_DEVELOPMENT_MODE,
 } from 'constans';
+
+import { IOption } from 'components/select/Select.types';
 
 import CreatorView from './CreatorPage.view';
 import {
@@ -36,7 +39,6 @@ import {
   formsSubscription,
   getNewFileName,
 } from './CreatorPage.utils';
-import useLocaleString from '../../hooks/useLocaleString';
 
 // ToDo: issue #150
 const Creator = (): JSX.Element => {

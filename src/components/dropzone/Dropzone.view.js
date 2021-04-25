@@ -1,11 +1,11 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import DescriptionIcon from '@material-ui/icons/Description';
 import classNames from 'classnames';
 
+import useLocaleString from 'hooks/useLocaleString';
+
 import classes from './fileDropzone.module.scss';
-import useLocaleString from '../../hooks/useLocaleString';
 
 const DropzoneView = ({
   multiple,

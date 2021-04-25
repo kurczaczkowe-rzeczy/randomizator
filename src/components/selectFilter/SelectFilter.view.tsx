@@ -1,9 +1,10 @@
 import { WithContext as ReactTags } from 'react-tag-input';
 import _noop from 'lodash/noop';
 
+import useLocaleString from 'hooks/useLocaleString';
+
 import { ISelectFilter } from './SelectFilter.types';
 import './selectFilter.scss';
-import useLocaleString from '../../hooks/useLocaleString';
 
 export const SelectFilter = ({
   tags,

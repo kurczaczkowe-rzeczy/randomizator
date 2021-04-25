@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import _isEmpty from 'lodash/isEmpty';
 import _map from 'lodash/map';
 
+import useLocaleString from 'hooks/useLocaleString';
 import { db, firestore } from 'config/firebaseConfig';
 
 import parseText from './FileContainer.utils';
 import FileContainerView from './FileContainer.view';
-import useLocaleString from '../../hooks/useLocaleString';
 
 const FileContainer = () => {
   const getString = useLocaleString();

@@ -10,6 +10,7 @@ import _isNil from 'lodash/isNil';
 import Typography from '@material-ui/core/Typography';
 
 import useLocalStorage from 'hooks/useLocalStorage';
+import useLocaleString from 'hooks/useLocaleString';
 import {
   showLoader,
   hideLoader,
@@ -30,7 +31,6 @@ import ErrorPage from 'page/errorPage';
 import Login from 'page/login';
 
 import useStyles from './App.styles';
-import useLocaleString from './hooks/useLocaleString';
 
 const authenticatedRoutes = <Route exact path={ `${ APP_SUFFIX }/` } component={ Creator } />;
 const unauthenticatedRoutes = <Route exact path={ `${ APP_SUFFIX }/` } component={ Login } />;

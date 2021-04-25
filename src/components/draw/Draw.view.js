@@ -1,10 +1,10 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+
+import useLocaleString from 'hooks/useLocaleString';
 
 import IconButton from 'components/iconButton/IconButton.view';
 import DrawResult from 'components/drawResult/DrawResult.view';
 import SelectFilter from 'components/selectFilter';
-import useLocaleString from '../../hooks/useLocaleString';
 
 // ToDo make this component more global
 const Draw = ({

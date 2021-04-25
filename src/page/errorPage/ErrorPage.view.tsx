@@ -1,11 +1,12 @@
 import { ReactComponent as Unicorn } from 'assets/unicorn.svg';
 
+import useLocaleString from 'hooks/useLocaleString';
+
 import Link from 'components/Link';
 import Card from 'components/card/Card.view';
 
 import classes from './errorPage.module.scss';
 import { IErrors } from './ErrorPage.types';
-import useLocaleString from '../../hooks/useLocaleString';
 
 export const ErrorPage = ({ errors }: IErrors ): JSX.Element => {
   const getString = useLocaleString();

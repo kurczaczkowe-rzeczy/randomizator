@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _includes from 'lodash/includes';
 
+import useLocaleString from 'hooks/useLocaleString';
+
 import TextNode from 'components/textNode/TextNode.view';
 
 import classes from './drawResult.module.scss';
-import useLocaleString from '../../hooks/useLocaleString';
 
 // ToDo create component that wraps textNodes (ref to ToDo in Form.view.tsx)
 const DrawResult = ({

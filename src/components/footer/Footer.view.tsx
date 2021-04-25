@@ -1,5 +1,6 @@
 import Link from 'components/Link';
 
+import useLocaleString from 'hooks/useLocaleString';
 import {
   APP_VERSION,
   CURRENT_DATE,
@@ -7,7 +8,6 @@ import {
 } from 'constans';
 
 import classes from './footer.module.scss';
-import useLocaleString from '../../hooks/useLocaleString';
 
 /**
  * Component for display info about creators of application

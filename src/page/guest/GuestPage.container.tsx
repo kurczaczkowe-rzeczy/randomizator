@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import _isEmpty from 'lodash/isEmpty';
 
 import useTimeout from 'hooks/useTimeout';
+import useLocaleString from 'hooks/useLocaleString';
 import { db, firestore } from 'config/firebaseConfig';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { getUserName } from 'store/actions/userActions';
@@ -16,7 +17,6 @@ import { RootState } from 'store/reducers/rootReducer';
 import { APP_SUFFIX, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
 
 import GuestPageView from './GuestPage.view';
-import useLocaleString from '../../hooks/useLocaleString';
 
 const GuestPage = (): JSX.Element => {
   const getString = useLocaleString();

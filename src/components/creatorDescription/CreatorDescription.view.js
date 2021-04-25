@@ -1,9 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+
+import useLocaleString from 'hooks/useLocaleString';
 
 import Description from 'components/description/Description.view';
 import TextBox from 'components/textBox/TextBox.view';
-import useLocaleString from '../../hooks/useLocaleString';
 
 const CreatorDescription = ({ content }) => {
   const getString = useLocaleString();

@@ -1,12 +1,13 @@
 import classNames from 'classnames';
 
+import useLocaleString from 'hooks/useLocaleString';
+
 import Label from './components/label/Label.view';
 import TextInput from './components/textInput/TextInput.view';
 import Button from 'components/Button';
 
 import classes from './form.module.scss';
 import { IForm } from './Form.types';
-import useLocaleString from '../../hooks/useLocaleString';
 
 // ToDo create component that wraps label and textInput
 /**

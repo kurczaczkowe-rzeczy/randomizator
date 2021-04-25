@@ -1,6 +1,7 @@
+import useLocaleString from 'hooks/useLocaleString';
+
 import classes from './answersCounter.module.scss';
 import { IAnswersCounter } from './AnswersCounter.types';
-import useLocaleString from '../../hooks/useLocaleString';
 
 /**
  * UI component displaying the number of answers

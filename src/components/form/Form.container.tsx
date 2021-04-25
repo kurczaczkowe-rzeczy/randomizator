@@ -5,10 +5,10 @@ import _isEqual from 'lodash/isEqual';
 import _some from 'lodash/some';
 
 import { RootState } from 'store/reducers/rootReducer';
+import useLocaleString from 'hooks/useLocaleString';
 
 import FormView from './Form.view';
 import { FormContainer } from './Form.types';
-import useLocaleString from '../../hooks/useLocaleString';
 
 const Form = ({
   preview = false,

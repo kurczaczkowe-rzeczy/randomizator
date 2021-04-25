@@ -1,8 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
+import useLocaleString from 'hooks/useLocaleString';
+
 import Description from 'components/description/Description.view';
-import useLocaleString from '../../hooks/useLocaleString';
 
 const FormName = ({ content }) => {
   const getString = useLocaleString();
