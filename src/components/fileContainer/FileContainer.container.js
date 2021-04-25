@@ -7,8 +7,10 @@ import { db, firestore } from 'config/firebaseConfig';
 
 import parseText from './FileContainer.utils';
 import FileContainerView from './FileContainer.view';
+import useLocaleString from '../../hooks/useLocaleString';
 
 const FileContainer = () => {
+  const getString = useLocaleString();
   const auth = useSelector(( state ) => state?.firebase.auth );
   const formID = useSelector(( state ) => state.form.id );
   const [ acceptedFile, setAcceptedFile ] = useState([]);
@@ -26,7 +28,7 @@ const FileContainer = () => {
         .update({ answers: firestore.FieldValue.arrayUnion( ...answers ) }) // ToDo move to hook
         .then(() => {
           setAcceptedFile([]);
-          alert( 'Dane zostały zapisane' ); // ToDo change to snackbar
+          alert( getString( 'dataSave' )); // ToDo change to snackbar
         })
         .catch(( error ) => console.log( 'Error!', error )); // ToDo better error handling
     }
@@ -45,7 +47,7 @@ const FileContainer = () => {
   };
 
   const onDropRejected = () => {
-    alert( 'Taki plik nie jest akceptowany. Prosze podać plik z rozszerzeniem CSV' ); // ToDo change to snackbar
+    alert( getString( 'errorOnlyCSVAccepted' )); // ToDo change to snackbar
   };
 
   return (

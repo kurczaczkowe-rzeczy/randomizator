@@ -25,4 +25,6 @@ export default{
   dropzoneDropFile: 'Tu upuść plik',
   dropzoneSelectFile: 'Upuść tu plik lub kliknij, aby wybrać z listy',
   dropzoneOnlyCSV: 'Tylko pliki z rozszerzeniem CSV',
+  errorOnlyCSVAccepted: 'Taki plik nie jest akceptowany. Prosze podać plik z rozszerzeniem CSV',
+  dataSave: 'Dane zostały zapisane',
 } as IResourceType;
