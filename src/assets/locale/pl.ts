@@ -19,4 +19,5 @@ export default{
   draw: 'Losowanie',
   previewForm: 'Wygląd formularza',
   countAnswers: 'Ilość odpowiedzi',
+  copied: 'Skopiowano',
 } as IResourceType;

@@ -5,6 +5,7 @@ import FileCopyIcon from '@material-ui/icons/FileCopy';
 import classNames from 'classnames';
 
 import classes from 'components/copyText/copyText.module.scss';
+import useLocaleString from '../../hooks/useLocaleString';
 
 const CopyText = ({
   isCopied,
@@ -12,18 +13,22 @@ const CopyText = ({
   content,
   withFlexStart,
   onClick,
-}) => (
-  <div className={ classNames( classes.text, { [ classes.withFlexStart ]: withFlexStart }) }>
-    <CopyToClipboard
-      text={ text }
-      onCopy={ onClick }
-    >
-      <FileCopyIcon />
-    </CopyToClipboard>
-    { content }
-    <div className={ classNames( classes.copied, { [ classes.show ]: isCopied }) }>Skopiowano</div>
-  </div>
-);
+}) => {
+  const getString = useLocaleString();
+
+  return (
+    <div className={ classNames( classes.text, { [ classes.withFlexStart ]: withFlexStart }) }>
+      <CopyToClipboard
+        text={ text }
+        onCopy={ onClick }
+      >
+        <FileCopyIcon />
+      </CopyToClipboard>
+      { content }
+      <div className={ classNames( classes.copied, { [ classes.show ]: isCopied }) }>{ getString( 'copied' ) }</div>
+    </div>
+  );
+};
 
 CopyText.propTypes = {
   content: PropTypes.element.isRequired,
