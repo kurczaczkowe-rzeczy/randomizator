@@ -10,8 +10,7 @@ export const AnswersCounter = ({ counter }: IAnswersCounter ): JSX.Element => {
 
   return (
     <h3 className={ classes.title }>
-      { getString( 'countAnswers' ) }
-      {': '}
+      { `${ getString( 'countAnswers' ) }: ` }
       <span>{counter}</span>
     </h3>
   );
