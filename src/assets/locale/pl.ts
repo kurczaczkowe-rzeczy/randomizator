@@ -30,4 +30,5 @@ export default{
   dropzoneOnlyCSV: 'Tylko pliki z rozszerzeniem CSV',
   errorOnlyCSVAccepted: 'Taki plik nie jest akceptowany. Prosze podać plik z rozszerzeniem CSV',
   dataSave: 'Dane zostały zapisane',
+  typeFilterElements: 'Wprowadź składnik filtrowania',
 } as IResourceType;

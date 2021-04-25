@@ -28,4 +28,5 @@ export default{
   dropzoneDropFile: 'Drop file here',
   dropzoneSelectFile: 'Drop a file here or click to select from the list',
   dropzoneOnlyCSV: 'Only files with the CSV extension',
+  typeFilterElements: 'Enter a filtering elements',
 } as IResourceType;
