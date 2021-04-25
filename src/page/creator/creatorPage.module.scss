@@ -56,10 +56,14 @@
   display: flex;
 }
 
-.openInNewIcon{
+.openInNewIconWrapper {
   margin-right: 8px;
 
-  &:hover {
-    fill: #771e76;
+  .openInNewIcon {
+    cursor: pointer;
+
+    &:hover {
+      fill: #771e76;
+    }
   }
 }

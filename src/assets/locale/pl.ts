@@ -44,4 +44,6 @@ export default{
   modalChangeUrlFourth: 'Na obecnej stronie znajduje się wersja deweloperska. To oznacza, że znajdziesz tutaj najnowsze funkcjonalności. Sprawdzamy je tutaj czy nie popsują stabilnej wersji dostępnej pod nowym adresem. Podczas użytkowania tej wersji możesz napotkać problemy. Zachęcamy do korzystania z nowego adresu.',
   iconMade: 'Ikona stworzona przez ',
   goBackToDashboard: 'Wróć do strony twórcy',
+  openFormLink: 'Przejdź do strony z formularzem',
+  copyIcon: 'Skopiuj link',
 } as IResourceType;

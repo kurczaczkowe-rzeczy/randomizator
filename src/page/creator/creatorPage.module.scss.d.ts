@@ -6,5 +6,6 @@ export const inline: string;
 export const leftSpace: string;
 export const linkWrapper: string;
 export const openInNewIcon: string;
+export const openInNewIconWrapper: string;
 export const rightSpace: string;
 export const rowGap: string;

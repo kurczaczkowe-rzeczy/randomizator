@@ -42,7 +42,9 @@ const Creator = ({
                 <Select { ...selectFormsProps } />
               </div>
               <div className={ classes.linkWrapper }>
-                <OpenInNewIcon classes={{ root: classes.openInNewIcon }} onClick={ onGoToForm } />
+                <div className={ classes.openInNewIconWrapper } title={ getString( 'openFormLink' ) }>
+                  <OpenInNewIcon classes={{ root: classes.openInNewIcon }} onClick={ onGoToForm } />
+                </div>
                 <CopyText
                   text={ link }
                   content={ (
