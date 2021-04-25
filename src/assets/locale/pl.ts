@@ -18,4 +18,5 @@ export default{
   logout: 'Wyloguj się',
   draw: 'Losowanie',
   previewForm: 'Wygląd formularza',
+  countAnswers: 'Ilość odpowiedzi',
 } as IResourceType;

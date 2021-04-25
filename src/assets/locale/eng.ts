@@ -18,4 +18,5 @@ export default{
   logout: 'Logout',
   draw: 'Draw',
   previewForm: 'Preview form',
+  countAnswers: 'Count answers',
 } as IResourceType;
