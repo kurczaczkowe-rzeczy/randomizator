@@ -5,6 +5,7 @@ import {
   shallowEqual,
   useDispatch,
 } from 'react-redux';
+import { useHistory } from 'react-router';
 import _isNil from 'lodash/isNil';
 import _forEach from 'lodash/forEach';
 import _union from 'lodash/union';
@@ -43,6 +44,8 @@ import {
 // ToDo: issue #150
 const Creator = (): JSX.Element => {
   const getString = useLocaleString();
+  const { push } = useHistory();
+
   const [ formID, setFormID ] = useLocalStorage<string>( FORM_ID_KEY );
   const [ link, setLink ] = useState( '' );
   const [ selectedFormId, setSelectedFormId ] = useState( '' );
@@ -180,6 +183,10 @@ const Creator = (): JSX.Element => {
     value: selectedFormId,
   };
 
+  const onGoToForm = (): void => {
+    push( link );
+  };
+
   return (
     <CreatorView
       answersCounter={ answersCounter }
@@ -188,6 +195,7 @@ const Creator = (): JSX.Element => {
       logout={ onLogout }
       selectFormsProps={ selectFormsProps }
       getAnswersToFile={ getAnswersToFile }
+      onGoToForm={ onGoToForm }
     />
   );
 };

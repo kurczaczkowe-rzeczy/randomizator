@@ -35,6 +35,10 @@ export interface ICreator{
    */
   onFormIdChange?: ( formID: string ) => void;
   /**
+   * Method move user to form page
+   */
+  onGoToForm: () => void;
+  /**
    * Method for draw answers
    */
   onRandomClick: () => void;

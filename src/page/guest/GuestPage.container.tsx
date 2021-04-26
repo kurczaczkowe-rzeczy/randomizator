@@ -3,7 +3,11 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { Redirect, useParams } from 'react-router';
+import {
+  Redirect,
+  useParams,
+  useHistory,
+} from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import _isEmpty from 'lodash/isEmpty';
 
@@ -20,6 +24,9 @@ import GuestPageView from './GuestPage.view';
 
 const GuestPage = (): JSX.Element => {
   const getString = useLocaleString();
+  const { goBack } = useHistory();
+
+  const auth = useSelector(( state: RootState ) => state.firebase.auth );
   const userName = useSelector(( state: RootState ) => state.usr.userName );
   const formName = useSelector(( state: RootState ) => state.form.name );
   const errorFormName = useSelector(( state: RootState ) => state.form.errors );
@@ -70,18 +77,24 @@ const GuestPage = (): JSX.Element => {
       .catch(( error ) => console.log( 'Error!', error )); // ToDo change then().catch() to async/await with try/catch
   };
 
+  const onBackToCreator = (): void => {
+    goBack();
+  };
+
   useEffect(() => {
     dispatch( getUserName( creatorId ));
     dispatch( fetchFormName( creatorId, formId ));
-  }, []);// eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const displayPage = (
     <GuestPageView
       creatorName={ userName }
-      formName={ formName as string }
+      formName={ formName }
+      isCreator={ !!auth.uid }
       isHighlighted={ isHighlighted }
       highlightFormName={ highlightFormName }
-      onSubmit={ ( nameMale, nameFemale ): void => onSubmit( nameMale, nameFemale ) }
+      onBackToCreator={ onBackToCreator }
+      onSubmit={ onSubmit }
     />
   );
 

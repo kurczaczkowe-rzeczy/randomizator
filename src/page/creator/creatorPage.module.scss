@@ -33,11 +33,9 @@
 
 .formNameWrapper {
   display: flex;
-  width: 100%;
   flex-direction: column;
 
   .copyText {
-    width: 90%;
     margin: 0 0 0 10px;
     justify-content: space-between;
     overflow-x: scroll;
@@ -52,4 +50,20 @@
 }
 .fullWidth > div:first-of-type {
   width: 100%;
+}
+
+.linkWrapper {
+  display: flex;
+}
+
+.openInNewIconWrapper {
+  margin-right: 8px;
+
+  .openInNewIcon {
+    cursor: pointer;
+
+    &:hover {
+      fill: #771e76;
+    }
+  }
 }

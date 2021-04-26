@@ -1,6 +1,8 @@
-import { IS_DEVELOPMENT_MODE } from 'constans';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 import useLocaleString from 'hooks/useLocaleString';
+import { IS_DEVELOPMENT_MODE } from 'constans';
 
 import Card from 'components/card';
 import FileContainer from 'components/fileContainer/FileContainer.container';
@@ -25,6 +27,7 @@ const Creator = ({
   logout,
   selectFormsProps,
   getAnswersToFile,
+  onGoToForm,
 }: ICreator ): JSX.Element => {
   const getString = useLocaleString();
 
@@ -38,18 +41,23 @@ const Creator = ({
               <div className={ classes.rowGap }>
                 <Select { ...selectFormsProps } />
               </div>
-              <CopyText
-                text={ link }
-                content={ (
-                  <p className={ classes.copyText }>
-                    {link}
-                  </p>
-                ) }
-              />
+              <div className={ classes.linkWrapper }>
+                <div className={ classes.openInNewIconWrapper } title={ getString( 'openFormLink' ) }>
+                  <OpenInNewIcon classes={{ root: classes.openInNewIcon }} onClick={ onGoToForm } />
+                </div>
+                <CopyText
+                  text={ link }
+                  content={ (
+                    <p className={ classes.copyText }>
+                      { link }
+                    </p>
+                  ) }
+                />
+              </div>
             </div>
           ) }
         />
-        {IS_DEVELOPMENT_MODE && (
+        { IS_DEVELOPMENT_MODE && (
           <Button
             value={ getString( 'getAnswers' ) }
             onClick={ getAnswersToFile }
@@ -62,7 +70,7 @@ const Creator = ({
           <AnswersCounter counter={ answersCounter } />
           <IconButton
             value={ getString( 'logout' ) }
-            icon="logout"
+            icon={ <ExitToAppIcon /> }
             onClick={ logout }
           />
         </div>

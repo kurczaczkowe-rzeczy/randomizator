@@ -22,7 +22,7 @@ const CopyText = ({
         text={ text }
         onCopy={ onClick }
       >
-        <FileCopyIcon />
+        <span title={ getString( 'copyIcon' ) }><FileCopyIcon /></span>
       </CopyToClipboard>
       { content }
       <div className={ classNames( classes.copied, { [ classes.show ]: isCopied }) }>{ getString( 'copied' ) }</div>
