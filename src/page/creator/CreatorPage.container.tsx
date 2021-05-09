@@ -28,6 +28,7 @@ import {
 } from 'constans';
 
 import { IOption } from 'components/select/Select.types';
+import prepareLink from 'utils/prepareLink';
 
 import CreatorView from './CreatorPage.view';
 import {
@@ -102,7 +103,7 @@ const Creator = (): JSX.Element => {
         }
       });
 
-      setLink( `${ HOME_PAGE }/${ auth.uid }/${ formID }` );
+      setLink( `/${ auth.uid }/${ formID }` );
 
       return (): void => subscription();
     }
@@ -184,13 +185,13 @@ const Creator = (): JSX.Element => {
   };
 
   const onGoToForm = (): void => {
-    push( link );
+    push( prepareLink( link ));
   };
 
   return (
     <CreatorView
       answersCounter={ answersCounter }
-      link={ link }
+      link={ prepareLink( link, HOME_PAGE ) }
       onRandomClick={ onRandomClick }
       logout={ onLogout }
       selectFormsProps={ selectFormsProps }
