@@ -17,7 +17,7 @@ import {
   showModal,
 } from 'store/actions/globalActions';
 import {
-  APP_SUFFIX,
+  ROUTES,
   IS_DEVELOPMENT_MODE,
   SHOW_DEV_MODAL_KEY,
 } from 'constans';
@@ -32,8 +32,8 @@ import Login from 'page/login';
 
 import useStyles from './App.styles';
 
-const authenticatedRoutes = <Route exact path={ `${ APP_SUFFIX }/` } component={ Creator } />;
-const unauthenticatedRoutes = <Route exact path={ `${ APP_SUFFIX }/` } component={ Login } />;
+const authenticatedRoutes = <Route exact path={ ROUTES.home } component={ Creator } />;
+const unauthenticatedRoutes = <Route exact path={ ROUTES.home } component={ Login } />;
 
 const App = () => {
   const getString = useLocaleString();
@@ -96,10 +96,10 @@ const App = () => {
     <>
       { isLoading && <LoadingScreen /> }
       <Switch>
-        <Route exact path={ `${ APP_SUFFIX }/not_found` } component={ ErrorPage } />
-        <Route exact path={ `${ APP_SUFFIX }/:creatorId/:formId` } component={ GuestPage } />
+        <Route exact path={ ROUTES.error } component={ ErrorPage } />
+        <Route exact path={ ROUTES.guest } component={ GuestPage } />
         { ( auth.uid !== undefined ) ? authenticatedRoutes : unauthenticatedRoutes }
-        <Redirect from="/*" to={ `${ APP_SUFFIX }/not_found` } />
+        <Redirect from="/*" to={ ROUTES.notFound } />
       </Switch>
       <Modal body={ body } title={ getString( 'modalChangeUrlTitle' ) } classes={{ title: styles.modalTitle }} />
     </>

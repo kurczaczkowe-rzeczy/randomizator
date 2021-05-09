@@ -11,9 +11,9 @@ import _forEach from 'lodash/forEach';
 import _union from 'lodash/union';
 import _isNull from 'lodash/isNull';
 
+import prepareLink from 'utils/prepareLink';
 import useLocalStorage from 'hooks/useLocalStorage';
 import useLocaleString from 'hooks/useLocaleString';
-
 import { clearDraw, setDrawResult } from 'store/actions/drawAction';
 import { setAnswers } from 'store/actions/answersAction';
 import { setFormName } from 'store/actions/formAction';
@@ -102,7 +102,7 @@ const Creator = (): JSX.Element => {
         }
       });
 
-      setLink( `${ HOME_PAGE }/${ auth.uid }/${ formID }` );
+      setLink( `/${ auth.uid }/${ formID }` );
 
       return (): void => subscription();
     }
@@ -184,13 +184,13 @@ const Creator = (): JSX.Element => {
   };
 
   const onGoToForm = (): void => {
-    push( link );
+    push( prepareLink( link ));
   };
 
   return (
     <CreatorView
       answersCounter={ answersCounter }
-      link={ link }
+      link={ prepareLink( link, HOME_PAGE ) }
       onRandomClick={ onRandomClick }
       logout={ onLogout }
       selectFormsProps={ selectFormsProps }

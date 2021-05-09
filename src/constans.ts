@@ -1,3 +1,5 @@
+import prepareLink from 'utils/prepareLink';
+
 // Timeouts
 export const DELAY_DISAPPEARING = 800;
 export const DELAY_FORM_NAME_HIGHLIGHT = 1500;
@@ -14,4 +16,11 @@ export const IS_DEVELOPMENT_MODE = process.env.REACT_APP_ENVIRONMENT === 'develo
 export const APP_SUFFIX = IS_DEVELOPMENT_MODE ? '/randomizator' : '';
 export const CURRENT_DATE = process.env.REACT_APP_LAST_UPDATE_DATE;
 export const ORGANIZATION_MAIN_PAGE = 'https://github.com/kurczaczkowe-rzeczy';
+
+export const ROUTES = {
+  home: prepareLink( '/' ),
+  error: prepareLink( '/not_found' ),
+  guest: prepareLink( '/:creatorId/:formId' ),
+  notFound: prepareLink( '/not_found' ),
+};
 
