@@ -59,9 +59,10 @@ const Creator = (): JSX.Element => {
   const updateFormID = ( forms: IForm[]): void => {
     const found = forms.findIndex(( form: IForm ) => form.id === formID );
 
-    if ( found === -1 ) {
+    if ( found === -1 && forms.length > 0 ) {
       setFormID( forms[ 0 ].id );
     }
+    // ToDo: issue #160
   };
 
   useEffect(() => {

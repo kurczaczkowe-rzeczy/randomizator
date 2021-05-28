@@ -46,4 +46,5 @@ export default{
   goBackToDashboard: 'Wróć do strony twórcy',
   openFormLink: 'Przejdź do strony z formularzem',
   copyIcon: 'Skopiuj link',
+  dashboard: 'Strona główna',
 } as IResourceType;
