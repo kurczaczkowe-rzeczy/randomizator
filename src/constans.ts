@@ -15,3 +15,9 @@ export const APP_SUFFIX = IS_DEVELOPMENT_MODE ? '/randomizator' : '';
 export const CURRENT_DATE = process.env.REACT_APP_LAST_UPDATE_DATE;
 export const ORGANIZATION_MAIN_PAGE = 'https://github.com/kurczaczkowe-rzeczy';
 
+// Sizes
+export const HEIGHT_OF_COLLAPSED_MENU = 70;
+export const HEIGHT_OF_EXPANDED_MENU = '100vh';
+export const WIDTH_OF_COLLAPSED_MENU = 92;
+export const WIDTH_OF_EXPANDED_MENU = 180;
+export const MENU_ITEM_HEIGHT = 52;

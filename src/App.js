@@ -22,15 +22,17 @@ import {
   SHOW_DEV_MODAL_KEY,
 } from 'constans';
 
-import Modal from 'components/modal';
-import LoadingScreen from 'components/loadingScreen';
+import DrawerMenu from 'components/DrawerMenu';
 import Link from 'components/Link';
+import LoadingScreen from 'components/loadingScreen';
+import Modal from 'components/modal';
 import Creator from 'page/creator';
-import GuestPage from 'page/guest';
 import ErrorPage from 'page/errorPage';
+import GuestPage from 'page/guest';
 import Login from 'page/login';
 
-import useStyles from './App.styles';
+import useStyles from 'App.styles';
+import { getMenuItems } from 'App.utils';
 
 const authenticatedRoutes = <Route exact path={ `${ APP_SUFFIX }/` } component={ Creator } />;
 const unauthenticatedRoutes = <Route exact path={ `${ APP_SUFFIX }/` } component={ Login } />;
@@ -84,13 +86,15 @@ const App = () => {
       <Typography classes={{ root: styles.modalParagraph }}>
         { `${ getString( 'modalChangeUrlSecond' ) } ` }
         <Link href="https://randomizator.web.app" label="randomizator.web.app" />
-        {getString( 'modalChangeUrlThird' )}
+        { getString( 'modalChangeUrlThird' )}
       </Typography>
       <Typography classes={{ root: styles.modalParagraph }}>
-        {getString( 'modalChangeUrlFourth' )}
+        { getString( 'modalChangeUrlFourth' )}
       </Typography>
     </div>
   );
+
+  const menuItems = getMenuItems( getString );
 
   return (
     <>
@@ -101,7 +105,8 @@ const App = () => {
         { ( auth.uid !== undefined ) ? authenticatedRoutes : unauthenticatedRoutes }
         <Redirect from="/*" to={ `${ APP_SUFFIX }/not_found` } />
       </Switch>
-      <Modal body={ body } title={ getString( 'modalChangeUrlTitle' ) } classes={{ title: styles.modalTitle }} />
+      { ( auth.uid !== undefined ) && <DrawerMenu items={ menuItems } /> }
+      <Modal classes={{ title: styles.modalTitle }} body={ body } title={ getString( 'modalChangeUrlTitle' ) } />
     </>
   );
 };

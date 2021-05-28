@@ -1,20 +1,21 @@
 import { CSSProperties } from 'react';
 
+import { fade } from '@material-ui/core/styles/colorManipulator';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
 import fonts from 'assets/fonts';
 
-interface IGradients {[ key: string ]: CSSProperties['backgroundImage']}
+interface IGradients {[ key: string ]: CSSProperties[ 'backgroundImage' ]}
 
 interface IFonts {
   size: {
-    [ key: string ]: CSSProperties['fontSize'];
+    [ key: string ]: CSSProperties[ 'fontSize' ];
   };
 }
 
-interface IBorders {[ key: string ]: CSSProperties['border']}
+export interface IBorders {[ key: string ]: CSSProperties[ 'border' ]}
 
-interface IShadows {[ key: string ]: CSSProperties['boxShadow']}
+interface IShadows {[ key: string ]: CSSProperties[ 'boxShadow' ]}
 
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
@@ -39,17 +40,19 @@ declare module '@material-ui/core/styles/createMuiTheme' {
 */
 declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
-    backgroundDark: CSSProperties['color'];
-    backgroundLight: CSSProperties['color'];
-    colorText: CSSProperties['color'];
-    colorTextSelected: CSSProperties['color'];
+    backgroundDark: CSSProperties[ 'color' ];
+    backgroundLight: CSSProperties[ 'color' ];
+    colorText: CSSProperties[ 'color' ];
+    colorTextSelected: CSSProperties[ 'color' ];
+    fadedMain: () => CSSProperties[ 'color' ];
   }
 
   interface PaletteOptions {
-    backgroundDark: CSSProperties['color'];
-    backgroundLight: CSSProperties['color'];
-    colorText: CSSProperties['color'];
-    colorTextSelected: CSSProperties['color'];
+    backgroundDark: CSSProperties[ 'color' ];
+    backgroundLight: CSSProperties[ 'color' ];
+    colorText: CSSProperties[ 'color' ];
+    colorTextSelected: CSSProperties[ 'color' ];
+    fadedMain: () => CSSProperties[ 'color' ];
   }
 }
 
@@ -63,6 +66,9 @@ const palette = {
   backgroundDark: '#1b1b1b',
   colorText: '#bdaeae',
   colorTextSelected: '#fff',
+  fadedMain(): CSSProperties[ 'color' ] {
+    return fade( this.primary.main, 0.2 );
+  },
 };
 
 const shadow = {
@@ -94,6 +100,8 @@ export const theme = createMuiTheme({
   },
   fonts: {
     size: {
+      menuButton: '2rem',
+      menuItem: 16,
       label: 19,
       base: 17,
     },
@@ -101,6 +109,7 @@ export const theme = createMuiTheme({
   borders: {
     input: '2px solid',
     separator: `2px solid ${ palette.primary.main }`,
+    menu: `4px solid ${ palette.primary.main }`,
   },
   shadow,
   typography,
