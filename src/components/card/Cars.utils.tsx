@@ -1,5 +1,8 @@
-import { StringOrNode, TitleWithContentAndId } from 'types';
 import { ReactNode } from 'react';
+
+import { StringOrNode } from 'types';
+
+import { TitleWithContentAndId } from './Card.types';
 
 export const getTitleContent = ( title: StringOrNode | TitleWithContentAndId ): ReactNode => {
   if ( title && typeof title === 'string' ) {

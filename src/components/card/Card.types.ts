@@ -1,6 +1,17 @@
 import { ReactNode } from 'react';
 
-import { TitleWithContentAndId, StringOrNode } from 'types';
+import { StringOrNode } from 'types';
+
+export interface TitleWithContentAndId {
+  /**
+   * Text described content of specific card.
+   */
+  content: string;
+  /**
+   * Identifier of title.
+   */
+  id: string;
+}
 
 export interface ICard {
   /** Specify content of card */

@@ -44,4 +44,5 @@ export default{
   goBackToDashboard: 'Go back to creator page',
   openFormLink: 'Go to page with form',
   copyIcon: 'Copy link',
+  dashboard: 'dashboard',
 } as IResourceType;
