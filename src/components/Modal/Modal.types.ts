@@ -4,28 +4,28 @@ import { ClassNameMap } from '@material-ui/styles';
 
 export interface IClasses {
   /** Specify class applied to body wrapper element */
-  body: string;
+  body?: string;
   /** Specify class applied to content wrapper element */
-  content: string;
+  content?: string;
   /** Specify class applied to icon wrapper element */
-  icon: string;
+  icon?: string;
   /** Specify class applied to title wrapper element */
-  title: string;
+  title?: string;
 }
 
 export interface IModal {
-  /** Specify main content of modal */
+  /** Specify main content of *Modal* */
   body: ReactNode;
   /** Overrides or extends styles applied to component. See {@link IClasses} for details. */
   classes?: IClasses;
-  /** Element that display above modal. If not specified it doesn't display */
+  /** Element that display above *Modal*. If not specified it doesn't display */
   icon?: ReactNode;
-  /** Specify title of modal */
+  /** Specify title of *Modal* */
   title: string;
 }
 
 export interface IModalWithControls extends IModal {
-  /** This control open state of modal */
+  /** This control open state of *Modal* */
   isModalOpen: boolean;
   /** Method called when click on backdrop */
   onClose: () => void;
@@ -42,7 +42,7 @@ interface IClassesWithOverrides {
   overrides: IClasses | undefined;
   /** Local styles applied to  */
   styles: classes;
-  /** If is ```true``` icon is display above modal content and content is slightly moved */
+  /** If is ```true``` icon is display above *Modal* content and content is slightly moved */
   withIcon: boolean;
 }
 

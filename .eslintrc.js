@@ -619,6 +619,17 @@ module.exports = {
         ],
         'space-infix-ops': [ 0 ],
         '@typescript-eslint/space-infix-ops': [ 2 ],
+        '@typescript-eslint/type-annotation-spacing': [
+          2, {
+            before: false,
+            after: true,
+            overrides: {
+              arrow: {
+                before: true,
+                after: true,
+              }
+            }
+          }],
       },
     },
   ],

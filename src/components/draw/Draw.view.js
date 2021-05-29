@@ -4,7 +4,7 @@ import ScatterPlotIcon from '@material-ui/icons/ScatterPlot';
 
 import useLocaleString from 'hooks/useLocaleString';
 
-import IconButton from 'components/iconButton/IconButton.view';
+import Button from 'components/Button';
 import DrawResult from 'components/drawResult/DrawResult.view';
 import SelectFilter from 'components/selectFilter';
 
@@ -21,10 +21,11 @@ const Draw = ({
     <>
       <SelectFilter />
       { loadedData && (
-        <IconButton
+        <Button
           value={ getString( 'drawAnswers' ) }
           icon={ <ScatterPlotIcon /> }
           onClick={ onRandomClick }
+          variant="iconButton"
         />
       )}
       <DrawResult

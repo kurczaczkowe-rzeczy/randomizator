@@ -5,13 +5,12 @@ import useLocaleString from 'hooks/useLocaleString';
 import { IS_DEVELOPMENT_MODE } from 'constans';
 
 import Card from 'components/card';
-import FileContainer from 'components/fileContainer/FileContainer.container';
+import FileContainer from 'components/fileContainer';
 import Form from 'components/form';
 import Draw from 'components/draw';
 import AnswersCounter from 'components/answersCounter';
-import IconButton from 'components/iconButton';
 import CopyText from 'components/copyText';
-import Button from 'components/Button';
+import ButtonView from 'components/Button';
 import Select from 'components/select';
 
 import { ICreator } from './CreatorPage.types';
@@ -58,7 +57,7 @@ const Creator = ({
           ) }
         />
         { IS_DEVELOPMENT_MODE && (
-          <Button
+          <ButtonView
             value={ getString( 'getAnswers' ) }
             onClick={ getAnswersToFile }
           />
@@ -68,10 +67,11 @@ const Creator = ({
       <div className={ classes.rightSpace }>
         <div className={ classes.inline }>
           <AnswersCounter counter={ answersCounter } />
-          <IconButton
+          <ButtonView
             value={ getString( 'logout' ) }
             icon={ <ExitToAppIcon /> }
             onClick={ logout }
+            variant="iconButton"
           />
         </div>
         <Card

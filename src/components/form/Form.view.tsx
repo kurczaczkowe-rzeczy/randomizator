@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import useLocaleString from 'hooks/useLocaleString';
 
 import Label from './components/label/Label.view';
-import TextInput from './components/textInput/TextInput.view';
-import Button from 'components/Button';
+import TextInput from './components/textInput';
+import ButtonView from 'components/Button';
 
 import classes from './form.module.scss';
 import { IForm } from './Form.types';
@@ -44,7 +44,7 @@ export const Form = ({
         onChange={ additionalFunction }
         onFocus={ additionalFunction }
       />
-      <Button value={ getString( 'send' ) } type="submit" />
+      <ButtonView value={ getString( 'send' ) } type="submit" />
     </form>
   );
 };

@@ -14,7 +14,7 @@ import { includesSearchValues } from 'utils/includesSearchValues';
 import { IDrawerMenu } from 'components/DrawerMenu/DrawerMenu.types';
 import MenuList from 'components/MenuList';
 
-import useStyle from './DrawerMenu.styles';
+import useStyles from './DrawerMenu.styles';
 import { getMenuItems } from './DrawerMenu.utils';
 
 let isAfterFirstSwitch = false;
@@ -36,7 +36,7 @@ const DrawerMenu = ({ items }: IDrawerMenu ): JSX.Element => {
 
   const collapsed = isAfterFirstSwitch && !expanded;
 
-  const styles = useStyle();
+  const styles = useStyles();
   const rootClasses = classNames( styles.root, {
     [ styles.expand ]: expanded,
     [ styles.collapse ]: collapsed,

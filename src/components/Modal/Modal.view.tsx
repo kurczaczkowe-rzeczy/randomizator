@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { BACKDROP_TIMEOUT } from 'constans';
 
-import useStyle from './Modal.styles';
+import useStyles from './Modal.styles';
 import { IModalWithControls } from './Modal.types';
 import { getClassesWithOverrides } from './Modal.utils';
 
@@ -20,7 +20,7 @@ const Modal = ({
   onClose,
 }: IModalWithControls ): JSX.Element => {
   const styles = getClassesWithOverrides({
-    styles: useStyle(),
+    styles: useStyles(),
     overrides: classes,
     withIcon: !!icon,
   });

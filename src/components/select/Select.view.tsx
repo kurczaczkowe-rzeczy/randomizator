@@ -7,7 +7,7 @@ import {
   createOptions,
   getValue,
 } from './Select.utils';
-import useStyle from './Select.styles';
+import useStyles from './Select.styles';
 import { ISelect } from './Select.types';
 
 /**
@@ -24,7 +24,7 @@ export const Select = ({
   onItemClick,
   onOpen = undefined,
 }: ISelect ): JSX.Element => {
-  const styles = useStyle();
+  const styles = useStyles();
   const labelId = prepareID( label );
 
   const selectClasses = {

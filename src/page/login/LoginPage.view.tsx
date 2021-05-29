@@ -1,7 +1,7 @@
 import useLocaleString from 'hooks/useLocaleString';
 
 import Card from 'components/card';
-import Button from 'components/Button';
+import ButtonView from 'components/Button';
 import TextInput from 'components/form/components/textInput';
 
 import classes from './loginPage.module.scss';
@@ -33,7 +33,7 @@ export const Login = ({ onLogin, authError }: ILogin ): JSX.Element => {
                 placeholder={ getString( 'password' ) }
                 type="password"
               />
-              <Button value={ getString( 'login' ) } type="submit" />
+              <ButtonView value={ getString( 'login' ) } type="submit" />
             </form>
             {authError && <div className={ classes.error }>{authError}</div>}
           </>

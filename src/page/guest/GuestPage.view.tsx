@@ -9,7 +9,7 @@ import CopyText from 'components/copyText';
 import CreatorDescription from 'components/creatorDescription';
 import Form from 'components/form';
 import FormName from 'components/guestFormDescription';
-import IconButton from 'components/iconButton';
+import Button from 'components/Button';
 import TextBox from 'components/textBox';
 
 import { IGuest } from './GuestPage.types';
@@ -30,10 +30,11 @@ export const GuestPageView = ({
     <div className={ classes.guest }>
       <div className={ classes.descriptor }>
         { isCreator && (
-          <IconButton
+          <Button
             value={ getString( 'goBackToDashboard' ) }
             icon={ <BackIcon classes={{ root: classes.backIcon }} /> }
             onClick={ onBackToCreator }
+            variant="iconButton"
           />
         ) }
         <Card
