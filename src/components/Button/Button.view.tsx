@@ -1,22 +1,43 @@
+import { cloneElement } from 'react';
+import classNames from 'classnames';
+
 import { IButton } from './Button.types';
-import classes from './button.module.scss';
+import useStyles from './Button.styles';
 
 /**
  * Clickable element that trigger some action
  */
-export const Button = ({
+export const ButtonView = ({
+  icon,
   value,
-  type = 'button',
   onClick,
-}: IButton ): JSX.Element => (
-  <button
-    className={ classes.button }
-    // eslint-disable-next-line react/button-has-type
-    type={ type }
-    onClick={ onClick }
-  >
-    { value }
-  </button>
-);
+  type = 'button',
+  variant = 'button',
+}: IButton ): JSX.Element => {
+  const isIconButton = variant === 'iconButton';
+  const styles = useStyles();
+  const preparedIcon = isIconButton && icon
+    ? cloneElement( icon, { className: classNames( styles.icon, styles.moreSpace ) })
+    : null;
+  const buttonClasses = classNames( styles.root, { [ styles.iconButton ]: isIconButton });
 
-export default Button;
+  return (
+    <button
+      className={ buttonClasses }
+      // eslint-disable-next-line react/button-has-type
+      type={ type }
+      onClick={ onClick }
+    >
+      { isIconButton
+        ? (
+          <>
+            { preparedIcon }
+            <span>{ value }</span>
+          </>
+        )
+        : value}
+    </button>
+  );
+};
+
+export default ButtonView;

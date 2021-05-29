@@ -5,7 +5,7 @@ import { ICreator } from './CreatorPage.types';
 import mockData from './CreatorPage.mock';
 
 export default{
-  title: 'components/Select',
+  title: 'components/CreatorPage',
   component: Component,
   args: { ...mockData },
 } as Meta;

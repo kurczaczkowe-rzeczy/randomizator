@@ -7,8 +7,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import _isNil from 'lodash/isNil';
 
-import Typography from '@material-ui/core/Typography';
-
 import useLocalStorage from 'hooks/useLocalStorage';
 import useLocaleString from 'hooks/useLocaleString';
 import {
@@ -16,6 +14,7 @@ import {
   hideLoader,
   showModal,
 } from 'store/actions/globalActions';
+import { RootState } from 'store/reducers/rootReducer';
 import {
   ROUTES,
   IS_DEVELOPMENT_MODE,
@@ -23,26 +22,23 @@ import {
 } from 'constans';
 
 import DrawerMenu from 'components/DrawerMenu';
-import Link from 'components/Link';
 import LoadingScreen from 'components/loadingScreen';
-import Modal from 'components/modal';
+import ProdReleaseModal from 'components/ProdReleaseModal';
 import Creator from 'page/creator';
 import ErrorPage from 'page/errorPage';
 import GuestPage from 'page/guest';
 import Login from 'page/login';
 
-import useStyles from 'App.styles';
 import { getMenuItems } from 'App.utils';
 
 const authenticatedRoutes = <Route exact path={ ROUTES.home } component={ Creator } />;
 const unauthenticatedRoutes = <Route exact path={ ROUTES.home } component={ Login } />;
 
-const App = () => {
+const App = (): JSX.Element => {
   const getString = useLocaleString();
-  const styles = useStyles();
   const dispatch = useDispatch();
-  const auth = useSelector(( state ) => state?.firebase.auth );
-  const isLoading = useSelector(( state ) => state?.global.isLoading );
+  const auth = useSelector(( state: RootState ) => state.firebase.auth );
+  const isLoading = useSelector(( state: RootState ) => state.global.isLoading );
   const [ showDevModal, setShowDevModal ] = useLocalStorage( SHOW_DEV_MODAL_KEY );
   const bodyRef = useRef( document.body );
 
@@ -72,27 +68,11 @@ const App = () => {
 
   useEffect(() => {
     if ( isLoading ) {
-      bodyRef.current.style = 'overflow: hidden';
+      bodyRef.current.style.overflow = 'hidden';
     } else {
       bodyRef.current.removeAttribute( 'style' );
     }
   }, [ isLoading ]);
-
-  const body = (
-    <div>
-      <Typography classes={{ root: styles.modalParagraph }}>
-        { getString( 'modalChangeUrlFirst' ) }
-      </Typography>
-      <Typography classes={{ root: styles.modalParagraph }}>
-        { `${ getString( 'modalChangeUrlSecond' ) } ` }
-        <Link href="https://randomizator.web.app" label="randomizator.web.app" />
-        { getString( 'modalChangeUrlThird' )}
-      </Typography>
-      <Typography classes={{ root: styles.modalParagraph }}>
-        { getString( 'modalChangeUrlFourth' )}
-      </Typography>
-    </div>
-  );
 
   const menuItems = getMenuItems( getString );
 
@@ -106,7 +86,7 @@ const App = () => {
         <Redirect from="/*" to={ ROUTES.notFound } />
       </Switch>
       { ( auth.uid !== undefined ) && <DrawerMenu items={ menuItems } /> }
-      <Modal classes={{ title: styles.modalTitle }} body={ body } title={ getString( 'modalChangeUrlTitle' ) } />
+      <ProdReleaseModal />
     </>
   );
 };

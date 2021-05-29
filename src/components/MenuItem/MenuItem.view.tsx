@@ -1,7 +1,7 @@
 import { KeyboardEvent } from 'react';
 import classNames from 'classnames';
 
-import useStyle from './MenuItem.styles';
+import useStyles from './MenuItem.styles';
 import { IInteractiveMenuItem } from './MenuItem.types';
 
 /**
@@ -12,7 +12,7 @@ const MenuItem = ({
   children,
   onClick,
 }: IInteractiveMenuItem ): JSX.Element => {
-  const styles = useStyle();
+  const styles = useStyles();
 
   const handleOnKeyUp = ( event: KeyboardEvent<HTMLDivElement> ): void => {
     if ( event.key === 'Enter' ) {

@@ -17,7 +17,7 @@ import { theme } from 'theme';
 
 import Footer from 'components/footer';
 
-import App from './App';
+import App from 'App';
 import * as serviceWorker from './serviceWorker';
 
 const store = createStore( rootReducer,

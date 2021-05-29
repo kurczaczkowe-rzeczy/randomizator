@@ -1,4 +1,4 @@
-export default{
+const mockData = {
   body: `
   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consectetur dicta dolorem doloribus earum, est
 harum hic laboriosam, mollitia provident rerum, sequi unde veniam! Asperiores eveniet id recusandae sed
@@ -38,3 +38,5 @@ voluptates.
   title: 'Dość długa nazwa',
   isModalOpen: true,
 };
+
+export default mockData;

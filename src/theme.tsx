@@ -143,14 +143,6 @@ export const theme = createMuiTheme({
             paddingRight: '78px',
           },
         },
-        button: {
-          transition: 'all 0.6s linear',
-
-          '&:focus': {
-            outline: 'none',
-            boxShadow: shadow.focus,
-          },
-        },
         input: {
           transition: 'all 0.6s linear',
 
