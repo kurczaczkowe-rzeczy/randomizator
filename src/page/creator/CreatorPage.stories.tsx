@@ -1,8 +1,8 @@
 import { Story, Meta } from '@storybook/react';
 
 import Component from './CreatorPage.view';
-import { ICreator } from './CreatorPage.types';
 import mockData from './CreatorPage.mock';
+import { ICreator } from '.';
 
 export default{
   title: 'components/CreatorPage',
@@ -12,5 +12,4 @@ export default{
 
 const Template: Story<ICreator> = ( args ) => <Component { ...args } />;
 
-/* ToDo: issue #152
-   export const Default = Template.bind({}); */
+export const Default = Template.bind({});

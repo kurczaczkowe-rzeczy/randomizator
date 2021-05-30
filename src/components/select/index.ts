@@ -1,1 +1,1 @@
-export { default } from 'components/select/Select.view';
+export { default } from './Select.view';

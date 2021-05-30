@@ -1,7 +1,6 @@
 import { Story, Meta } from '@storybook/react';
 
-import Component from '.';
-import { ICard } from './Card.types';
+import Component, { ICard } from '.';
 
 export default{
   title: 'components/Card',
@@ -9,7 +8,7 @@ export default{
   args: { body: <div><p>Domyślny widok</p></div> },
 } as Meta;
 
-const Template : Story<ICard> = ( args ) => <Component { ...args } />;
+const Template: Story<ICard> = ( args ) => <Component { ...args } />;
 
 const Default = Template.bind({});
 const WithTitle = Template.bind({});
