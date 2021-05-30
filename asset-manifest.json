@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/css/main.a55f5495.chunk.css",
-    "main.js": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/main.ce39e0c1.chunk.js",
-    "main.js.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/main.ce39e0c1.chunk.js.map",
+    "main.js": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/main.b92918dd.chunk.js",
+    "main.js.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/main.b92918dd.chunk.js.map",
     "runtime-main.js": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/runtime-main.45b52233.js",
     "runtime-main.js.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/runtime-main.45b52233.js.map",
-    "static/js/2.19d575b4.chunk.js": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.19d575b4.chunk.js",
-    "static/js/2.19d575b4.chunk.js.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.19d575b4.chunk.js.map",
+    "static/js/2.01e81027.chunk.js": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.01e81027.chunk.js",
+    "static/js/2.01e81027.chunk.js.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.01e81027.chunk.js.map",
     "index.html": "https://kurczaczkowe-rzeczy.github.io/randomizator/index.html",
     "static/css/main.a55f5495.chunk.css.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/css/main.a55f5495.chunk.css.map",
-    "static/js/2.19d575b4.chunk.js.LICENSE.txt": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.19d575b4.chunk.js.LICENSE.txt",
+    "static/js/2.01e81027.chunk.js.LICENSE.txt": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.01e81027.chunk.js.LICENSE.txt",
     "static/media/FiraSans-Bold.3919333f.ttf": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/FiraSans-Bold.3919333f.ttf",
     "static/media/FiraSans-BoldItalic.b17b4285.ttf": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/FiraSans-BoldItalic.b17b4285.ttf",
     "static/media/FiraSans-Italic.3b21f231.ttf": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/FiraSans-Italic.3b21f231.ttf",
@@ -24,8 +24,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.45b52233.js",
-    "static/js/2.19d575b4.chunk.js",
+    "static/js/2.01e81027.chunk.js",
     "static/css/main.a55f5495.chunk.css",
-    "static/js/main.ce39e0c1.chunk.js"
+    "static/js/main.b92918dd.chunk.js"
   ]
 }
