@@ -15,6 +15,6 @@ export default{
   },
 } as Meta;
 
-const Template : Story<IErrors> = ( args ) => <Component { ...args } />;
+const Template: Story<IErrors> = ( args ) => <Component { ...args } />;
 
 export const Default = Template.bind({});
