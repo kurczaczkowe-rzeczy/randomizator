@@ -10,7 +10,10 @@ import _isNil from 'lodash/isNil';
 import _forEach from 'lodash/forEach';
 import _union from 'lodash/union';
 import _isNull from 'lodash/isNull';
+import _isEmpty from 'lodash/isEmpty';
+import _map from 'lodash/map';
 
+import { db, firestore } from 'config/firebaseConfig';
 import prepareLink from 'utils/prepareLink';
 import useLocalStorage from 'hooks/useLocalStorage';
 import useLocaleString from 'hooks/useLocaleString';
@@ -36,9 +39,10 @@ import {
   IAnswersStore,
 } from './CreatorPage.types';
 import {
-  fomCollection,
+  getFormCollection,
   formsSubscription,
   getNewFileName,
+  parseText,
 } from './CreatorPage.utils';
 
 // ToDo: issue #150
@@ -49,6 +53,8 @@ const Creator = (): JSX.Element => {
   const [ formID, setFormID ] = useLocalStorage<string>( FORM_ID_KEY );
   const [ link, setLink ] = useState( '' );
   const [ selectedFormId, setSelectedFormId ] = useState( '' );
+  const [ acceptedFileNames, setAcceptedFileNames ] = useState<string[]>([]);
+  const [ answersFromFile, setAnswersFromFile ] = useState<IAnswers[]>([]);
 
   const auth = useSelector(( state: RootState ) => state.firebase.auth, shallowEqual );
   const answersCounter = useSelector(( state: RootState ) => state.ans.counter );
@@ -86,7 +92,6 @@ const Creator = (): JSX.Element => {
       return (): void => subscription();
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
   useEffect(() => {
     if ( auth && formID !== null ) {
       const subscription = formsSubscription( auth.uid, ( doc ) => {
@@ -124,55 +129,87 @@ const Creator = (): JSX.Element => {
 
     dispatch( setAnswers( result, answers.length ));
   };
-
   const onFormIdChange = ( formID: string ): void => {
     setFormID( formID );
     dispatch( clearDraw());
   };
-
   const onRandomClick = (): void => {
     dispatch( setDrawResult());
   };
-
   const onLogout = (): void => {
     dispatch( signOut());
   };
 
   useEffect(() => {
-    if ( _isNull( answersCounter )) {
-      dispatch( showLoader( 'CREATOR_PAGE' ));
-    } else {
-      dispatch( hideLoader( 'CREATOR_PAGE' ));
-    }
+    const toggleLoader = _isNull( answersCounter ) ? showLoader( 'CREATOR_PAGE' ) : hideLoader( 'CREATOR_PAGE' );
+
+    dispatch( toggleLoader );
   }, [ answersCounter, dispatch ]);
 
-  const getAnswersToFile = async (): Promise<void> => {
+  const onDownloadAnswers = async (): Promise<void> => {
     if ( IS_DEVELOPMENT_MODE && formID ) {
-      const savedForm = await fomCollection( auth.uid, formID );
-      const answersOfForm = savedForm?.answers;
-      const formName = savedForm ? savedForm.name.replaceAll( ' ', '_' ) : getNewFileName();
+      try {
+        const savedForm = await getFormCollection( auth.uid, formID );
+        const answersOfForm = savedForm?.answers;
+        const formName = savedForm ? savedForm.name.replaceAll( ' ', '_' ) : getNewFileName();
 
-      /* In database doesn't exist emptyColumn fields that is append in google forms
-         and we want to bo compatibility with it so we added it to header row */
-      answersOfForm[ 0 ] = {
-        emptyColumn: '',
-        ...answersOfForm[ 0 ],
-      };
+        /* In database doesn't exist emptyColumn fields that is append in google forms
+         and we want to be compatibility with it so we added it to header row */
+        answersOfForm[ 0 ] = {
+          emptyColumn: '',
+          ...answersOfForm[ 0 ],
+        };
 
-      const csvContent = `data:text/csv;charset=utf-8,${ jsonToCSV( answersOfForm ) }`;
-      const encodedUri = encodeURI( csvContent );
-      const link = document.createElement( 'a' );
+        const csvContent = `data:text/csv;charset=utf-8,${ jsonToCSV( answersOfForm ) }`;
+        const encodedUri = encodeURI( csvContent );
+        const link = document.createElement( 'a' );
 
-      link.setAttribute( 'href', encodedUri );
-      link.setAttribute( 'download', `${ formName }.csv` );
+        link.setAttribute( 'href', encodedUri );
+        link.setAttribute( 'download', `${ formName }.csv` );
 
-      link.click();
+        link.click();
+      } catch ( error: unknown ) { console.error( 'Error!', error ); }
     }
   };
-
   const onMenuItemClick = ( option: IOption ): void => {
     setSelectedFormId( option.name );
     onFormIdChange( option.id );
+  };
+  const onGoToForm = (): void => { push( prepareLink( link )); };
+
+  const onDropAccepted = ( acceptedFiles: File[]): void => {
+    setAcceptedFileNames( _map( acceptedFiles, ( file ) => file.name ));
+
+    const reader = new FileReader();
+
+    reader.onload = (): void => {
+      const { result } = reader;
+
+      if ( typeof result === 'string' ) {
+        setAnswersFromFile( parseText( result ));
+      } else {
+        console.error( 'TypeError: CreatorPageContainer.onDropAccepted.reader.onload ->', {
+          resultType: typeof result,
+          result,
+        });
+      }
+    };
+
+    reader.readAsText( acceptedFiles[ 0 ]);
+  };
+  const onDropRejected = (): void => { alert( getString( 'errorOnlyCSVAccepted' )); }; // ToDo change to snackbar
+  const onRemove = (): void => { setAcceptedFileNames([]); };
+  const onSend = async (): Promise<void> => {
+    if ( !_isEmpty( answersFromFile )) {
+      try {
+        const docReference = await db.collection( auth.uid ).doc( formID );
+
+        // ToDo move to hook
+        await docReference.update({ answers: firestore.FieldValue.arrayUnion( ...answersFromFile ) });
+        setAcceptedFileNames([]);
+        alert( getString( 'dataSave' )); // ToDo change to snackbar
+      } catch ( error: unknown ) { console.log( 'Error!', error ); } // ToDo better error handling
+    }
   };
 
   const selectFormsProps = {
@@ -183,20 +220,24 @@ const Creator = (): JSX.Element => {
     label: getString( 'activeNameForm' ),
     value: selectedFormId,
   };
-
-  const onGoToForm = (): void => {
-    push( prepareLink( link ));
+  const fileContainerProps = {
+    acceptedFileNames,
+    onDropAccepted,
+    onDropRejected,
+    onRemove,
+    onSend,
   };
 
   return (
     <CreatorView
       answersCounter={ answersCounter }
+      fileContainerProps={ fileContainerProps }
       link={ prepareLink( link, HOME_PAGE ) }
-      onRandomClick={ onRandomClick }
-      logout={ onLogout }
       selectFormsProps={ selectFormsProps }
-      getAnswersToFile={ getAnswersToFile }
+      onDownloadAnswers={ onDownloadAnswers }
+      onDrawClick={ onRandomClick }
       onGoToForm={ onGoToForm }
+      onLogout={ onLogout }
     />
   );
 };

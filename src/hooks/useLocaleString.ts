@@ -7,7 +7,7 @@ import { RootState } from 'store/reducers/rootReducer';
 import { GetString, IResourceType } from './types';
 
 const useLocaleString = (): GetString => {
-  const language = useSelector(( state: RootState ) => state?.global.language );
+  const language = useSelector(( state: RootState ) => state.global.language );
   let localeFile: IResourceType;
 
   switch ( language ) {

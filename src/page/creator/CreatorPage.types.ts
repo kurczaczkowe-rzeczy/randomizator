@@ -1,7 +1,14 @@
+import { IFileContainer } from 'components/FileContainer';
 import { ISelect } from 'components/select/Select.types';
 
 export interface IForm{
+  /**
+   * Identifier of specific form.
+   */
   id: string;
+  /**
+   * Name of form.
+   */
   name: string;
 }
 
@@ -13,37 +20,41 @@ export interface IAnswersStore{
   [key: string]: string[];
 }
 
-export interface ICreator{
+export interface ICreator {
   /**
-   * Number of form answers
+   * Number of form answers.
    */
   answersCounter: number;
   /**
-   * Method for convert answers to csv file
+   * Props passed to FileContainer component.
    */
-  getAnswersToFile: () => void;
+  fileContainerProps: IFileContainer;
   /**
-   * Link to specific form
+   * Link to specific form.
    */
   link: string;
   /**
-   * Method for sign out users
+   * Method download answers and converts it to csv file.
    */
-  logout: () => void;
+  onDownloadAnswers: () => void;
   /**
-   * Method for change current displays form
+   * Method draw answers.
+   */
+  onDrawClick: () => void;
+  /**
+   * Method change current displays form.
    */
   onFormIdChange?: ( formID: string ) => void;
   /**
-   * Method move user to form page
+   * Method move user to form page.
    */
   onGoToForm: () => void;
   /**
-   * Method for draw answers
+   * Method sign out users.
    */
-  onRandomClick: () => void;
+  onLogout: () => void;
   /**
-   * Props passed to select with forms
+   * Props passed to select with forms.
    */
   selectFormsProps: ISelect;
 }

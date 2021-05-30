@@ -4,13 +4,13 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import useLocaleString from 'hooks/useLocaleString';
 import { IS_DEVELOPMENT_MODE } from 'constans';
 
-import Card from 'components/card';
-import FileContainer from 'components/fileContainer';
-import Form from 'components/form';
-import Draw from 'components/draw';
 import AnswersCounter from 'components/answersCounter';
-import CopyText from 'components/copyText';
 import ButtonView from 'components/Button';
+import Card from 'components/card';
+import CopyText from 'components/copyText';
+import Draw from 'components/draw';
+import FileContainer from 'components/FileContainer';
+import Form from 'components/form';
 import Select from 'components/select';
 
 import { ICreator } from './CreatorPage.types';
@@ -21,12 +21,13 @@ import classes from './creatorPage.module.scss';
  */
 const Creator = ({
   answersCounter,
+  fileContainerProps,
   link,
-  onRandomClick,
-  logout,
   selectFormsProps,
-  getAnswersToFile,
+  onDownloadAnswers,
+  onDrawClick,
   onGoToForm,
+  onLogout,
 }: ICreator ): JSX.Element => {
   const getString = useLocaleString();
 
@@ -59,10 +60,10 @@ const Creator = ({
         { IS_DEVELOPMENT_MODE && (
           <ButtonView
             value={ getString( 'getAnswers' ) }
-            onClick={ getAnswersToFile }
+            onClick={ onDownloadAnswers }
           />
         )}
-        <FileContainer />
+        <FileContainer { ...fileContainerProps } />
       </div>
       <div className={ classes.rightSpace }>
         <div className={ classes.inline }>
@@ -70,7 +71,7 @@ const Creator = ({
           <ButtonView
             value={ getString( 'logout' ) }
             icon={ <ExitToAppIcon /> }
-            onClick={ logout }
+            onClick={ onLogout }
             variant="iconButton"
           />
         </div>
@@ -81,7 +82,7 @@ const Creator = ({
         <Card
           cardClass={ classes.fullWidth }
           title={ getString( 'draw' ) }
-          body={ <Draw onRandomClick={ onRandomClick } /> }
+          body={ <Draw onRandomClick={ onDrawClick } /> }
         />
       </div>
     </div>

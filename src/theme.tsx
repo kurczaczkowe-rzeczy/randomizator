@@ -74,6 +74,7 @@ const palette = {
 const shadow = {
   card: `0 0 5px ${ palette.primary.main }`,
   focus: `0 0 10px ${ palette.primary.main }`,
+  dropzoneBoxActive: `0 0 10px ${ palette.primary.main }`,
 };
 
 const typography = {
@@ -84,6 +85,14 @@ const typography = {
   h4: { fontFamily: 'FiraSans' },
   h5: { fontFamily: 'FiraSans' },
   h6: { fontFamily: 'FiraSans' },
+};
+
+const borders = {
+  input: '2px solid',
+  separator: `2px solid ${ palette.primary.main }`,
+  menu: `4px solid ${ palette.primary.main }`,
+  dropzoneBox: `3px dashed ${ palette.colorText }`,
+  dropzoneBoxActive: `3px dashed ${ palette.primary.main }`,
 };
 
 export const theme = createMuiTheme({
@@ -106,11 +115,7 @@ export const theme = createMuiTheme({
       base: 17,
     },
   },
-  borders: {
-    input: '2px solid',
-    separator: `2px solid ${ palette.primary.main }`,
-    menu: `4px solid ${ palette.primary.main }`,
-  },
+  borders,
   shadow,
   typography,
   overrides: {
