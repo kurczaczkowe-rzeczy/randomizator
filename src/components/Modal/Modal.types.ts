@@ -31,19 +31,13 @@ export interface IModalWithControls extends IModal {
   onClose: () => void;
 }
 
-type classes = ClassNameMap<
-  | 'modal' | 'separator' | 'contentWrapper'
-  | 'iconWrapper' | 'titleWrapper' | 'bodyWrapper'
-  | 'title' | 'withIcon'
+export type LocalStylesMap = ClassNameMap<
+  | 'modal'
+  | 'separator'
+  | 'contentWrapper'
+  | 'iconWrapper'
+  | 'titleWrapper'
+  | 'bodyWrapper'
+  | 'title'
+  | 'withIcon'
 >;
-
-interface IClassesWithOverrides {
-  /** Class overrides or extend local styles */
-  overrides: IClasses | undefined;
-  /** Local styles applied to  */
-  styles: classes;
-  /** If is ```true``` icon is display above *Modal* content and content is slightly moved */
-  withIcon: boolean;
-}
-
-export type classesOverrides = ( args: IClassesWithOverrides ) => classes;

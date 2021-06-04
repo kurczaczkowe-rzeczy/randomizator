@@ -1,4 +1,5 @@
 import Typography from '@material-ui/core/Typography';
+import { ReactComponent as Unicorn } from 'assets/unicorn.svg';
 
 import useLocaleString from 'hooks/useLocaleString';
 import { PROD_ADDRESS, PROD_HOST_NAME } from 'constans';
@@ -35,6 +36,7 @@ const ProdReleaseModal = (): JSX.Element => {
         </div>
       ) }
       title={ getString( 'modalChangeUrlTitle' ) }
+      icon={ <Unicorn /> }
     />
   );
 };

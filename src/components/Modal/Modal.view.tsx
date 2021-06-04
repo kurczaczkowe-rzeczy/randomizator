@@ -3,15 +3,18 @@ import Grow from '@material-ui/core/Grow';
 import Typography from '@material-ui/core/Typography';
 
 import { BACKDROP_TIMEOUT } from 'constans';
+import getClassOverrides from 'utils/getClassOverrides';
 
 import useStyles from './Modal.styles';
-import { IModalWithControls } from './Modal.types';
-import { getClassesWithOverrides } from './Modal.utils';
+import {
+  IModalWithControls,
+  LocalStylesMap,
+} from './Modal.types';
 
 /**
  * UI element that display over entire page.
  */
-const Modal = ({
+export const Modal = ({
   body,
   classes = undefined,
   icon = null,
@@ -19,18 +22,19 @@ const Modal = ({
   title,
   onClose,
 }: IModalWithControls ): JSX.Element => {
-  const styles = getClassesWithOverrides({
-    styles: useStyles(),
-    overrides: classes,
-    withIcon: !!icon,
-  });
+  const localStyles = useStyles();
+  const styles = getClassOverrides<LocalStylesMap>( localStyles,
+    {
+      iconWrapper: classes?.icon,
+      titleWrapper: classes?.title,
+      bodyWrapper: classes?.body,
+      contentWrapper: [{ [ localStyles.withIcon ]: !!icon }, classes?.content ],
+    });
 
   return (
     <MuiModal
       closeAfterTransition
-      aria-labelledby="modalTitle"
       BackdropProps={{ timeout: BACKDROP_TIMEOUT }}
-      // eslint-disable-next-line react/forbid-component-props
       className={ styles.modal }
       open={ isModalOpen }
       onClose={ onClose }
@@ -52,4 +56,3 @@ const Modal = ({
 };
 
 export default Modal;
-export { Modal };
