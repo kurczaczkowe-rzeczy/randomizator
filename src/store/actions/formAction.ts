@@ -3,7 +3,7 @@ import { ThunkAction } from 'redux-thunk';
 import {
   SET_FORM_NAME,
   ERROR_FORM_DONT_EXIST,
-}  from 'store/actions';
+} from 'store/actions';
 import {
   FormAction,
   IForm,

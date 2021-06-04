@@ -16,7 +16,7 @@ export const TextNode = ({
   const styles = useStyles();
 
   return (
-    <p className={ classNames( styles.root, !_isEmpty( classes ) &&  classes ) }>
+    <p className={ classNames( styles.root, !_isEmpty( classes ) && classes ) }>
       {value}
       {( required && type === 'label' ) && <span>* </span>}
       {type === 'label' && ':'}
