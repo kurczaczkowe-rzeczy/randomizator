@@ -105,6 +105,7 @@ const rules = {
       maxEOF: 1,
     },
   ],
+  'no-multi-spaces': [ 2 ],
   'no-new-symbol': [ 2 ],
   'no-obj-calls': [ 2 ],
   'no-template-curly-in-string': [ 2 ],
@@ -340,7 +341,7 @@ const rules = {
     'always',
     { ignoreClassFields: false },
   ],
-  'react/forbid-component-props': [ 2, { forbid: [ 'className', 'style' ]}],
+  'react/forbid-component-props': [ 0 ],
   'react/forbid-prop-types': [
     2,
     {

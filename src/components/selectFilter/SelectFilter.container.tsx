@@ -38,7 +38,7 @@ const SelectFilter = (): JSX.Element => {
     dispatch( addTag( tag ));
   }, [ dispatch ]);
 
-  const  handleDrag: HandleDrag = useCallback((
+  const handleDrag: HandleDrag = useCallback((
     tag, currPos, newPos,
   ) => {
     const newTags = [ ...tags ];
