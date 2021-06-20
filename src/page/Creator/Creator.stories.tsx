@@ -1,11 +1,11 @@
 import { Story, Meta } from '@storybook/react';
 
-import Component from './CreatorPage.view';
-import mockData from './CreatorPage.mock';
+import Component from './Creator.view';
+import mockData from './Creator.mock';
 import { ICreator } from '.';
 
 export default{
-  title: 'components/CreatorPage',
+  title: 'pages/Creator',
   component: Component,
   args: { ...mockData },
 } as Meta;

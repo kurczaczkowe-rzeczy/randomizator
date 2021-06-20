@@ -12,10 +12,13 @@ import FormName from 'components/guestFormDescription';
 import Button from 'components/Button';
 import TextBox from 'components/textBox';
 
-import { IGuest } from './GuestPage.types';
-import classes from './guestPage.module.scss';
+import { IGuest } from './Guest.types';
+import useStyles from './Guest.styles';
 
-export const GuestPageView = ({
+/**
+ * Page allows user to send data for creator.
+ */
+export const GuestView = ({
   creatorName,
   formName = '',
   onSubmit,
@@ -24,27 +27,28 @@ export const GuestPageView = ({
   onBackToCreator,
   isCreator,
 }: IGuest ): JSX.Element => {
+  const styles = useStyles();
   const getString = useLocaleString();
 
   return (
-    <div className={ classes.guest }>
-      <div className={ classes.descriptor }>
+    <div className={ styles.root }>
+      <div className={ styles.descriptor }>
         { isCreator && (
           <Button
-            value={ getString( 'goBackToDashboard' ) }
-            icon={ <BackIcon classes={{ root: classes.backIcon }} /> }
+            value={ getString( 'goBackToCreator' ) }
+            icon={ <BackIcon classes={{ root: styles.backIcon }} /> }
             onClick={ onBackToCreator }
             variant="iconButton"
           />
         ) }
         <Card
-          cardClass={ classes.baseLine }
+          cardClass={ styles.baseLine }
           centerBody={ false }
           body={ <CreatorDescription content={ creatorName } /> }
         />
         <Card
           id="formName"
-          cardClass={ classNames( classes.baseLine, { [ classes.highlightCard ]: isHighlighted }) }
+          cardClass={ classNames( styles.baseLine, { [ styles.highlightCard ]: isHighlighted }) }
           centerBody={ false }
           body={ (
             <FormName content={ (
@@ -53,7 +57,7 @@ export const GuestPageView = ({
                 text={ formName }
                 content={ (
                   <TextBox
-                    additionalClasses={ classNames( classes.textBox, { [ classes.highlightText ]: isHighlighted }) }
+                    additionalClasses={ classNames( styles.textBox, { [ styles.highlightText ]: isHighlighted }) }
                   >
                     { formName }
                   </TextBox>
@@ -79,4 +83,4 @@ export const GuestPageView = ({
   );
 };
 
-export default GuestPageView;
+export default GuestView;

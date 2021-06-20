@@ -13,8 +13,8 @@ import FileContainer from 'components/FileContainer';
 import Form from 'components/form';
 import Select from 'components/select';
 
-import { ICreator } from './CreatorPage.types';
-import classes from './creatorPage.module.scss';
+import { ICreator } from './Creator.types';
+import useStyles from './Creator.styles';
 
 /**
  * Page displaying panel for authenticated users
@@ -29,26 +29,27 @@ const Creator = ({
   onGoToForm,
   onLogout,
 }: ICreator ): JSX.Element => {
+  const styles = useStyles();
   const getString = useLocaleString();
 
   return (
-    <div className={ classes.creator }>
-      <div className={ classes.leftSpace }>
+    <div className={ styles.root }>
+      <div className={ styles.leftSpace }>
         <Card
           centerBody={ false }
           body={ (
-            <div className={ classes.formNameWrapper }>
-              <div className={ classes.rowGap }>
+            <div className={ styles.formNameWrapper }>
+              <div className={ styles.rowGap }>
                 <Select { ...selectFormsProps } />
               </div>
-              <div className={ classes.linkWrapper }>
-                <div className={ classes.openInNewIconWrapper } title={ getString( 'openFormLink' ) }>
-                  <OpenInNewIcon classes={{ root: classes.openInNewIcon }} onClick={ onGoToForm } />
+              <div className={ styles.linkWrapper }>
+                <div className={ styles.openInNewIconWrapper } title={ getString( 'openFormLink' ) }>
+                  <OpenInNewIcon classes={{ root: styles.openInNewIcon }} onClick={ onGoToForm } />
                 </div>
                 <CopyText
                   text={ link }
                   content={ (
-                    <p className={ classes.copyText }>
+                    <p className={ styles.copyText }>
                       { link }
                     </p>
                   ) }
@@ -65,8 +66,8 @@ const Creator = ({
         )}
         <FileContainer { ...fileContainerProps } />
       </div>
-      <div className={ classes.rightSpace }>
-        <div className={ classes.inline }>
+      <div className={ styles.rightSpace }>
+        <div className={ styles.inline }>
           <AnswersCounter counter={ answersCounter } />
           <ButtonView
             value={ getString( 'logout' ) }
@@ -80,7 +81,7 @@ const Creator = ({
           body={ <Form preview /> }
         />
         <Card
-          cardClass={ classes.fullWidth }
+          cardClass={ styles.fullWidth }
           title={ getString( 'draw' ) }
           body={ <Draw onRandomClick={ onDrawClick } /> }
         />

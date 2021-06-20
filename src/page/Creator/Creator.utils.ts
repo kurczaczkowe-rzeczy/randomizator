@@ -4,7 +4,7 @@ import _forEach from 'lodash/forEach';
 import _isEmpty from 'lodash/isEmpty';
 
 import { db } from 'config/firebaseConfig';
-import { IAnswers, IForm } from 'page/creator/CreatorPage.types';
+import { IAnswers, IForm } from './Creator.types';
 
 type returnedType = () => void;
 

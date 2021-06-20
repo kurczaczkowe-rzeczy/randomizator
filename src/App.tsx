@@ -24,9 +24,9 @@ import {
 import DrawerMenu from 'components/DrawerMenu';
 import LoadingScreen from 'components/loadingScreen';
 import ProdReleaseModal from 'components/ProdReleaseModal';
-import Creator from 'page/creator';
+import Creator from 'page/Creator';
 import ErrorPage from 'page/errorPage';
-import GuestPage from 'page/guest';
+import GuestPage from 'page/Guest';
 import Login from 'page/Login';
 
 import { getMenuItems } from 'App.utils';

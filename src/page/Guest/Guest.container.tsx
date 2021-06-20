@@ -20,7 +20,7 @@ import { fetchFormName } from 'store/actions/formAction';
 import { RootState } from 'store/reducers/rootReducer';
 import { APP_SUFFIX, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
 
-import GuestPageView from './GuestPage.view';
+import GuestView from './Guest.view';
 
 const GuestPage = (): JSX.Element => {
   const getString = useLocaleString();
@@ -87,7 +87,7 @@ const GuestPage = (): JSX.Element => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const displayPage = (
-    <GuestPageView
+    <GuestView
       creatorName={ userName }
       formName={ formName }
       isCreator={ !!auth.uid }
