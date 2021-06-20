@@ -477,6 +477,7 @@ const rules = {
   ],
   'react-hooks/exhaustive-deps': [ 1 ],
   'react-hooks/rules-of-hooks': [ 2 ],
+  "@typescript-eslint/explicit-function-return-type": [ 0 ],
 };
 
 const orderConfig = {
@@ -552,7 +553,9 @@ module.exports = {
         '@typescript-eslint/default-param-last': [ 2 ],
         'dot-notation': [ 0 ],
         '@typescript-eslint/dot-notation': [ 2 ],
-        '@typescript-eslint/explicit-function-return-type': [ 1 ],
+        '@typescript-eslint/explicit-function-return-type': [ 1, {
+          allowExpressions: true,
+        }],
         'func-call-spacing': [ 0 ],
         '@typescript-eslint/func-call-spacing': [ 2, 'never' ],
         'keyword-spacing': [ 0 ],

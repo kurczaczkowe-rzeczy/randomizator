@@ -27,7 +27,7 @@ import ProdReleaseModal from 'components/ProdReleaseModal';
 import Creator from 'page/creator';
 import ErrorPage from 'page/errorPage';
 import GuestPage from 'page/guest';
-import Login from 'page/login';
+import Login from 'page/Login';
 
 import { getMenuItems } from 'App.utils';
 
