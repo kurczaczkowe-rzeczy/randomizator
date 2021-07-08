@@ -35,9 +35,10 @@ export type FormState = IForm & IState;
 
 // ACTIONS
 export type LogoutAction = IAction<LogoutActionsTypes>;
+export interface IGlobalActionsPayloads { callFrom: string }
 export type GlobalAction =
   | IAction<GlobalActionsTypes>
-  | IActionWithPayload<GlobalActionsTypesWithPayload, { callFrom: string }>;
+  | IActionWithPayload<GlobalActionsTypesWithPayload, IGlobalActionsPayloads>;
 export type FormsAction = IAction<typeof CLEAR_FORMS> | IActionWithPayload<typeof ADD_FORM, IForm>;
 export type FormAction =
   | IAction<typeof CLEAR_FORM>

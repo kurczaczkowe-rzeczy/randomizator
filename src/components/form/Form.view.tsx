@@ -1,3 +1,5 @@
+import { SyntheticEvent } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 import classNames from 'classnames';
 
 import useLocaleString from 'hooks/useLocaleString';
@@ -7,7 +9,7 @@ import TextInput from './components/textInput';
 import ButtonView from 'components/Button';
 
 import classes from './form.module.scss';
-import { IForm } from './Form.types';
+import { IForm, IGuestValues } from './Form.types';
 
 // ToDo create component that wraps label and textInput
 /**
@@ -18,31 +20,50 @@ export const Form = ({
   additionalFunction,
   onSubmit,
 }: IForm ): JSX.Element => {
+  const { control, handleSubmit } = useFormContext<IGuestValues>();
   const getString = useLocaleString();
 
   return (
     <form
       className={ classNames( classes.form, { [ classes.disabled ]: preview }) }
-      onSubmit={ ( event ): void => {
-        event.preventDefault();
-        onSubmit( event );
-      } }
+      onSubmit={ handleSubmit( onSubmit ) }
     >
       <div className={ classes.alignBottom }>
         <Label content={ getString( 'nameMaleLabel' ) } />
-        <TextInput name="name_male" />
+        <Controller
+          control={ control }
+          name="nameMale"
+          render={ ({ field }): JSX.Element => (
+            <TextInput { ...field } />
+          ) }
+        />
       </div>
       <div className={ classes.alignBottom }>
         <Label content={ getString( 'nameFemaleLabel' ) } />
-        <TextInput name="name_female" />
+        <Controller
+          control={ control }
+          name="nameFemale"
+          render={ ({ field }): JSX.Element => (
+            <TextInput { ...field } />
+          ) }
+        />
       </div>
-      <TextInput
-        required
-        fullWidth
-        name="check_is_not_robot"
-        placeholder={ getString( 'formSendPlaceholder' ) }
-        onChange={ additionalFunction }
-        onFocus={ additionalFunction }
+      <Controller
+        control={ control }
+        name="checkIsNotRobot"
+        render={ ({ field }): JSX.Element => (
+          <TextInput
+            required
+            fullWidth
+            onFocus={ additionalFunction }
+            placeholder={ getString( 'formSendPlaceholder' ) }
+            { ...field }
+            onChange={ ( event: SyntheticEvent ) => {
+              additionalFunction( event );
+              field.onChange( event );
+            } }
+          />
+        ) }
       />
       <ButtonView value={ getString( 'send' ) } type="submit" />
     </form>

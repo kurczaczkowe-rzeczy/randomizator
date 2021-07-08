@@ -41,6 +41,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
 declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
     backgroundDark: CSSProperties[ 'color' ];
+    backgroundHighlighted: CSSProperties[ 'color' ];
     backgroundLight: CSSProperties[ 'color' ];
     colorText: CSSProperties[ 'color' ];
     colorTextSelected: CSSProperties[ 'color' ];
@@ -49,6 +50,7 @@ declare module '@material-ui/core/styles/createPalette' {
 
   interface PaletteOptions {
     backgroundDark: CSSProperties[ 'color' ];
+    backgroundHighlighted: CSSProperties[ 'color' ];
     backgroundLight: CSSProperties[ 'color' ];
     colorText: CSSProperties[ 'color' ];
     colorTextSelected: CSSProperties[ 'color' ];
@@ -62,6 +64,8 @@ const palette = {
     light: '#765076',
   },
   secondary: { main: '#e28521' },
+  error: { main: '#b02d2d' },
+  backgroundHighlighted: '#333',
   backgroundLight: '#222',
   backgroundDark: '#1b1b1b',
   colorText: '#bdaeae',

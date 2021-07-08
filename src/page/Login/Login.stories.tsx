@@ -1,7 +1,7 @@
 import { Story, Meta } from '@storybook/react';
 
-import Component from './LoginPage.view';
-import { ILogin } from './LoginPage.types';
+import Component from './Login.view';
+import { ILogin } from './Login.types';
 
 export default{
   title: 'pages/LoginPage',

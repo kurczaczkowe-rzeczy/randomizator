@@ -1,10 +1,11 @@
-import { SyntheticEvent } from 'react';
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { signIn } from 'store/actions/authAction';
 import { RootState } from 'store/reducers/rootReducer';
 
-import LoginPageView from 'page/login/LoginPage.view';
+import LoginPageView from './Login.view';
+import { ILoginValues } from './Login.types';
 
 const Login = (): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -12,18 +13,9 @@ const Login = (): JSX.Element => {
   const authError = useSelector(( state: RootState ) => state.auth.authError );
   const dispatch = useDispatch();
 
-  const handleLogin = ( event: SyntheticEvent ): void => {
-    event.preventDefault();
-    const target = event.target as typeof event.target & {
-      email: { value: string };
-      password: { value: string };
-    };
-
-    const email = target.email.value;
-    const password = target.password.value;
-
-    dispatch( signIn({ email, password }));
-  };
+  const handleLogin = useCallback(( data: ILoginValues ): void => {
+    dispatch( signIn( data ));
+  }, [ dispatch ]);
 
   return (
     <LoginPageView authError={ authError } onLogin={ handleLogin } />

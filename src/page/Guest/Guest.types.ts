@@ -2,7 +2,7 @@ import { SyntheticEvent } from 'react';
 
 export interface IGuest{
   /**
-   * Name of form creator
+   * Name of form Creator
    */
   creatorName: string;
   /**
@@ -22,7 +22,7 @@ export interface IGuest{
    */
   isHighlighted?: boolean;
   /**
-   * Methods takes user back to creator page
+   * Methods takes user back to Creator page
    */
   onBackToCreator: () => void;
   /**
