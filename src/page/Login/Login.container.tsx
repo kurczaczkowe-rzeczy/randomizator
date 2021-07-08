@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from 'store/actions/authAction';
 import { RootState } from 'store/reducers/rootReducer';
 
-import LoginPageView from './LoginPage.view';
-import { ILoginValues } from './LoginPage.types';
+import LoginPageView from './Login.view';
+import { ILoginValues } from './Login.types';
 
 const Login = (): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

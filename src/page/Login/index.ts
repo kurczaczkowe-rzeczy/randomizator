@@ -1,2 +1,2 @@
-export { default } from './LoginPage.container';
-export type { ILoginValues, ILogin } from './LoginPage.types';
+export { default } from './Login.container';
+export type { ILoginValues, ILogin } from './Login.types';

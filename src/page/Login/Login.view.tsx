@@ -6,8 +6,8 @@ import Card from 'components/card';
 import ButtonView from 'components/Button';
 import TextInput from 'components/form/components/textInput';
 
-import { ILogin, ILoginValues } from './LoginPage.types';
-import useStyles from './LoginPage.styles';
+import { ILogin, ILoginValues } from './Login.types';
+import useStyles from './Login.styles';
 
 /**
  * Page displaying Login form
