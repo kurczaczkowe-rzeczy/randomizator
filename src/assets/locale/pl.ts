@@ -20,7 +20,7 @@ export default{
   getAnswers: 'Pobierz odpowiedzi',
   logout: 'Wyloguj się',
   login: 'Zaloguj się',
-  email: 'email@przykladowy.pl',
+  emailAddress: 'email@przykladowy.pl',
   password: 'hasło',
   draw: 'Losowanie',
   previewForm: 'Wygląd formularza',

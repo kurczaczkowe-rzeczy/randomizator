@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import { FormProvider, useForm } from 'react-hook-form';
 import _isEmpty from 'lodash/isEmpty';
 import _isEqual from 'lodash/isEqual';
 import _some from 'lodash/some';
@@ -8,31 +9,33 @@ import { RootState } from 'store/reducers/rootReducer';
 import useLocaleString from 'hooks/useLocaleString';
 
 import FormView from './Form.view';
-import { FormContainer } from './Form.types';
+import { FormContainer, IGuestValues } from './Form.types';
 
+// ToDo: #167
 const Form = ({
   preview = false,
   onSubmit = (): void => {},
   additionalFunction = (): void => {},
 }: FormContainer ): JSX.Element => {
+  const methods = useForm<IGuestValues>();
   const getString = useLocaleString();
   const nameOfForm = useSelector(( state: RootState ) => state.form.name );
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const someFieldFill = ( ...args: any[]): boolean => _some( args, ( field ) => !_isEmpty( field ));
+  const someFieldFill = ( ...fields: string[]): boolean => _some( fields, ( field ) => !_isEmpty( field ));
 
-  const handleSubmit = useCallback(( event ) => {
-    const data = new FormData( event.target );
-    const fromInput = data.get( 'check_is_not_robot' );
-
-    if ( _isEmpty( fromInput )) {
+  const handleSubmit = useCallback(({
+    nameMale,
+    nameFemale,
+    checkIsNotRobot,
+  }) => {
+    if ( _isEmpty( checkIsNotRobot )) {
       alert( getString( 'formErrorEmptyFormName' ));
-    } else if ( !_isEqual( fromInput, nameOfForm )) {
+    } else if ( !_isEqual( checkIsNotRobot, nameOfForm )) {
       alert( getString( 'formErrorWrongFormName' ));
     } else {
-      if ( someFieldFill( data.get( 'name_male' ), data.get( 'name_female' ))) {
-        onSubmit( data.get( 'name_male' ) as string, data.get( 'name_female' ) as string );
-        event.target.reset();
+      if ( someFieldFill( nameMale, nameFemale )) {
+        onSubmit( nameMale, nameFemale );
+        methods.reset();
       } else {
         alert( getString( 'formErrorEmptyFormFields' ));
       }
@@ -41,14 +44,17 @@ const Form = ({
     nameOfForm,
     onSubmit,
     getString,
+    methods,
   ]);
 
   return (
-    <FormView
-      preview={ preview }
-      onSubmit={ handleSubmit }
-      additionalFunction={ additionalFunction }
-    />
+    <FormProvider { ...methods }>
+      <FormView
+        preview={ preview }
+        onSubmit={ handleSubmit }
+        additionalFunction={ additionalFunction }
+      />
+    </FormProvider>
   );
 };
 

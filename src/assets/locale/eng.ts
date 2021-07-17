@@ -20,7 +20,7 @@ export default{
   getAnswers: 'Get answers',
   logout: 'Logout',
   login: 'Login',
-  email: 'email@example.com',
+  emailAddress: 'email@example.com',
   password: 'password',
   draw: 'Draw',
   previewForm: 'Preview form',

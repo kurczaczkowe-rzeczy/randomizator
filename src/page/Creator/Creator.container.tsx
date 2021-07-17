@@ -32,18 +32,18 @@ import {
 
 import { IOption } from 'components/select/Select.types';
 
-import CreatorView from './CreatorPage.view';
+import CreatorView from './Creator.view';
 import {
   IForm,
   IAnswers,
   IAnswersStore,
-} from './CreatorPage.types';
+} from './Creator.types';
 import {
   getFormCollection,
   formsSubscription,
   getNewFileName,
   parseText,
-} from './CreatorPage.utils';
+} from './Creator.utils';
 
 // ToDo: issue #150
 const Creator = (): JSX.Element => {

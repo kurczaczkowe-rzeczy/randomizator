@@ -18,3 +18,11 @@ export interface IForm {
 export type FormContainer = Partial<Omit<IForm, 'onSubmit'>> & {
   onSubmit?: ( nameMale: string, nameFemale: string ) => void;
 };
+
+export interface IGuestValues {
+  /**
+   * Value uses to check fi human user fill the form.
+   */
+  checkIsNotRobot: string;
+  [ key: string ]: string | undefined;
+}
