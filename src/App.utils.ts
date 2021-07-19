@@ -1,5 +1,5 @@
 import { GetString } from 'hooks/types';
-import { APP_SUFFIX } from 'constans';
+import { ROUTES } from 'constans';
 
 import { IDrawerMenu } from 'components/DrawerMenu/DrawerMenu.types';
 
@@ -9,15 +9,15 @@ import { IDrawerMenu } from 'components/DrawerMenu/DrawerMenu.types';
  */
 export const getMenuItems = ( getString: GetString ): IDrawerMenu[ 'items' ] => [
   {
-    active: true,
-    children: getString( 'formManagement' ),
+    active: false,
+    children: getString( 'dashboard' ),
     id: 1,
-    path: `${ APP_SUFFIX }/`,
+    path: ROUTES.dashboard,
   },
   {
     active: true,
-    children: getString( 'dashboard' ),
-    id: 1,
-    path: `${ APP_SUFFIX }/dashboard`,
+    children: getString( 'formManagement' ),
+    id: 2,
+    path: ROUTES.home,
   },
 ];

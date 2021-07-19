@@ -169,5 +169,17 @@ export const theme = createMuiTheme({
         },
       },
     },
+    MuiFormHelperText: {
+      root: {
+        '&$error': {
+          backgroundColor: palette.error.main,
+          textAlign: 'center',
+          padding: 7,
+          boxSizing: 'border-box',
+          color: palette.colorTextSelected,
+          boxShadow: `0 0 5px ${ palette.error.main }`,
+        },
+      },
+    },
   },
 });

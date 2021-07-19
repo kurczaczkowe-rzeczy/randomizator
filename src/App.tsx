@@ -25,13 +25,27 @@ import DrawerMenu from 'components/DrawerMenu';
 import LoadingScreen from 'components/loadingScreen';
 import ProdReleaseModal from 'components/ProdReleaseModal';
 import Creator from 'page/Creator';
+import Dashboard from 'page/Dashboard';
 import ErrorPage from 'page/errorPage';
 import GuestPage from 'page/Guest';
 import Login from 'page/Login';
 
 import { getMenuItems } from 'App.utils';
 
-const authenticatedRoutes = <Route exact path={ ROUTES.home } component={ Creator } />;
+const authenticatedRoutes = [
+  <Route
+    exact
+    key="creator"
+    path={ ROUTES.home }
+    component={ Creator }
+  />,
+  <Route
+    exact
+    key="dashboard"
+    path={ ROUTES.dashboard }
+    component={ Dashboard }
+  />,
+];
 const unauthenticatedRoutes = <Route exact path={ ROUTES.home } component={ Login } />;
 
 const App = (): JSX.Element => {
@@ -80,8 +94,18 @@ const App = (): JSX.Element => {
     <>
       { isLoading && <LoadingScreen /> }
       <Switch>
-        <Route exact path={ ROUTES.error } component={ ErrorPage } />
-        <Route exact path={ ROUTES.guest } component={ GuestPage } />
+        <Route
+          exact
+          key="error"
+          path={ ROUTES.error }
+          component={ ErrorPage }
+        />
+        <Route
+          exact
+          key="guest"
+          path={ ROUTES.guest }
+          component={ GuestPage }
+        />
         { ( auth.uid !== undefined ) ? authenticatedRoutes : unauthenticatedRoutes }
         <Redirect from="/*" to={ ROUTES.notFound } />
       </Switch>

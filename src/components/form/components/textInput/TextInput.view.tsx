@@ -16,7 +16,7 @@ const TextInput = ({
   fullWidth = false,
   onChange = undefined,
   onFocus = undefined,
-  value = '',
+  value = undefined,
   forwardedRef,
 }: ITextInput ): JSX.Element => (
   <input

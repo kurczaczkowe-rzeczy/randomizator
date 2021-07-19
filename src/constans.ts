@@ -21,6 +21,7 @@ export const PROD_ADDRESS = `https://${ PROD_HOST_NAME }`;
 
 export const ROUTES = {
   home: prepareLink( '/' ),
+  dashboard: prepareLink( '/dashboard' ),
   error: prepareLink( '/not_found' ),
   guest: prepareLink( '/:creatorId/:formId' ),
   notFound: prepareLink( '/not_found' ),

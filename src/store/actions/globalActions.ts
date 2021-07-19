@@ -8,13 +8,22 @@ import {
   SHOW_MODAL,
   FORCE_HIDE_LOADER,
 } from 'store/actions';
-import { GlobalAction, IGlobalState } from 'store/types';
+import {
+  GlobalAction,
+  IGlobalActionsPayloads,
+  IGlobalState,
+} from 'store/types';
 
-export const showLoader = ( callFrom: string ): ThunkAction<void, IGlobalState, unknown, GlobalAction> =>
-  ( dispatch ): void => { dispatch({ type: SHOW_LOADER, payload: { callFrom }}); };
+type LoaderAction = ( callFrom: IGlobalActionsPayloads[ 'callFrom' ]) =>
+  ThunkAction<void, IGlobalState, unknown, GlobalAction>;
 
-export const hideLoader = ( callFrom: string ): ThunkAction<void, IGlobalState, unknown, GlobalAction> =>
-  ( dispatch ): void => { dispatch({ type: HIDE_LOADER, payload: { callFrom }}); };
+export const showLoader: LoaderAction = ( callFrom ) => ( dispatch ) => {
+  dispatch({ type: SHOW_LOADER, payload: { callFrom }});
+};
+
+export const hideLoader: LoaderAction = ( callFrom ) => ( dispatch ) => {
+  dispatch({ type: HIDE_LOADER, payload: { callFrom }});
+};
 
 export const forceHideLoader = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {
   dispatch({ type: FORCE_HIDE_LOADER });
