@@ -1,3 +1,4 @@
+import Card from 'components/card';
 import UserCreator from 'components/UserCreator';
 
 import useStyles from './Dashboard.styles';
@@ -11,7 +12,11 @@ export const Dashboard = ({ userCreatorProps }: IDashboard ): JSX.Element => {
 
   return (
     <div className={ styles.root }>
-      <UserCreator { ...userCreatorProps } />
+      <Card
+        centerBody={ false }
+        isLoading={ userCreatorProps.isLoading }
+        body={ <UserCreator { ...userCreatorProps } /> }
+      />
     </div>
   );
 };

@@ -18,6 +18,7 @@ export interface IActionWithPayload<Type, Payload> extends IAction<Type>{ payloa
 
 // STATES
 export interface IGlobalState{
+  readonly bindToCard: string[];
   readonly isLoading: boolean;
   readonly isModalOpen: boolean;
   readonly language: string;
@@ -35,7 +36,10 @@ export type FormState = IForm & IState;
 
 // ACTIONS
 export type LogoutAction = IAction<LogoutActionsTypes>;
-export interface IGlobalActionsPayloads { callFrom: string }
+export interface IGlobalActionsPayloads {
+  bindToCard: string;
+  callFrom: string;
+}
 export type GlobalAction =
   | IAction<GlobalActionsTypes>
   | IActionWithPayload<GlobalActionsTypesWithPayload, IGlobalActionsPayloads>;

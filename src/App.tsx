@@ -53,8 +53,12 @@ const App = (): JSX.Element => {
   const dispatch = useDispatch();
   const auth = useSelector(( state: RootState ) => state.firebase.auth );
   const isLoading = useSelector(( state: RootState ) => state.global.isLoading );
+  const hasWidgetLoading = useSelector(( state: RootState ) => state.global.bindToCard.length > 0 );
   const [ showDevModal, setShowDevModal ] = useLocalStorage( SHOW_DEV_MODAL_KEY );
   const bodyRef = useRef( document.body );
+
+  const menuItems = getMenuItems( getString );
+  const isLoaderVisible = isLoading && !hasWidgetLoading;
 
   useEffect(() => {
     if ( _isNil( showDevModal )) {
@@ -88,11 +92,9 @@ const App = (): JSX.Element => {
     }
   }, [ isLoading ]);
 
-  const menuItems = getMenuItems( getString );
-
   return (
     <>
-      { isLoading && <LoadingScreen /> }
+      { isLoaderVisible && <LoadingScreen /> }
       <Switch>
         <Route
           exact

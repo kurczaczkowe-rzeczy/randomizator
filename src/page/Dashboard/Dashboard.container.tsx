@@ -1,10 +1,12 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFirestore } from 'react-redux-firebase';
 import firebase from 'firebase/app';
+import _includes from 'lodash/includes';
 
 import useLocaleString from 'hooks/useLocaleString';
 import { firebaseConfig } from 'config/firebaseConfig';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
+import { RootState } from 'store/reducers/rootReducer';
 
 import { UserCreatorSubmitHandler } from 'components/UserCreator';
 
@@ -18,12 +20,21 @@ import {
   DASHBOARD,
   defaultUserValues,
   NAME_OF_TEMP_APP,
+  USER_CREATOR,
 } from './Dashboard.consts';
 
 const Dashboard = (): JSX.Element => {
   const firestore = useFirestore();
   const dispatch = useDispatch();
+  const bindToCard = useSelector(( state: RootState ) => state.global.bindToCard );
   const getString = useLocaleString();
+
+  const showLoaderOnUserCreator = (): void => {
+    dispatch( showLoader( DASHBOARD, USER_CREATOR ));
+  };
+  const hideLoaderOnUserCreator = (): void => {
+    dispatch( hideLoader( DASHBOARD, USER_CREATOR ));
+  };
 
   const handleSubmit: UserCreatorSubmitHandler = async ({
     email,
@@ -31,7 +42,7 @@ const Dashboard = (): JSX.Element => {
     password,
     formName,
   }) => {
-    dispatch( showLoader( DASHBOARD ));
+    showLoaderOnUserCreator();
     let newUser: firebase.User | null = null;
 
     try {
@@ -45,7 +56,7 @@ const Dashboard = (): JSX.Element => {
       const errorMessage = userCreatorErrorHandler( error, getString );
 
       alert( errorMessage );
-      dispatch( hideLoader( DASHBOARD ));
+      hideLoaderOnUserCreator();
 
       return;
     } finally {
@@ -54,7 +65,7 @@ const Dashboard = (): JSX.Element => {
 
     if ( !newUser ) {
       alert( getString( 'userIsNullAfterCreating' ));
-      dispatch( hideLoader( DASHBOARD ));
+      hideLoaderOnUserCreator();
 
       return;
     }
@@ -78,12 +89,13 @@ const Dashboard = (): JSX.Element => {
         getString,
       );
     } finally {
-      dispatch( hideLoader( DASHBOARD ));
+      hideLoaderOnUserCreator();
     }
   };
   const userCreatorProps = {
     defaultValues: defaultUserValues,
     onSubmit: handleSubmit,
+    isLoading: _includes( bindToCard, USER_CREATOR ),
   };
 
   return (

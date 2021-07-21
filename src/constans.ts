@@ -33,3 +33,4 @@ export const HEIGHT_OF_EXPANDED_MENU = '100vh';
 export const WIDTH_OF_COLLAPSED_MENU = 92;
 export const WIDTH_OF_EXPANDED_MENU = 180;
 export const MENU_ITEM_HEIGHT = 52;
+export const LOADER_SIZE = 60;

@@ -4,6 +4,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
 import fonts from 'assets/fonts';
+import { Mapping } from 'types';
 
 interface IGradients {[ key: string ]: CSSProperties[ 'backgroundImage' ]}
 
@@ -17,9 +18,12 @@ export interface IBorders {[ key: string ]: CSSProperties[ 'border' ]}
 
 interface IShadows {[ key: string ]: CSSProperties[ 'boxShadow' ]}
 
+type Classes = Mapping<CSSProperties>;
+
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
     borders: IBorders;
+    classes: Classes;
     fonts: IFonts;
     gradient: IGradients;
     shadow: IShadows;
@@ -28,6 +32,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
 
   interface ThemeOptions {
     borders: IBorders;
+    classes: Classes;
     fonts: IFonts;
     gradient: IGradients;
     shadow: IShadows;
@@ -45,6 +50,7 @@ declare module '@material-ui/core/styles/createPalette' {
     backgroundLight: CSSProperties[ 'color' ];
     colorText: CSSProperties[ 'color' ];
     colorTextSelected: CSSProperties[ 'color' ];
+    fadedBackgroundDark: () => CSSProperties[ 'color' ];
     fadedMain: () => CSSProperties[ 'color' ];
   }
 
@@ -54,6 +60,7 @@ declare module '@material-ui/core/styles/createPalette' {
     backgroundLight: CSSProperties[ 'color' ];
     colorText: CSSProperties[ 'color' ];
     colorTextSelected: CSSProperties[ 'color' ];
+    fadedBackgroundDark: () => CSSProperties[ 'color' ];
     fadedMain: () => CSSProperties[ 'color' ];
   }
 }
@@ -72,6 +79,9 @@ const palette = {
   colorTextSelected: '#fff',
   fadedMain(): CSSProperties[ 'color' ] {
     return fade( this.primary.main, 0.2 );
+  },
+  fadedBackgroundDark(): CSSProperties[ 'color' ] {
+    return fade( this.backgroundDark, 0.75 );
   },
 };
 
@@ -99,6 +109,19 @@ const borders = {
   dropzoneBoxActive: `3px dashed ${ palette.primary.main }`,
 };
 
+const classes = {
+  centerWithFillParent: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 1000,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+};
+
 export const theme = createMuiTheme({
   themeName: 'randoTheme',
   palette,
@@ -122,6 +145,7 @@ export const theme = createMuiTheme({
   borders,
   shadow,
   typography,
+  classes,
   overrides: {
     MuiCssBaseline: {
       '@global': {

@@ -12,6 +12,7 @@ const userCreatorProps = {
     formName: '',
   },
   onSubmit: action( 'onSubmit' ),
+  isLoading: false,
 };
 
 export default{
@@ -22,10 +23,11 @@ export default{
 
 const Template: Story<IDashboard> = ( args ) => <Component { ...args } />;
 
-export const EmptyUserCreator = Template.bind({});
-export const FilledUserCreator = Template.bind({});
+export const Empty = Template.bind({});
+export const Filled = Template.bind({});
+export const Loading = Template.bind({});
 
-FilledUserCreator.args = {
+Filled.args = {
   userCreatorProps: {
     ...userCreatorProps,
     defaultValues: {
@@ -34,5 +36,17 @@ FilledUserCreator.args = {
       nickname: 'Nickname',
       password: 'password',
     },
+  },
+};
+Loading.args = {
+  userCreatorProps: {
+    ...userCreatorProps,
+    defaultValues: {
+      email: 'example@mail.com',
+      formName: 'Form',
+      nickname: 'Nickname',
+      password: 'password',
+    },
+    isLoading: true,
   },
 };
