@@ -45,6 +45,7 @@ export default{
   modalChangeUrlTitle: 'Uwaga! Zmieniamy adres strony.',
   nameFemaleLabel: 'Imie damskie',
   nameMaleLabel: 'Imie męskie',
+  networkRequestFailed: 'Błąd połączenia z serwerem. Sprawdź połączenie z internetem',
   nickname: 'Nazwa użytkownika',
   noName: 'Brak nazwy',
   noValueToDraw: 'Brak wartości do losowania',

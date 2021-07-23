@@ -45,6 +45,7 @@ export default{
   modalChangeUrlTitle: 'Attention! We are changing the website address.',
   nameFemaleLabel: 'Name female',
   nameMaleLabel: 'Name male',
+  networkRequestFailed: 'Connection error. Please check your network connection.',
   nickname: 'Nickname',
   noName: 'No name',
   noValueToDraw: 'No value to draw',

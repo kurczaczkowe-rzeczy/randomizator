@@ -9,5 +9,7 @@ export type UserCreatorSubmitHandler = ( data: IUserCreatorValues ) => void | Pr
 
 export interface IUserCreator {
   defaultValues: IUserCreatorValues;
+  onReset: () => void;
   onSubmit: UserCreatorSubmitHandler;
+  shouldResetForm?: boolean;
 }

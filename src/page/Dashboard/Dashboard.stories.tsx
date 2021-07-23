@@ -11,6 +11,7 @@ const userCreatorProps = {
     password: '',
     formName: '',
   },
+  onReset: action( 'onReset' ),
   onSubmit: action( 'onSubmit' ),
   isLoading: false,
 };

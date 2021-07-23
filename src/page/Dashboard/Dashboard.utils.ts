@@ -29,6 +29,9 @@ export const userCreatorErrorHandler = ( error: unknown, getString: GetString ):
       case 'app/duplicate-app': {
         return getString( 'duplicatedApp' );
       }
+      case 'auth/network-request-failed': {
+        return getString( 'networkRequestFailed' );
+      }
       default: {
         errorLogger( firebaseError, ERROR_ORIGIN );
 

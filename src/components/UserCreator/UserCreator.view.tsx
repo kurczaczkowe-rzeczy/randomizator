@@ -1,4 +1,5 @@
-import { Controller, useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 import useLocaleString from 'hooks/useLocaleString';
 
@@ -12,14 +13,26 @@ import { IUserCreator, IUserCreatorValues } from './UserCreator.types';
 /**
  * Component used to add new user to app.
  */
-export const UserCreator = ({ onSubmit, defaultValues }: IUserCreator ): JSX.Element => {
+export const UserCreator = ({
+  defaultValues,
+  shouldResetForm = false,
+  onReset,
+  onSubmit,
+}: IUserCreator ): JSX.Element => {
   const styles = useStyle();
   const getString = useLocaleString();
   const {
-    control,
     handleSubmit,
     register,
+    reset,
   } = useForm<IUserCreatorValues>({ defaultValues });
+
+  useEffect(() => {
+    if ( shouldResetForm ) {
+      onReset();
+      reset( defaultValues );
+    }
+  }, [ shouldResetForm ]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <form
@@ -52,16 +65,10 @@ export const UserCreator = ({ onSubmit, defaultValues }: IUserCreator ): JSX.Ele
       </div>
       <div className={ styles.row }>
         <Label required content={ getString( 'formName' ) } />
-        <Controller
-          control={ control }
-          name="formName"
-          render={ ({ field }): JSX.Element => (
-            <TextInput
-              required
-              type="text"
-              { ...field }
-            />
-          ) }
+        <TextInput
+          required
+          type="text"
+          { ...register( 'formName', { required: true }) }
         />
       </div>
       <ButtonView value={ getString( 'addUser' ) } type="submit" />

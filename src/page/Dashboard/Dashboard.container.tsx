@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFirestore } from 'react-redux-firebase';
 import firebase from 'firebase/app';
@@ -28,6 +29,7 @@ const Dashboard = (): JSX.Element => {
   const dispatch = useDispatch();
   const bindToCard = useSelector(( state: RootState ) => state.global.bindToCard );
   const getString = useLocaleString();
+  const [ shouldResetUserCreator, setShouldResetUserCreator ] = useState( false );
 
   const showLoaderOnUserCreator = (): void => {
     dispatch( showLoader( DASHBOARD, USER_CREATOR ));
@@ -88,12 +90,17 @@ const Dashboard = (): JSX.Element => {
         password,
         getString,
       );
+
+      return;
     } finally {
+      setShouldResetUserCreator( true );
       hideLoaderOnUserCreator();
     }
   };
   const userCreatorProps = {
     defaultValues: defaultUserValues,
+    shouldResetForm: shouldResetUserCreator,
+    onReset: () => { setShouldResetUserCreator( false ); },
     onSubmit: handleSubmit,
     isLoading: _includes( bindToCard, USER_CREATOR ),
   };
