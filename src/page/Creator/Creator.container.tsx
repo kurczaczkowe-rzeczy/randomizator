@@ -110,7 +110,7 @@ const Creator = (): JSX.Element => {
 
       setLink( `/${ auth.uid }/${ formID }` );
 
-      return (): void => subscription();
+      return subscription;
     }
   }, [ formID ]); // eslint-disable-line react-hooks/exhaustive-deps
 

@@ -5,6 +5,7 @@ import {
   Redirect,
 } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { isLoaded, isEmpty } from 'react-redux-firebase';
 import _isNil from 'lodash/isNil';
 
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -58,7 +59,7 @@ const App = (): JSX.Element => {
   const bodyRef = useRef( document.body );
 
   const menuItems = getMenuItems( getString );
-  const isLoaderVisible = isLoading && !hasWidgetLoading;
+  const isLoaderVisible = !isLoaded( auth ) && isLoading && !hasWidgetLoading;
 
   useEffect(() => {
     if ( _isNil( showDevModal )) {
@@ -77,12 +78,12 @@ const App = (): JSX.Element => {
   ]);
 
   useEffect(() => {
-    if ( !auth.isLoaded ) {
+    if ( !isLoaded( auth )) {
       dispatch( showLoader( 'APP' ));
     } else {
       dispatch( hideLoader( 'APP' ));
     }
-  }, [ auth.isLoaded, dispatch ]);
+  }, [ auth, dispatch ]);
 
   useEffect(() => {
     if ( isLoading ) {
@@ -92,29 +93,30 @@ const App = (): JSX.Element => {
     }
   }, [ isLoading ]);
 
-  return (
-    <>
-      { isLoaderVisible && <LoadingScreen /> }
-      <Switch>
-        <Route
-          exact
-          key="error"
-          path={ ROUTES.error }
-          component={ ErrorPage }
-        />
-        <Route
-          exact
-          key="guest"
-          path={ ROUTES.guest }
-          component={ GuestPage }
-        />
-        { ( auth.uid !== undefined ) ? authenticatedRoutes : unauthenticatedRoutes }
-        <Redirect from="/*" to={ ROUTES.notFound } />
-      </Switch>
-      { ( auth.uid !== undefined ) && <DrawerMenu items={ menuItems } /> }
-      <ProdReleaseModal />
-    </>
-  );
+  return isLoaderVisible
+    ? <LoadingScreen />
+    : (
+      <>
+        <Switch>
+          <Route
+            exact
+            key="error"
+            path={ ROUTES.error }
+            component={ ErrorPage }
+          />
+          <Route
+            exact
+            key="guest"
+            path={ ROUTES.guest }
+            component={ GuestPage }
+          />
+          { isLoaded( auth ) && !isEmpty( auth ) ? authenticatedRoutes : unauthenticatedRoutes }
+          <Redirect from="/*" to={ ROUTES.notFound } />
+        </Switch>
+        { isLoaded( auth ) && !isEmpty( auth ) && <DrawerMenu items={ menuItems } /> }
+        <ProdReleaseModal />
+      </>
+    );
 };
 
 export default App;
