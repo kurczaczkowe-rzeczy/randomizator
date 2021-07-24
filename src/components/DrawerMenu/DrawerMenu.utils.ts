@@ -1,3 +1,4 @@
+import { matchPath } from 'react-router';
 import { History } from 'history';
 import _map from 'lodash/map';
 
@@ -18,12 +19,11 @@ export const getMenuItems = (
   history: History,
   closeDrawerMenu: () => void,
 ): InteractiveMenuItems => _map( items, ({
-  active,
   children,
   id,
   path,
 }) => ({
-  active,
+  active: Boolean( matchPath( history.location.pathname, { path, exact: true })?.isExact ),
   children,
   id,
   onClick: (): void => {

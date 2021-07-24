@@ -9,13 +9,11 @@ import { IDrawerMenu } from 'components/DrawerMenu/DrawerMenu.types';
  */
 export const getMenuItems = ( getString: GetString ): IDrawerMenu[ 'items' ] => [
   {
-    active: false,
     children: getString( 'dashboard' ),
     id: 1,
     path: ROUTES.dashboard,
   },
   {
-    active: true,
     children: getString( 'formManagement' ),
     id: 2,
     path: ROUTES.home,
