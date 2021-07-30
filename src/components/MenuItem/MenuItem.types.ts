@@ -4,10 +4,6 @@ import { StringOrNumber } from 'types';
 
 export interface IMenuItem {
   /**
-   * Specify if element has state active or not.
-   */
-  active: boolean;
-  /**
    * Specify content of menu element.
    */
   children: ReactNode;
@@ -19,9 +15,11 @@ export interface IMenuItem {
 
 export interface IInteractiveMenuItem extends IMenuItem {
   /**
+   * Specify if element has state active or not.
+   */
+  active: boolean;
+  /**
    * Action call on user interaction via mouse click on this element.
    */
   onClick: ( event?: SyntheticEvent ) => void;
 }
-
-export type InteractiveMenuItems = IInteractiveMenuItem[];

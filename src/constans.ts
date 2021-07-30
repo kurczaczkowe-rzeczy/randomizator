@@ -21,6 +21,7 @@ export const PROD_ADDRESS = `https://${ PROD_HOST_NAME }`;
 
 export const ROUTES = {
   home: prepareLink( '/' ),
+  dashboard: prepareLink( '/dashboard' ),
   error: prepareLink( '/not_found' ),
   guest: prepareLink( '/:creatorId/:formId' ),
   notFound: prepareLink( '/not_found' ),
@@ -32,3 +33,6 @@ export const HEIGHT_OF_EXPANDED_MENU = '100vh';
 export const WIDTH_OF_COLLAPSED_MENU = 92;
 export const WIDTH_OF_EXPANDED_MENU = 180;
 export const MENU_ITEM_HEIGHT = 52;
+export const LOADER_SIZE = 60;
+
+export const USER_ROLES = { ADMIN: 'ADMIN' };

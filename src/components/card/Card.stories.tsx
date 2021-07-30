@@ -15,6 +15,7 @@ const WithTitle = Template.bind({});
 const WithTitleAsObject = Template.bind({});
 const WithId = Template.bind({});
 const WithClassPassedFromUp = Template.bind({});
+const WithLoadingState = Template.bind({});
 
 WithTitle.args = {
   title: 'Przykładowy tytuł',
@@ -33,6 +34,10 @@ WithClassPassedFromUp.args = {
   cardClass: 'className',
   body: 'Z klasą. Do cardClass przekazujesz klasę z pliku *.styles. Przykład w kontrolkach.',
 };
+WithLoadingState.args = {
+  body: 'Z widocznym loaderem',
+  isLoading: true,
+};
 
 export {
   Default,
@@ -40,4 +45,5 @@ export {
   WithTitleAsObject,
   WithId,
   WithClassPassedFromUp,
+  WithLoadingState,
 };

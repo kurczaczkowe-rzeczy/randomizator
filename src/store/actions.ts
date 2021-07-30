@@ -8,9 +8,13 @@ export type LogoutActionsTypes = typeof LOGOUT_SUCCESS;
 export const SET_ANSWERS = 'SET_ANSWERS';
 export type AnswersActionsTypes = typeof SET_ANSWERS;
 
-export const GET_USER_NAME = 'GET_USER_NAME';
+export const GET_CREATOR_NAME = 'GET_CREATOR_NAME';
 export const ERROR_USER_DONT_EXIST = 'ERROR_USER_DONT_EXIST';
-export type UserActionsTypes = typeof GET_USER_NAME | typeof ERROR_USER_DONT_EXIST;
+export const GET_CURRENT_USER_ROLE = 'GET_CURRENT_USER_ROLE';
+export const CLEAR_USER = 'CLEAR_USER';
+export type UserActionsTypes = typeof GET_CREATOR_NAME
+  | typeof GET_CURRENT_USER_ROLE
+  | typeof ERROR_USER_DONT_EXIST;
 
 export const SET_FORM_NAME = 'SET_FORM_NAME';
 export const ERROR_FORM_DONT_EXIST = 'ERROR_FORM_DONT_EXIST';

@@ -13,6 +13,7 @@ import {
 import { GlobalAction, IGlobalState } from 'store/types';
 
 const initialState: IGlobalState = {
+  bindToCard: [],
   isLoading: true,
   isModalOpen: false,
   language: 'PL',
@@ -22,19 +23,26 @@ const initialState: IGlobalState = {
 const reducer = ( state = initialState, action: GlobalAction = { type: CLEAR_GLOBAL }): IGlobalState => {
   switch ( action.type ) {
     case SHOW_LOADER: {
+      const isEmptyBindings = action.payload.bindToCard === 'none';
+      const newBindings = !isEmptyBindings ? [ ...state.bindToCard, action.payload.bindToCard ] : [];
+
       return {
         ...state,
         loadingsQueue: _union( state.loadingsQueue, [ action.payload.callFrom ]),
         isLoading: true,
+        bindToCard: newBindings,
       };
     }
     case HIDE_LOADER: {
       const newLoadingQueue = _pull( state.loadingsQueue, action.payload.callFrom );
+      const isEmptyBindings = action.payload.bindToCard === 'none';
+      const newBindings = !isEmptyBindings ? _pull( state.bindToCard, action.payload.bindToCard ) : [];
 
       return {
         ...state,
         loadingsQueue: newLoadingQueue,
         isLoading: !_isEmpty( newLoadingQueue ),
+        bindToCard: newBindings,
       };
     }
     case FORCE_HIDE_LOADER: {
@@ -42,6 +50,7 @@ const reducer = ( state = initialState, action: GlobalAction = { type: CLEAR_GLO
         ...state,
         loadingsQueue: [],
         isLoading: false,
+        bindToCard: [],
       };
     }
     case SHOW_MODAL: {

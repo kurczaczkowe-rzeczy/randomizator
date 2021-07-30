@@ -15,4 +15,3 @@ const Template: Story<IInteractiveMenuItem> = ( args ) => <Component { ...args }
 export const Default = Template.bind({});
 export const Active = Template.bind({});
 
-Active.args = { active: true };

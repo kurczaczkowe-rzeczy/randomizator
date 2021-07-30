@@ -6,7 +6,9 @@ import {
   CLEAR_FORM,
   CLEAR_FORMS,
   ADD_FORM,
+  CLEAR_USER,
   GlobalActionsTypesWithPayload,
+  UserActionsTypes,
 } from 'store/actions';
 
 export interface IState { readonly errors: string | null }
@@ -18,6 +20,7 @@ export interface IActionWithPayload<Type, Payload> extends IAction<Type>{ payloa
 
 // STATES
 export interface IGlobalState{
+  readonly bindToCard: string[];
   readonly isLoading: boolean;
   readonly isModalOpen: boolean;
   readonly language: string;
@@ -33,9 +36,30 @@ export interface IFormsState extends IState {
 
 export type FormState = IForm & IState;
 
+export interface IUserState extends IState {
+  creatorName: string;
+  currentUserRole: string;
+}
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export interface IRootState {
+  ans: unknown;
+  auth: unknown;
+  draw: unknown;
+  firebase: any;
+  firestore: any;
+  form: FormState;
+  forms: IFormsState;
+  global: IGlobalState;
+  usr: IUserState;
+}
+/* eslint-enable @typescript-eslint/no-explicit-any */
 // ACTIONS
 export type LogoutAction = IAction<LogoutActionsTypes>;
-export interface IGlobalActionsPayloads { callFrom: string }
+export interface IGlobalActionsPayloads {
+  bindToCard: string;
+  callFrom: string;
+}
 export type GlobalAction =
   | IAction<GlobalActionsTypes>
   | IActionWithPayload<GlobalActionsTypesWithPayload, IGlobalActionsPayloads>;
@@ -44,3 +68,11 @@ export type FormAction =
   | IAction<typeof CLEAR_FORM>
   | IActionWithPayload<typeof SET_FORM_NAME, IForm>
   | IActionWithPayload<typeof ERROR_FORM_DONT_EXIST, IErrorMessage>;
+export interface IUserActionPayload {
+  currentUserRole?: string;
+  errorMsg?: string;
+  name?: string;
+}
+export type UserAction =
+  | IAction<typeof CLEAR_USER>
+  | IActionWithPayload<UserActionsTypes, IUserActionPayload>;

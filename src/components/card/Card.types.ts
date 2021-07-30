@@ -18,12 +18,12 @@ export interface ICard {
   body: ReactNode | ReactNode[];
   /** Class overrides or extend root element styles */
   cardClass?: string;
-  /**
-   * Specify if body should display in center of card
-   */
+  /** Specify if body should display in center of card */
   centerBody?: boolean;
   /** Identifier of root element. It is optional */
   id?: string;
+  /** Specify if loader should show or not */
+  isLoading?: boolean;
   /** Specify title of card */
   title?: StringOrNode | TitleWithContentAndId;
 }
