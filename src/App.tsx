@@ -22,7 +22,6 @@ import {
   ROUTES,
   IS_DEVELOPMENT_MODE,
   SHOW_DEV_MODAL_KEY,
-  USER_ROLES,
 } from 'constans';
 
 import DrawerMenu from 'components/DrawerMenu';
