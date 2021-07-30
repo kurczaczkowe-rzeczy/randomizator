@@ -3,7 +3,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useHistory } from 'react-router';
 import classNames from 'classnames';
 
 import IconButton from '@material-ui/core/IconButton';
@@ -15,7 +14,6 @@ import { IDrawerMenu } from 'components/DrawerMenu/DrawerMenu.types';
 import MenuList from 'components/MenuList';
 
 import useStyles from './DrawerMenu.styles';
-import { getMenuItems } from './DrawerMenu.utils';
 
 let isAfterFirstSwitch = false;
 const animationNames = [ 'collapse', 'expand' ];
@@ -24,7 +22,6 @@ const animationNames = [ 'collapse', 'expand' ];
  * Component provides bar with navigation. It has two state collapsed and expanded.
  */
 const DrawerMenu = ({ items }: IDrawerMenu ): JSX.Element => {
-  const history = useHistory();
   const [ expanded, setExpanded ] = useState( false );
   const [ showItems, setShowItems ] = useState( false );
 
@@ -78,12 +75,6 @@ const DrawerMenu = ({ items }: IDrawerMenu ): JSX.Element => {
     }
   };
 
-  const menuItems = getMenuItems(
-    items,
-    history,
-    toggleExpanded,
-  );
-
   return (
     <div
       className={ rootClasses }
@@ -101,7 +92,7 @@ const DrawerMenu = ({ items }: IDrawerMenu ): JSX.Element => {
         <MenuIcon classes={{ root: styles.menuIcon }} />
       </IconButton>
       <div className={ menuItemsWrapperClasses }>
-        <MenuList items={ menuItems } />
+        <MenuList items={ items } onClose={ toggleExpanded } />
       </div>
     </div>
   );

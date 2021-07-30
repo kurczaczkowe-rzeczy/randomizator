@@ -23,5 +23,3 @@ export interface IInteractiveMenuItem extends IMenuItem {
    */
   onClick: ( event?: SyntheticEvent ) => void;
 }
-
-export type InteractiveMenuItems = IInteractiveMenuItem[];

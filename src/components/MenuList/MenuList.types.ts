@@ -1,8 +1,12 @@
-import { InteractiveMenuItems } from 'components/MenuItem/MenuItem.types';
+import { IDrawerMenu } from 'components/DrawerMenu/DrawerMenu.types';
 
 export interface IMenuList {
   /**
    * List of interactive menu elements.
    */
-  items: InteractiveMenuItems;
+  items: IDrawerMenu[ 'items' ];
+  /**
+   * Method runs on close menu.
+   */
+  onClose: () => void;
 }

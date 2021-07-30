@@ -7,46 +7,38 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
 import _isNil from 'lodash/isNil';
+import _map from 'lodash/map';
+import _compact from 'lodash/compact';
 
 import useLocalStorage from 'hooks/useLocalStorage';
 import useLocaleString from 'hooks/useLocaleString';
 import {
   showLoader,
-  hideLoader,
   showModal,
 } from 'store/actions/globalActions';
+import { getCurrentUserRole } from 'store/actions/userActions';
 import { RootState } from 'store/reducers/rootReducer';
 import {
   ROUTES,
   IS_DEVELOPMENT_MODE,
   SHOW_DEV_MODAL_KEY,
+  USER_ROLES,
 } from 'constans';
 
 import DrawerMenu from 'components/DrawerMenu';
 import LoadingScreen from 'components/loadingScreen';
 import ProdReleaseModal from 'components/ProdReleaseModal';
-import Creator from 'page/Creator';
-import Dashboard from 'page/Dashboard';
+import ProtectedRoute from 'components/ProtectedRoute';
 import ErrorPage from 'page/errorPage';
 import GuestPage from 'page/Guest';
 import Login from 'page/Login';
 
-import { getMenuItems } from 'App.utils';
+import {
+  authenticatedRoutesCollection,
+  getMenuItems,
+  getMenuItemsForCurrentUser,
+} from 'App.utils';
 
-const authenticatedRoutes = [
-  <Route
-    exact
-    key="creator"
-    path={ ROUTES.home }
-    component={ Creator }
-  />,
-  <Route
-    exact
-    key="dashboard"
-    path={ ROUTES.dashboard }
-    component={ Dashboard }
-  />,
-];
 const unauthenticatedRoutes = <Route exact path={ ROUTES.home } component={ Login } />;
 
 const App = (): JSX.Element => {
@@ -54,12 +46,14 @@ const App = (): JSX.Element => {
   const dispatch = useDispatch();
   const auth = useSelector(( state: RootState ) => state.firebase.auth );
   const isLoading = useSelector(( state: RootState ) => state.global.isLoading );
-  const hasWidgetLoading = useSelector(( state: RootState ) => state.global.bindToCard.length > 0 );
+  const currentUserRole = useSelector(( state: RootState ) => state.usr.currentUserRole );
   const [ showDevModal, setShowDevModal ] = useLocalStorage( SHOW_DEV_MODAL_KEY );
   const bodyRef = useRef( document.body );
 
-  const menuItems = getMenuItems( getString );
-  const isLoaderVisible = !isLoaded( auth ) && isLoading && !hasWidgetLoading;
+  const menuItems = getMenuItemsForCurrentUser( getMenuItems( getString ), currentUserRole );
+  const authenticatedRoutes = _compact( _map( authenticatedRoutesCollection, ( props ) => (
+    <ProtectedRoute { ...props } />
+  )));
 
   useEffect(() => {
     if ( _isNil( showDevModal )) {
@@ -81,7 +75,7 @@ const App = (): JSX.Element => {
     if ( !isLoaded( auth )) {
       dispatch( showLoader( 'APP' ));
     } else {
-      dispatch( hideLoader( 'APP' ));
+      dispatch( getCurrentUserRole());
     }
   }, [ auth, dispatch ]);
 
@@ -93,7 +87,9 @@ const App = (): JSX.Element => {
     }
   }, [ isLoading ]);
 
-  return isLoaderVisible
+  const isAuthenticated = isLoaded( auth ) && !isEmpty( auth );
+
+  return !isLoaded( auth )
     ? <LoadingScreen />
     : (
       <>
@@ -110,10 +106,10 @@ const App = (): JSX.Element => {
             path={ ROUTES.guest }
             component={ GuestPage }
           />
-          { isLoaded( auth ) && !isEmpty( auth ) ? authenticatedRoutes : unauthenticatedRoutes }
+          { isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes }
           <Redirect from="/*" to={ ROUTES.notFound } />
         </Switch>
-        { isLoaded( auth ) && !isEmpty( auth ) && <DrawerMenu items={ menuItems } /> }
+        { isAuthenticated && <DrawerMenu items={ menuItems } /> }
         <ProdReleaseModal />
       </>
     );

@@ -1,39 +1,29 @@
-import { useState } from 'react';
-import _find from 'lodash/find';
+import { matchPath, useHistory } from 'react-router';
 import _map from 'lodash/map';
 
 import MenuItem from 'components/MenuItem';
-import { IMenuItem } from 'components/MenuItem/MenuItem.types';
 
 import { IMenuList } from './MenuList.types';
 
 /**
  * Component controls menu elements.
  */
-const MenuList = ({ items }: IMenuList ): JSX.Element => {
-  const [ menuItems, setMenuItems ] = useState( items );
-
-  const handleOnClickMenuItem = ( id: IMenuItem[ 'id' ]): void => {
-    const newItems = _map( items, ( item ) => ({
-      ...item,
-      active: item.id === id,
-    }));
-    const clickedItem = _find( newItems, { id });
-
-    setMenuItems( newItems );
-    clickedItem?.onClick();
-  };
+const MenuList = ({ items, onClose }: IMenuList ): JSX.Element => {
+  const history = useHistory();
 
   return (
     <>
-      { _map( menuItems, ({
-        active,
+      { _map( items, ({
+        path,
         id,
         children,
       }) => (
         <MenuItem
-          onClick={ (): void => handleOnClickMenuItem( id ) }
-          active={ active }
+          onClick={ (): void => {
+            onClose();
+            history.push( path );
+          } }
+          active={ Boolean( matchPath( history.location.pathname, { path, exact: true })?.isExact ) }
           key={ id }
         >
           { children }

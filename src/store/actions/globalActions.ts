@@ -14,7 +14,7 @@ import {
   IGlobalState,
 } from 'store/types';
 
-type LoaderAction = (
+export type LoaderAction = (
   callFrom: IGlobalActionsPayloads[ 'callFrom' ],
   bindToCard?: IGlobalActionsPayloads[ 'bindToCard' ],
 ) =>
