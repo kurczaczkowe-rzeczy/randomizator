@@ -10,6 +10,7 @@ import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { RootState } from 'store/reducers/rootReducer';
 
 import { UserCreatorSubmitHandler } from 'components/UserCreator';
+import PageContainer from 'components/PageContainer';
 
 import {
   deleteNewApp,
@@ -106,7 +107,9 @@ const Dashboard = (): JSX.Element => {
   };
 
   return (
-    <DashboardView userCreatorProps={ userCreatorProps } />
+    <PageContainer>
+      <DashboardView userCreatorProps={ userCreatorProps } />
+    </PageContainer>
   );
 };
 

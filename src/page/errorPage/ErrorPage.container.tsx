@@ -6,6 +6,8 @@ import { RootState } from 'store/reducers/rootReducer';
 import { forceHideLoader } from 'store/actions/globalActions';
 import useLocaleString from 'hooks/useLocaleString';
 
+import PageContainer from 'components/PageContainer';
+
 import ErrorPage from './ErrorPage.view';
 
 const ErrorPageContainer = (): JSX.Element => {
@@ -32,7 +34,11 @@ const ErrorPageContainer = (): JSX.Element => {
     errors.push( <p key={ uuid() }>{ getString( 'errorUserNotExist' ) }</p> );
   }
 
-  return <ErrorPage errors={ errors } />;
+  return (
+    <PageContainer>
+      <ErrorPage errors={ errors } />
+    </PageContainer>
+  );
 };
 
 export default ErrorPageContainer;

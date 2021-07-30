@@ -15,10 +15,12 @@ import useTimeout from 'hooks/useTimeout';
 import useLocaleString from 'hooks/useLocaleString';
 import { db, firestore } from 'config/firebaseConfig';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
-import { getUserName } from 'store/actions/userActions';
+import { getCreatorName } from 'store/actions/userActions';
 import { fetchFormName } from 'store/actions/formAction';
 import { RootState } from 'store/reducers/rootReducer';
 import { APP_SUFFIX, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
+
+import PageContainer from 'components/PageContainer';
 
 import GuestView from './Guest.view';
 
@@ -27,7 +29,7 @@ const GuestPage = (): JSX.Element => {
   const { goBack } = useHistory();
 
   const auth = useSelector(( state: RootState ) => state.firebase.auth );
-  const userName = useSelector(( state: RootState ) => state.usr.userName );
+  const creatorName = useSelector(( state: RootState ) => state.usr.creatorName );
   const formName = useSelector(( state: RootState ) => state.form.name );
   const errorFormName = useSelector(( state: RootState ) => state.form.errors );
   const errorUserName = useSelector(( state: RootState ) => state.usr.errors );
@@ -39,14 +41,14 @@ const GuestPage = (): JSX.Element => {
   const { runTimeout, stopTimeout } = useTimeout( DELAY_FORM_NAME_HIGHLIGHT );
 
   useEffect(() => {
-    if ( _isEmpty( userName ) || _isEmpty( formName )) {
+    if ( _isEmpty( creatorName ) || _isEmpty( formName )) {
       dispatch( showLoader( 'GUEST_PAGE' ));
     } else {
       dispatch( hideLoader( 'GUEST_PAGE' ));
     }
   }, [
     dispatch,
-    userName,
+    creatorName,
     formName,
   ]);
 
@@ -82,26 +84,25 @@ const GuestPage = (): JSX.Element => {
   };
 
   useEffect(() => {
-    dispatch( getUserName( creatorId ));
+    dispatch( getCreatorName( creatorId ));
     dispatch( fetchFormName( creatorId, formId ));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const displayPage = (
-    <GuestView
-      creatorName={ userName }
-      formName={ formName }
-      isCreator={ !!auth.uid }
-      isHighlighted={ isHighlighted }
-      highlightFormName={ highlightFormName }
-      onBackToCreator={ onBackToCreator }
-      onSubmit={ onSubmit }
-    />
-  );
-
-  const redirect = ( <Redirect from="/*" to={ `${ APP_SUFFIX }/not_found` } /> );
-
-  return ( errorFormName || errorUserName ) ? redirect : displayPage;
-
+  return ( errorFormName || errorUserName )
+    ? <Redirect from="/*" to={ `${ APP_SUFFIX }/not_found` } />
+    : (
+      <PageContainer>
+        <GuestView
+          creatorName={ creatorName }
+          formName={ formName }
+          isCreator={ !!auth.uid }
+          isHighlighted={ isHighlighted }
+          highlightFormName={ highlightFormName }
+          onBackToCreator={ onBackToCreator }
+          onSubmit={ onSubmit }
+        />
+      </PageContainer>
+    );
 };
 
 export default GuestPage;

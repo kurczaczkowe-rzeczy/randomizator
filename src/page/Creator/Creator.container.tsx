@@ -6,6 +6,7 @@ import {
   useDispatch,
 } from 'react-redux';
 import { useHistory } from 'react-router';
+import { isEmpty } from 'react-redux-firebase';
 import _isNil from 'lodash/isNil';
 import _forEach from 'lodash/forEach';
 import _union from 'lodash/union';
@@ -31,6 +32,7 @@ import {
 } from 'constans';
 
 import { IOption } from 'components/select/Select.types';
+import PageContainer from 'components/PageContainer';
 
 import CreatorView from './Creator.view';
 import {
@@ -72,7 +74,7 @@ const Creator = (): JSX.Element => {
   };
 
   useEffect(() => {
-    if ( auth ) {
+    if ( !isEmpty( auth )) {
       const subscription = formsSubscription(
         auth.uid,
         ( doc ) => { // ToDo maybe puts this function into const
@@ -93,7 +95,7 @@ const Creator = (): JSX.Element => {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if ( auth && formID !== null ) {
+    if ( !isEmpty( auth ) && formID !== null ) {
       const subscription = formsSubscription( auth.uid, ( doc ) => {
         const ans = doc.data()?.answers;
 
@@ -229,16 +231,18 @@ const Creator = (): JSX.Element => {
   };
 
   return (
-    <CreatorView
-      answersCounter={ answersCounter }
-      fileContainerProps={ fileContainerProps }
-      link={ prepareLink( link, HOME_PAGE ) }
-      selectFormsProps={ selectFormsProps }
-      onDownloadAnswers={ onDownloadAnswers }
-      onDrawClick={ onRandomClick }
-      onGoToForm={ onGoToForm }
-      onLogout={ onLogout }
-    />
+    <PageContainer>
+      <CreatorView
+        answersCounter={ answersCounter }
+        fileContainerProps={ fileContainerProps }
+        link={ prepareLink( link, HOME_PAGE ) }
+        selectFormsProps={ selectFormsProps }
+        onDownloadAnswers={ onDownloadAnswers }
+        onDrawClick={ onRandomClick }
+        onGoToForm={ onGoToForm }
+        onLogout={ onLogout }
+      />
+    </PageContainer>
   );
 };
 
