@@ -30,8 +30,6 @@ export const createGenerateClassName: CreateGenerateClassName = ( options?: Gene
   return ( rule, styleSheet ) => {
     const name = _get( styleSheet, 'options.name' );
 
-    console.log( ' ->', { name, className: styleSheet?.options.classNamePrefix });
-
     if ( name && _indexOf( name, 'Mui' ) === 0 && !_get( styleSheet, 'options.link' ) && !disableGlobal ) {
       if ( _indexOf( pseudoClasses, rule.key ) !== -1 ) {
         return `Mui-${ rule.key }`;
