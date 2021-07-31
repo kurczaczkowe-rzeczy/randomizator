@@ -10,9 +10,11 @@ import { BrowserRouter } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
+import StylesProvider from '@material-ui/styles/StylesProvider';
 
 import { firebase } from 'config/firebaseConfig';
 import rootReducer from 'store/reducers/rootReducer';
+import { createGenerateClassName } from 'utils/createGenerateClassName';
 import { theme } from 'theme';
 
 import Footer from 'components/footer';
@@ -37,17 +39,21 @@ const reactReduxFirebaseProps = {
   createFirestoreInstance,
 };
 
+const generateClassName = createGenerateClassName();
+
 const render = (
   <StrictMode>
     <Provider store={ store }>
       <ReactReduxFirebaseProvider { ...reactReduxFirebaseProps }>
-        <ThemeProvider theme={ theme }>
-          <CssBaseline />
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-          <Footer />
-        </ThemeProvider>
+        <StylesProvider generateClassName={ generateClassName }>
+          <ThemeProvider theme={ theme }>
+            <CssBaseline />
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+            <Footer />
+          </ThemeProvider>
+        </StylesProvider>
       </ReactReduxFirebaseProvider>
     </Provider>
   </StrictMode>
