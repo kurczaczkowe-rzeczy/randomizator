@@ -1,6 +1,6 @@
 {
   "name": "randomizator",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -49,7 +49,7 @@
     "tsm": "./node_modules/.bin/tsm src/ -w",
     "storybook": "start-storybook -p 6660 -s public --no-manager-cache",
     "build-storybook": "build-storybook -s public -o build.storybook",
-    "bump": "npm version patch -m \"chore: Bump version to %s [skip ci]\""
+    "bump": "npm version patch -m \"chore: Bump version to %s\""
   },
   "browserslist": {
     "production": [
