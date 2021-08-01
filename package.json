@@ -49,7 +49,7 @@
     "tsm": "./node_modules/.bin/tsm src/ -w",
     "storybook": "start-storybook -p 6660 -s public --no-manager-cache",
     "build-storybook": "build-storybook -s public -o build.storybook",
-    "bump": "npm version patch -m \"chore: Bump version to %s\""
+    "bump": "npm version patch -m \"chore: Bump version to %s [skip ci]\""
   },
   "browserslist": {
     "production": [

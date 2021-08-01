@@ -5,6 +5,7 @@ on:
       - master
 jobs:
   deploy_page:
+    if: "!contains(github.event.head_commit.author.name, 'KurczaczekBumperBot')"
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -42,6 +43,7 @@ jobs:
           publish_dir: ./build
           publish_branch: gh-pages
   deploy_storybook:
+    if: "!contains(github.event.head_commit.author.name, 'KurczaczekBumperBot')"
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -63,6 +65,7 @@ jobs:
       - name: Deploy storybook
         run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --only hosting:stories
   bump_version:
+    if: "!contains(github.event.head_commit.author.name, 'KurczaczekBumperBot')"
     runs-on: ubuntu-latest
     strategy:
       matrix:
