@@ -77,7 +77,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Bump version
-        with:
+        env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
         run: |
           git config --global user.email "KurczaczekBumperBot@user.noreply.github.com"
