@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-node@v2.3.0
         with:
           node-version: ${{ matrix.node-version }}
-      -name: Bump version
+      - name: Bump version
         run: |
           git config --global user.email "lzygmunt0@gmail.com"
           git config --global user.name "KurczaczekBumperBot"
