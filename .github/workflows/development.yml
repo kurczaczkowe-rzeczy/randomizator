@@ -76,9 +76,8 @@ jobs:
         uses: actions/setup-node@v2.3.0
         with:
           node-version: ${{ matrix.node-version }}
+          token: ${{ secrets.WORKFLOW_TOKEN }}
       - name: Bump version
-        env:
-          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
         run: |
           git config --global user.email "KurczaczekBumperBot@user.noreply.github.com"
           git config --global user.name "KurczaczekBumperBot"
