@@ -4,23 +4,6 @@ on:
     branches:
       - master
 jobs:
-  bump_version:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [ 15.10.0 ]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2.3.0
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Bump version
-        run: |
-          git config --global user.email "lzygmunt0@gmail.com"
-          git config --global user.name "KurczaczekBumperBot"
-          npm run bump
-          git push --follow-tags
   deploy_page:
     runs-on: ubuntu-latest
     strategy:
@@ -79,3 +62,20 @@ jobs:
           firebase target:apply hosting stories randomizator-stories
       - name: Deploy storybook
         run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --only hosting:stories
+  bump_version:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 15.10.0 ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.3.0
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Bump version
+        run: |
+          git config --global user.email "lzygmunt0@gmail.com"
+          git config --global user.name "KurczaczekBumperBot"
+          npm run bump
+          git push --follow-tags
