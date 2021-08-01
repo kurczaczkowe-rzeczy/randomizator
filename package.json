@@ -48,7 +48,8 @@
     "lint:ts-build": "eslint --ext=js,jsx,ts,tsx --max-warnings 0 src",
     "tsm": "./node_modules/.bin/tsm src/ -w",
     "storybook": "start-storybook -p 6660 -s public --no-manager-cache",
-    "build-storybook": "build-storybook -s public -o build.storybook"
+    "build-storybook": "build-storybook -s public -o build.storybook",
+    "bump": "npm version patch -m \"ci: Bump version to %s [skip ci]\""
   },
   "browserslist": {
     "production": [

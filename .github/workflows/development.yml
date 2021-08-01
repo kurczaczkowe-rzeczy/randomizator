@@ -4,22 +4,22 @@ on:
     branches:
       - master
 jobs:
-  deploy:
+  deploy_page:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [ 15.10.0 ]
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2.3.0
         with:
           node-version: ${{ matrix.node-version }}
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(TZ=Europe/Warsaw date +'%Y-%m-%d %H:%M:%S')"
       - name: Install depedencies
-        run: npm install && npm i -g firebase-tools
+        run: npm install
       - name: Build page
         env:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
@@ -41,7 +41,41 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: ./build
           publish_branch: gh-pages
+  deploy_storybook:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 15.10.0 ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.3.0
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install depedencies
+        run: |
+          npm i
+          npm i -g firebase-tools
       - name: Setup storybook
-        run: npm run build-storybook && firebase target:apply hosting stories randomizator-stories
+        run: |
+          npm run build-storybook
+          firebase target:apply hosting stories randomizator-stories
       - name: Deploy storybook
         run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --only hosting:stories
+  bump_version:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 15.10.0 ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.3.0
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Bump version
+        run: |
+          git config --global user.email "lzygmunt0@gmail.com"
+          git config --global user.name "KurczaczekBumperBot"
+          npm run bump
+          git push --follow-tags

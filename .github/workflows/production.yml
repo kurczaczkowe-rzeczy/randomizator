@@ -10,16 +10,18 @@ jobs:
       matrix:
         node-version: [ 15.10.0 ]
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2.3.0
         with:
           node-version: ${{ matrix.node-version }}
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(TZ=Europe/Warsaw date +'%Y-%m-%d %H:%M:%S')"
       - name: Install Packages
-        run: npm install; npm i -g firebase-tools
+        run: |
+          npm install
+          npm i -g firebase-tools
       - name: Build production page
         env:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY_PROD }}
