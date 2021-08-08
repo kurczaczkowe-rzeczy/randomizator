@@ -6,7 +6,7 @@ export interface IButton{
    */
   icon?: ReactElement;
   /**
-   * Method after click Button.
+   * Action call on user interaction via mouse click on this element.
    */
   onClick?: () => void;
   /**

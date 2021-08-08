@@ -1,7 +1,7 @@
 import { Story, Meta } from '@storybook/react';
 
-import TableBody from '@material-ui/core/TableBody';
-import TableHead from '@material-ui/core/TableHead';
+import MUITableBody from '@material-ui/core/TableBody';
+import MUITableHead from '@material-ui/core/TableHead';
 
 import Component, { ITableCell } from '.';
 
@@ -13,13 +13,13 @@ export default{
 
 const Template: Story<ITableCell> = ( args ) => {
   // eslint-disable-next-line react/destructuring-assignment
-  const TableComponent = args?.width ? TableHead : TableBody;
+  const TableGroupComponent = args?.width ? MUITableHead : MUITableBody;
 
   return (
     <table>
-      <TableComponent>
+      <TableGroupComponent>
         <Component { ...args } />
-      </TableComponent>
+      </TableGroupComponent>
     </table>
   );
 };

@@ -17,10 +17,10 @@ export const TableCell = ({
   children,
   width,
 }: ITableCell ): JSX.Element => {
-  const styles = useStyles();
-  const MUITableCellRef = useRef< Element >( null );
-
   const [ currentWidth, setCurrentWidth ] = useState<ITableCell[ 'width' ]>( undefined );
+  const styles = useStyles({ width: currentWidth });
+
+  const MUITableCellRef = useRef< Element >( null );
 
   useEffect(() => {
     if ( MUITableCellRef.current?.tagName === 'TH' ) {
@@ -32,7 +32,6 @@ export const TableCell = ({
     <MUITableCell
       innerRef={ MUITableCellRef }
       classes={{ root: styles.root }}
-      width={ currentWidth }
     >
       { children }
     </MUITableCell>

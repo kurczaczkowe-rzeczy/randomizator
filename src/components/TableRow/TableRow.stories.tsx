@@ -2,8 +2,8 @@ import { action } from '@storybook/addon-actions';
 import { Story, Meta } from '@storybook/react';
 import _every from 'lodash/every';
 
-import TableBody from '@material-ui/core/TableBody';
-import TableHead from '@material-ui/core/TableHead';
+import MUITableBody from '@material-ui/core/TableBody';
+import MUITableHead from '@material-ui/core/TableHead';
 
 import { bodyCells, headerCells } from './TableRow.mock';
 import Component, { ITableRow } from '.';
@@ -16,13 +16,13 @@ export default{
 
 const Template: Story<ITableRow> = ( args ) => {
   // eslint-disable-next-line react/destructuring-assignment
-  const TableComponent = _every( args.cells, 'width' ) ? TableHead : TableBody;
+  const TableGroupComponent = _every( args.cells, 'width' ) ? MUITableHead : MUITableBody;
 
   return (
     <table>
-      <TableComponent>
+      <TableGroupComponent>
         <Component { ...args } />
-      </TableComponent>
+      </TableGroupComponent>
     </table>
   );
 };

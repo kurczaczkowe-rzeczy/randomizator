@@ -6,5 +6,5 @@ export const headerCells = _map( Array( 4 ),
   ( _, id ) => ({
     id,
     children: <span>{ `Komórka ${ id }` }</span>,
-    width: 200,
+    width: id % 2 === 0 ? 200 : 'calc(50% - 200px)',
   }));
