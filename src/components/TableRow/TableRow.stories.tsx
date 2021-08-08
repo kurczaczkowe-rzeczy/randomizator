@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { Story, Meta } from '@storybook/react';
 import _every from 'lodash/every';
 
@@ -28,5 +29,7 @@ const Template: Story<ITableRow> = ( args ) => {
 
 export const BodyRow = Template.bind({});
 export const HeaderRow = Template.bind({});
+export const InteractiveRow = Template.bind({});
 
 HeaderRow.args = { cells: headerCells };
+InteractiveRow.args = { onClick: action( 'onClick' ) };
