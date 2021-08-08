@@ -8,7 +8,7 @@ import Component, { ITableCell } from '.';
 export default{
   title: 'components/TableCell',
   component: Component,
-  args: { content: <span>Treść</span> },
+  args: { children: <span>Treść</span> },
 } as Meta;
 
 const Template: Story<ITableCell> = ( args ) => {
@@ -16,9 +16,11 @@ const Template: Story<ITableCell> = ( args ) => {
   const TableComponent = args?.width ? TableHead : TableBody;
 
   return (
-    <TableComponent>
-      <Component { ...args } />
-    </TableComponent>
+    <table>
+      <TableComponent>
+        <Component { ...args } />
+      </TableComponent>
+    </table>
   );
 };
 

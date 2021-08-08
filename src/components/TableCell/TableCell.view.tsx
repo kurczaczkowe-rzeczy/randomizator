@@ -1,7 +1,10 @@
-import { useContext } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import MUITableCell from '@material-ui/core/TableCell';
-import MUITableLvl2Context from '@material-ui/core/Table/Tablelvl2Context';
 
 import { ITableCell } from './TableCell.types';
 import useStyles from './TableCell.styles';
@@ -11,20 +14,27 @@ import useStyles from './TableCell.styles';
  * otherwise it has be a `td` tag.
  */
 export const TableCell = ({
-  content,
+  children,
   width,
 }: ITableCell ): JSX.Element => {
   const styles = useStyles();
-  const tableLvl2 = useContext( MUITableLvl2Context );
+  const MUITableCellRef = useRef< Element >( null );
 
-  const isHeadCell = tableLvl2?.variant === 'head';
+  const [ currentWidth, setCurrentWidth ] = useState<ITableCell[ 'width' ]>( undefined );
+
+  useEffect(() => {
+    if ( MUITableCellRef.current?.tagName === 'TH' ) {
+      setCurrentWidth( width );
+    }
+  }, [ MUITableCellRef, width ]);
 
   return (
     <MUITableCell
+      innerRef={ MUITableCellRef }
       classes={{ root: styles.root }}
-      width={ isHeadCell ? width : undefined }
+      width={ currentWidth }
     >
-      { content }
+      { children }
     </MUITableCell>
   );
 };
