@@ -7,10 +7,11 @@ export interface IStyleProps {
   width?: CSSProperties[ 'width' ];
 }
 
-export default makeStyles<Theme, IStyleProps>(({ palette }) => ({
+export default makeStyles<Theme, IStyleProps>(({ palette, spacing }) => ({
   root: {
     color: palette.colorTextSelected,
     borderBottom: 'none',
     width: ({ width }) => width,
+    padding: spacing( 1 ),
   },
 }));

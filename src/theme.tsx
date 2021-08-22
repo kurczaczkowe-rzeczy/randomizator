@@ -6,36 +6,32 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import fonts from 'assets/fonts';
 import { Mapping } from 'types';
 
-interface IGradients {[ key: string ]: CSSProperties[ 'backgroundImage' ]}
+type Gradients = Mapping< CSSProperties[ 'backgroundImage' ] >;
 
-interface IFonts {
-  size: {
-    [ key: string ]: CSSProperties[ 'fontSize' ];
-  };
-}
+interface IFonts { size: Mapping< CSSProperties[ 'fontSize' ] > }
 
-export interface IBorders {[ key: string ]: CSSProperties[ 'border' ]}
+export type Borders = Mapping< CSSProperties[ 'border' ] >;
 
-interface IShadows {[ key: string ]: CSSProperties[ 'boxShadow' ]}
+type Shadows = Mapping< CSSProperties[ 'boxShadow' ] >;
 
-type Classes = Mapping<CSSProperties>;
+type Classes = Mapping< CSSProperties >;
 
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
-    borders: IBorders;
+    borders: Borders;
     classes: Classes;
     fonts: IFonts;
-    gradient: IGradients;
-    shadow: IShadows;
+    gradient: Gradients;
+    shadow: Shadows;
     themeName: string;
   }
 
   interface ThemeOptions {
-    borders: IBorders;
+    borders: Borders;
     classes: Classes;
     fonts: IFonts;
-    gradient: IGradients;
-    shadow: IShadows;
+    gradient: Gradients;
+    shadow: Shadows;
     themeName: string;
   }
 }

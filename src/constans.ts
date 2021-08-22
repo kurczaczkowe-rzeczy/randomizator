@@ -34,5 +34,9 @@ export const WIDTH_OF_COLLAPSED_MENU = 92;
 export const WIDTH_OF_EXPANDED_MENU = 180;
 export const MENU_ITEM_HEIGHT = 52;
 export const LOADER_SIZE = 60;
+export const TABLE_BORDER_RADIUS = 4;
+export const ROW_HEIGHT = 36;
+/** Row offset describe how much additional space was added to row. This value is divided between top and bottom. */
+export const ROW_OFFSET = 4;
 
 export const USER_ROLES = { ADMIN: 'ADMIN' };

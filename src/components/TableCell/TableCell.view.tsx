@@ -14,6 +14,7 @@ import useStyles from './TableCell.styles';
  * otherwise it has be a `td` tag.
  */
 export const TableCell = ({
+  component,
   children,
   width,
 }: ITableCell ): JSX.Element => {
@@ -31,6 +32,7 @@ export const TableCell = ({
   return (
     <MUITableCell
       innerRef={ MUITableCellRef }
+      component={ component }
       classes={{ root: styles.root }}
     >
       { children }
