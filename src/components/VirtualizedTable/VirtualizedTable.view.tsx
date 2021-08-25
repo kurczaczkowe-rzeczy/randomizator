@@ -3,6 +3,7 @@ import {
   Table,
   Column,
   AutoSizer,
+  InfiniteLoader,
   Index,
   SortDirection,
   TableHeaderRenderer,
@@ -27,11 +28,13 @@ import { IVirtualizedTable, Sort } from './VirtualizedTable.types';
  */
 export const VirtualizedTable = ({
   rows,
+  maxRows,
   columns,
   onSort = undefined,
   sortBy,
   sortDirection = SortDirection.ASC,
   overscanRowCount = 10,
+  onLoadMoreRows,
 }: IVirtualizedTable ): JSX.Element => {
   const styles = useStyle();
   const disableSort = !onSort;
@@ -82,34 +85,44 @@ export const VirtualizedTable = ({
   );
 
   return (
-    <AutoSizer>
-      {({ width, height }) => (
-        <Table
-          width={ width }
-          height={ height }
-          headerHeight={ ROW_HEIGHT }
-          headerClassName={ headerClassName }
-          rowCount={ rows.length }
-          rowGetter={ ({ index }) => rows[ index ] }
-          rowHeight={ ROW_HEIGHT + ROW_OFFSET }
-          rowClassName={ getRowClassNames }
-          overscanRowCount={ overscanRowCount }
-          sort={ sort }
-          sortBy={ currentSortBy }
-          sortDirection={ currentSortDirection }
-        >
-          { _map( columns, ( column ) => (
-            <Column
-              key={ column.dataKey }
-              disableSort={ disableSort }
-              headerRenderer={ headerCellRenderer }
-              cellRenderer={ cellRenderer }
-              { ...column }
-            />
-          )) }
-        </Table>
+    <InfiniteLoader
+      isRowLoaded={ ({ index }) => !!rows[ index ] }
+      loadMoreRows={ onLoadMoreRows }
+      rowCount={ maxRows }
+    >
+      {({ onRowsRendered, registerChild }) => (
+        <AutoSizer>
+          {({ width, height }) => (
+            <Table
+              ref={ registerChild }
+              width={ width }
+              height={ height }
+              headerHeight={ ROW_HEIGHT }
+              headerClassName={ headerClassName }
+              rowCount={ rows.length }
+              rowGetter={ ({ index }) => rows[ index ] }
+              rowHeight={ ROW_HEIGHT + ROW_OFFSET }
+              rowClassName={ getRowClassNames }
+              onRowsRendered={ onRowsRendered }
+              overscanRowCount={ overscanRowCount }
+              sort={ sort }
+              sortBy={ currentSortBy }
+              sortDirection={ currentSortDirection }
+            >
+              { _map( columns, ( column ) => (
+                <Column
+                  key={ column.dataKey }
+                  disableSort={ disableSort }
+                  headerRenderer={ headerCellRenderer }
+                  cellRenderer={ cellRenderer }
+                  { ...column }
+                />
+              )) }
+            </Table>
+          )}
+        </AutoSizer>
       )}
-    </AutoSizer>
+    </InfiniteLoader>
   );
 };
 
