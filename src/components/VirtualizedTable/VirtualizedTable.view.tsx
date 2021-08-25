@@ -4,22 +4,21 @@ import {
   Column,
   AutoSizer,
   InfiniteLoader,
-  Index,
   SortDirection,
-  TableHeaderRenderer,
-  TableCellRenderer,
 } from 'react-virtualized';
 import classNames from 'classnames';
 import _map from 'lodash/map';
 import _isUndefined from 'lodash/isUndefined';
 
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-
-import TableCell from 'components/TableCell';
 import { ROW_HEIGHT, ROW_OFFSET } from 'constans';
 
 import useStyle from './VirtualizedTable.styles';
 import { IVirtualizedTable, Sort } from './VirtualizedTable.types';
+import {
+  cellRenderer,
+  getRowClassNames,
+  headerCellRenderer,
+} from './VirtualizedTable.utils';
 
 /**
  * Component render virtualized table.
@@ -40,33 +39,6 @@ export const VirtualizedTable = ({
   const disableSort = !onSort;
   const [ currentSortDirection, setCurrentSortDirection ] = useState( disableSort ? undefined : sortDirection );
   const [ currentSortBy, setCurrentSortBy ] = useState( disableSort ? undefined : sortBy );
-
-  const getRowClassNames = ({ index }: Index ): string => index > -1
-    ? classNames( styles.row, styles.flexContainer )
-    : classNames( styles.headerRow, styles.flexContainer );
-
-  const headerCellRenderer: TableHeaderRenderer = ({
-    label,
-    dataKey,
-    sortBy,
-    sortDirection,
-    disableSort,
-  }) => (
-    <TableCell component="div">
-      <span>{ label }</span>
-      { !disableSort && sortBy === dataKey && (
-        <KeyboardArrowUpIcon
-          classes={{
-            root: classNames( styles.arrow,
-              { [ styles.rotateArrow ]: sortDirection === SortDirection.DESC }),
-          }}
-        />
-      ) }
-    </TableCell>
-  );
-  const cellRenderer: TableCellRenderer = ({ cellData }) => (
-    <TableCell component="div">{cellData}</TableCell>
-  );
 
   const sort: Sort = ( params ) => {
     if ( _isUndefined( onSort )) {
@@ -102,7 +74,7 @@ export const VirtualizedTable = ({
               rowCount={ rows.length }
               rowGetter={ ({ index }) => rows[ index ] }
               rowHeight={ ROW_HEIGHT + ROW_OFFSET }
-              rowClassName={ getRowClassNames }
+              rowClassName={ getRowClassNames( styles ) }
               onRowsRendered={ onRowsRendered }
               overscanRowCount={ overscanRowCount }
               sort={ sort }
@@ -113,7 +85,7 @@ export const VirtualizedTable = ({
                 <Column
                   key={ column.dataKey }
                   disableSort={ disableSort }
-                  headerRenderer={ headerCellRenderer }
+                  headerRenderer={ headerCellRenderer( styles ) }
                   cellRenderer={ cellRenderer }
                   { ...column }
                 />

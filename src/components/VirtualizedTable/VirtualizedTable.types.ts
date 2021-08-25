@@ -1,8 +1,11 @@
 import {
   ColumnProps,
+  Index,
   IndexRange,
   SortDirectionType,
 } from 'react-virtualized';
+
+import { ClassNameMap } from '@material-ui/styles/withStyles';
 
 import { Mapping, StringOrNumber } from 'types';
 
@@ -27,3 +30,6 @@ export interface IVirtualizedTable {
   /** Specify sort direction. */
   sortDirection?: SortDirectionType;
 }
+
+export type WithStyles< ReturnType extends unknown = unknown > = ( styles: ClassNameMap ) => ReturnType;
+export type GetRowClassNames = ({ index }: Index ) => string;
