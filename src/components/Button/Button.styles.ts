@@ -6,18 +6,19 @@ export default makeStyles(({
   root: {
     width: '100%',
     padding: spacing( 1, 0 ),
-    backgroundColor: palette.primary.main,
     borderColor: 'transparent',
     color: palette.colorText,
     textTransform: 'uppercase',
     cursor: 'pointer',
     transition: 'all 0.6s linear',
+  },
+  containedButton: {
+    backgroundColor: palette.primary.main,
 
     '&:focus': {
       outline: 'none',
       boxShadow: shadow.focus,
     },
-    '& span': { color: palette.colorText },
   },
   iconButton: {
     padding: spacing(
@@ -30,6 +31,12 @@ export default makeStyles(({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  icon: { color: palette.colorText },
+  icon: { },
   moreSpace: { marginRight: spacing( 0.5 ) },
+  textButton: {
+    background: 'none',
+    color: palette.primary.main,
+
+    '&:hover': { color: palette.primary.light },
+  },
 }));

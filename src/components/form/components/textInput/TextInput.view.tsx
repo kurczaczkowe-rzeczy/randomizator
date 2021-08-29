@@ -4,7 +4,8 @@ import classNames from 'classnames';
 import classes from './textInput.module.scss';
 import { ITextInput } from './TextInput.types';
 
-// ToDo move to global scope
+// ToDo: issue #187
+
 /**
  * UI form control allows user enter and edit text.
  */

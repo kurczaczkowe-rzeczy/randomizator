@@ -40,6 +40,7 @@ export const UserCreator = ({
       onSubmit={ handleSubmit( onSubmit ) }
     >
       <div className={ styles.row }>
+        {/* ToDo: issue #187 */}
         <Label required content={ getString( 'email' ) } />
         <TextInput
           required
@@ -48,6 +49,7 @@ export const UserCreator = ({
         />
       </div>
       <div className={ styles.row }>
+        {/* ToDo: issue #187 */}
         <Label required content={ getString( 'password' ) } />
         <TextInput
           required
@@ -56,6 +58,7 @@ export const UserCreator = ({
         />
       </div>
       <div className={ styles.row }>
+        {/* ToDo: issue #187 */}
         <Label required content={ getString( 'nickname' ) } />
         <TextInput
           required
@@ -64,6 +67,7 @@ export const UserCreator = ({
         />
       </div>
       <div className={ styles.row }>
+        {/* ToDo: issue #187 */}
         <Label required content={ getString( 'formName' ) } />
         <TextInput
           required

@@ -25,3 +25,10 @@ IconButton.args = {
   variant: 'iconButton',
   icon: <ExitToAppIcon />,
 };
+
+export const TextIconButton = Template.bind({});
+TextIconButton.args = {
+  type: 'button',
+  variant: 'textIconButton',
+  icon: <ExitToAppIcon />,
+};

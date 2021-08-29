@@ -11,7 +11,6 @@ import ButtonView from 'components/Button';
 import classes from './form.module.scss';
 import { IForm, IGuestValues } from './Form.types';
 
-// ToDo create component that wraps label and textInput
 /**
  * Components represents a document section containing interactive controls for submitting information
  */
@@ -29,6 +28,7 @@ export const Form = ({
       onSubmit={ handleSubmit( onSubmit ) }
     >
       <div className={ classes.alignBottom }>
+        {/* ToDo: issue #187 */}
         <Label content={ getString( 'nameMaleLabel' ) } />
         <Controller
           control={ control }
@@ -39,6 +39,7 @@ export const Form = ({
         />
       </div>
       <div className={ classes.alignBottom }>
+        {/* ToDo: issue #187 */}
         <Label content={ getString( 'nameFemaleLabel' ) } />
         <Controller
           control={ control }

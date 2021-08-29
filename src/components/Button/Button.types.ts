@@ -20,5 +20,5 @@ export interface IButton{
   /**
    * Variant specify if button has or not icon. Default *variant* is button.
    */
-  variant?: 'button' | 'iconButton';
+  variant?: 'button' | 'iconButton' | 'textIconButton';
 }
