@@ -24,6 +24,7 @@ export default{
   errorPageNotFound: 'Nie znaleziono strony',
   errorUserFormNotExist: 'Nie istnieje taki formularz tego użytkownika',
   errorUserNotExist: 'Nie istnieje taki użytkownik',
+  filter: 'Filtruj',
   firestorePermissionDenied: 'Nie masz uprawnień do wykonania tej akcji. Cały postęp zostanie wycofany.',
   form: 'Formularz',
   formErrorEmptyFormFields: 'Wpisz wartość w pola formularza. Wystarczy jedno pole!',
