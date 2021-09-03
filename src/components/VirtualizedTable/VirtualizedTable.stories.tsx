@@ -60,11 +60,11 @@ const Template: Story<IVirtualizedTable> = ( args ) => {
     />
   );
 };
-/* eslint-enable */
 
 export const Default = Template.bind({});
-export const Sortable = Template.bind({});
-export const WithOverscanRowCount = Template.bind({});
 
+export const Sortable = Template.bind({});
 Sortable.args = { ...sortData };
+
+export const WithOverscanRowCount = Template.bind({});
 WithOverscanRowCount.args = { overscanRowCount: 2 };

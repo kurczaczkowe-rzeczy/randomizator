@@ -23,7 +23,7 @@ export const ButtonView = ({
 
   const styles = useStyles();
   const preparedIcon = isIconButton && icon
-    ? cloneElement( icon, { className: classNames( styles.icon, styles.moreSpace ) })
+    ? cloneElement( icon, { className: styles.moreSpace })
     : null;
   const buttonClasses = classNames(
     styles.root,

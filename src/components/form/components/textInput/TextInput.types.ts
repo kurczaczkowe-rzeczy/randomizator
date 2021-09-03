@@ -5,6 +5,7 @@ import {
 } from 'react';
 import { ChangeHandler } from 'react-hook-form';
 
+// ToDo: issue #187
 export interface ITextInput {
   forwardedRef?: ForwardedRef<HTMLInputElement>;
   fullWidth?: boolean;

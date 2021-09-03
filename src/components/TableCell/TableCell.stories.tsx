@@ -25,8 +25,9 @@ const Template: Story<ITableCell> = ( args ) => {
 };
 
 export const Default = Template.bind({});
-export const HeaderCell = Template.bind({});
-export const WithCustomComponent = Template.bind({});
 
+export const HeaderCell = Template.bind({});
 HeaderCell.args = { width: 300 };
+
+export const WithCustomComponent = Template.bind({});
 WithCustomComponent.args = { component: 'div' };

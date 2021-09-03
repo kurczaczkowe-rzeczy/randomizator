@@ -24,6 +24,6 @@ const Template: Story<TableHeadProps> = ( args ) => (
 );
 
 export const noninteractive = Template.bind({});
-export const interactive = Template.bind({});
 
+export const interactive = Template.bind({});
 interactive.args = { onClick: action( 'onClick' ) };

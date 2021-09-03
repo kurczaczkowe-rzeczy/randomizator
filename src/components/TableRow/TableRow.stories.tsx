@@ -28,8 +28,9 @@ const Template: Story<ITableRow> = ( args ) => {
 };
 
 export const BodyRow = Template.bind({});
-export const HeaderRow = Template.bind({});
-export const InteractiveRow = Template.bind({});
 
+export const HeaderRow = Template.bind({});
 HeaderRow.args = { cells: headerCells };
+
+export const InteractiveRow = Template.bind({});
 InteractiveRow.args = { onClick: action( 'onClick' ) };

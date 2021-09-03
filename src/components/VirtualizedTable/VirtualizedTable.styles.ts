@@ -2,7 +2,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import { TABLE_BORDER_RADIUS } from 'constans';
 
-export default makeStyles(({ palette, spacing }) => ({
+export default makeStyles(({ palette }) => ({
   headerRow: {
     backgroundColor: palette.primary.main,
     borderTopLeftRadius: TABLE_BORDER_RADIUS,
@@ -29,8 +29,8 @@ export default makeStyles(({ palette, spacing }) => ({
   arrow: {
     fontsize: '1.25rem',
     position: 'relative',
-    top: spacing( -0.25 ),
-    left: spacing( 0.5 ),
+    top: -2,
+    left: 4,
     transition: 'transform ease-in-out 200ms',
   },
   rotateArrow: { transform: 'rotate(180deg)' },

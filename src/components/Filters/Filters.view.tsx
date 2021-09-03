@@ -37,19 +37,12 @@ export const Filters = ({
     [ styles.columnOrder ]: columnOrder,
   });
 
-  const onToggleVisibility = (): void => {
-    setShow(( currentState ) => !currentState );
-
-  };
+  const onToggleVisibility = (): void => { setShow(( currentState ) => !currentState ); };
 
   const onTransitionEnd = ( event: TransitionEvent<HTMLDivElement> ): void => {
     const parent = event.currentTarget.parentElement;
 
-    if ( show ) {
-      parent?.setAttribute( 'style', 'overflowY: auto' );
-    } else {
-      parent?.setAttribute( 'style', 'overflowY: hidden' );
-    }
+    parent?.setAttribute( 'style', `overflowY: ${ show ? 'auto' : 'hidden' }` );
   };
 
   return (
@@ -65,10 +58,7 @@ export const Filters = ({
       </div>
       <form className={ styles.filterForm } onSubmit={ handleSubmit( onSubmit ) }>
         <div className={ fieldsWrapperClasses } onTransitionEnd={ onTransitionEnd }>
-          { _map( fields, ({
-            name,
-            type,
-          }) => {
+          { _map( fields, ({ name, type }) => {
             const registeredProps = register( name );
 
             return (

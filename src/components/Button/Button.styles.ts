@@ -31,7 +31,6 @@ export default makeStyles(({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  icon: { },
   moreSpace: { marginRight: spacing( 0.5 ) },
   textButton: {
     background: 'none',
