@@ -9,11 +9,13 @@ const mockData = {
     {
       label: 'Nagłówek 1',
       dataKey: 'cell1',
+      columnData: { type: 'text' },
       width: 150,
     },
     {
       label: 'Nagłówek 2',
       dataKey: 'cell2',
+      columnData: { type: 'text' },
       width: 150,
       flexGrow: 1,
     },

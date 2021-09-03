@@ -8,7 +8,7 @@ export interface IField {
 export interface IFilters {
   /** Specify displaying of filters. If passed true filters should be display in one column
    *  otherwise should be display in rows. */
-  columnOrder: boolean;
+  columnOrder?: boolean;
   /** Contain object with defaults for every field. */
   defaultValues: {[ key: string ]: unknown }; // ToDo: issue #190
   /** Sets of fields with provides name of them and type that should be display, e.g. select. */

@@ -24,8 +24,9 @@ const useStyles = makeStyles({
     },
   },
 });
-/* eslint-disable */
+
 const Template: Story<IVirtualizedTable> = ( args ) => {
+  // eslint-disable-next-line react/destructuring-assignment
   const [ rows, setRows ] = useState<IVirtualizedTable[ 'rows' ]>( args.rows );
 
   const onLoadMoreRows: IVirtualizedTable[ 'onLoadMoreRows' ] = ( params ) => {
@@ -37,11 +38,11 @@ const Template: Story<IVirtualizedTable> = ( args ) => {
       newRows.push( ...args.rows );
 
       setRows( newRows );
-      // @ts-ignore
-      promiseResolve();
-    }, 5000 );
 
-    let promiseResolve: ( value: ( PromiseLike<unknown> | unknown ) ) => void = () => {};
+      promiseResolve( undefined );
+    }, 500 );
+
+    let promiseResolve: ( value: ( PromiseLike<unknown> | unknown )) => void = () => {};
 
     return new Promise(( resolve ) => { promiseResolve = resolve; });
   };
