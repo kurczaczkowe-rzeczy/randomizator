@@ -17,6 +17,7 @@ const TextInput = ({
   fullWidth = false,
   onChange = undefined,
   onFocus = undefined,
+  onBlur = undefined,
   value = undefined,
   forwardedRef,
 }: ITextInput ): JSX.Element => (
@@ -28,6 +29,7 @@ const TextInput = ({
     placeholder={ placeholder }
     name={ name }
     className={ classNames( classes.inputText, { [ classes.fullWidth ]: fullWidth }) }
+    onBlur={ onBlur }
     onChange={ onChange }
     onFocus={ onFocus }
     value={ value }

@@ -24,6 +24,7 @@ export default{
   errorPageNotFound: 'Page not found',
   errorUserFormNotExist: 'This form not exist for this user',
   errorUserNotExist: 'This user is not exist',
+  filter: 'Filter',
   firestorePermissionDenied: 'You have not permission to execute this action. All progress will be revert.',
   form: 'Form',
   formErrorEmptyFormFields: 'Enter a value in the form fields. One field is enough!',

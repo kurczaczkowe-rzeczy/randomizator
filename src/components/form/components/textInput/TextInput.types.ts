@@ -1,11 +1,17 @@
-import { ChangeEvent, ForwardedRef } from 'react';
+import {
+  ChangeEvent,
+  FocusEvent,
+  ForwardedRef,
+} from 'react';
+import { ChangeHandler } from 'react-hook-form';
 
 export interface ITextInput {
   forwardedRef?: ForwardedRef<HTMLInputElement>;
   fullWidth?: boolean;
   name?: string;
-  onChange?: ( event: ChangeEvent<HTMLInputElement> ) => void;
-  onFocus?: ( event: ChangeEvent<HTMLInputElement> ) => void;
+  onBlur?: (( event: FocusEvent<HTMLInputElement> ) => void ) | ChangeHandler;
+  onChange?: (( event: ChangeEvent<HTMLInputElement> ) => void ) | ChangeHandler;
+  onFocus?: ( event: FocusEvent<HTMLInputElement> ) => void ;
   placeholder?: string;
   required?: boolean;
   type?: 'email' | 'password' | 'text';

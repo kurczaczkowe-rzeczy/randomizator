@@ -15,6 +15,7 @@ export const ButtonView = ({
   onClick,
   type = 'button',
   variant = 'button',
+  className,
 }: IButton ): JSX.Element => {
   const isIconButton = _includes( _toLower( variant ), _toLower( 'iconButton' ));
   const isTextButton = _includes( _toLower( variant ), _toLower( 'text' ));
@@ -24,11 +25,15 @@ export const ButtonView = ({
   const preparedIcon = isIconButton && icon
     ? cloneElement( icon, { className: classNames( styles.icon, styles.moreSpace ) })
     : null;
-  const buttonClasses = classNames( styles.root, {
-    [ styles.iconButton ]: isIconButton,
-    [ styles.containedButton ]: isContainedButton,
-    [ styles.textButton ]: isTextButton,
-  });
+  const buttonClasses = classNames(
+    styles.root,
+    className,
+    {
+      [ styles.iconButton ]: isIconButton,
+      [ styles.containedButton ]: isContainedButton,
+      [ styles.textButton ]: isTextButton,
+    },
+  );
 
   return (
     <button

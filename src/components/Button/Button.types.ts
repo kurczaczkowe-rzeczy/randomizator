@@ -1,6 +1,8 @@
 import { ReactElement } from 'react';
 
 export interface IButton{
+  /** Specify additional styles passed to button element. */
+  className?: string;
   /**
    * Icon element will be displaying before all content.
    */
