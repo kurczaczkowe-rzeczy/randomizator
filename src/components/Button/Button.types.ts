@@ -1,12 +1,14 @@
 import { ReactElement } from 'react';
 
 export interface IButton{
+  /** Specify additional styles passed to button element. */
+  className?: string;
   /**
    * Icon element will be displaying before all content.
    */
   icon?: ReactElement;
   /**
-   * Method after click Button.
+   * Action call on user interaction via mouse click on this element.
    */
   onClick?: () => void;
   /**
@@ -20,5 +22,5 @@ export interface IButton{
   /**
    * Variant specify if button has or not icon. Default *variant* is button.
    */
-  variant?: 'button' | 'iconButton';
+  variant?: 'button' | 'iconButton' | 'textIconButton';
 }
