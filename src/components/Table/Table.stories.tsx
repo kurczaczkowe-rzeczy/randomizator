@@ -10,7 +10,14 @@ export default{
   component: Component,
   args: {
     body: bodyMock.rows,
-    head: headerCells,
+    head: [
+      {
+        id: 'index',
+        children: <span>Indeks</span>,
+        width: 50,
+      },
+      ...headerCells,
+    ],
   },
 } as Meta;
 
