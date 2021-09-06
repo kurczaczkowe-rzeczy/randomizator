@@ -60,7 +60,7 @@ declare module '@material-ui/core/styles/createPalette' {
     fadedMain: () => CSSProperties[ 'color' ];
   }
 }
-
+// ToDo: issue #192
 const palette = {
   primary: {
     main: '#771e76',
@@ -115,6 +115,17 @@ const classes = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  tab: {
+    opacity: 1,
+    fontWeight: 700,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    border: `2px solid ${ palette.backgroundHighlighted }`,
+    borderBottom: 'none',
+
+    color: palette.primary.main,
+    '&:hover:not(.Mui-selected)': { borderColor: palette.backgroundLight },
   },
 };
 
@@ -199,6 +210,13 @@ export const theme = createMuiTheme({
           color: palette.colorTextSelected,
           boxShadow: `0 0 5px ${ palette.error.main }`,
         },
+      },
+    },
+    MuiTab: {
+      root: {
+        ...classes.tab,
+
+        '&.Mui-selected': { borderColor: palette.primary.main },
       },
     },
   },
