@@ -219,5 +219,16 @@ export const theme = createMuiTheme({
         '&.Mui-selected': { borderColor: palette.primary.main },
       },
     },
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    MuiTabScrollButton: {
+      root: {
+        ...classes.tab,
+        border: 'none',
+
+        '&:hover .MuiSvgIcon-root': { fontSize: '2rem' },
+      },
+    },
+    MuiTabs: { flexContainer: { color: palette.primary.main }},
   },
 });
