@@ -23,6 +23,8 @@ import { APP_SUFFIX, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
 import PageContainer from 'components/PageContainer';
 
 import GuestView from './Guest.view';
+import { createFieldsCollection } from './Guest.utils';
+import { IGuest } from './Guest.types';
 
 const GuestPage = (): JSX.Element => {
   const getString = useLocaleString();
@@ -66,11 +68,8 @@ const GuestPage = (): JSX.Element => {
     stopTimeout,
   ]);
 
-  const onSubmit = ( nameMale: string, nameFemale: string ): void => {
-    const ans = {
-      nameMale,
-      nameFemale,
-    };
+  const onSubmit: IGuest[ 'onSubmit' ] = ( fields ): void => {
+    const ans = { fields: createFieldsCollection( fields ) };
 
     db.collection( creatorId )
       .doc( formId )

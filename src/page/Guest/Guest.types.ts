@@ -1,5 +1,8 @@
 import { SyntheticEvent } from 'react';
 
+import { FormContainer } from 'components/form';
+import { Mapping } from 'types';
+
 export interface IGuest{
   /**
    * Name of form Creator
@@ -28,5 +31,18 @@ export interface IGuest{
   /**
    * Method for send answers
    */
-  onSubmit: ( nameMale: string, nameFemale: string ) => void;
+  onSubmit: FormContainer[ 'onSubmit' ];
 }
+
+export interface IAnswer {
+  /** Holds field name of answer collection */
+  fieldName: string;
+  /** Specify actual value provides from user to field */
+  value: string;
+  /** The weight of answer. It will be use for increase, decrease or disable chance to draw value */
+  weight: number;
+}
+
+export type Answers = IAnswer[];
+export type CreateFieldsCollection = ( fields: Mapping< string > ) => Answers;
+export type CheckValueIsValid = ( value: string ) => boolean;

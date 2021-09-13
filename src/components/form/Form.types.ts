@@ -16,7 +16,7 @@ export interface IForm {
 }
 
 export type FormContainer = Partial<Omit<IForm, 'onSubmit'>> & {
-  onSubmit?: ( nameMale: string, nameFemale: string ) => void;
+  onSubmit?: ( fields: { nameFemale: string; nameMale: string }) => void;
 };
 
 export interface IGuestValues {

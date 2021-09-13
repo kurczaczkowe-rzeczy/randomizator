@@ -34,7 +34,7 @@ const Form = ({
       alert( getString( 'formErrorWrongFormName' ));
     } else {
       if ( someFieldFill( nameMale, nameFemale )) {
-        onSubmit( nameMale, nameFemale );
+        onSubmit({ nameMale, nameFemale });
         methods.reset();
       } else {
         alert( getString( 'formErrorEmptyFormFields' ));
