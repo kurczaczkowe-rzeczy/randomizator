@@ -4,7 +4,11 @@ import _forEach from 'lodash/forEach';
 import _isEmpty from 'lodash/isEmpty';
 
 import { db } from 'config/firebaseConfig';
-import { IAnswers, IForm } from './Creator.types';
+
+import { AnswerFields } from 'page/Guest';
+import { createAnswer, createAnswerField } from 'utils/answersUtils';
+
+import { IAnswer, IForm } from './Creator.types';
 
 type returnedType = () => void;
 
@@ -44,12 +48,12 @@ export const getNewFileName = (): string => {
   return `${ datePart }${ timePart }`;
 };
 
-export const parseText = ( text: string ): IAnswers[] => {
+export const parseText = ( text: string ): IAnswer[] => {
   const jsonCSV = readString( text ).data as string[][];
 
-  const answers: IAnswers[] = [];
+  const answers: IAnswer[] = [];
   let fieldNames: string[] = [];
-  let answer: IAnswers = {};
+  let answerFields: AnswerFields = [];
 
   _forEach( jsonCSV, ( fileRow, index ) => {
     if ( index === 0 ) {
@@ -60,14 +64,14 @@ export const parseText = ( text: string ): IAnswers[] => {
 
     _forEach( fileRow, ( cell, ind ) => {
       if ( ind !== 0 ) {
-        answer[ fieldNames[ ind ] ] = cell;
+        answerFields.push( createAnswerField( cell, fieldNames[ ind ]));
       }
     });
 
-    if ( !_isEmpty( answer )) {
-      answers.push({ ...answer });
+    if ( !_isEmpty( answerFields )) {
+      answers.push( createAnswer( answerFields ));
     }
-    answer = {};
+    answerFields = [];
   });
 
   return answers;

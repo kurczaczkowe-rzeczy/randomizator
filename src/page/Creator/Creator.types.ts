@@ -1,60 +1,44 @@
 import { IFileContainer } from 'components/FileContainer';
 import { ISelect } from 'components/select/Select.types';
+import { AnswerFields } from 'page/Guest';
 
-export interface IForm{
-  /**
-   * Identifier of specific form.
-   */
+export interface IForm {
+  /** Identifier of specific form. */
   id: string;
-  /**
-   * Name of form.
-   */
+  /** Name of form. */
   name: string;
 }
 
-export interface IAnswers{
-  [key: string]: string;
+export interface IAnswer {
+  /** Array of fields created base on provided users answers. */
+  fields: AnswerFields;
+  /** Unique identifier of answer. */
+  id: string;
 }
 
-export interface IAnswersStore{
+export interface IAnswersStore {
   [key: string]: string[];
 }
 
 export interface ICreator {
-  /**
-   * Number of form answers.
-   */
+  /** Number of form answers. */
   answersCounter: number;
-  /**
-   * Props passed to FileContainer component.
-   */
+  /** Props passed to FileContainer component. */
   fileContainerProps: IFileContainer;
-  /**
-   * Link to specific form.
-   */
+  /** Link to specific form. */
   link: string;
-  /**
-   * Method download answers and converts it to csv file.
-   */
+  /** Method download answers and converts it to csv file. */
   onDownloadAnswers: () => void;
-  /**
-   * Method draw answers.
-   */
+  /** Method draw answers. */
   onDrawClick: () => void;
-  /**
-   * Method change current displays form.
-   */
+  /** Method change current displays form. */
   onFormIdChange?: ( formID: string ) => void;
-  /**
-   * Method move user to form page.
-   */
+  /** Method move user to form page. */
   onGoToForm: () => void;
-  /**
-   * Method sign out users.
-   */
+  /** Method sign out users. */
   onLogout: () => void;
-  /**
-   * Props passed to select with forms.
-   */
+  /** Props passed to select with forms. */
   selectFormsProps: ISelect;
 }
+
+export type Answers = IAnswer[];

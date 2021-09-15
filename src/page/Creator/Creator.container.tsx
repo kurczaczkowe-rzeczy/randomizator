@@ -37,8 +37,8 @@ import PageContainer from 'components/PageContainer';
 import CreatorView from './Creator.view';
 import {
   IForm,
-  IAnswers,
   IAnswersStore,
+  Answers,
 } from './Creator.types';
 import {
   getFormCollection,
@@ -56,7 +56,7 @@ const Creator = (): JSX.Element => {
   const [ link, setLink ] = useState( '' );
   const [ selectedFormId, setSelectedFormId ] = useState( '' );
   const [ acceptedFileNames, setAcceptedFileNames ] = useState<string[]>([]);
-  const [ answersFromFile, setAnswersFromFile ] = useState<IAnswers[]>([]);
+  const [ answersFromFile, setAnswersFromFile ] = useState<Answers>([]);
 
   const auth = useSelector(( state: RootState ) => state.firebase.auth, shallowEqual );
   const answersCounter = useSelector(( state: RootState ) => state.ans.counter );
@@ -116,16 +116,16 @@ const Creator = (): JSX.Element => {
     }
   }, [ formID ]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const getData = ( answers: IAnswers[]): void => {
+  const getData = ( answers: Answers ): void => {
     const result: IAnswersStore = { };
 
     _forEach( answers, ( answer ) => {
-      _forEach( answer, ( value, key ) => {
-        if ( _isNil( result[ key ])) {
-          result[ key ] = [];
+      _forEach( answer.fields, ({ value, fieldName }) => {
+        if ( _isNil( result[ fieldName ])) {
+          result[ fieldName ] = [];
         }
 
-        result[ key ] = _union( result[ key ], [ value ]);
+        result[ fieldName ] = _union( result[ fieldName ], [ value ]);
       });
     });
 

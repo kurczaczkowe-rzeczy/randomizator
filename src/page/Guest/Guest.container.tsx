@@ -18,12 +18,12 @@ import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { getCreatorName } from 'store/actions/userActions';
 import { fetchFormName } from 'store/actions/formAction';
 import { RootState } from 'store/reducers/rootReducer';
+import { createAnswer } from 'utils/answersUtils';
 import { APP_SUFFIX, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
 
 import PageContainer from 'components/PageContainer';
 
 import GuestView from './Guest.view';
-import { createFieldsCollection } from './Guest.utils';
 import { IGuest } from './Guest.types';
 
 const GuestPage = (): JSX.Element => {
@@ -37,7 +37,7 @@ const GuestPage = (): JSX.Element => {
   const errorUserName = useSelector(( state: RootState ) => state.usr.errors );
   const dispatch = useDispatch();
 
-  /* ToDo use constants instead of hardcoded strings */
+  // ToDo use constants instead of hardcoded strings
   const { creatorId, formId } = useParams<{[key: string]: string }>();
   const [ isHighlighted, setIsHighlighted ] = useState( false );
   const { runTimeout, stopTimeout } = useTimeout( DELAY_FORM_NAME_HIGHLIGHT );
@@ -69,7 +69,7 @@ const GuestPage = (): JSX.Element => {
   ]);
 
   const onSubmit: IGuest[ 'onSubmit' ] = ( fields ): void => {
-    const ans = { fields: createFieldsCollection( fields ) };
+    const ans = createAnswer( fields );
 
     db.collection( creatorId )
       .doc( formId )
