@@ -12,4 +12,4 @@ export default{
 
 const Template: Story<ICreator> = ( args ) => <Component { ...args } />;
 
-export const Default = Template.bind({});
+export const Creator = Template.bind({});

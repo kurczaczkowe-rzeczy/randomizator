@@ -1,3 +1,5 @@
+import { action } from '@storybook/addon-actions';
+
 const options = [
   {
     id: '1',
@@ -210,6 +212,14 @@ const mockData = {
     name: 'forms',
     label: 'Nazwa aktywnego formularza',
     value: '1',
+    onItemClick: action( 'onItemClick' ),
+  },
+  fileContainerProps: {
+    acceptedFileNames: [],
+    onDropAccepted: action( 'onDropAccepted' ),
+    onDropRejected: action( 'onDropRejected' ),
+    onRemove: action( 'onRemove' ),
+    onSend: action( 'onSend' ),
   },
 };
 

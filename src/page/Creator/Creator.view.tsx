@@ -17,9 +17,11 @@ import { ICreator } from './Creator.types';
 import useStyles from './Creator.styles';
 
 /**
- * Page displaying panel for authenticated users
+ * Page contain panel with preview of form, drawing answers, select that provide form context
+ * and link to actual form and porvies possibility to upload answers. For admin additionally provides button
+ * that allow download answers.
  */
-const Creator = ({
+export const Creator = ({
   answersCounter,
   fileContainerProps,
   link,

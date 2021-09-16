@@ -16,8 +16,11 @@ export interface IAnswer {
   id: string;
 }
 
-export interface IAnswersStore {
-  [key: string]: string[];
+export interface IFormDoc {
+  /** Users answers. */
+  answers: Answers;
+  /** Form name. */
+  name: string;
 }
 
 export interface ICreator {

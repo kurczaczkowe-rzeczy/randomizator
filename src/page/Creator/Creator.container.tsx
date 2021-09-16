@@ -15,6 +15,7 @@ import _isEmpty from 'lodash/isEmpty';
 import _map from 'lodash/map';
 
 import { db, firestore } from 'config/firebaseConfig';
+import { Mapping } from 'types';
 import prepareLink from 'utils/prepareLink';
 import useLocalStorage from 'hooks/useLocalStorage';
 import useLocaleString from 'hooks/useLocaleString';
@@ -37,7 +38,7 @@ import PageContainer from 'components/PageContainer';
 import CreatorView from './Creator.view';
 import {
   IForm,
-  IAnswersStore,
+  IFormDoc,
   Answers,
 } from './Creator.types';
 import {
@@ -45,6 +46,7 @@ import {
   formsSubscription,
   getNewFileName,
   parseText,
+  mapAnswers,
 } from './Creator.utils';
 
 // ToDo: issue #150
@@ -117,7 +119,7 @@ const Creator = (): JSX.Element => {
   }, [ formID ]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getData = ( answers: Answers ): void => {
-    const result: IAnswersStore = { };
+    const result: Mapping< string[] > = { };
 
     _forEach( answers, ( answer ) => {
       _forEach( answer.fields, ({ value, fieldName }) => {
@@ -151,8 +153,8 @@ const Creator = (): JSX.Element => {
   const onDownloadAnswers = async (): Promise<void> => {
     if ( IS_DEVELOPMENT_MODE && formID ) {
       try {
-        const savedForm = await getFormCollection( auth.uid, formID );
-        const answersOfForm = savedForm?.answers;
+        const savedForm = await getFormCollection( auth.uid, formID ) as IFormDoc;
+        const answersOfForm = mapAnswers( savedForm?.answers );
         const formName = savedForm ? savedForm.name.replaceAll( ' ', '_' ) : getNewFileName();
 
         /* In database doesn't exist emptyColumn fields that is append in google forms
