@@ -10,9 +10,7 @@ import {
 import useStyles from './Select.styles';
 import { ISelect } from './Select.types';
 
-/**
- * UI Components provides input with options list.
- */
+/** UI Components allows users select option from dropdown list. */
 export const Select = ({
   defaultValue,
   label,
