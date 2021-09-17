@@ -2,6 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import { MemoryRouter } from 'react-router';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
@@ -15,16 +16,13 @@ const store = createStore( rootReducer, composeWithDevTools( applyMiddleware( th
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Story />
-    </ThemeProvider>
-  ),
-  (Story) => (
     <Provider store={store}>
-      <Story />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <MemoryRouter><Story /></MemoryRouter>
+      </ThemeProvider>
     </Provider>
-  )
+  ),
 ];
 
 export const parameters = {

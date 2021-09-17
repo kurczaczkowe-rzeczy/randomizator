@@ -5,7 +5,6 @@ import {
   shallowEqual,
   useDispatch,
 } from 'react-redux';
-import { useHistory } from 'react-router';
 import { isEmpty } from 'react-redux-firebase';
 import _isNil from 'lodash/isNil';
 import _forEach from 'lodash/forEach';
@@ -32,7 +31,7 @@ import {
   IS_DEVELOPMENT_MODE,
 } from 'constans';
 
-import { IOption } from 'components/select/Select.types';
+import { IOption } from 'components/Select';
 import PageContainer from 'components/PageContainer';
 
 import CreatorView from './Creator.view';
@@ -52,7 +51,6 @@ import {
 // ToDo: issue #150
 const Creator = (): JSX.Element => {
   const getString = useLocaleString();
-  const { push } = useHistory();
 
   const [ formID, setFormID ] = useLocalStorage<string>( FORM_ID_KEY );
   const [ link, setLink ] = useState( '' );
@@ -179,7 +177,6 @@ const Creator = (): JSX.Element => {
     setSelectedFormId( option.name );
     onFormIdChange( option.id );
   };
-  const onGoToForm = (): void => { push( prepareLink( link )); };
 
   const onDropAccepted = ( acceptedFiles: File[]): void => {
     setAcceptedFileNames( _map( acceptedFiles, ( file ) => file.name ));
@@ -241,7 +238,6 @@ const Creator = (): JSX.Element => {
         selectFormsProps={ selectFormsProps }
         onDownloadAnswers={ onDownloadAnswers }
         onDrawClick={ onRandomClick }
-        onGoToForm={ onGoToForm }
         onLogout={ onLogout }
       />
     </PageContainer>

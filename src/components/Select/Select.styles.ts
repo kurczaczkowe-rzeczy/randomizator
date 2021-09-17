@@ -14,9 +14,7 @@ export default makeStyles(({
     paddingLeft: spacing( 1 ),
     '&.Mui-focused': { color: palette.colorText },
   },
-
   list: { padding: 0 },
-
   select: {
     borderLeft: borders.input,
     borderRight: borders.input,
@@ -31,13 +29,11 @@ export default makeStyles(({
         color: palette.colorText,
       },
   },
-
   paper: {
     background: palette.backgroundDark,
     color: palette.colorText,
     borderRadius: 0,
   },
-
   menuItem: {
     borderBottom: `1px solid ${ palette.primary.main }`,
     padding: spacing( 1, 2 ),
@@ -45,12 +41,10 @@ export default makeStyles(({
     '&.Mui-selected': { background: palette.primary.main },
     '&.Mui-selected:hover, &:hover': { background: palette.primary.light },
   },
-
   icon: {
     fill: palette.primary.main,
     marginRight: spacing( 1 ),
   },
-
   selected: {
     color: palette.colorTextSelected,
     paddingTop: spacing( 1.5 ),

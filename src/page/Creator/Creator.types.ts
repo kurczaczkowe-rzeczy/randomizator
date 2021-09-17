@@ -1,5 +1,5 @@
 import { IFileContainer } from 'components/FileContainer';
-import { ISelect } from 'components/select/Select.types';
+import { ISelect } from 'components/Select';
 import { AnswerFields } from 'page/Guest';
 
 export interface IForm {
@@ -28,7 +28,7 @@ export interface ICreator {
   answersCounter: number;
   /** Props passed to FileContainer component. */
   fileContainerProps: IFileContainer;
-  /** Link to specific form. */
+  /** Link to form for guest users. */
   link: string;
   /** Method download answers and converts it to csv file. */
   onDownloadAnswers: () => void;
@@ -36,8 +36,6 @@ export interface ICreator {
   onDrawClick: () => void;
   /** Method change current displays form. */
   onFormIdChange?: ( formID: string ) => void;
-  /** Method move user to form page. */
-  onGoToForm: () => void;
   /** Method sign out users. */
   onLogout: () => void;
   /** Props passed to select with forms. */
