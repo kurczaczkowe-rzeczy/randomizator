@@ -1,5 +1,4 @@
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 import useLocaleString from 'hooks/useLocaleString';
 import { IS_DEVELOPMENT_MODE } from 'constans';
@@ -7,18 +6,16 @@ import { IS_DEVELOPMENT_MODE } from 'constans';
 import AnswersCounter from 'components/answersCounter';
 import ButtonView from 'components/Button';
 import Card from 'components/card';
-import CopyText from 'components/copyText';
 import Draw from 'components/draw';
 import FileContainer from 'components/FileContainer';
 import Form from 'components/form';
-import Select from 'components/select';
+import FormChooser from 'components/FormChooser';
 
 import { ICreator } from './Creator.types';
 import useStyles from './Creator.styles';
 
-/**
- * Page displaying panel for authenticated users
- */
+/** Page allows creators share link to form, display form preview, upload answers from CSV files
+ * and draw answers. */
 const Creator = ({
   answersCounter,
   fileContainerProps,
@@ -26,7 +23,6 @@ const Creator = ({
   selectFormsProps,
   onDownloadAnswers,
   onDrawClick,
-  onGoToForm,
   onLogout,
 }: ICreator ): JSX.Element => {
   const styles = useStyles();
@@ -35,29 +31,7 @@ const Creator = ({
   return (
     <div className={ styles.root }>
       <div className={ styles.leftSpace }>
-        <Card
-          centerBody={ false }
-          body={ (
-            <div className={ styles.formNameWrapper }>
-              <div className={ styles.rowGap }>
-                <Select { ...selectFormsProps } />
-              </div>
-              <div className={ styles.linkWrapper }>
-                <div className={ styles.openInNewIconWrapper } title={ getString( 'openFormLink' ) }>
-                  <OpenInNewIcon classes={{ root: styles.openInNewIcon }} onClick={ onGoToForm } />
-                </div>
-                <CopyText
-                  text={ link }
-                  content={ (
-                    <p className={ styles.copyText }>
-                      { link }
-                    </p>
-                  ) }
-                />
-              </div>
-            </div>
-          ) }
-        />
+        <FormChooser link={ link } selectFormsProps={ selectFormsProps } />
         { IS_DEVELOPMENT_MODE && (
           <ButtonView
             value={ getString( 'getAnswers' ) }
