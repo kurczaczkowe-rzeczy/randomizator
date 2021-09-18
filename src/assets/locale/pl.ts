@@ -1,8 +1,7 @@
-import { IResourceType } from 'hooks/types';
-
 /* eslint-disable max-len */
-export default{
+const localizationPL = {
   addUser: 'Dodaj użytkownika',
+  answersWeightManagerTitle: 'Odpowiedzi',
   activeNameForm: 'Nazwa aktywnego formularza',
   copied: 'Skopiowano',
   copyIcon: 'Skopiuj link',
@@ -61,4 +60,6 @@ export default{
   userIsNullAfterCreating: 'Wystąpił nieoczekiwany błąd po utworzeniu użytkownika. Sprawdź proszę w panelu admina firebase czy użytkownik został stworzony.',
   version: 'Wersja',
   weakPassword: 'Hasło jest zbyt słabe aby utworzyć konto',
-} as IResourceType;
+};
+
+export default localizationPL;

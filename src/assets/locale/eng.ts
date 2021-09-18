@@ -1,8 +1,9 @@
 /* eslint-disable max-len */
-import { IResourceType } from 'hooks/types';
+import { LocaleResources } from 'assets/locale/types';
 
 export default{
   addUser: 'Add user',
+  answersWeightManagerTitle: 'Answers',
   activeNameForm: 'Name of active form',
   copied: 'Copied',
   copyIcon: 'Copy link',
@@ -61,4 +62,4 @@ export default{
   userIsNullAfterCreating: 'Unknown error occurred after user create. Please check if user was added to firebase admin panel.',
   version: 'Version',
   weakPassword: 'Password is too weak to create account',
-} as IResourceType;
+} as LocaleResources;
