@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { LocaleResources } from 'assets/locale/types';
 
-export default{
+const localizationENG: LocaleResources = {
   addUser: 'Add user',
   answersWeightManagerTitle: 'Answers',
   activeNameForm: 'Name of active form',
@@ -62,4 +62,6 @@ export default{
   userIsNullAfterCreating: 'Unknown error occurred after user create. Please check if user was added to firebase admin panel.',
   version: 'Version',
   weakPassword: 'Password is too weak to create account',
-} as LocaleResources;
+};
+
+export default localizationENG;
