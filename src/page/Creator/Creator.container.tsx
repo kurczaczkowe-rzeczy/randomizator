@@ -52,7 +52,6 @@ const Creator = (): JSX.Element => {
 
   const [ formID, setFormID ] = useLocalStorage<string>( FORM_ID_KEY );
   const [ link, setLink ] = useState( '' );
-  const [ selectedFormId, setSelectedFormId ] = useState( '' );
   const [ acceptedFileNames, setAcceptedFileNames ] = useState<string[]>([]);
   const [ answersFromFile, setAnswersFromFile ] = useState<IAnswers[]>([]);
 
@@ -129,10 +128,6 @@ const Creator = (): JSX.Element => {
 
     dispatch( setAnswers( result, answers.length ));
   };
-  const onFormIdChange = ( formID: string ): void => {
-    setFormID( formID );
-    dispatch( clearDraw());
-  };
   const onRandomClick = (): void => {
     dispatch( setDrawResult());
   };
@@ -171,9 +166,9 @@ const Creator = (): JSX.Element => {
       } catch ( error: unknown ) { console.error( 'Error!', error ); }
     }
   };
-  const onMenuItemClick = ( option: IOption ): void => {
-    setSelectedFormId( option.name );
-    onFormIdChange( option.id );
+  const onMenuItemClick = ({ id }: IOption ): void => {
+    setFormID( id );
+    dispatch( clearDraw());
   };
 
   const onDropAccepted = ( acceptedFiles: File[]): void => {
@@ -217,7 +212,7 @@ const Creator = (): JSX.Element => {
     onItemClick: onMenuItemClick,
     name: 'forms',
     label: getString( 'activeNameForm' ),
-    value: selectedFormId,
+    value: formID,
   };
   const fileContainerProps = {
     acceptedFileNames,
