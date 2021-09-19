@@ -3,6 +3,7 @@ const localizationPL = {
   addUser: 'Dodaj użytkownika',
   answersWeightManagerTitle: 'Odpowiedzi',
   activeNameForm: 'Nazwa aktywnego formularza',
+  content: 'Zawartość',
   copied: 'Skopiowano',
   copyIcon: 'Skopiuj link',
   countAnswers: 'Ilość odpowiedzi',
@@ -23,6 +24,7 @@ const localizationPL = {
   errorPageNotFound: 'Nie znaleziono strony',
   errorUserFormNotExist: 'Nie istnieje taki formularz tego użytkownika',
   errorUserNotExist: 'Nie istnieje taki użytkownik',
+  fieldName: 'Nazwa pola',
   filter: 'Filtruj',
   firestorePermissionDenied: 'Nie masz uprawnień do wykonania tej akcji. Cały postęp zostanie wycofany.',
   form: 'Formularz',
@@ -60,6 +62,7 @@ const localizationPL = {
   userIsNullAfterCreating: 'Wystąpił nieoczekiwany błąd po utworzeniu użytkownika. Sprawdź proszę w panelu admina firebase czy użytkownik został stworzony.',
   version: 'Wersja',
   weakPassword: 'Hasło jest zbyt słabe aby utworzyć konto',
+  weight: 'Waga',
 };
 
 export default localizationPL;

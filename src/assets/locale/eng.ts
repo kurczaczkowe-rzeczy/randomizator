@@ -5,6 +5,7 @@ const localizationENG: LocaleResources = {
   addUser: 'Add user',
   answersWeightManagerTitle: 'Answers',
   activeNameForm: 'Name of active form',
+  content: 'Content',
   copied: 'Copied',
   copyIcon: 'Copy link',
   countAnswers: 'Count answers',
@@ -25,6 +26,7 @@ const localizationENG: LocaleResources = {
   errorPageNotFound: 'Page not found',
   errorUserFormNotExist: 'This form not exist for this user',
   errorUserNotExist: 'This user is not exist',
+  fieldName: 'Field name',
   filter: 'Filter',
   firestorePermissionDenied: 'You have not permission to execute this action. All progress will be revert.',
   form: 'Form',
@@ -62,6 +64,7 @@ const localizationENG: LocaleResources = {
   userIsNullAfterCreating: 'Unknown error occurred after user create. Please check if user was added to firebase admin panel.',
   version: 'Version',
   weakPassword: 'Password is too weak to create account',
+  weight: 'Weight',
 };
 
 export default localizationENG;
