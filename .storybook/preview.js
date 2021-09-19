@@ -31,4 +31,11 @@ export const parameters = {
     theme: randoTheme,
     source: { type: 'dynamic' },
   },
+  options: {
+    storySort: {
+      method: 'alphabetical',
+      order: [],
+      locales: 'en-US',
+    }
+  }
 };
