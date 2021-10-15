@@ -1,4 +1,8 @@
-import { useState, TransitionEvent } from 'react';
+import {
+  useState,
+  FocusEvent,
+  TransitionEvent,
+} from 'react';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 import _map from 'lodash/map';
@@ -26,6 +30,9 @@ export const Filters = ({
 }: IFilters ): JSX.Element => {
   const rowOrder = !columnOrder;
   const styles = useStyle();
+  // ToDo: issue #190
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const { handleSubmit, register } = useForm<IFilters[ 'defaultValues' ]>({ defaultValues });
   const [ show, setShow ] = useState( false );
   const getString = useLocaleString();
@@ -67,7 +74,7 @@ export const Filters = ({
                 <TextInput
                   type={ type }
                   { ...register( name ) }
-                  onBlur={ ( event: unknown ) => {
+                  onBlur={ ( event: FocusEvent< HTMLInputElement > ) => {
                     handleSubmit( onSubmit )();
                     registeredProps.onBlur( event );
                   } }

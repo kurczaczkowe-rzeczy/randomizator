@@ -1,4 +1,5 @@
-import { FormEventHandler, SyntheticEvent } from 'react';
+import { FormEvent, SyntheticEvent } from 'react';
+import { SubmitHandler } from 'react-hook-form';
 
 export interface IForm {
   /**
@@ -8,7 +9,7 @@ export interface IForm {
   /**
    * Method define what happen when response form was submit
    */
-  onSubmit: FormEventHandler<HTMLFormElement>;
+  onSubmit: SubmitHandler< FormEvent< HTMLFormElement >>;
   /**
    * Define if form could send response
    */
