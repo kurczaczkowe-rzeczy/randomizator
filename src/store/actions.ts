@@ -53,3 +53,13 @@ export type GlobalActionsTypes =
 export type GlobalActionsTypesWithPayload =
   | typeof SHOW_LOADER
   | typeof HIDE_LOADER;
+
+export const CLEAR_ANSWERS_MANAGER = 'CLEAR_ANSWERS_MANAGER';
+export const SET_EDITED_ANSWER = 'SET_EDITED_ANSWER';
+export const UNSET_EDITED_ANSWER = 'UNSET_EDITED_ANSWER';
+export type AnswersManagerActionsTypes =
+  | typeof CLEAR_ANSWERS_MANAGER;
+
+export type AnswersManagerActionsTypesWithPayload =
+  | typeof SET_EDITED_ANSWER
+  | typeof UNSET_EDITED_ANSWER;

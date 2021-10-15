@@ -9,7 +9,10 @@ import {
   CLEAR_USER,
   GlobalActionsTypesWithPayload,
   UserActionsTypes,
+  AnswersManagerActionsTypes,
+  AnswersManagerActionsTypesWithPayload,
 } from 'store/actions';
+import { StringOrNumber } from 'types';
 
 export interface IState { readonly errors: string | null }
 
@@ -40,6 +43,8 @@ export interface IUserState extends IState {
   creatorName: string;
   currentUserRole: string;
 }
+
+export interface IAnswersManagerState { editedAnswers: StringOrNumber[] }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IRootState {
@@ -76,3 +81,8 @@ export interface IUserActionPayload {
 export type UserAction =
   | IAction<typeof CLEAR_USER>
   | IActionWithPayload<UserActionsTypes, IUserActionPayload>;
+
+export interface IAnswersManagerActionsPayload { answerID: StringOrNumber }
+export type AnswersManagerAction =
+  | IAction<AnswersManagerActionsTypes>
+  | IActionWithPayload<AnswersManagerActionsTypesWithPayload, IAnswersManagerActionsPayload>;

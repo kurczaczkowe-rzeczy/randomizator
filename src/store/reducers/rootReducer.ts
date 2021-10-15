@@ -12,6 +12,7 @@ import formReducer from './formReducer';
 import formsReducer from './formsReducer';
 import answersReducer from './answersReducer';
 import drawReducer from './drawReducer';
+import answersManagerReducer from './answersManagerReducer';
 
 const appReducer = combineReducers({
   global: globalReducer,
@@ -22,6 +23,7 @@ const appReducer = combineReducers({
   form: formReducer,
   forms: formsReducer,
   ans: answersReducer,
+  answersManager: answersManagerReducer,
   draw: drawReducer,
 });
 
