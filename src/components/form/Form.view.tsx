@@ -11,9 +11,7 @@ import ButtonView from 'components/Button';
 import classes from './form.module.scss';
 import { IForm, IGuestValues } from './Form.types';
 
-/**
- * Components represents a document section containing interactive controls for submitting information
- */
+/** Components represents a document section containing interactive controls for submitting information. */
 export const Form = ({
   preview,
   additionalFunction,
@@ -49,23 +47,25 @@ export const Form = ({
           ) }
         />
       </div>
-      <Controller
-        control={ control }
-        name="checkIsNotRobot"
-        render={ ({ field }): JSX.Element => (
-          <TextInput
-            required
-            fullWidth
-            onFocus={ additionalFunction }
-            placeholder={ getString( 'formSendPlaceholder' ) }
-            { ...field }
-            onChange={ ( event: SyntheticEvent ) => {
-              additionalFunction( event );
-              field.onChange( event );
-            } }
-          />
-        ) }
-      />
+      <div className={ classes.checkIsNotRobot }>
+        <Controller
+          control={ control }
+          name="checkIsNotRobot"
+          render={ ({ field }): JSX.Element => (
+            <TextInput
+              required
+              fullWidth
+              onFocus={ additionalFunction }
+              placeholder={ getString( 'formSendPlaceholder' ) }
+              { ...field }
+              onChange={ ( event: SyntheticEvent ) => {
+                additionalFunction( event );
+                field.onChange( event );
+              } }
+            />
+          ) }
+        />
+      </div>
       <ButtonView value={ getString( 'send' ) } type="submit" />
     </form>
   );

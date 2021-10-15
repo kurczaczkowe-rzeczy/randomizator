@@ -5,6 +5,7 @@ export class FirebaseError extends Error {
 
   readonly message: string;
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   constructor(
     code: string,
     message: string,

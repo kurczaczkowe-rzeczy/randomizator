@@ -135,8 +135,8 @@ export const theme = createMuiTheme({
   gradient: {
     input: `linear-gradient(
         180deg,
-        ${ palette.backgroundLight } 0%,
-        ${ palette.backgroundLight } 49%,
+        transparent 0%,
+        transparent 49%,
         ${ palette.primary.main } 50%,
         ${ palette.primary.main } 100%
       ) 1`,
@@ -188,11 +188,11 @@ export const theme = createMuiTheme({
 
           '&:focus': {
             borderImage: `linear-gradient(
-                 0deg,
-                 ${ palette.primary.main } 0%,
-                 ${ palette.primary.main } 49%,
-                 ${ palette.backgroundDark } 50%,
-                 ${ palette.backgroundDark } 100%
+                 180deg,
+                 transparent 0%,
+                 transparent 49%,
+                 ${ palette.primary.main } 50%,
+                 ${ palette.primary.main } 100%
                ) 1`,
             outline: 'none',
             boxShadow: shadow.focus,
