@@ -15,6 +15,6 @@ export interface ITextInput {
   onFocus?: ( event: FocusEvent<HTMLInputElement> ) => void ;
   placeholder?: string;
   required?: boolean;
-  type?: 'email' | 'password' | 'text';
+  type?: 'email' | 'password' | 'text' | 'number';
   value?: string;
 }

@@ -1,15 +1,28 @@
 .inputText {
-  background-color: #222222;
+  background-color: transparent;
   border-left: 2px solid;
   border-right: 2px solid;
-  border-image: linear-gradient(180deg, #222 0%, #222 49%, #771e76 50%, #771e76 100%) 1;
+  border-image: linear-gradient(180deg, transparent 0%, transparent 49%, #771e76 50%, #771e76 100%) 1;
   border-bottom: 2px solid;
   padding: 8px;
   color: #bdaeae;
   font-size: 17px;
+  font-family: Montserrat;
+
+  /* Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  &[type=number] {
+    -moz-appearance: textfield;
+    text-align: right;
+  }
 }
 .fullWidth {
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 8px;
 }
