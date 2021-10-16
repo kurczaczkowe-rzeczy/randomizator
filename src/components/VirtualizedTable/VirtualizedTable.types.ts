@@ -31,5 +31,5 @@ export interface IVirtualizedTable {
   sortDirection?: SortDirectionType;
 }
 
-export type WithStyles< ReturnType extends unknown = unknown > = ( styles: ClassNameMap ) => ReturnType;
+export type WithStyles< ReturnType > = ( styles: ClassNameMap ) => ReturnType;
 export type GetRowClassNames = ({ index }: Index ) => string;
