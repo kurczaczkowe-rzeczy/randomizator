@@ -1,3 +1,3 @@
-const mockData = { answersIndex: 0, edit: false };
+const mockData = { answerIndex: 0, edit: false };
 
 export default mockData;

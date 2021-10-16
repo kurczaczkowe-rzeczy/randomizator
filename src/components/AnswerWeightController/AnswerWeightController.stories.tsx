@@ -1,12 +1,13 @@
-import { IAnswersValues } from 'components/AnswersWeightManagerTable/AnswersWeightManagerTable.utils';
-import { FormProvider, useForm } from 'react-hook-form';
-import { Story, Meta } from '@storybook/react';
-import { setEditedAnswer, unsetEditedAnswer } from 'store/actions/answersManagerActions';
-
-import Component, { IAnswerWeightController } from '.';
-import mockData from './AnswerWeightController.mock';
-import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Story, Meta } from '@storybook/react';
+
+import { answerControllerDecorator } from 'decorators';
+import { setEditedAnswer, unsetEditedAnswer } from 'store/actions/answersManagerActions';
+import { IAnswer } from 'hooks/types';
+
+import Component from '.';
+import mockData from './AnswerWeightController.mock';
 
 export default{
   title: 'components/AnswerWeightController',
@@ -19,27 +20,20 @@ export default{
       table: { type: { summary: 'boolean' }},
     },
   },
+  decorators: [
+    answerControllerDecorator(({ args: { edit }}) => {
+      const dispatch = useDispatch();
+
+      useEffect(() => {
+        const action = edit ? setEditedAnswer : unsetEditedAnswer;
+
+        dispatch( action( 'aWd2fg4h57r' ));
+      }, [ edit, dispatch ]);
+    }),
+  ],
 } as Meta;
 
-const Template: Story<IAnswerWeightController & { edit: boolean }> = ( args ) => {
-  const methods = useForm< IAnswersValues >({ defaultValues: { answers: [{ weight: 5, answerID: 'aWd2fg4h57r' }]}});
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const action = args.edit ? setEditedAnswer : unsetEditedAnswer;
-
-    dispatch( action( 'aWd2fg4h57r' ));
-    // eslint-disable-next-line react/destructuring-assignment
-  }, [ args.edit, dispatch ]);
-
-  return (
-    <form>
-      <FormProvider { ...methods }>
-        <Component { ...args } />
-      </FormProvider>
-    </form>
-  );
-};
+const Template: Story<IAnswer & { edit: boolean }> = ( args ) => <Component { ...args } />;
 
 export const View = Template.bind({});
 
