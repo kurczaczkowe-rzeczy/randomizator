@@ -15,4 +15,5 @@ export default{
 
 const Template: Story<IAnswer> = ( args ) => <Component { ...args } />;
 
-export const Default = Template.bind({});
+export const AnswerEditController = Template.bind({});
+AnswerEditController.storyName = 'AnswerEditController';
