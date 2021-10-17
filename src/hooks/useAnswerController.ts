@@ -10,7 +10,7 @@ import { RootState } from 'store/reducers/rootReducer';
  * of answer and shared them to component when this hook is used. Also shared edit state from associated answer stored
  * in redux store.
  *
- * @param answerIndex specify index of answer in array field.
+ * @param answerIndex specify answer index in array field.
  * @return {@link IAnswerController}
  */
 const useAnswerController = ( answerIndex: IAnswer[ 'answerIndex' ]): IAnswerController => {
