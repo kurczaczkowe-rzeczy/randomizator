@@ -1,17 +1,17 @@
 import { Story, Meta } from '@storybook/react';
 import { answerControllerDecorator } from 'decorators';
 
-import Component, { IAnswersWeightRow } from '.';
-import mockData from 'components/AnswerWeightRow/AnswerWeightRow.mock';
+import Component, { IAnswerRow } from '.';
+import mockData from './AnswerRow.mock';
 
 export default{
-  title: 'components/AnswerWeightRow',
+  title: 'components/AnswerRow',
   component: Component,
   args: mockData,
   decorators: [ answerControllerDecorator() ],
 } as Meta;
 
-const Template: Story<IAnswersWeightRow> = ( args ) => <Component { ...args } />;
+const Template: Story<IAnswerRow> = ( args ) => <Component { ...args } />;
 
 export const AnswerWeightRow = Template.bind({});
 AnswerWeightRow.storyName = 'AnswerWeightRow';

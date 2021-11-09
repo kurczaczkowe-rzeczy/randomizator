@@ -1,16 +1,16 @@
 import classNames from 'classnames';
 
-import { getCells } from './AnswerWeightRow.utils';
-import useStyles from './AnswerWeightRow.styles';
-import { IAnswersWeightRow } from './AnswerWeightRow.types';
+import { getCells } from './AnswerRow.utils';
+import useStyles from './AnswerRow.styles';
+import { IAnswerRow } from './AnswerRow.types';
 
 /** Component display data in row based on columns. */
-export const AnswersWeightRow = ({
+export const AnswerRow = ({
   className,
   answerIndex,
   style,
   columns,
-}: IAnswersWeightRow ): JSX.Element => {
+}: IAnswerRow ): JSX.Element => {
   const styles = useStyles();
 
   return (
@@ -25,4 +25,4 @@ export const AnswersWeightRow = ({
   );
 };
 
-export default AnswersWeightRow;
+export default AnswerRow;

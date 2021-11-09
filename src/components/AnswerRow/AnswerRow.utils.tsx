@@ -10,8 +10,9 @@ import _isArray from 'lodash/isArray';
 
 import AnswerEditController from 'components/AnswerEditController';
 import AnswerWeightController from 'components/AnswerWeightController';
+import AnswerContentController from 'components/AnswerContentController';
 
-import { AnswerWeightRowCellGetter } from './AnswerWeightRow.types';
+import { AnswerRowCellGetter } from './AnswerRow.types';
 
 /**
  * Methods get cell index and based on them display content for specific cell.
@@ -21,13 +22,13 @@ import { AnswerWeightRowCellGetter } from './AnswerWeightRow.types';
  * @param cellIndex based on this value display proper content for cell.
  * @return content of cell or null if cell index was not specified or cell index was not handled
  */
-const getCellContent: AnswerWeightRowCellGetter = (
+const getCellContent: AnswerRowCellGetter = (
   element,
   answerIndex,
   cellIndex,
 ) => {
   switch ( cellIndex ) {
-    case 0: { return element; }
+    case 0: { return <AnswerContentController answer={ element } />; }
     case 1: { return <AnswerWeightController answerIndex={ answerIndex } />; }
     case 2: { return <AnswerEditController answerIndex={ answerIndex } />; }
     default: { return null; }
@@ -46,7 +47,7 @@ const getCellContent: AnswerWeightRowCellGetter = (
  * @param cellIndex current encounter cell index.
  * @return cloned element from parent or cell content
  */
-export const getCells: AnswerWeightRowCellGetter< ReactNodeArray | ReactNode > = (
+export const getCells: AnswerRowCellGetter< ReactNodeArray | ReactNode > = (
   element,
   answerIndex,
   cellIndex = -1,

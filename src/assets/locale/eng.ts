@@ -22,6 +22,7 @@ const localizationENG: LocaleResources = {
   email: 'E-mail',
   emailAddress: 'email@example.com',
   emailAlreadyInUse: 'This email is already in use',
+  emptyContentCell: 'Empty',
   errorOnlyCSVAccepted: 'File was rejected. Please, put only files with CSV extension',
   errorPageNotFound: 'Page not found',
   errorUserFormNotExist: 'This form not exist for this user',

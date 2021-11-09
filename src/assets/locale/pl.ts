@@ -20,6 +20,7 @@ const localizationPL = {
   email: 'E-mail',
   emailAddress: 'email@przykladowy.pl',
   emailAlreadyInUse: 'Ten email jest już zajęty',
+  emptyContentCell: 'Brak odpowiedzi',
   errorOnlyCSVAccepted: 'Taki plik nie jest akceptowany. Proszę podać plik z rozszerzeniem CSV',
   errorPageNotFound: 'Nie znaleziono strony',
   errorUserFormNotExist: 'Nie istnieje taki formularz tego użytkownika',
