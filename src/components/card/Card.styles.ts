@@ -12,6 +12,7 @@ export default makeStyles(({
     backgroundColor: palette.backgroundLight,
     borderRadius: 4,
     width: '100%',
+    height: 'max-content',
     padding: spacing( 2.5, 4.5 ),
     color: palette.colorText,
     display: 'flex',

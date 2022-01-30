@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react';
 
 import { answerControllerDecorator } from 'decorators';
 import { setEditedAnswer, unsetEditedAnswer } from 'store/actions/answersManagerActions';
-import { IAnswer } from 'hooks/types';
+import { IAnswerRowController } from 'hooks/types';
 
 import Component from '.';
 import mockData from './AnswerWeightController.mock';
@@ -33,7 +33,7 @@ export default{
   ],
 } as Meta;
 
-const Template: Story<IAnswer & { edit: boolean }> = ( args ) => <Component { ...args } />;
+const Template: Story<IAnswerRowController & { edit: boolean }> = ( args ) => <Component { ...args } />;
 
 export const View = Template.bind({});
 

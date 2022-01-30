@@ -6,12 +6,12 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { setEditedAnswer, unsetEditedAnswer } from 'store/actions/answersManagerActions';
 import useAnswerController from 'hooks/useAnswerController';
-import { IAnswer } from 'hooks/types';
+import { IAnswerRowController } from 'hooks/types';
 
 import useStyle from './AnswerEditController.styles';
 
 /** Component control edit state on associated answer. */
-export const AnswerEditController = ({ answerIndex }: IAnswer ): JSX.Element => {
+export const AnswerEditController = ({ answerIndex }: IAnswerRowController ): JSX.Element => {
   const styles = useStyle();
   const { answerID, edit } = useAnswerController( answerIndex );
   const dispatch = useDispatch();

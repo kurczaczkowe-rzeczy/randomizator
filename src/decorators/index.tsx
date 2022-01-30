@@ -1,19 +1,37 @@
+/* eslint-disable react/no-multi-comp */
+import { useEffect } from 'react';
+import { Action as ReduxAction } from 'redux';
+import { useDispatch } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 import { FormProvider, useForm } from 'react-hook-form';
 import { StoryContext } from '@storybook/addons';
 
 import { IAnswersValues } from 'hooks/types';
 
+// Types
 /**
- * Decorator type for control answer.
+ * Function decorate story and allow you to add mocks, styling, logger and more.
+ *
+ * @param Story - Component used to show story.
+ * @param context - Storybook bag with story context
+ * */
+type Decorator = < StoryFnReturnType extends JSX.Element = JSX.Element >
+  ( Story: () => StoryFnReturnType, context: StoryContext ) => JSX.Element;
+
+/**
+ * Function decorate answers story and provide optional callback.
+ *
  * @param callback allows runs code block with story context,
  * @return story decorator function that allows customize story render.
  * */
-type AnswerControllerDecorator = ( callback?: ( context: StoryContext ) => void ) => <
-  StoryFnReturnType extends JSX.Element = JSX.Element,
->( Story: () => StoryFnReturnType, context: StoryContext ) => JSX.Element;
+type AnswerControllerDecorator = ( callback?: ( context: StoryContext ) => void ) => Decorator;
 
+type DispatchDecorator = <State, Action extends ReduxAction>
+( callback: ( dispatch: ThunkDispatch<State, unknown, Action> ) => void ) => Decorator;
+
+// Decorators
 /**
- * This decorator provide useForm from react-hook-form to story and allow use callback as side effect.
+ * This decorator provides useForm from react-hook-form to story and allow use callback as side effect.
  *
  * See {@link AnswerControllerDecorator} for more details about parameters and return value.
  *
@@ -50,3 +68,17 @@ export const answerControllerDecorator: AnswerControllerDecorator = ( callback )
     </form>
   );
 };
+
+/**
+ * This decorator provides redux dispatcher to story component.
+ * */
+export const dispatchDecorator: DispatchDecorator = ( callback ) => ( Story ) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    callback( dispatch );
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return <Story />;
+};
+/* eslint-enable react/no-multi-comp */

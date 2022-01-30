@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import _includes from 'lodash/includes';
 
-import { IAnswer, IAnswerController } from 'hooks/types';
+import { IAnswerRowController, IAnswerController } from 'hooks/types';
 import { RootState } from 'store/reducers/rootReducer';
 
 /**
@@ -13,10 +13,10 @@ import { RootState } from 'store/reducers/rootReducer';
  * @param answerIndex specify answer index in array field.
  * @return {@link IAnswerController}
  */
-const useAnswerController = ( answerIndex: IAnswer[ 'answerIndex' ]): IAnswerController => {
+const useAnswerController = ( answerIndex: IAnswerRowController[ 'answerIndex' ]): IAnswerController => {
   const { register, getValues } = useFormContext();
 
-  const { answerID, weight } = getValues().answers[ answerIndex ] || {};
+  const { answerID, weight } = getValues( `answers.${ answerIndex }` );
   const edit = useSelector(( state: RootState ) => _includes( state.answersManager.editedAnswers, answerID ));
 
   return {

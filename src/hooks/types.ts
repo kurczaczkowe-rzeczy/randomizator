@@ -1,38 +1,31 @@
 import { UseFormRegister } from 'react-hook-form';
 
 import { LocaleResourcesIDs } from 'assets/locale/types';
-import { StringOrNumber } from 'types';
+import { IAnswersManagerDirtyAnswerPayload } from 'store/types';
+import { Answers, IAnswer } from 'types';
 
 export type SetValue<T> = ( value: T | (( val: T ) => T )) => void;
 
 export type GetString = ( resourceId: LocaleResourcesIDs ) => string;
 
-/** An object represents values shape associated with answer. */
-export interface IAnswerValues {
-  /** This value specify identifier of answer */
-  answerID: StringOrNumber;
-  /** This value specify current value of weight associated with specific answer. */
-  weight: number;
-}
-
 /** An object represents shape of from values. */
 export interface IAnswersValues {
-  /** This value specify collection of {@link IAnswerValues} */
-  answers: IAnswerValues[];
+  /** This value specify collection of {@link Answers} */
+  answers: Answers;
 }
 
 /** An object represents information about answer. */
-export interface IAnswer {
+export interface IAnswerRowController {
   /** This value specify answer index in field array. */
-  answerIndex: number;
+  answerIndex: IAnswersManagerDirtyAnswerPayload[ 'answerIndex' ];
 }
 
 /**
  * An object represents information about answer controller such as edit state, form register method, answer identifier
- * and weight associated with answer. It extends **IAnswerValues** to provide answer form values such as weight and
+ * and weight associated with answer. It extends **IAnswer** to provide answer form values such as weight and
  * answer identifier.
  */
-export interface IAnswerController extends IAnswerValues {
+export interface IAnswerController extends IAnswer {
   /** This value specify if associated answer is edited or not. */
   edit: boolean;
   /** This method is used when you want to register field to form. */

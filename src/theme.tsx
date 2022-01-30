@@ -47,6 +47,7 @@ declare module '@material-ui/core/styles/createPalette' {
     colorText: CSSProperties[ 'color' ];
     colorTextSelected: CSSProperties[ 'color' ];
     fadedBackgroundDark: () => CSSProperties[ 'color' ];
+    fadedColorText: () => CSSProperties[ 'color' ];
     fadedMain: () => CSSProperties[ 'color' ];
   }
 
@@ -57,6 +58,7 @@ declare module '@material-ui/core/styles/createPalette' {
     colorText: CSSProperties[ 'color' ];
     colorTextSelected: CSSProperties[ 'color' ];
     fadedBackgroundDark: () => CSSProperties[ 'color' ];
+    fadedColorText: () => CSSProperties[ 'color' ];
     fadedMain: () => CSSProperties[ 'color' ];
   }
 }
@@ -78,6 +80,9 @@ const palette = {
   },
   fadedBackgroundDark(): CSSProperties[ 'color' ] {
     return fade( this.backgroundDark, 0.75 );
+  },
+  fadedColorText(): CSSProperties[ 'color' ] {
+    return fade( this.colorText, 0.6 );
   },
 };
 

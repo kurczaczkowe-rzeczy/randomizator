@@ -11,8 +11,13 @@ import {
   UserActionsTypes,
   AnswersManagerActionsTypes,
   AnswersManagerActionsTypesWithPayload,
+  SET_DIRTY_ANSWER,
 } from 'store/actions';
-import { StringOrNumber } from 'types';
+import {
+  Answers,
+  IAnswer,
+  StringOrNumber,
+} from 'types';
 
 export interface IState { readonly errors: string | null }
 
@@ -44,7 +49,11 @@ export interface IUserState extends IState {
   currentUserRole: string;
 }
 
-export interface IAnswersManagerState { editedAnswers: StringOrNumber[] }
+export interface IAnswersManagerState {
+  readonly areDirtyAnswers: boolean;
+  readonly dirtyAnswer: Answers;
+  readonly editedAnswers: StringOrNumber[];
+}
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IRootState {
@@ -82,7 +91,12 @@ export type UserAction =
   | IAction<typeof CLEAR_USER>
   | IActionWithPayload<UserActionsTypes, IUserActionPayload>;
 
-export interface IAnswersManagerActionsPayload { answerID: StringOrNumber }
+export interface IAnswersManagerActionsPayload { readonly answerID: IAnswer[ 'answerID' ] }
+export interface IAnswersManagerDirtyAnswerPayload {
+  readonly answer: IAnswer;
+  readonly answerIndex: number;
+}
 export type AnswersManagerAction =
   | IAction<AnswersManagerActionsTypes>
-  | IActionWithPayload<AnswersManagerActionsTypesWithPayload, IAnswersManagerActionsPayload>;
+  | IActionWithPayload<AnswersManagerActionsTypesWithPayload, IAnswersManagerActionsPayload>
+  | IActionWithPayload<typeof SET_DIRTY_ANSWER, IAnswersManagerDirtyAnswerPayload>;
