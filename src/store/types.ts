@@ -84,7 +84,7 @@ export type FormAction =
   | IActionWithPayload<typeof SET_FORM_NAME, IForm>
   | IActionWithPayload<typeof ERROR_FORM_DONT_EXIST, IErrorMessage>;
 export interface IUserActionPayload {
-  currentUserRole?: string;
+  currentUserRole?: Role;
   errorMsg?: string;
   name?: string;
 }
