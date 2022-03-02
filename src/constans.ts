@@ -13,7 +13,7 @@ export const SHOW_DEV_MODAL_KEY = 'SHOW_DEV_MODAL';
 export { version as APP_VERSION } from '../package.json';
 export const HOME_PAGE = process.env.PUBLIC_URL;
 export const IS_DEVELOPMENT_MODE = process.env.REACT_APP_ENVIRONMENT === 'development';
-export const APP_SUFFIX = IS_DEVELOPMENT_MODE ? '/randomizator' : '';
+export const APP_NAME_SUFFIX = IS_DEVELOPMENT_MODE ? '/randomizator' : '';
 export const CURRENT_DATE = process.env.REACT_APP_LAST_UPDATE_DATE ?? new Date();
 export const ORGANIZATION_MAIN_PAGE = 'https://github.com/kurczaczkowe-rzeczy';
 export const PROD_HOST_NAME = 'randomizator.web.app';
@@ -39,4 +39,8 @@ export const ROW_HEIGHT = 36;
 /** Row offset describe how much additional space was added to row. This value is divided between top and bottom. */
 export const ROW_OFFSET = 4;
 
-export const USER_ROLES = { ADMIN: 'ADMIN' };
+export const USER_ROLES = {
+  ADMIN: 'ADMIN',
+  CREATOR: 'CREATOR',
+  GUEST: 'GUEST',
+} as const;

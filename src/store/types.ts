@@ -16,6 +16,7 @@ import {
 import {
   Answers,
   IAnswer,
+  Role,
   StringOrNumber,
 } from 'types';
 
@@ -46,7 +47,7 @@ export type FormState = IForm & IState;
 
 export interface IUserState extends IState {
   creatorName: string;
-  currentUserRole: string;
+  currentUserRole: Role;
 }
 
 export interface IAnswersManagerState {

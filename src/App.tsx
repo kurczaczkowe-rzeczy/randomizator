@@ -1,4 +1,8 @@
-import { useEffect, useRef } from 'react';
+import {
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import {
   Switch,
   Route,
@@ -8,7 +12,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
 import _isNil from 'lodash/isNil';
 import _map from 'lodash/map';
-import _compact from 'lodash/compact';
 
 import useLocalStorage from 'hooks/useLocalStorage';
 import useLocaleString from 'hooks/useLocaleString';
@@ -50,9 +53,9 @@ const App = (): JSX.Element => {
   const bodyRef = useRef( document.body );
 
   const menuItems = getMenuItemsForCurrentUser( getMenuItems( getString ), currentUserRole );
-  const authenticatedRoutes = _compact( _map( authenticatedRoutesCollection, ( props ) => (
-    <ProtectedRoute { ...props } />
-  )));
+  const authenticatedRoutes = useMemo(() => _map( authenticatedRoutesCollection, ( props ) => (
+    <ProtectedRoute currentUserRole={ currentUserRole } { ...props } />
+  )), [ currentUserRole ]);
 
   useEffect(() => {
     if ( _isNil( showDevModal )) {
@@ -88,7 +91,7 @@ const App = (): JSX.Element => {
 
   const isAuthenticated = isLoaded( auth ) && !isEmpty( auth );
 
-  return !isLoaded( auth )
+  return isEmpty( currentUserRole )
     ? <LoadingScreen />
     : (
       <>
@@ -105,7 +108,8 @@ const App = (): JSX.Element => {
             path={ ROUTES.guest }
             component={ GuestPage }
           />
-          { isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes }
+          {/* eslint-disable-next-line react/jsx-no-useless-fragment */}
+          <>{ isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes }</>
           <Redirect from="/*" to={ ROUTES.notFound } />
         </Switch>
         { isAuthenticated && <DrawerMenu items={ menuItems } /> }

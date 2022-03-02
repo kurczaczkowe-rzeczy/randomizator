@@ -19,7 +19,7 @@ import { getCreatorName } from 'store/actions/userActions';
 import { fetchFormName } from 'store/actions/formAction';
 import { RootState } from 'store/reducers/rootReducer';
 import { createAnswer } from 'utils/answersUtils';
-import { APP_SUFFIX, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
+import { APP_NAME_SUFFIX, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
 
 import PageContainer from 'components/PageContainer';
 
@@ -88,7 +88,7 @@ const GuestPage = (): JSX.Element => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return ( errorFormName || errorUserName )
-    ? <Redirect from="/*" to={ `${ APP_SUFFIX }/not_found` } />
+    ? <Redirect from="/*" to={ `${ APP_NAME_SUFFIX }/not_found` } />
     : (
       <PageContainer>
         <GuestView

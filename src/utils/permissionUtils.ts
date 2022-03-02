@@ -1,10 +1,11 @@
 import _includes from 'lodash/includes';
 import _isEmpty from 'lodash/isEmpty';
 
-export type Role = string;
-export type IsRolePermitted = ( permittedRoles: Role[], role: Role ) => boolean;
-export type IsAllRolesPermitted = ( permittedRoles: Role[]) => boolean;
-export type HasAccess = ( permittedRoles: Role[], role: Role ) => boolean;
+import { Role, Roles } from 'types';
+
+export type IsRolePermitted = ( permittedRoles: Roles, role: Role ) => boolean;
+export type IsAllRolesPermitted = ( permittedRoles: Roles ) => boolean;
+export type HasAccess = ( permittedRoles: Roles, role: Role ) => boolean;
 
 export const isRolePermitted: IsRolePermitted = ( permittedRoles, role ) =>
   _includes( permittedRoles, role );
