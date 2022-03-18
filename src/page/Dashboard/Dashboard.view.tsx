@@ -1,4 +1,5 @@
 import Card from 'components/card';
+import FormChooser from 'components/FormChooser';
 import UserCreator from 'components/UserCreator';
 
 import useStyles from './Dashboard.styles';
@@ -12,11 +13,14 @@ export const Dashboard = ({ userCreatorProps }: IDashboard ): JSX.Element => {
 
   return (
     <div className={ styles.root }>
-      <Card
-        centerBody={ false }
-        isLoading={ userCreatorProps.isLoading }
-        body={ <UserCreator { ...userCreatorProps } /> }
-      />
+      <div className={ styles.left }>
+        <FormChooser />
+        <Card
+          centerBody={ false }
+          isLoading={ userCreatorProps.isLoading }
+          body={ <UserCreator { ...userCreatorProps } /> }
+        />
+      </div>
     </div>
   );
 };

@@ -20,8 +20,6 @@ import useStyles from './Creator.styles';
 export const Creator = ({
   answersCounter,
   fileContainerProps,
-  link,
-  selectFormsProps,
   onDownloadAnswers,
   onDrawClick,
   onLogout,
@@ -32,7 +30,7 @@ export const Creator = ({
   return (
     <div className={ styles.root }>
       <div className={ styles.leftSpace }>
-        <FormChooser link={ link } selectFormsProps={ selectFormsProps } />
+        <FormChooser />
         { IS_DEVELOPMENT_MODE && (
           <ButtonView
             value={ getString( 'getAnswers' ) }

@@ -1,9 +1,11 @@
 import { useHistory } from 'react-router';
+import _isEmpty from 'lodash/isEmpty';
 
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 import prepareLink from 'utils/prepareLink';
 import useLocaleString from 'hooks/useLocaleString';
+import { HOME_PAGE } from 'constans';
 
 import Card from 'components/card';
 import CopyText from 'components/copyText';
@@ -12,13 +14,21 @@ import Select from 'components/Select';
 import useStyle from './FormChooser.styles';
 import { IFormChooser } from './FormChooser.types';
 
-/** Component allows choose current form context and share link to fill them. */
-export const FormChooser = ({ link, selectFormsProps }: IFormChooser ): JSX.Element => {
+/** Component allows to choose current form context and share link to fill them. */
+export const FormChooser = ({
+  creatorID,
+  formID,
+  forms,
+  onFormSelect,
+  defaultFormID,
+}: IFormChooser ): JSX.Element => {
   const styles = useStyle();
   const { push } = useHistory();
   const getString = useLocaleString();
 
-  const onGoToForm = (): void => { push( prepareLink( link )); };
+  const link = prepareLink( `/${ creatorID }/${ formID }`, HOME_PAGE );
+
+  const onGoToForm = (): void => { push( link ); };
 
   return (
     <Card
@@ -26,7 +36,14 @@ export const FormChooser = ({ link, selectFormsProps }: IFormChooser ): JSX.Elem
       body={ (
         <div className={ styles.root }>
           <div className={ styles.selectWrapper }>
-            <Select { ...selectFormsProps } />
+            <Select
+              name="forms"
+              label={ getString( 'activeNameForm' ) }
+              defaultValue={ defaultFormID }
+              options={ forms }
+              value={ _isEmpty( forms ) ? defaultFormID : formID }
+              onItemClick={ onFormSelect }
+            />
           </div>
           <div className={ styles.linkWrapper }>
             <div className={ styles.openInNewIconWrapper } title={ getString( 'openFormLink' ) }>

@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-import { jsonToCSV } from 'react-papaparse';
 import {
-  useSelector,
-  shallowEqual,
-  useDispatch,
-} from 'react-redux';
-import { isEmpty } from 'react-redux-firebase';
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
+import { jsonToCSV } from 'react-papaparse';
+import { shallowEqual, useDispatch } from 'react-redux';
 import _isNil from 'lodash/isNil';
 import _forEach from 'lodash/forEach';
 import _union from 'lodash/union';
@@ -15,34 +14,23 @@ import _map from 'lodash/map';
 
 import { db, firestore } from 'config/firebaseConfig';
 import { Mapping } from 'types';
-import prepareLink from 'utils/prepareLink';
-import useLocalStorage from 'hooks/useLocalStorage';
 import useLocaleString from 'hooks/useLocaleString';
+import useTypedSelector from 'hooks/useTypedSelector';
 import { clearDraw, setDrawResult } from 'store/actions/drawAction';
 import { setAnswers } from 'store/actions/answersAction';
-import { setFormName } from 'store/actions/formAction';
 import { signOut } from 'store/actions/authAction';
-import { addForm } from 'store/actions/formsActions';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
-import { RootState } from 'store/reducers/rootReducer';
-import {
-  FORM_ID_KEY,
-  HOME_PAGE,
-  IS_DEVELOPMENT_MODE,
-} from 'constans';
+import { IS_DEVELOPMENT_MODE } from 'constans';
 
-import { IOption } from 'components/Select';
 import PageContainer from 'components/PageContainer';
 
 import CreatorView from './Creator.view';
 import {
-  IForm,
   IFormDoc,
   Answers,
 } from './Creator.types';
 import {
   getFormCollection,
-  formsSubscription,
   getNewFileName,
   parseText,
   mapAnswers,
@@ -52,70 +40,15 @@ import {
 const Creator = (): JSX.Element => {
   const getString = useLocaleString();
 
-  const [ formID, setFormID ] = useLocalStorage<string>( FORM_ID_KEY );
-  const [ link, setLink ] = useState( '' );
   const [ acceptedFileNames, setAcceptedFileNames ] = useState<string[]>([]);
   const [ answersFromFile, setAnswersFromFile ] = useState<Answers>([]);
 
-  const auth = useSelector(( state: RootState ) => state.firebase.auth, shallowEqual );
-  const answersCounter = useSelector(( state: RootState ) => state.ans.counter );
-  const defaultFormId = useSelector(( state: RootState ) => state.form.id );
-  const forms = useSelector(( state: RootState ) => state.forms.forms );
+  const auth = useTypedSelector(({ firebase: { auth }}) => auth, shallowEqual );
+  const answersCounter = useTypedSelector(({ ans: { counter }}) => counter );
+  const dformID = useTypedSelector(({ form: { id }}) => id );
   const dispatch = useDispatch();
 
-  const updateFormID = ( forms: IForm[]): void => {
-    const found = forms.findIndex(( form: IForm ) => form.id === formID );
-
-    if ( found === -1 && forms.length > 0 ) {
-      setFormID( forms[ 0 ].id );
-    }
-    // ToDo: issue #160
-  };
-
-  useEffect(() => {
-    if ( !isEmpty( auth )) {
-      const subscription = formsSubscription(
-        auth.uid,
-        ( doc ) => { // ToDo maybe puts this function into const
-          const form = {
-            name: doc.data()?.name ?? getString( 'noName' ),
-            id: doc.id,
-          };
-
-          dispatch( addForm( form )); // ToDo we can add all forms at once?
-          if ( _isNil( formID )) {
-            setFormID( form.id );
-          }
-        },
-        updateFormID,
-      );
-
-      return (): void => subscription();
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    if ( !isEmpty( auth ) && formID !== null ) {
-      const subscription = formsSubscription( auth.uid, ( doc ) => {
-        const ans = doc.data()?.answers;
-
-        if ( formID === doc.id ) {
-          const form = {
-            id: doc.id,
-            name: doc.data()?.name,
-          };
-
-          dispatch( setFormName( form ));
-          getData( ans );
-        }
-      });
-
-      setLink( `/${ auth.uid }/${ formID }` );
-
-      return subscription;
-    }
-  }, [ formID ]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const getData = ( answers: Answers ): void => {
+  const getData = useCallback(( answers: Answers ): void => {
     const result: Mapping< string[] > = { };
 
     _forEach( answers, ( answer ) => {
@@ -128,8 +61,13 @@ const Creator = (): JSX.Element => {
       });
     });
 
-    dispatch( setAnswers( result, answers.length ));
-  };
+    dispatch( setAnswers( result, answers?.length || 0 ));
+  }, [ dispatch ]);
+
+  useEffect(() => {
+    getData([]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const onRandomClick = (): void => {
     dispatch( setDrawResult());
   };
@@ -143,7 +81,14 @@ const Creator = (): JSX.Element => {
     dispatch( toggleLoader );
   }, [ answersCounter, dispatch ]);
 
+  // ToDo: check if it's useful
+  useEffect(() => {
+    if ( !_isEmpty( dformID )) { dispatch( clearDraw()); }
+  }, [ dformID, dispatch ]);
+
   const onDownloadAnswers = async (): Promise<void> => {
+    const formID = 'kolejny';
+
     if ( IS_DEVELOPMENT_MODE && formID ) {
       try {
         const savedForm = await getFormCollection( auth.uid, formID ) as IFormDoc;
@@ -159,18 +104,14 @@ const Creator = (): JSX.Element => {
 
         const csvContent = `data:text/csv;charset=utf-8,${ jsonToCSV( answersOfForm ) }`;
         const encodedUri = encodeURI( csvContent );
-        const link = document.createElement( 'a' );
+        const linkEl = document.createElement( 'a' );
 
-        link.setAttribute( 'href', encodedUri );
-        link.setAttribute( 'download', `${ formName }.csv` );
+        linkEl.setAttribute( 'href', encodedUri );
+        linkEl.setAttribute( 'download', `${ formName }.csv` );
 
-        link.click();
+        linkEl.click();
       } catch ( error: unknown ) { console.error( 'Error!', error ); }
     }
-  };
-  const onMenuItemClick = ({ id }: IOption ): void => {
-    setFormID( id );
-    dispatch( clearDraw());
   };
 
   const onDropAccepted = ( acceptedFiles: File[]): void => {
@@ -196,6 +137,8 @@ const Creator = (): JSX.Element => {
   const onDropRejected = (): void => { alert( getString( 'errorOnlyCSVAccepted' )); }; // ToDo change to snackbar
   const onRemove = (): void => { setAcceptedFileNames([]); };
   const onSend = async (): Promise<void> => {
+    const formID = 'kolejny';
+
     if ( !_isEmpty( answersFromFile )) {
       try {
         const docReference = await db.collection( auth.uid ).doc( formID );
@@ -204,18 +147,10 @@ const Creator = (): JSX.Element => {
         await docReference.update({ answers: firestore.FieldValue.arrayUnion( ...answersFromFile ) });
         setAcceptedFileNames([]);
         alert( getString( 'dataSave' )); // ToDo change to snackbar
-      } catch ( error: unknown ) { console.log( 'Error!', error ); } // ToDo better error handling
+      } catch ( error: unknown ) { console.log( 'Error!', error ); } // ToDo better error handling, issue #160
     }
   };
 
-  const selectFormsProps = {
-    defaultValue: defaultFormId,
-    options: forms,
-    onItemClick: onMenuItemClick,
-    name: 'forms',
-    label: getString( 'activeNameForm' ),
-    value: formID,
-  };
   const fileContainerProps = {
     acceptedFileNames,
     onDropAccepted,
@@ -229,8 +164,6 @@ const Creator = (): JSX.Element => {
       <CreatorView
         answersCounter={ answersCounter }
         fileContainerProps={ fileContainerProps }
-        link={ prepareLink( link, HOME_PAGE ) }
-        selectFormsProps={ selectFormsProps }
         onDownloadAnswers={ onDownloadAnswers }
         onDrawClick={ onRandomClick }
         onLogout={ onLogout }

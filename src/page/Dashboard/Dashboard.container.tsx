@@ -106,6 +106,7 @@ const Dashboard = (): JSX.Element => {
     isLoading: _includes( bindToCard, USER_CREATOR ),
   };
 
+  // ToDo: move userCreatorProps and associated logic with them to user creator component
   return (
     <PageContainer>
       <DashboardView userCreatorProps={ userCreatorProps } />

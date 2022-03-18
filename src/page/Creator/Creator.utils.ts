@@ -11,31 +11,7 @@ import { AnswerFields } from 'page/Guest';
 import { Mapping } from 'types';
 import { createAnswer, createAnswerField } from 'utils/answersUtils';
 
-import {
-  Answers,
-  IAnswer,
-  IForm,
-} from './Creator.types';
-
-type returnedType = () => void;
-
-export const formsSubscription = (
-  userID: string,
-  snapshotFunction: ( doc: firebase.firestore.DocumentSnapshot ) => void,
-  setFormID?: ( formID: IForm[]) => void,
-): returnedType => db.collection( userID )
-  .onSnapshot(( snap ) => { // ToDo should put this into hook
-    if ( setFormID ) {
-      const forms: IForm[] = [];
-
-      snap.forEach(( doc ) => {
-        forms.push({ id: doc.id, name: doc.data().name });
-      });
-
-      setFormID( forms );
-    }
-    _forEach( snap.docs, snapshotFunction );
-  });
+import { Answers, IAnswer } from './Creator.types';
 
 export const getFormCollection = async ( userID: string, formID: string ):
   Promise<firebase.firestore.DocumentData | undefined> => {

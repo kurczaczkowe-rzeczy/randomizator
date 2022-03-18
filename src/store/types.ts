@@ -12,12 +12,15 @@ import {
   AnswersManagerActionsTypes,
   AnswersManagerActionsTypesWithPayload,
   SET_DIRTY_ANSWER,
+  SET_SELECTED_FORM,
 } from 'store/actions';
 import {
   Answers,
   IAnswer,
   Role,
   StringOrNumber,
+  IForm,
+  Forms,
 } from 'types';
 
 export interface IState { readonly errors: string | null }
@@ -35,15 +38,17 @@ export interface IGlobalState{
   readonly language: string;
   readonly loadingsQueue: string[];
 }
-export interface IForm {
-  readonly id: string;
-  readonly name: string;
-}
+
+/** Object represent forms state. It provides array of forms data and extends
+ * {@link IState} to gathered forms errors. */
 export interface IFormsState extends IState {
-  readonly forms: IForm[];
+  /** Array of forms information. */
+  readonly forms: Forms;
 }
 
-export type FormState = IForm & IState;
+/** Object represent form state. It extends {@link IForm} and {@link IState} to provide information about form
+ * and its errors */
+export interface IFormState extends IForm, IState {}
 
 export interface IUserState extends IState {
   creatorName: string;
@@ -63,7 +68,7 @@ export interface IRootState {
   draw: unknown;
   firebase: any;
   firestore: any;
-  form: FormState;
+  form: IFormState;
   forms: IFormsState;
   global: IGlobalState;
   usr: IUserState;
@@ -82,6 +87,7 @@ export type FormsAction = IAction<typeof CLEAR_FORMS> | IActionWithPayload<typeo
 export type FormAction =
   | IAction<typeof CLEAR_FORM>
   | IActionWithPayload<typeof SET_FORM_NAME, IForm>
+  | IActionWithPayload<typeof SET_SELECTED_FORM, IForm>
   | IActionWithPayload<typeof ERROR_FORM_DONT_EXIST, IErrorMessage>;
 export interface IUserActionPayload {
   currentUserRole?: Role;
@@ -92,7 +98,7 @@ export type UserAction =
   | IAction<typeof CLEAR_USER>
   | IActionWithPayload<UserActionsTypes, IUserActionPayload>;
 
-export interface IAnswersManagerActionsPayload { readonly answerID: IAnswer[ 'answerID' ] }
+export interface IAnswersManagerActionsPayload { readonly id: IAnswer[ 'id' ] }
 export interface IAnswersManagerDirtyAnswerPayload {
   readonly answer: IAnswer;
   readonly answerIndex: number;

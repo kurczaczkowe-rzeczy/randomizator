@@ -3,14 +3,16 @@ import { ThunkAction } from 'redux-thunk';
 import {
   SET_FORM_NAME,
   ERROR_FORM_DONT_EXIST,
+  SET_SELECTED_FORM,
 } from 'store/actions';
 import {
   FormAction,
-  IForm,
-  FormState,
+  IFormState,
+  IRootState,
 } from 'store/types';
+import { IForm } from 'types';
 
-export const fetchFormName = ( userID: string, formID: string ): ThunkAction<void, FormState, any, FormAction> =>
+export const fetchFormName = ( userID: string, formID: string ): ThunkAction<void, IFormState, any, FormAction> =>
   (
     dispatch,
     _,
@@ -25,7 +27,11 @@ export const fetchFormName = ( userID: string, formID: string ): ThunkAction<voi
         if ( doc.exists ) {
           dispatch({
             type: SET_FORM_NAME,
-            payload: { name: doc.data().name, id: formID },
+            payload: {
+              name: doc.data().name,
+              id: formID,
+              fields: [],
+            },
           });
         } else {
           dispatch({
@@ -36,10 +42,12 @@ export const fetchFormName = ( userID: string, formID: string ): ThunkAction<voi
       });
   };
 
-export const setFormName = ( formProp: IForm ): ThunkAction<void, FormState, IForm, FormAction> =>
-  ( dispatch ): void => {
+export const setSelectedForm = ( formID: IForm[ 'id' ]): ThunkAction<void, IRootState, unknown, FormAction> =>
+  ( dispatch, getState ): void => {
+    const form = getState().firestore.data.forms[ formID ];
+
     dispatch({
-      type: SET_FORM_NAME,
-      payload: formProp,
+      type: SET_SELECTED_FORM,
+      payload: { id: formID, ...form },
     });
   };
