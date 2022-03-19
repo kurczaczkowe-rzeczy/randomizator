@@ -27,6 +27,10 @@ export const ROUTES = {
   notFound: prepareLink( '/not_found' ),
 };
 
+export const PAGES = { DASHBOARD: 'DASHBOARD' };
+
+export const CARDS = { USER_CREATOR: 'USER_CREATOR' };
+
 // Sizes
 export const HEIGHT_OF_COLLAPSED_MENU = 70;
 export const HEIGHT_OF_EXPANDED_MENU = '100vh';

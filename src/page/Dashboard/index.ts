@@ -1,2 +1,1 @@
-export { default } from './Dashboard.container';
-export type { IDashboard } from './Dashboard.types';
+export { default } from './Dashboard.view';

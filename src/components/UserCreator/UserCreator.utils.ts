@@ -4,7 +4,7 @@ import { errorLogger, FirebaseError } from 'utils/errorLogger';
 import { GetString } from 'hooks/types';
 import { firebaseConfig } from 'config/firebaseConfig';
 
-import { ERROR_ORIGIN, NAME_OF_TEMP_APP } from './Dashboard.consts';
+import { ERROR_ORIGIN, NAME_OF_TEMP_APP } from './UserCreator.consts';
 
 /**
  * Method handle errors in user creator widget.

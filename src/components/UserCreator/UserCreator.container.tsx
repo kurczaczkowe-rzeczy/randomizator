@@ -1,42 +1,38 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useFirestore } from 'react-redux-firebase';
 import firebase from 'firebase/app';
 import _includes from 'lodash/includes';
 
-import useLocaleString from 'hooks/useLocaleString';
 import { firebaseConfig } from 'config/firebaseConfig';
+import useLocaleString from 'hooks/useLocaleString';
+import useTypedSelector from 'hooks/useTypedSelector';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
-import { RootState } from 'store/reducers/rootReducer';
+import { PAGES, CARDS } from 'constans';
 
-import { UserCreatorSubmitHandler } from 'components/UserCreator';
-import PageContainer from 'components/PageContainer';
+import Card from 'components/card';
 
+import { UserCreatorSubmitHandler } from './UserCreator.types';
+import { defaultUserValues, NAME_OF_TEMP_APP } from './UserCreator.consts';
+import UserCreatorView from './UserCreator.view';
 import {
   deleteNewApp,
-  userCreatorErrorHandler,
   removeUser,
-} from './Dashboard.utils';
-import DashboardView from './Dashboard.view';
-import {
-  DASHBOARD,
-  defaultUserValues,
-  NAME_OF_TEMP_APP,
-  USER_CREATOR,
-} from './Dashboard.consts';
+  userCreatorErrorHandler,
+} from './UserCreator.utils';
 
-const Dashboard = (): JSX.Element => {
+const UserCreator = (): JSX.Element => {
   const firestore = useFirestore();
   const dispatch = useDispatch();
-  const bindToCard = useSelector(( state: RootState ) => state.global.bindToCard );
+  const isLoading = useTypedSelector(({ global: { bindToCard }}) => _includes( bindToCard, CARDS.USER_CREATOR ));
   const getString = useLocaleString();
-  const [ shouldResetUserCreator, setShouldResetUserCreator ] = useState( false );
+  const [ shouldReset, setShouldReset ] = useState( false );
 
   const showLoaderOnUserCreator = (): void => {
-    dispatch( showLoader( DASHBOARD, USER_CREATOR ));
+    dispatch( showLoader( PAGES.DASHBOARD, CARDS.USER_CREATOR ));
   };
   const hideLoaderOnUserCreator = (): void => {
-    dispatch( hideLoader( DASHBOARD, USER_CREATOR ));
+    dispatch( hideLoader( PAGES.DASHBOARD, CARDS.USER_CREATOR ));
   };
 
   const handleSubmit: UserCreatorSubmitHandler = async ({
@@ -94,24 +90,25 @@ const Dashboard = (): JSX.Element => {
 
       return;
     } finally {
-      setShouldResetUserCreator( true );
+      setShouldReset( true );
       hideLoaderOnUserCreator();
     }
   };
-  const userCreatorProps = {
-    defaultValues: defaultUserValues,
-    shouldResetForm: shouldResetUserCreator,
-    onReset: () => { setShouldResetUserCreator( false ); },
-    onSubmit: handleSubmit,
-    isLoading: _includes( bindToCard, USER_CREATOR ),
-  };
 
-  // ToDo: move userCreatorProps and associated logic with them to user creator component
   return (
-    <PageContainer>
-      <DashboardView userCreatorProps={ userCreatorProps } />
-    </PageContainer>
+    <Card
+      centerBody={ false }
+      isLoading={ isLoading }
+      body={ (
+        <UserCreatorView
+          defaultValues={ defaultUserValues }
+          onReset={ () => { setShouldReset( false ); } }
+          onSubmit={ handleSubmit }
+          shouldResetForm={ shouldReset }
+        />
+      ) }
+    />
   );
 };
 
-export default Dashboard;
+export default UserCreator;
