@@ -130,7 +130,7 @@ const classes = {
     borderBottom: 'none',
 
     color: palette.primary.main,
-    '&:hover:not(.Mui-selected)': { borderColor: palette.backgroundLight },
+    '&:hover:not($selected)': { borderColor: palette.backgroundLight },
   },
 };
 
@@ -221,7 +221,7 @@ export const theme = createMuiTheme({
       root: {
         ...classes.tab,
 
-        '&.Mui-selected': { borderColor: palette.primary.main },
+        '&$selected': { borderColor: palette.primary.main },
       },
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
