@@ -16,12 +16,12 @@ import {
 type AnswersManagerThunkAction = ThunkAction<void, IAnswersManagerState, unknown, AnswersManagerAction>;
 
 /** Action trigger add answer id to array of edited answers. */
-export const setEditedAnswer = ( answerID: IAnswersManagerActionsPayload[ 'answerID' ]): AnswersManagerThunkAction =>
-  ( dispatch ) => { dispatch({ type: SET_EDITED_ANSWER, payload: { answerID }}); };
+export const setEditedAnswer = ( id: IAnswersManagerActionsPayload[ 'id' ]): AnswersManagerThunkAction =>
+  ( dispatch ) => { dispatch({ type: SET_EDITED_ANSWER, payload: { id }}); };
 
 /** Action trigger remove answer id from array of edited answers. */
-export const unsetEditedAnswer = ( answerID: IAnswersManagerActionsPayload[ 'answerID' ]): AnswersManagerThunkAction =>
-  ( dispatch ) => { dispatch({ type: UNSET_EDITED_ANSWER, payload: { answerID }}); };
+export const unsetEditedAnswer = ( id: IAnswersManagerActionsPayload[ 'id' ]): AnswersManagerThunkAction =>
+  ( dispatch ) => { dispatch({ type: UNSET_EDITED_ANSWER, payload: { id }}); };
 
 /** Action trigger add answer to array with dirty state of form field array */
 export const setDirtyAnswer = ( answerIndex: IAnswersManagerDirtyAnswerPayload[ 'answerIndex' ],

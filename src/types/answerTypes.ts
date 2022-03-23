@@ -1,0 +1,26 @@
+import { StringOrNumber } from './utilityTypes';
+
+export interface IWeightAnswer {
+  /** Identifier of whole answer. */
+  answerID: StringOrNumber;
+  /** Identifier of answer in specific field. */
+  id: StringOrNumber;
+  /** Value of weight associated with specific answer. */
+  weight: number;
+}
+
+export interface IBaseAnswer extends IWeightAnswer {
+  /** Actual given answer value. */
+  value: string;
+}
+
+/** An object represents answer and associated property. */
+export interface IAnswer extends IBaseAnswer {
+  /** Identifier of form associated with answer. */
+  formID: StringOrNumber;
+  /** Number of milliseconds since the ECMAScript epoch. */
+  timestamp: number;
+}
+
+export type WeightAnswers = IWeightAnswer[];
+export type Answers = IAnswer[];

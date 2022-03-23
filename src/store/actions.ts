@@ -20,10 +20,10 @@ export const SET_FORM_NAME = 'SET_FORM_NAME';
 export const SET_SELECTED_FORM = 'SET_SELECTED_FORM';
 export const ERROR_FORM_DONT_EXIST = 'ERROR_FORM_DONT_EXIST';
 export const CLEAR_FORM = 'CLEAR_FORM';
-export type FormActionsTypes =
-  | typeof SET_FORM_NAME
+export type FormActionsTypesWithPayload =
   | typeof SET_SELECTED_FORM
-  | typeof ERROR_FORM_DONT_EXIST
+  | typeof SET_FORM_NAME;
+export type FormActionsTypes =
   | typeof CLEAR_FORM;
 
 export const ADD_FORM = 'ADD_FORM';

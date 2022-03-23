@@ -1,11 +1,11 @@
-import { Answers } from 'types';
+import { WeightAnswers } from 'types';
 
 /** An object represent props of AnswerListener Component. */
 export interface IAnswerListener {
   /**
    * Functions save current state of answers weights in firebase.
    *
-   * @param answers - {@link Answers}
+   * @param answers - {@link WeightAnswers}
    */
-  onWeightUpdate: ( answers: Answers ) => void;
+  onWeightUpdate: ( answers: WeightAnswers ) => void;
 }

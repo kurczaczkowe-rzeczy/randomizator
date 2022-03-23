@@ -1,9 +1,12 @@
 import {
   ChangeEvent,
   useCallback,
+  useEffect,
   useState,
 } from 'react';
 import _map from 'lodash/map';
+import _isEmpty from 'lodash/isEmpty';
+import _includes from 'lodash/includes';
 
 import MUITabs from '@material-ui/core/Tabs';
 import MUITab from '@material-ui/core/Tab';
@@ -24,10 +27,21 @@ export const Tabs = ({
 }: ITabs ): JSX.Element => {
   const [ value, setValue ] = useState( defaultTab );
 
+  const tabsLabels = _map( tabs, ({ label }) => label );
   const handleChange = useCallback(( event: ChangeEvent< unknown > | null, newValue: string ): void => {
     setValue( newValue );
     onTabChange( newValue );
   }, [ onTabChange ]);
+
+  useEffect(() => {
+    if ( _isEmpty( value ) || !_includes( tabsLabels, value )) {
+      setValue( defaultTab );
+    }
+  }, [
+    defaultTab,
+    value,
+    tabsLabels,
+  ]);
 
   return (
     <>

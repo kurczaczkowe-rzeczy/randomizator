@@ -4,6 +4,7 @@ import {
   SET_FORM_NAME,
   ERROR_FORM_DONT_EXIST,
   SET_SELECTED_FORM,
+  CLEAR_FORM,
 } from 'store/actions';
 import {
   FormAction,
@@ -17,7 +18,7 @@ export const fetchFormName = ( userID: string, formID: string ): ThunkAction<voi
     dispatch,
     _,
     { getFirestore },
-  ): void => {
+  ) => {
     const firestore = getFirestore();
 
     // ToDo consider whether it makes sense to create a hook/util for a firebase
@@ -42,8 +43,9 @@ export const fetchFormName = ( userID: string, formID: string ): ThunkAction<voi
       });
   };
 
+/** Action trigger select specific form from firestore. */
 export const setSelectedForm = ( formID: IForm[ 'id' ]): ThunkAction<void, IRootState, unknown, FormAction> =>
-  ( dispatch, getState ): void => {
+  ( dispatch, getState ) => {
     const form = getState().firestore.data.forms[ formID ];
 
     dispatch({
@@ -51,3 +53,8 @@ export const setSelectedForm = ( formID: IForm[ 'id' ]): ThunkAction<void, IRoot
       payload: { id: formID, ...form },
     });
   };
+
+/** Action trigger cleaning form store. */
+export const clearForm = (): ThunkAction<void, IRootState, unknown, FormAction> => ( dispatch ) => {
+  dispatch({ type: CLEAR_FORM });
+};

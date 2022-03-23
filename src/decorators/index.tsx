@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { Action as ReduxAction } from 'redux';
 import { useDispatch } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { FormProvider, useForm } from 'react-hook-form';
 import { StoryContext } from '@storybook/addons';
 
@@ -26,8 +26,10 @@ type Decorator = < StoryFnReturnType extends JSX.Element = JSX.Element >
  * */
 type AnswerControllerDecorator = ( callback?: ( context: StoryContext ) => void ) => Decorator;
 
-type DispatchDecorator = <State, Action extends ReduxAction>
-( callback: ( dispatch: ThunkDispatch<State, unknown, Action> ) => void ) => Decorator;
+type DispatchDecorator = <State, Action extends ReduxAction>(
+  callback: ( dispatch: ThunkDispatch< State, unknown, Action > ) => void,
+  clearAction: () => ThunkAction< void, State, unknown, Action >
+) => Decorator;
 
 // Decorators
 /**
@@ -56,7 +58,7 @@ type DispatchDecorator = <State, Action extends ReduxAction>
  * } as Meta;
  */
 export const answerControllerDecorator: AnswerControllerDecorator = ( callback ) => ( Story, context ) => {
-  const methods = useForm< IAnswersValues >({ defaultValues: { answers: [{ weight: 5, answerID: 'aWd2fg4h57r' }]}});
+  const methods = useForm< IAnswersValues >({ defaultValues: { answers: [{ weight: 5, id: 'aWd2fg4h57r' }]}});
 
   if ( callback ) { callback( context ); }
 
@@ -72,12 +74,15 @@ export const answerControllerDecorator: AnswerControllerDecorator = ( callback )
 /**
  * This decorator provides redux dispatcher to story component.
  * */
-export const dispatchDecorator: DispatchDecorator = ( callback ) => ( Story ) => {
+export const dispatchDecorator: DispatchDecorator = ( callback, clearAction ) => ( Story ) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch( clearAction());
     callback( dispatch );
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => () => { dispatch( clearAction()); });
 
   return <Story />;
 };

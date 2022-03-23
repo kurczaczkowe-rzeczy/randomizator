@@ -16,10 +16,15 @@ import { RootState } from 'store/reducers/rootReducer';
 const useAnswerController = ( answerIndex: IAnswerRowController[ 'answerIndex' ]): IAnswerController => {
   const { register, getValues } = useFormContext();
 
-  const { answerID, weight } = getValues( `answers.${ answerIndex }` );
-  const edit = useSelector(( state: RootState ) => _includes( state.answersManager.editedAnswers, answerID ));
+  const {
+    id,
+    weight,
+    answerID,
+  } = getValues( `answers.${ answerIndex }` );
+  const edit = useSelector(( state: RootState ) => _includes( state.answersManager.editedAnswers, id ));
 
   return {
+    id,
     answerID,
     register,
     edit,

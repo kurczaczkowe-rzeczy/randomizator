@@ -20,13 +20,13 @@ const reducer = ( state = initialState, action: AnswersManagerAction = initialAc
     case SET_EDITED_ANSWER: {
       return {
         ...state,
-        editedAnswers: [ ...state.editedAnswers, action.payload.answerID ],
+        editedAnswers: [ ...state.editedAnswers, action.payload.id ],
       };
     }
     case UNSET_EDITED_ANSWER: {
       return {
         ...state,
-        editedAnswers: _filter( state.editedAnswers, ( answerID ) => answerID !== action.payload.answerID ),
+        editedAnswers: _filter( state.editedAnswers, ( id ) => id !== action.payload.id ),
       };
     }
     case SET_DIRTY_ANSWER: {

@@ -26,7 +26,7 @@ const Column = ({ flex, children }: { children: StringOrNumber; flex: string }):
 const mockData = {
   answerIndex: 0,
   columns: [
-    <Column key="content" flex="100%">Imię męskie</Column>,
+    <Column key="value" flex="100%">Imię męskie</Column>,
     <Column key="weight" flex="150px">5</Column>,
     <Column key="edit" flex="60px">edit</Column>,
   ],

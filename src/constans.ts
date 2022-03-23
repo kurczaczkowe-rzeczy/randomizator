@@ -29,7 +29,10 @@ export const ROUTES = {
 
 export const PAGES = { DASHBOARD: 'DASHBOARD' };
 
-export const CARDS = { USER_CREATOR: 'USER_CREATOR' };
+export const CARDS = {
+  USER_CREATOR: 'USER_CREATOR',
+  ANSWERS_TABLE: 'ANSWERS_TABLE',
+};
 
 // Sizes
 export const HEIGHT_OF_COLLAPSED_MENU = 70;
@@ -41,7 +44,8 @@ export const LOADER_SIZE = 60;
 export const TABLE_BORDER_RADIUS = 4;
 export const ROW_HEIGHT = 36;
 /** Row offset describe how much additional space was added to row. This value is divided between top and bottom. */
-export const ROW_OFFSET = 4;
+export const ROW_OFFSET = 14;
+export const DEFAULT_COUNT = 25;
 
 export const USER_ROLES = {
   ADMIN: 'ADMIN',

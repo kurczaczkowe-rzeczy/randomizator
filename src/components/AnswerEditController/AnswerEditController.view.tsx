@@ -13,17 +13,17 @@ import useStyle from './AnswerEditController.styles';
 /** Component control edit state on associated answer. */
 export const AnswerEditController = ({ answerIndex }: IAnswerRowController ): JSX.Element => {
   const styles = useStyle();
-  const { answerID, edit } = useAnswerController( answerIndex );
+  const { id, edit } = useAnswerController( answerIndex );
   const dispatch = useDispatch();
 
   const toggleEdit = useCallback(() => {
     const action = edit ? unsetEditedAnswer : setEditedAnswer;
 
-    dispatch( action( answerID ));
+    dispatch( action( id ));
   }, [
     dispatch,
     edit,
-    answerID,
+    id,
   ]);
 
   return (
