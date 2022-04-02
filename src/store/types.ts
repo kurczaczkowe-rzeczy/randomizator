@@ -1,5 +1,5 @@
 import {
-  ERROR_FORM_DONT_EXIST,
+  ERROR_FORM,
   CLEAR_FORMS,
   ADD_FORM,
   CLEAR_USER,
@@ -86,7 +86,7 @@ export type FormsAction = IAction<typeof CLEAR_FORMS> | IActionWithPayload<typeo
 export type FormAction =
   | IAction<FormActionsTypes>
   | IActionWithPayload<FormActionsTypesWithPayload, IForm>
-  | IActionWithPayload<typeof ERROR_FORM_DONT_EXIST, IErrorMessage>;
+  | IActionWithPayload<typeof ERROR_FORM, IErrorMessage>;
 export interface IUserActionPayload {
   currentUserRole?: Role;
   errorMsg?: string;

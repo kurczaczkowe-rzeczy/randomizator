@@ -1,29 +1,33 @@
-import { FormEvent, SyntheticEvent } from 'react';
+import { SyntheticEvent } from 'react';
 import { SubmitHandler } from 'react-hook-form';
+import { Fields, Mapping } from 'types';
 
 export interface IForm {
   /**
    * Additional function in textNode
    */
   additionalFunction: ( event: SyntheticEvent ) => void;
+  /** Array of fields used in form. */
+  fields: Fields;
   /**
    * Method define what happen when response form was submit
    */
-  onSubmit: SubmitHandler< FormEvent< HTMLFormElement >>;
+  onSubmit: SubmitHandler< IGuestValues >;
   /**
    * Define if form could send response
    */
   preview: boolean;
 }
 
+export type GuestSubmitHandler = ( fields: IGuestValues ) => void;
+
 export type FormContainer = Partial<Omit<IForm, 'onSubmit'>> & {
-  onSubmit?: ( fields: { nameFemale: string; nameMale: string }) => void;
+  onSubmit?: ( fields: Mapping< string > ) => void;
 };
 
-export interface IGuestValues {
+export interface IGuestValues extends Mapping< string >{
   /**
-   * Value uses to check fi human user fill the form.
+   * Value uses to check if human user fill the form.
    */
   checkIsNotRobot: string;
-  [ key: string ]: string | undefined;
 }

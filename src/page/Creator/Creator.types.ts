@@ -1,7 +1,7 @@
 import { IFileContainer } from 'components/FileContainer';
 import { AnswerFields } from 'page/Guest';
 
-export interface IAnswer {
+export interface IAnswerWithId {
   /** Array of fields created base on provided users answers. */
   fields: AnswerFields;
   /** Unique identifier of answer. */
@@ -30,4 +30,4 @@ export interface ICreator {
   onLogout: () => void;
 }
 
-export type Answers = IAnswer[];
+export type Answers = IAnswerWithId[];

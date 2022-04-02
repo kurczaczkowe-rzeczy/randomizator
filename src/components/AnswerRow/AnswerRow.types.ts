@@ -6,7 +6,7 @@ import {
 } from 'react';
 
 /**
- * Object represents row parameters for answer manager. It extends **IAnswer** to provide answer index
+ * Object represents row parameters for answer manager. It extends **IAnswerRowController** to provide answer index
  * that is used to correctly specify row.
  */
 export interface IAnswerRow extends IAnswerRowController {

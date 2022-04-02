@@ -11,7 +11,7 @@ import { AnswerFields } from 'page/Guest';
 import { Mapping } from 'types';
 import { createAnswer, createAnswerField } from 'utils/answersUtils';
 
-import { Answers, IAnswer } from './Creator.types';
+import { Answers, IAnswerWithId } from './Creator.types';
 
 export const getFormCollection = async ( userID: string, formID: string ):
   Promise<firebase.firestore.DocumentData | undefined> => {
@@ -31,10 +31,10 @@ export const getNewFileName = (): string => {
   return `${ datePart }${ timePart }`;
 };
 
-export const parseText = ( text: string ): IAnswer[] => {
+export const parseText = ( text: string ): IAnswerWithId[] => {
   const jsonCSV = readString( text ).data as string[][];
 
-  const answers: IAnswer[] = [];
+  const answers: IAnswerWithId[] = [];
   let fieldNames: string[] = [];
   let answerFields: AnswerFields = [];
 
@@ -47,11 +47,15 @@ export const parseText = ( text: string ): IAnswer[] => {
 
     _forEach( fileRow, ( cell, ind ) => {
       if ( ind !== 0 ) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         answerFields.push( createAnswerField( cell, fieldNames[ ind ]));
       }
     });
 
     if ( !_isEmpty( answerFields )) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       answers.push( createAnswer( answerFields ));
     }
     answerFields = [];

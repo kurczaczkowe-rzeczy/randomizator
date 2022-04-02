@@ -9,17 +9,23 @@ import {
   useHistory,
 } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { useFirestore } from 'react-redux-firebase';
 import _isEmpty from 'lodash/isEmpty';
+import _forEach from 'lodash/forEach';
 
 import useTimeout from 'hooks/useTimeout';
 import useLocaleString from 'hooks/useLocaleString';
-import { db, firestore } from 'config/firebaseConfig';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { getCreatorName } from 'store/actions/userActions';
 import { fetchFormName } from 'store/actions/formAction';
 import { RootState } from 'store/reducers/rootReducer';
 import { createAnswer } from 'utils/answersUtils';
-import { APP_NAME_SUFFIX, DELAY_FORM_NAME_HIGHLIGHT } from 'constans';
+import {
+  APP_NAME_SUFFIX,
+  CARDS,
+  DELAY_FORM_NAME_HIGHLIGHT,
+  PAGES,
+} from 'constans';
 
 import PageContainer from 'components/PageContainer';
 
@@ -29,6 +35,12 @@ import { IGuest } from './Guest.types';
 const GuestPage = (): JSX.Element => {
   const getString = useLocaleString();
   const { goBack } = useHistory();
+
+  const {
+    doc,
+    FieldValue,
+    batch: firestoreBatch,
+  } = useFirestore();
 
   const auth = useSelector(( state: RootState ) => state.firebase.auth );
   const creatorName = useSelector(( state: RootState ) => state.usr.creatorName );
@@ -43,11 +55,9 @@ const GuestPage = (): JSX.Element => {
   const { runTimeout, stopTimeout } = useTimeout( DELAY_FORM_NAME_HIGHLIGHT );
 
   useEffect(() => {
-    if ( _isEmpty( creatorName ) || _isEmpty( formName )) {
-      dispatch( showLoader( 'GUEST_PAGE' ));
-    } else {
-      dispatch( hideLoader( 'GUEST_PAGE' ));
-    }
+    const action = _isEmpty( creatorName ) || _isEmpty( formName ) ? showLoader : hideLoader;
+
+    dispatch( action( PAGES.GUEST_PAGE ));
   }, [
     dispatch,
     creatorName,
@@ -68,14 +78,37 @@ const GuestPage = (): JSX.Element => {
     stopTimeout,
   ]);
 
-  const onSubmit: IGuest[ 'onSubmit' ] = ( fields ): void => {
-    const ans = createAnswer( fields );
+  const onSubmit: IGuest[ 'onSubmit' ] = async ( fields ): Promise< void > => {
+    dispatch( showLoader( PAGES.GUEST_PAGE, CARDS.GUEST_FORM ));
+    const formRef = doc( `${ creatorId }/${ formId }` );
+    const answersRef = formRef.collection( 'answers' ).doc();
+    const fieldsRef = answersRef.collection( 'fields' );
 
-    db.collection( creatorId )
-      .doc( formId )
-      .update({ answers: firestore.FieldValue.arrayUnion( ans ) }) // ToDo move to hook
-      .then(() => alert( getString( 'dataSave' )))
-      .catch(( error ) => console.log( 'Error!', error )); // ToDo change then().catch() to async/await with try/catch
+    const answers = createAnswer(
+      fields,
+      formId,
+      answersRef.id,
+    );
+
+    try {
+      const batch = firestoreBatch();
+
+      _forEach( answers, ( answer ) => {
+        batch.set( fieldsRef.doc(), answer );
+      });
+
+      batch.update( formRef, { counter: FieldValue.increment( 1 ) });
+      await batch.commit();
+    } catch ( e: unknown ) {
+      // ToDo: Better error handling
+      console.error( 'Guest container submit:', e );
+      alert( getString( 'guestFormSubmittingError' ));
+
+      return;
+    }
+
+    dispatch( hideLoader( PAGES.GUEST_PAGE, CARDS.GUEST_FORM ));
+    alert( getString( 'dataSave' ));
   };
 
   const onBackToCreator = (): void => {

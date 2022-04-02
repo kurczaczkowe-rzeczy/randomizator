@@ -18,7 +18,7 @@ export type UserActionsTypes = typeof GET_CREATOR_NAME
 
 export const SET_FORM_NAME = 'SET_FORM_NAME';
 export const SET_SELECTED_FORM = 'SET_SELECTED_FORM';
-export const ERROR_FORM_DONT_EXIST = 'ERROR_FORM_DONT_EXIST';
+export const ERROR_FORM = 'ERROR_FORM';
 export const CLEAR_FORM = 'CLEAR_FORM';
 export type FormActionsTypesWithPayload =
   | typeof SET_SELECTED_FORM

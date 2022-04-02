@@ -64,7 +64,6 @@ const AnswersTableContainer = ({ tab }: IAnswerTableContainer ): JSX.Element => 
       console.error( 'onWeightUpdate:', e );
     } finally {
       dispatch( hideLoader( PAGES.DASHBOARD, CARDS.ANSWERS_TABLE ));
-
     }
   };
 

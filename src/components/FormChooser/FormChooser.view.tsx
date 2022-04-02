@@ -5,7 +5,7 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 import prepareLink from 'utils/prepareLink';
 import useLocaleString from 'hooks/useLocaleString';
-import { HOME_PAGE } from 'constans';
+import { APP_NAME_SUFFIX, HOME_PAGE } from 'constans';
 
 import Card from 'components/card';
 import CopyText from 'components/copyText';
@@ -26,7 +26,7 @@ export const FormChooser = ({
   const { push } = useHistory();
   const getString = useLocaleString();
 
-  const link = prepareLink( `/${ creatorID }/${ formID }`, HOME_PAGE );
+  const link = prepareLink( `/${ creatorID }/${ formID }`, HOME_PAGE + APP_NAME_SUFFIX );
 
   const onGoToForm = (): void => { push( link ); };
 

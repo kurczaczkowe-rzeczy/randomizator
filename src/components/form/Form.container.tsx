@@ -1,15 +1,18 @@
 import { useCallback } from 'react';
-import { useSelector } from 'react-redux';
 import { FormProvider, useForm } from 'react-hook-form';
-import _isEmpty from 'lodash/isEmpty';
 import _isEqual from 'lodash/isEqual';
-import _some from 'lodash/some';
 
 import { RootState } from 'store/reducers/rootReducer';
 import useLocaleString from 'hooks/useLocaleString';
+import useTypedSelector from 'hooks/useTypedSelector';
 
+import { getErrorMessage } from './Form.utils';
 import FormView from './Form.view';
-import { FormContainer, IGuestValues } from './Form.types';
+import {
+  FormContainer,
+  GuestSubmitHandler,
+  IGuestValues,
+} from './Form.types';
 
 // ToDo: #167
 const Form = ({
@@ -17,31 +20,27 @@ const Form = ({
   onSubmit = (): void => {},
   additionalFunction = (): void => {},
 }: FormContainer ): JSX.Element => {
-  const methods = useForm<IGuestValues>();
+  const methods = useForm< IGuestValues >();
   const getString = useLocaleString();
-  const nameOfForm = useSelector(( state: RootState ) => state.form.name );
+  const { name, fields } = useTypedSelector(( state: RootState ) => state.form, _isEqual );
 
-  const someFieldFill = ( ...fields: string[]): boolean => _some( fields, ( field ) => !_isEmpty( field ));
+  const handleSubmit = useCallback< GuestSubmitHandler >(({ checkIsNotRobot, ...fields }) => {
+    const message = getErrorMessage(
+      checkIsNotRobot,
+      name,
+      fields,
+    );
 
-  const handleSubmit = useCallback(({
-    nameMale,
-    nameFemale,
-    checkIsNotRobot,
-  }) => {
-    if ( _isEmpty( checkIsNotRobot )) {
-      alert( getString( 'formErrorEmptyFormName' ));
-    } else if ( !_isEqual( checkIsNotRobot, nameOfForm )) {
-      alert( getString( 'formErrorWrongFormName' ));
-    } else {
-      if ( someFieldFill( nameMale, nameFemale )) {
-        onSubmit({ nameMale, nameFemale });
-        methods.reset();
-      } else {
-        alert( getString( 'formErrorEmptyFormFields' ));
-      }
+    if ( message ) {
+      alert( getString( message ));
+
+      return;
     }
+
+    onSubmit( fields );
+    methods.reset();
   }, [
-    nameOfForm,
+    name,
     onSubmit,
     getString,
     methods,
@@ -50,6 +49,7 @@ const Form = ({
   return (
     <FormProvider { ...methods }>
       <FormView
+        fields={ fields }
         preview={ preview }
         onSubmit={ handleSubmit }
         additionalFunction={ additionalFunction }

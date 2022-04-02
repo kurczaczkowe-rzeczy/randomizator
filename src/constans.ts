@@ -27,11 +27,15 @@ export const ROUTES = {
   notFound: prepareLink( '/not_found' ),
 };
 
-export const PAGES = { DASHBOARD: 'DASHBOARD' };
+export const PAGES = {
+  DASHBOARD: 'DASHBOARD',
+  GUEST_PAGE: 'GUEST_PAGE',
+};
 
 export const CARDS = {
   USER_CREATOR: 'USER_CREATOR',
   ANSWERS_TABLE: 'ANSWERS_TABLE',
+  GUEST_FORM: 'GUEST_FORM',
 };
 
 // Sizes

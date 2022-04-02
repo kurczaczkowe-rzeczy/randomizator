@@ -1,46 +1,61 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ExtendedFirestoreInstance } from 'react-redux-firebase';
 import { ThunkAction } from 'redux-thunk';
 import {
   SET_FORM_NAME,
-  ERROR_FORM_DONT_EXIST,
+  ERROR_FORM,
   SET_SELECTED_FORM,
   CLEAR_FORM,
 } from 'store/actions';
 import {
   FormAction,
-  IFormState,
   IRootState,
 } from 'store/types';
 import { IForm } from 'types';
 
-export const fetchFormName = ( userID: string, formID: string ): ThunkAction<void, IFormState, any, FormAction> =>
-  (
+type ActionCreator = ( userID: string, formID: string ) =>
+  ThunkAction<Promise< void > | void, IRootState, { getFirestore: () => ExtendedFirestoreInstance }, FormAction>;
+
+export const fetchFormName: ActionCreator = ( userID, formID ) =>
+  async (
     dispatch,
-    _,
+    getState,
     { getFirestore },
   ) => {
+    const { id } = getState().form;
+
+    if ( id === formID ) { return; }
+
     const firestore = getFirestore();
 
-    // ToDo consider whether it makes sense to create a hook/util for a firebase
-    firestore.collection( userID ).doc( formID )
-      .get()
-      .then(( doc: any ) => {
-        if ( doc.exists ) {
-          dispatch({
-            type: SET_FORM_NAME,
-            payload: {
-              name: doc.data().name,
-              id: formID,
-              fields: [],
-            },
-          });
-        } else {
-          dispatch({
-            type: ERROR_FORM_DONT_EXIST,
-            payload: { errorMessage: 'Form don\'t exist' },
-          });
-        }
+    try {
+      const doc = await firestore.get< IForm >( `${ userID }/${ formID }` );
+
+      if ( doc.exists ) {
+        const { name, fields } = doc.data() ?? {};
+
+        dispatch({
+          type: SET_FORM_NAME,
+          payload: {
+            name,
+            id: formID,
+            fields,
+          },
+        } as FormAction );
+      } else {
+        dispatch({
+          type: ERROR_FORM,
+          payload: { errorMessage: 'Form don\'t exist' },
+        });
+      }
+    } catch ( e: unknown ) {
+      // ToDo: Better error handling
+      console.error( 'Form name fetch:', e );
+      dispatch({
+        type: ERROR_FORM,
+        payload: { errorMessage: 'Unknown error occurrence' },
       });
+    }
   };
 
 /** Action trigger select specific form from firestore. */

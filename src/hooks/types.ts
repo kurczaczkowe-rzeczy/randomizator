@@ -5,7 +5,8 @@ import { WhereFilterOp } from '@firebase/firestore-types';
 import { LocaleResourcesIDs } from 'assets/locale/types';
 import { IAnswersManagerDirtyAnswerPayload } from 'store/types';
 import {
-  Answers, IAnswer,
+  Answers,
+  IAnswer,
   IWeightAnswer,
   WeightAnswers,
 } from 'types';
@@ -28,7 +29,7 @@ export interface IAnswerRowController {
 
 /**
  * An object represents information about answer controller such as edit state, form register method, answer identifier
- * and weight associated with answer. It extends **IAnswer** to provide answer form values such as weight and
+ * and weight associated with answer. It extends **IWeightAnswer** to provide answer form values such as weight and
  * answer identifier.
  */
 export interface IAnswerController extends IWeightAnswer {

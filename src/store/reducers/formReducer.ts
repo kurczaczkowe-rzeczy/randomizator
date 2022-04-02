@@ -1,6 +1,6 @@
 import {
   CLEAR_FORM,
-  ERROR_FORM_DONT_EXIST,
+  ERROR_FORM,
   SET_FORM_NAME,
   SET_SELECTED_FORM,
 } from 'store/actions';
@@ -23,7 +23,7 @@ const reducer = ( state = initialState, action: FormAction = { type: CLEAR_FORM 
         ...action.payload,
         errors: null,
       };
-    case ERROR_FORM_DONT_EXIST:
+    case ERROR_FORM:
       return {
         ...state,
         name: '',
