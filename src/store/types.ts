@@ -47,7 +47,10 @@ export interface IFormsState extends IState {
 
 /** An object represent form state. It extends {@link IForm} and {@link IState} to provide information about form
  * and its errors */
-export interface IFormState extends IForm, IState {}
+export interface IFormState extends IForm, IState {
+  /** Amounts of gathered answers. */
+  counter: number;
+}
 
 export interface IUserState extends IState {
   creatorName: string;

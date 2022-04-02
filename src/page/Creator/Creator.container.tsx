@@ -44,7 +44,7 @@ const Creator = (): JSX.Element => {
   const [ answersFromFile, setAnswersFromFile ] = useState<Answers>([]);
 
   const auth = useTypedSelector(({ firebase: { auth }}) => auth, shallowEqual );
-  const answersCounter = useTypedSelector(({ ans: { counter }}) => counter );
+  const answersCounter = useTypedSelector(({ form: { counter }}) => counter );
   const dformID = useTypedSelector(({ form: { id }}) => id );
   const dispatch = useDispatch();
 

@@ -11,12 +11,14 @@ const initialState: IFormState = {
   id: '',
   name: '',
   errors: null,
+  counter: 0,
 };
 
 const reducer = ( state = initialState, action: FormAction = { type: CLEAR_FORM }): IFormState => {
   switch ( action.type ) {
     case CLEAR_FORM:
       return initialState;
+    case SET_SELECTED_FORM:
     case SET_FORM_NAME:
       return {
         ...state,
@@ -26,15 +28,8 @@ const reducer = ( state = initialState, action: FormAction = { type: CLEAR_FORM 
     case ERROR_FORM:
       return {
         ...state,
-        name: '',
-        id: '',
+        ...initialState,
         errors: action.payload.errorMessage,
-      };
-    case SET_SELECTED_FORM:
-      return {
-        ...state,
-        ...action.payload,
-        errors: null,
       };
     default:
       return state;

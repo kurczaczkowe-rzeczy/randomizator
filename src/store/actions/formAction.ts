@@ -32,14 +32,13 @@ export const fetchFormName: ActionCreator = ( userID, formID ) =>
       const doc = await firestore.get< IForm >( `${ userID }/${ formID }` );
 
       if ( doc.exists ) {
-        const { name, fields } = doc.data() ?? {};
+        const formData = doc.data();
 
         dispatch({
           type: SET_FORM_NAME,
           payload: {
-            name,
             id: formID,
-            fields,
+            ...formData,
           },
         } as FormAction );
       } else {
