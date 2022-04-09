@@ -1,10 +1,8 @@
 import { useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import _isEqual from 'lodash/isEqual';
+import noop from 'lodash/noop';
 
-import { RootState } from 'store/reducers/rootReducer';
 import useLocaleString from 'hooks/useLocaleString';
-import useTypedSelector from 'hooks/useTypedSelector';
 
 import { getErrorMessage } from './Form.utils';
 import FormView from './Form.view';
@@ -16,13 +14,14 @@ import {
 
 // ToDo: #167
 const Form = ({
+  name,
   preview = false,
-  onSubmit = (): void => {},
-  additionalFunction = (): void => {},
+  onSubmit = noop,
+  additionalFunction = noop,
+  fields = [],
 }: FormContainer ): JSX.Element => {
   const methods = useForm< IGuestValues >();
   const getString = useLocaleString();
-  const { name, fields } = useTypedSelector(( state: RootState ) => state.form, _isEqual );
 
   const handleSubmit = useCallback< GuestSubmitHandler >(({ checkIsNotRobot, ...fields }) => {
     const message = getErrorMessage(

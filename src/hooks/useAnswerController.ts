@@ -1,9 +1,8 @@
-import { useFormContext } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useFormContext, useWatch } from 'react-hook-form';
 import _includes from 'lodash/includes';
 
 import { IAnswerRowController, IAnswerController } from 'hooks/types';
-import { RootState } from 'store/reducers/rootReducer';
+import useTypedSelector from 'hooks/useTypedSelector';
 
 /**
  * Hook provide access to form context created by useForm in the parent component. From this context hook get values
@@ -14,14 +13,14 @@ import { RootState } from 'store/reducers/rootReducer';
  * @return {@link IAnswerController}
  */
 const useAnswerController = ( answerIndex: IAnswerRowController[ 'answerIndex' ]): IAnswerController => {
-  const { register, getValues } = useFormContext();
+  const { register, control } = useFormContext();
 
   const {
     id,
     weight,
     answerID,
-  } = getValues( `answers.${ answerIndex }` );
-  const edit = useSelector(( state: RootState ) => _includes( state.answersManager.editedAnswers, id ));
+  } = useWatch({ control, name: `answers.${ answerIndex }` });
+  const edit = useTypedSelector(({ answersManager: { editedAnswers }}) => _includes( editedAnswers, id ));
 
   return {
     id,

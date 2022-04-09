@@ -23,7 +23,7 @@ import useStyles from './Guest.styles';
  */
 export const GuestView = ({
   creatorName,
-  formName = '',
+  form,
   onSubmit,
   isHighlighted,
   highlightFormName,
@@ -59,12 +59,12 @@ export const GuestView = ({
             <FormName content={ (
               <CopyText
                 withFlexStart
-                text={ formName }
+                text={ form.name }
                 content={ (
                   <TextBox
                     additionalClasses={ classNames( styles.textBox, { [ styles.highlightText ]: isHighlighted }) }
                   >
-                    { formName }
+                    { form.name }
                   </TextBox>
                 ) }
               />
@@ -82,7 +82,13 @@ export const GuestView = ({
             </p>
           </>
         ) }
-        body={ <Form onSubmit={ onSubmit } additionalFunction={ highlightFormName } /> }
+        body={ (
+          <Form
+            { ...form }
+            onSubmit={ onSubmit }
+            additionalFunction={ highlightFormName }
+          />
+        ) }
         isLoading={ isLoading }
       />
     </div>

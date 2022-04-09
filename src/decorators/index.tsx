@@ -24,12 +24,17 @@ type Decorator = < StoryFnReturnType extends JSX.Element = JSX.Element >
  * @param callback allows runs code block with story context,
  * @return story decorator function that allows customize story render.
  * */
-type AnswerControllerDecorator = ( callback?: ( context: StoryContext ) => void ) => Decorator;
+type AnswerControllerDecorator = (
+  callback?: ( context: StoryContext ) => void,
+  defaultValues?: IAnswersValues,
+) => Decorator;
 
 type DispatchDecorator = <State, Action extends ReduxAction>(
   callback: ( dispatch: ThunkDispatch< State, unknown, Action > ) => void,
   clearAction: () => ThunkAction< void, State, unknown, Action >
 ) => Decorator;
+
+const DEFAULT_VALUES = { answers: [{ weight: 5, id: 'aWd2fg4h57r' }]} as IAnswersValues;
 
 // Decorators
 /**
@@ -57,19 +62,20 @@ type DispatchDecorator = <State, Action extends ReduxAction>(
  *   ],
  * } as Meta;
  */
-export const answerControllerDecorator: AnswerControllerDecorator = ( callback ) => ( Story, context ) => {
-  const methods = useForm< IAnswersValues >({ defaultValues: { answers: [{ weight: 5, id: 'aWd2fg4h57r' }]}});
+export const answerControllerDecorator: AnswerControllerDecorator = ( callback, defaultValues = DEFAULT_VALUES ) =>
+  ( Story, context ) => {
+    const methods = useForm< IAnswersValues >({ defaultValues });
 
-  if ( callback ) { callback( context ); }
+    if ( callback ) { callback( context ); }
 
-  return (
-    <form>
-      <FormProvider { ...methods }>
-        <Story />
-      </FormProvider>
-    </form>
-  );
-};
+    return (
+      <form>
+        <FormProvider { ...methods }>
+          <Story />
+        </FormProvider>
+      </form>
+    );
+  };
 
 /**
  * This decorator provides redux dispatcher to story component.

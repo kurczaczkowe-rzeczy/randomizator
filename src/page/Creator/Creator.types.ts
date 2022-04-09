@@ -1,5 +1,6 @@
 import { IFileContainer } from 'components/FileContainer';
 import { AnswerFields } from 'page/Guest';
+import { IForm } from 'types';
 
 export interface IAnswerWithId {
   /** Array of fields created base on provided users answers. */
@@ -16,8 +17,6 @@ export interface IFormDoc {
 }
 
 export interface ICreator {
-  /** Number of form answers. */
-  answersCounter: number;
   /** Props passed to FileContainer component. */
   fileContainerProps: IFileContainer;
   /** Method download answers and converts it to csv file. */
@@ -28,6 +27,8 @@ export interface ICreator {
   onFormIdChange?: ( formID: string ) => void;
   /** Method signs out users. */
   onLogout: () => void;
+  /** Data from selected form. */
+  selectedForm: IForm;
 }
 
 export type Answers = IAnswerWithId[];

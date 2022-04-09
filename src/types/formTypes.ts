@@ -22,6 +22,8 @@ export interface IBaseForm {
 
 /** Object represent whole information about specific form. */
 export interface IForm extends IBaseForm {
+  /** Number of answers provided by users. */
+  readonly counter: number;
   /** Array of fields used in form. */
   readonly fields: Fields;
 }

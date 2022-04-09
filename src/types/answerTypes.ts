@@ -16,6 +16,8 @@ export interface IBaseAnswer extends IWeightAnswer {
 
 /** An object represents answer and associated property. */
 export interface IAnswer extends IBaseAnswer {
+  /** Field name associated with answer. */
+  fieldName?: StringOrNumber;
   /** Identifier of form associated with answer. */
   formID: StringOrNumber;
   /** Number of milliseconds since the ECMAScript epoch. */

@@ -1,12 +1,13 @@
 import { SyntheticEvent } from 'react';
 
 import { FormContainer } from 'components/form';
+import { IForm } from 'types';
 
-export interface IGuest{
+export interface IGuest {
   /** Name of form Creator. */
   creatorName: string;
   /** Name of form. */
-  formName: string;
+  form: IForm;
   /** Method for highlight form name. */
   highlightFormName: ( event: SyntheticEvent ) => void;
   /** Determinate if current user is logged in or not. */
@@ -24,7 +25,7 @@ export interface IAnswerField {
   fieldName: string;
   /** Specify actual value provides from user to field. */
   value: string;
-  /** The weight of answer. It will be use for increase, decrease or disable chance to draw value. */
+  /** The weight of answer. It will be used for increase, decrease or disable chance to draw value. */
   weight: number;
 }
 

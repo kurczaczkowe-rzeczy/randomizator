@@ -13,13 +13,7 @@ export default{
   title: 'components/AnswerWeightController',
   component: Component,
   args: mockData,
-  argTypes: {
-    edit: {
-      description: 'Based on this value component display input or paragraph with value.' +
-           ' This args is used only for story.',
-      table: { type: { summary: 'boolean' }},
-    },
-  },
+  argTypes: { edit: { table: { disable: true }}},
   decorators: [
     answerControllerDecorator(({ args: { edit }}) => {
       const dispatch = useDispatch();

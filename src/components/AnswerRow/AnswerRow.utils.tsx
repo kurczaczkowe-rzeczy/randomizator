@@ -28,7 +28,7 @@ const getCellContent: AnswerRowCellGetter = (
   cellIndex,
 ) => {
   switch ( cellIndex ) {
-    case 0: { return <AnswerContentController answer={ element } />; }
+    case 0: { return <AnswerContentController answer={ element } answerIndex={ answerIndex } />; }
     case 1: { return <AnswerWeightController answerIndex={ answerIndex } />; }
     case 2: { return <AnswerEditController answerIndex={ answerIndex } />; }
     default: { return null; }

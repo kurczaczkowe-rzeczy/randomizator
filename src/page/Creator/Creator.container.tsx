@@ -11,6 +11,7 @@ import _union from 'lodash/union';
 import _isNull from 'lodash/isNull';
 import _isEmpty from 'lodash/isEmpty';
 import _map from 'lodash/map';
+import _isEqual from 'lodash/isEqual';
 
 import { db, firestore } from 'config/firebaseConfig';
 import { Mapping } from 'types';
@@ -44,8 +45,8 @@ const Creator = (): JSX.Element => {
   const [ answersFromFile, setAnswersFromFile ] = useState<Answers>([]);
 
   const auth = useTypedSelector(({ firebase: { auth }}) => auth, shallowEqual );
-  const answersCounter = useTypedSelector(({ form: { counter }}) => counter );
-  const dformID = useTypedSelector(({ form: { id }}) => id );
+  const formID = useTypedSelector(({ form: { id }}) => id );
+  const selectedForm = useTypedSelector(({ firestore: { data }}) => data.forms?.[ formID ] ?? {}, _isEqual );
   const dispatch = useDispatch();
 
   const getData = useCallback(( answers: Answers ): void => {
@@ -76,22 +77,21 @@ const Creator = (): JSX.Element => {
   };
 
   useEffect(() => {
-    const toggleLoader = _isNull( answersCounter ) ? showLoader( 'CREATOR_PAGE' ) : hideLoader( 'CREATOR_PAGE' );
+    const toggleLoader = _isNull( selectedForm.counter ) ? showLoader( 'CREATOR_PAGE' ) : hideLoader( 'CREATOR_PAGE' );
 
     dispatch( toggleLoader );
-  }, [ answersCounter, dispatch ]);
+  }, [ selectedForm.counter, dispatch ]);
 
-  // ToDo: check if it's useful
   useEffect(() => {
-    if ( !_isEmpty( dformID )) { dispatch( clearDraw()); }
-  }, [ dformID, dispatch ]);
+    if ( !_isEmpty( formID )) { dispatch( clearDraw()); }
+  }, [ formID, dispatch ]);
 
   const onDownloadAnswers = async (): Promise<void> => {
-    const formID = 'kolejny';
+    const _formID = 'kolejny';
 
-    if ( IS_DEVELOPMENT_MODE && formID ) {
+    if ( IS_DEVELOPMENT_MODE && _formID ) {
       try {
-        const savedForm = await getFormCollection( auth.uid, formID ) as IFormDoc;
+        const savedForm = await getFormCollection( auth.uid, _formID ) as IFormDoc;
         const answersOfForm = mapAnswers( savedForm?.answers );
         const formName = savedForm ? savedForm.name.replaceAll( ' ', '_' ) : getNewFileName();
 
@@ -137,11 +137,11 @@ const Creator = (): JSX.Element => {
   const onDropRejected = (): void => { alert( getString( 'errorOnlyCSVAccepted' )); }; // ToDo change to snackbar
   const onRemove = (): void => { setAcceptedFileNames([]); };
   const onSend = async (): Promise<void> => {
-    const formID = 'kolejny';
+    const _formID = 'kolejny';
 
     if ( !_isEmpty( answersFromFile )) {
       try {
-        const docReference = await db.collection( auth.uid ).doc( formID );
+        const docReference = await db.collection( auth.uid ).doc( _formID );
 
         // ToDo move to hook
         await docReference.update({ answers: firestore.FieldValue.arrayUnion( ...answersFromFile ) });
@@ -162,7 +162,7 @@ const Creator = (): JSX.Element => {
   return (
     <PageContainer>
       <CreatorView
-        answersCounter={ answersCounter }
+        selectedForm={ selectedForm }
         fileContainerProps={ fileContainerProps }
         onDownloadAnswers={ onDownloadAnswers }
         onDrawClick={ onRandomClick }

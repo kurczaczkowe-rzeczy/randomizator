@@ -8,17 +8,18 @@ import {
   useParams,
   useHistory,
 } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useFirestore } from 'react-redux-firebase';
 import _isEmpty from 'lodash/isEmpty';
 import _forEach from 'lodash/forEach';
+import _isEqual from 'lodash/isEqual';
 
+import useTypedSelector from 'hooks/useTypedSelector';
 import useTimeout from 'hooks/useTimeout';
 import useLocaleString from 'hooks/useLocaleString';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { getCreatorName } from 'store/actions/userActions';
 import { fetchFormName } from 'store/actions/formAction';
-import { RootState } from 'store/reducers/rootReducer';
 import { createAnswer } from 'utils/answersUtils';
 import {
   APP_NAME_SUFFIX,
@@ -35,6 +36,9 @@ import { IGuest } from './Guest.types';
 const GuestPage = (): JSX.Element => {
   const getString = useLocaleString();
   const { goBack } = useHistory();
+  const { creatorId, formId } = useParams<{[ key: string ]: string }>();
+  const [ isHighlighted, setIsHighlighted ] = useState( false );
+  const { runTimeout, stopTimeout } = useTimeout( DELAY_FORM_NAME_HIGHLIGHT );
 
   const {
     doc,
@@ -42,38 +46,34 @@ const GuestPage = (): JSX.Element => {
     batch: firestoreBatch,
   } = useFirestore();
 
-  const auth = useSelector(( state: RootState ) => state.firebase.auth );
-  const creatorName = useSelector(( state: RootState ) => state.usr.creatorName );
-  const formName = useSelector(( state: RootState ) => state.form.name );
-  const errorFormName = useSelector(( state: RootState ) => state.form.errors );
-  const errorUserName = useSelector(( state: RootState ) => state.usr.errors );
+  const auth = useTypedSelector(({ firebase: { auth }}) => auth );
+  const creatorName = useTypedSelector(({ usr: { creatorName }}) => creatorName );
+  const form = useTypedSelector(({ firestore: { data }}) => ( data[ creatorId ] ?? data.forms )?.[ formId ] ?? {},
+    _isEqual );
+  const errorFormName = useTypedSelector(({ form: { errors }}) => errors );
+  const errorUserName = useTypedSelector(({ usr: { errors }}) => errors );
   const dispatch = useDispatch();
 
-  // ToDo use constants instead of hardcoded strings
-  const { creatorId, formId } = useParams<{[key: string]: string }>();
-  const [ isHighlighted, setIsHighlighted ] = useState( false );
-  const { runTimeout, stopTimeout } = useTimeout( DELAY_FORM_NAME_HIGHLIGHT );
-
   useEffect(() => {
-    const action = _isEmpty( creatorName ) || _isEmpty( formName ) ? showLoader : hideLoader;
+    const action = _isEmpty( creatorName ) || _isEmpty( form.name ) ? showLoader : hideLoader;
 
     dispatch( action( PAGES.GUEST_PAGE ));
   }, [
     dispatch,
     creatorName,
-    formName,
+    form.name,
   ]);
 
   const highlightFormName = useCallback(( event ) => {
     const { target: { value }} = event;
 
-    if ( value === formName ) {
+    if ( value === form.name ) {
       return stopTimeout(() => setIsHighlighted( false ));
     }
 
     return runTimeout(() => setIsHighlighted( true ));
   }, [
-    formName,
+    form.name,
     runTimeout,
     stopTimeout,
   ]);
@@ -105,9 +105,10 @@ const GuestPage = (): JSX.Element => {
       alert( getString( 'guestFormSubmittingError' ));
 
       return;
+    } finally {
+      dispatch( hideLoader( PAGES.GUEST_PAGE, CARDS.GUEST_FORM ));
     }
 
-    dispatch( hideLoader( PAGES.GUEST_PAGE, CARDS.GUEST_FORM ));
     alert( getString( 'dataSave' ));
   };
 
@@ -126,7 +127,7 @@ const GuestPage = (): JSX.Element => {
       <PageContainer>
         <GuestView
           creatorName={ creatorName }
-          formName={ formName }
+          form={ form }
           isCreator={ !!auth.uid }
           isHighlighted={ isHighlighted }
           highlightFormName={ highlightFormName }

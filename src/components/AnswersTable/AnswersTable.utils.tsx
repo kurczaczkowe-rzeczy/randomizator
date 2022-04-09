@@ -1,7 +1,9 @@
 import AnswerListener, { IAnswerListener } from 'components/AnswerListener';
-import { IAnswerRow } from './AnswersTable.types';
 import { IVirtualizedTable } from 'components/VirtualizedTable';
 import { GetString } from 'hooks/types';
+import { ANSWER_EDIT_ICON_COLUMN_WIDTH, ANSWER_WEIGHT_COLUMN_WIDTH } from 'constans';
+
+import { IAnswerRow } from './AnswersTable.types';
 
 export const getColumns = ( getString: GetString, onWeightUpdate: IAnswerListener[ 'onWeightUpdate' ]):
   IVirtualizedTable< IAnswerRow >[ 'columns' ] => [
@@ -14,11 +16,11 @@ export const getColumns = ( getString: GetString, onWeightUpdate: IAnswerListene
   {
     label: getString( 'weight' ),
     dataKey: 'weight',
-    width: 80,
+    width: ANSWER_WEIGHT_COLUMN_WIDTH,
   },
   {
     label: <AnswerListener onWeightUpdate={ onWeightUpdate } />,
     dataKey: 'edit',
-    width: 48,
+    width: ANSWER_EDIT_ICON_COLUMN_WIDTH,
   },
 ];

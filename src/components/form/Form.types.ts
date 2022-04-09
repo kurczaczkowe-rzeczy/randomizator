@@ -22,6 +22,9 @@ export interface IForm {
 export type GuestSubmitHandler = ( fields: IGuestValues ) => void;
 
 export type FormContainer = Partial<Omit<IForm, 'onSubmit'>> & {
+  /** Name of selected form. */
+  name: string;
+  /** Method run after submit button was clicked. */
   onSubmit?: ( fields: Mapping< string > ) => void;
 };
 

@@ -50,6 +50,10 @@ export const ROW_HEIGHT = 36;
 /** Row offset describe how much additional space was added to row. This value is divided between top and bottom. */
 export const ROW_OFFSET = 14;
 export const DEFAULT_COUNT = 25;
+export const ANSWER_WEIGHT_COLUMN_WIDTH = 80;
+export const ANSWER_EDIT_ICON_COLUMN_WIDTH = 48;
+export const ANSWER_LINE_THROUGH_BOLD = 1;
+export const ANSWER_PADDING_SPACE_TO_REMOVE = 6;
 
 export const USER_ROLES = {
   ADMIN: 'ADMIN',

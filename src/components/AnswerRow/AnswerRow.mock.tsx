@@ -2,6 +2,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 import TableCell from 'components/TableCell';
+import { IAnswersValues } from 'hooks/types';
 import { StringOrNumber } from 'types';
 
 const useStyles = makeStyles< Theme, { flex: string }>({
@@ -32,5 +33,7 @@ const mockData = {
   ],
   style: { display: 'flex' },
 };
+
+export const defaultValues = { answers: [{ weight: 0, id: 'aWd2fg4h57r' }]} as IAnswersValues;
 
 export default mockData;

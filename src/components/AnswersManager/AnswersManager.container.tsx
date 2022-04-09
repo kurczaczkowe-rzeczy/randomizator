@@ -22,7 +22,8 @@ export const AnswersManager = (): JSX.Element => {
   const styles = useStyle();
   const getString = useLocaleString();
 
-  const fields = useTypedSelector(({ form: { fields }}) => fields, _isEqual );
+  const formID = useTypedSelector(({ form: { id }}) => id );
+  const fields = useTypedSelector(({ firestore: { data: { forms }}}) => forms?.[ formID ]?.fields ?? [], _isEqual );
   const isLoading = useTypedSelector(({ global: { bindToCard }}) => _includes( bindToCard, CARDS.ANSWERS_TABLE ));
 
   const tabs = useMemo(() => _map( fields, ({ name }) => ({ index: name, label: name })), [ fields ]);

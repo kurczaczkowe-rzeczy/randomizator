@@ -3,7 +3,9 @@ import { useDispatch } from 'react-redux';
 import { useFirestore } from 'react-redux-firebase';
 import _map from 'lodash/map';
 import _forEach from 'lodash/forEach';
+import _compact from 'lodash/compact';
 
+import { clearAnswerManager } from 'store/actions/answersManagerActions';
 import { showLoader, hideLoader } from 'store/actions/globalActions';
 import useAnswersConnect from 'hooks/useAnswersConnect';
 import useTypedSelector from 'hooks/useTypedSelector';
@@ -48,7 +50,9 @@ const AnswersTableContainer = ({ tab }: IAnswerTableContainer ): JSX.Element => 
     try {
       const batch = firestoreBatch();
 
-      _forEach( answers, ({
+      const notEmptyAnswers = _compact( answers );
+
+      _forEach( notEmptyAnswers, ({
         id,
         weight,
         answerID,
@@ -59,6 +63,7 @@ const AnswersTableContainer = ({ tab }: IAnswerTableContainer ): JSX.Element => 
       });
 
       await batch.commit();
+      dispatch( clearAnswerManager());
     } catch ( e: unknown ) {
       // ToDo: Better error handling
       console.error( 'onWeightUpdate:', e );

@@ -9,5 +9,6 @@ export default makeStyles(({ palette }) => ({
   dirty: {
     color: palette.colorTextSelected,
     pointerEvents: 'auto',
+    cursor: 'pointer',
   },
 }));

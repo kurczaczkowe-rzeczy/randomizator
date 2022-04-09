@@ -26,8 +26,8 @@ export interface IState { readonly errors: string | null }
 
 export interface IErrorMessage { errorMessage: string }
 
-export interface IAction<Type> { type: Type }
-export interface IActionWithPayload<Type, Payload> extends IAction<Type>{ payload: Payload }
+export interface IAction< Type > { type: Type }
+export interface IActionWithPayload< Type, Payload > extends IAction< Type >{ payload: Payload }
 
 // STATES
 export interface IGlobalState{
@@ -45,12 +45,9 @@ export interface IFormsState extends IState {
   readonly forms: Forms;
 }
 
-/** An object represent form state. It extends {@link IForm} and {@link IState} to provide information about form
- * and its errors */
-export interface IFormState extends IForm, IState {
-  /** Amounts of gathered answers. */
-  counter: number;
-}
+/** An object represent form state. It extends {@link IForm} and {@link IState} to provide id of selected
+ * form and its errors. */
+export interface IFormState extends Pick< IForm, 'id' >, IState {}
 
 export interface IUserState extends IState {
   creatorName: string;
@@ -77,27 +74,27 @@ export interface IRootState {
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */
 // ACTIONS
-export type LogoutAction = IAction<LogoutActionsTypes>;
+export type LogoutAction = IAction< LogoutActionsTypes >;
 export interface IGlobalActionsPayloads {
   bindToCard: string;
   callFrom: string;
 }
 export type GlobalAction =
-  | IAction<GlobalActionsTypes>
-  | IActionWithPayload<GlobalActionsTypesWithPayload, IGlobalActionsPayloads>;
-export type FormsAction = IAction<typeof CLEAR_FORMS> | IActionWithPayload<typeof ADD_FORM, IForm>;
+  | IAction< GlobalActionsTypes >
+  | IActionWithPayload< GlobalActionsTypesWithPayload, IGlobalActionsPayloads >;
+export type FormsAction = IAction< typeof CLEAR_FORMS > | IActionWithPayload< typeof ADD_FORM, IForm >;
 export type FormAction =
-  | IAction<FormActionsTypes>
-  | IActionWithPayload<FormActionsTypesWithPayload, IForm>
-  | IActionWithPayload<typeof ERROR_FORM, IErrorMessage>;
+  | IAction< FormActionsTypes >
+  | IActionWithPayload< FormActionsTypesWithPayload, Pick< IForm, 'id' >>
+  | IActionWithPayload< typeof ERROR_FORM, IErrorMessage >;
 export interface IUserActionPayload {
   currentUserRole?: Role;
   errorMsg?: string;
   name?: string;
 }
 export type UserAction =
-  | IAction<typeof CLEAR_USER>
-  | IActionWithPayload<UserActionsTypes, IUserActionPayload>;
+  | IAction< typeof CLEAR_USER >
+  | IActionWithPayload< UserActionsTypes, IUserActionPayload >;
 
 export interface IAnswersManagerActionsPayload { readonly id: IWeightAnswer[ 'id' ] }
 export interface IAnswersManagerDirtyAnswerPayload {
@@ -105,6 +102,6 @@ export interface IAnswersManagerDirtyAnswerPayload {
   readonly answerIndex: number;
 }
 export type AnswersManagerAction =
-  | IAction<AnswersManagerActionsTypes>
-  | IActionWithPayload<AnswersManagerActionsTypesWithPayload, IAnswersManagerActionsPayload>
-  | IActionWithPayload<typeof SET_DIRTY_ANSWER, IAnswersManagerDirtyAnswerPayload>;
+  | IAction< AnswersManagerActionsTypes >
+  | IActionWithPayload< AnswersManagerActionsTypesWithPayload, IAnswersManagerActionsPayload >
+  | IActionWithPayload< typeof SET_DIRTY_ANSWER, IAnswersManagerDirtyAnswerPayload >;
