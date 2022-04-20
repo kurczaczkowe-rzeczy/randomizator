@@ -15,6 +15,7 @@ const Card = ({
   id,
   isLoading = false,
   title,
+  fullWidthBody = false,
 }: ICard ): JSX.Element => {
   const styles = useStyles();
 
@@ -33,7 +34,7 @@ const Card = ({
         </div>
       )}
       {getTitleContent( title )}
-      <div className={ classNames( !centerBody && styles.bodyWrapper ) }>
+      <div className={ classNames({ [ styles.fullWidth ]: !centerBody || fullWidthBody }) || undefined }>
         {body}
       </div>
     </div>

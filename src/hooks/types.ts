@@ -1,6 +1,6 @@
 import { UseFormRegister } from 'react-hook-form';
 import firebase from 'firebase';
-import { WhereFilterOp } from '@firebase/firestore-types';
+import { WhereFilterOp, DocumentData } from '@firebase/firestore-types';
 
 import { LocaleResourcesIDs } from 'assets/locale/types';
 import { IAnswersManagerDirtyAnswerPayload } from 'store/types';
@@ -40,7 +40,10 @@ export interface IAnswerController extends IWeightAnswer {
 }
 
 /** An object represent document or query snapshot provided from firestore. */
-export type DocumentOrQuerySnapshot = firebase.firestore.DocumentSnapshot | firebase.firestore.QuerySnapshot | null;
+export type DocumentOrQuerySnapshot< Data = DocumentData > =
+  | firebase.firestore.DocumentSnapshot< Data >
+  | firebase.firestore.QuerySnapshot< Data >
+  | null;
 
 /** Array of filter tuples allows adding condition to firestore query. */
 export type Filters = [ string, WhereFilterOp, string ][];

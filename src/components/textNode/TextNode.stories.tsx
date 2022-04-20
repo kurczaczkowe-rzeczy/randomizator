@@ -1,16 +1,21 @@
 import { Story, Meta } from '@storybook/react';
 
-import classes from 'components/drawResult/drawResult.module.scss';
+import useStyles from 'components/Draw/Draw.styles';
 
 import Component from '.';
 import { ITextNode } from './TextNode.types';
 
 export default{
-  title: 'components/TextNodeView',
+  title: 'components/TextNode',
   component: Component,
 } as Meta;
 
-const Template: Story<ITextNode> = ( args ) => <Component { ...args } />;
+// eslint-disable-next-line react/prop-types
+const Template: Story<ITextNode> = ({ classes, ...args }) => {
+  const styles = useStyles();
+
+  return <Component { ...args } classes={ classes ? styles[ classes as keyof typeof styles ] : classes } />;
+};
 
 export const Default = Template.bind({});
 Default.args = {
@@ -21,19 +26,19 @@ Default.args = {
 export const LabelWithClass = Template.bind({});
 LabelWithClass.args = {
   value: 'Etykieta z klasą',
-  classes: classes.label,
+  classes: 'label',
 };
 
 export const RequiredLabelWithClass = Template.bind({});
 RequiredLabelWithClass.args = {
   required: true,
   value: 'Etykieta z klasą',
-  classes: classes.label,
+  classes: 'label',
 };
 
 export const InputText = Template.bind({});
 InputText.args = {
   type: 'input-text',
   value: 'Wartość udawanego inputa',
-  classes: classes.input,
+  classes: 'input',
 };

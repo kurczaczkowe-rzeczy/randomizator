@@ -33,16 +33,16 @@ export type FormsActionsTypes = typeof ADD_FORM | typeof CLEAR_FORMS;
 export const SET_TAGS = 'SET_TAGS';
 export const ADD_TAG = 'ADD_TAG';
 export const REMOVE_TAG = 'REMOVE_TAG';
-export type TagActionsTypes = typeof SET_TAGS | typeof ADD_TAG | typeof REMOVE_TAG;
 
 export const DRAW_RESULT = 'DRAW_RESULT';
 export const CLEAR_DRAW_RESULT = 'CLEAR_DRAW_RESULT';
 export const ERROR_DRAW_RESULT = 'ERROR_DRAW_RESULT';
-export const SET_ERROR_DRAW_RESULT = 'SET_ERROR_DRAW_RESULT';
-export type DrawActionsTypes = typeof DRAW_RESULT
-  | typeof CLEAR_DRAW_RESULT
-  | typeof ERROR_DRAW_RESULT
-  | typeof SET_ERROR_DRAW_RESULT;
+export const UNKNOWN_ERROR_DRAW_RESULT = 'UNKNOWN_ERROR_DRAW_RESULT';
+export const REMOVE_ERROR_DRAW_RESULT = 'REMOVE_ERROR_DRAW_RESULT';
+export const SET_ERRORS_DRAW_RESULT = 'SET_ERRORS_DRAW_RESULT';
+export type DrawActionsTypes =
+  | typeof UNKNOWN_ERROR_DRAW_RESULT
+  | typeof CLEAR_DRAW_RESULT;
 
 export const SHOW_LOADER = 'SHOW_LOADER';
 export const HIDE_LOADER = 'HIDE_LOADER';

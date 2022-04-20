@@ -16,6 +16,7 @@ const WithTitleAsObject = Template.bind({});
 const WithId = Template.bind({});
 const WithClassPassedFromUp = Template.bind({});
 const WithLoadingState = Template.bind({});
+const WithFullWidthBody = Template.bind({});
 
 WithTitle.args = {
   title: 'Przykładowy tytuł',
@@ -38,6 +39,10 @@ WithLoadingState.args = {
   body: 'Z widocznym loaderem',
   isLoading: true,
 };
+WithFullWidthBody.args = {
+  body: 'Ciało karty wypełnia całą dostępną powierzchnie karty',
+  fullWidthBody: true,
+};
 
 export {
   Default,
@@ -46,4 +51,5 @@ export {
   WithId,
   WithClassPassedFromUp,
   WithLoadingState,
+  WithFullWidthBody,
 };

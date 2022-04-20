@@ -5,6 +5,7 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 import prepareLink from 'utils/prepareLink';
 import useLocaleString from 'hooks/useLocaleString';
+import useTypedSelector from 'hooks/useTypedSelector';
 import { APP_NAME_SUFFIX, HOME_PAGE } from 'constans';
 
 import Card from 'components/card';
@@ -25,6 +26,7 @@ export const FormChooser = ({
   const styles = useStyle();
   const { push } = useHistory();
   const getString = useLocaleString();
+  const isRequesting = useTypedSelector(({ firestore: { status: { requesting: { forms }}}}) => !!forms );
 
   const link = prepareLink( `/${ creatorID }/${ formID }`, HOME_PAGE + APP_NAME_SUFFIX );
 
@@ -33,6 +35,7 @@ export const FormChooser = ({
   return (
     <Card
       centerBody={ false }
+      isLoading={ isRequesting }
       body={ (
         <div className={ styles.root }>
           <div className={ styles.selectWrapper }>

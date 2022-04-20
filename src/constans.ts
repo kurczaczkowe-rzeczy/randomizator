@@ -28,15 +28,18 @@ export const ROUTES = {
 };
 
 export const PAGES = {
+  CREATOR: 'CREATOR',
   DASHBOARD: 'DASHBOARD',
-  GUEST_PAGE: 'GUEST_PAGE',
-};
+  GUEST: 'GUEST',
+  HOME: 'HOME',
+} as const;
 
 export const CARDS = {
-  USER_CREATOR: 'USER_CREATOR',
   ANSWERS_TABLE: 'ANSWERS_TABLE',
+  DRAW: 'DRAW',
   GUEST_FORM: 'GUEST_FORM',
-};
+  USER_CREATOR: 'USER_CREATOR',
+} as const;
 
 // Sizes
 export const HEIGHT_OF_COLLAPSED_MENU = 70;

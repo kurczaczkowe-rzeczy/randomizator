@@ -23,12 +23,13 @@ export default makeStyles(({
     '& h3': { textAlign: 'center' },
   },
   center: { alignItems: 'center' },
-  bodyWrapper: { width: '100%' },
+  fullWidth: { width: '100%' },
   loadingRoot: { fontSize: LOADER_SIZE },
   loaderWrapper: {
     position: 'absolute',
     backgroundColor: palette.fadedBackgroundDark(),
     borderRadius: spacing( 0.5 ),
     ...classes.centerWithFillParent,
+    zIndex: 999,
   },
 }));

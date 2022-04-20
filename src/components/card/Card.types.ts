@@ -20,6 +20,8 @@ export interface ICard {
   cardClass?: string;
   /** Specify if body should display in center of card */
   centerBody?: boolean;
+  /** Determine if body fit to available space */
+  fullWidthBody?: boolean;
   /** Identifier of root element. It is optional */
   id?: string;
   /** Specify if loader should show or not */

@@ -1,22 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ExtendedFirestoreInstance } from 'react-redux-firebase';
-import { ThunkAction } from 'redux-thunk';
 import {
   SET_FORM_NAME,
   ERROR_FORM,
   SET_SELECTED_FORM,
   CLEAR_FORM,
 } from 'store/actions';
-import {
-  FormAction,
-  IRootState,
-} from 'store/types';
+import { ActionCreator, FormAction } from 'store/types';
 import { IForm } from 'types';
 
-type ActionCreator = ( userID: string, formID: string ) =>
-  ThunkAction<Promise< void > | void, IRootState, { getFirestore: () => ExtendedFirestoreInstance }, FormAction>;
+type FormActionCreator< PayloadArgs extends unknown[] = []> = ActionCreator< FormAction, PayloadArgs >;
 
-export const fetchFormName: ActionCreator = ( userID, formID ) =>
+// ToDo: Focus on this func, it could be rewrite or deleted and instead of using them use setSelectedForm
+export const fetchFormName: FormActionCreator<[ userID: string, formID: IForm[ 'id' ] ]> = ( userID, formID ) =>
   async (
     dispatch,
     getState,
@@ -53,17 +47,11 @@ export const fetchFormName: ActionCreator = ( userID, formID ) =>
   };
 
 /** Action trigger select specific form from firestore. */
-export const setSelectedForm = ( formID: IForm[ 'id' ]): ThunkAction<void, IRootState, unknown, FormAction> =>
-  ( dispatch, getState ) => {
-    const form = getState().firestore.data.forms[ formID ];
+export const setSelectedForm: FormActionCreator<[ formID: IForm[ 'id' ]]> = ( formID ) => ( dispatch, getState ) => {
+  const form = getState().firestore.data.forms[ formID ];
 
-    dispatch({
-      type: SET_SELECTED_FORM,
-      payload: { id: formID, ...form },
-    });
-  };
+  dispatch({ type: SET_SELECTED_FORM, payload: { id: formID, ...form }});
+};
 
 /** Action trigger cleaning form store. */
-export const clearForm = (): ThunkAction<void, IRootState, unknown, FormAction> => ( dispatch ) => {
-  dispatch({ type: CLEAR_FORM });
-};
+export const clearForm: FormActionCreator = () => ( dispatch ) => { dispatch({ type: CLEAR_FORM }); };

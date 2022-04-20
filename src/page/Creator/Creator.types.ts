@@ -21,8 +21,6 @@ export interface ICreator {
   fileContainerProps: IFileContainer;
   /** Method download answers and converts it to csv file. */
   onDownloadAnswers: () => void;
-  /** Method draw answers. */
-  onDrawClick: () => void;
   /** Method change current displays form. */
   onFormIdChange?: ( formID: string ) => void;
   /** Method signs out users. */

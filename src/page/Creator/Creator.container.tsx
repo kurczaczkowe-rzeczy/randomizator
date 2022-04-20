@@ -17,11 +17,11 @@ import { db, firestore } from 'config/firebaseConfig';
 import { Mapping } from 'types';
 import useLocaleString from 'hooks/useLocaleString';
 import useTypedSelector from 'hooks/useTypedSelector';
-import { clearDraw, setDrawResult } from 'store/actions/drawAction';
+import { clearDraw } from 'store/actions/drawAction';
 import { setAnswers } from 'store/actions/answersAction';
 import { signOut } from 'store/actions/authAction';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
-import { IS_DEVELOPMENT_MODE } from 'constans';
+import { IS_DEVELOPMENT_MODE, PAGES } from 'constans';
 
 import PageContainer from 'components/PageContainer';
 
@@ -69,15 +69,12 @@ const Creator = (): JSX.Element => {
     getData([]);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onRandomClick = (): void => {
-    dispatch( setDrawResult());
-  };
   const onLogout = (): void => {
     dispatch( signOut());
   };
 
   useEffect(() => {
-    const toggleLoader = _isNull( selectedForm.counter ) ? showLoader( 'CREATOR_PAGE' ) : hideLoader( 'CREATOR_PAGE' );
+    const toggleLoader = _isNull( selectedForm.counter ) ? showLoader( PAGES.CREATOR ) : hideLoader( PAGES.CREATOR );
 
     dispatch( toggleLoader );
   }, [ selectedForm.counter, dispatch ]);
@@ -165,7 +162,6 @@ const Creator = (): JSX.Element => {
         selectedForm={ selectedForm }
         fileContainerProps={ fileContainerProps }
         onDownloadAnswers={ onDownloadAnswers }
-        onDrawClick={ onRandomClick }
         onLogout={ onLogout }
       />
     </PageContainer>

@@ -1,6 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
 
-import { USER_ROLES } from 'constans';
+import { PAGES, USER_ROLES } from 'constans';
 
 import {
   GET_CREATOR_NAME,
@@ -64,6 +64,6 @@ export const getCurrentUserRole = (): UserThunkAction => async (
   } catch ( error: unknown ) {
     console.error( error ); // ToDo: issue #172
   } finally {
-    dispatch( hideLoader( 'APP' ));
+    dispatch( hideLoader( PAGES.HOME ));
   }
 };

@@ -6,7 +6,7 @@ import { IS_DEVELOPMENT_MODE } from 'constans';
 import AnswersCounter from 'components/answersCounter';
 import ButtonView from 'components/Button';
 import Card from 'components/card';
-import Draw from 'components/draw';
+import Draw from 'components/Draw';
 import FileContainer from 'components/FileContainer';
 import Form from 'components/form';
 import FormChooser from 'components/FormChooser';
@@ -21,7 +21,6 @@ export const Creator = ({
   selectedForm,
   fileContainerProps,
   onDownloadAnswers,
-  onDrawClick,
   onLogout,
 }: ICreator ): JSX.Element => {
   const styles = useStyles();
@@ -53,11 +52,7 @@ export const Creator = ({
           title={ getString( 'previewForm' ) }
           body={ <Form { ...selectedForm } preview /> }
         />
-        <Card
-          cardClass={ styles.fullWidth }
-          title={ getString( 'draw' ) }
-          body={ <Draw onRandomClick={ onDrawClick } /> }
-        />
+        <Draw />
       </div>
     </div>
   );

@@ -1,5 +1,3 @@
-import { ThunkAction } from 'redux-thunk';
-
 import {
   SHOW_LOADER,
   HIDE_LOADER,
@@ -9,16 +7,17 @@ import {
   FORCE_HIDE_LOADER,
 } from 'store/actions';
 import {
+  ActionCreator,
   GlobalAction,
   IGlobalActionsPayloads,
-  IGlobalState,
 } from 'store/types';
 
-export type LoaderAction = (
+type GlobalActionCreator< PayloadArgs extends unknown[] = []> = ActionCreator< GlobalAction, PayloadArgs >;
+
+type LoaderActionCreator = GlobalActionCreator<[
   callFrom: IGlobalActionsPayloads[ 'callFrom' ],
   bindToCard?: IGlobalActionsPayloads[ 'bindToCard' ],
-) =>
-  ThunkAction<void, IGlobalState, unknown, GlobalAction>;
+]>;
 
 /**
  * Action shows loader on specific page. If specified bindToCard param shows loader only in specific card.
@@ -26,9 +25,8 @@ export type LoaderAction = (
  * @param callFrom - page on that call this action
  * @param bindToCard - card on that call this action
  */
-export const showLoader: LoaderAction = ( callFrom, bindToCard = 'none' ) => ( dispatch ) => {
-  dispatch({ type: SHOW_LOADER, payload: { callFrom, bindToCard }});
-};
+export const showLoader: LoaderActionCreator = ( callFrom, bindToCard ) =>
+  ( dispatch ) => { dispatch({ type: SHOW_LOADER, payload: { callFrom, bindToCard }}); };
 
 /**
  * Action hide loader from specific page. If specified bindToCard param hide loader only from specific card.
@@ -36,23 +34,14 @@ export const showLoader: LoaderAction = ( callFrom, bindToCard = 'none' ) => ( d
  * @param callFrom - page on that call this action
  * @param bindToCard - card on that call this action
  */
-export const hideLoader: LoaderAction = ( callFrom, bindToCard = 'none' ) => ( dispatch ) => {
-  dispatch({ type: HIDE_LOADER, payload: { callFrom, bindToCard }});
-};
+export const hideLoader: LoaderActionCreator = ( callFrom, bindToCard ) =>
+  ( dispatch ) => { dispatch({ type: HIDE_LOADER, payload: { callFrom, bindToCard }}); };
 
 /** Action force hide loader. If you call this action any loader that shows should hide immediately. */
-export const forceHideLoader = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {
-  dispatch({ type: FORCE_HIDE_LOADER });
-};
+export const forceHideLoader: GlobalActionCreator = () => ( dispatch ) => { dispatch({ type: FORCE_HIDE_LOADER }); };
 
-export const showModal = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {
-  dispatch({ type: SHOW_MODAL });
-};
+export const showModal: GlobalActionCreator = () => ( dispatch ) => { dispatch({ type: SHOW_MODAL }); };
 
-export const hideModal = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {
-  dispatch({ type: HIDE_MODAL });
-};
+export const hideModal: GlobalActionCreator = () => ( dispatch ) => { dispatch({ type: HIDE_MODAL }); };
 
-export const clearGlobal = (): ThunkAction<void, IGlobalState, unknown, GlobalAction> => ( dispatch ): void => {
-  dispatch({ type: CLEAR_GLOBAL });
-};
+export const clearGlobal: GlobalActionCreator = () => ( dispatch ) => { dispatch({ type: CLEAR_GLOBAL }); };

@@ -26,3 +26,5 @@ export interface IAnswer extends IBaseAnswer {
 
 export type WeightAnswers = IWeightAnswer[];
 export type Answers = IAnswer[];
+export type FirestoreAnswer = Omit< Required< IAnswer >, 'id' >;
+export type FirestoreAnswers = FirestoreAnswer[];

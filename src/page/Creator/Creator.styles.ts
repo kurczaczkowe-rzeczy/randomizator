@@ -25,5 +25,4 @@ export default makeStyles(({ spacing }) => ({
 
     '& button': { width: 250 },
   },
-  fullWidth: { '& > div:first-of-type': { width: '100%' }},
 }));

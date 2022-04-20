@@ -25,6 +25,7 @@ import {
   ROUTES,
   IS_DEVELOPMENT_MODE,
   SHOW_DEV_MODAL_KEY,
+  PAGES,
 } from 'constans';
 
 import DrawerMenu from 'components/DrawerMenu';
@@ -75,7 +76,7 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     if ( !isLoaded( auth )) {
-      dispatch( showLoader( 'APP' ));
+      dispatch( showLoader( PAGES.HOME ));
     } else {
       dispatch( getCurrentUserRole());
     }

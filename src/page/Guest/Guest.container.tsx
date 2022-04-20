@@ -57,7 +57,7 @@ const GuestPage = (): JSX.Element => {
   useEffect(() => {
     const action = _isEmpty( creatorName ) || _isEmpty( form.name ) ? showLoader : hideLoader;
 
-    dispatch( action( PAGES.GUEST_PAGE ));
+    dispatch( action( PAGES.GUEST ));
   }, [
     dispatch,
     creatorName,
@@ -79,7 +79,7 @@ const GuestPage = (): JSX.Element => {
   ]);
 
   const onSubmit: IGuest[ 'onSubmit' ] = async ( fields ): Promise< void > => {
-    dispatch( showLoader( PAGES.GUEST_PAGE, CARDS.GUEST_FORM ));
+    dispatch( showLoader( PAGES.GUEST, CARDS.GUEST_FORM ));
     const formRef = doc( `${ creatorId }/${ formId }` );
     const answersRef = formRef.collection( 'answers' ).doc();
     const fieldsRef = answersRef.collection( 'fields' );
@@ -106,7 +106,7 @@ const GuestPage = (): JSX.Element => {
 
       return;
     } finally {
-      dispatch( hideLoader( PAGES.GUEST_PAGE, CARDS.GUEST_FORM ));
+      dispatch( hideLoader( PAGES.GUEST, CARDS.GUEST_FORM ));
     }
 
     alert( getString( 'dataSave' ));
