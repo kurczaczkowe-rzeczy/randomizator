@@ -1,41 +1,24 @@
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
-import { jsonToCSV } from 'react-papaparse';
+import { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch } from 'react-redux';
-import _isNil from 'lodash/isNil';
-import _forEach from 'lodash/forEach';
-import _union from 'lodash/union';
 import _isNull from 'lodash/isNull';
 import _isEmpty from 'lodash/isEmpty';
 import _map from 'lodash/map';
 import _isEqual from 'lodash/isEqual';
 
 import { db, firestore } from 'config/firebaseConfig';
-import { Mapping } from 'types';
 import useLocaleString from 'hooks/useLocaleString';
 import useTypedSelector from 'hooks/useTypedSelector';
 import { clearDraw } from 'store/actions/drawAction';
-import { setAnswers } from 'store/actions/answersAction';
+import { downloadAnswersCSV } from 'store/actions/answersAction';
 import { signOut } from 'store/actions/authAction';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
-import { IS_DEVELOPMENT_MODE, PAGES } from 'constans';
+import { PAGES } from 'constans';
 
 import PageContainer from 'components/PageContainer';
 
 import CreatorView from './Creator.view';
-import {
-  IFormDoc,
-  Answers,
-} from './Creator.types';
-import {
-  getFormCollection,
-  getNewFileName,
-  parseText,
-  mapAnswers,
-} from './Creator.utils';
+import { Answers } from './Creator.types';
+import { parseText } from './Creator.utils';
 
 // ToDo: issue #150
 const Creator = (): JSX.Element => {
@@ -48,26 +31,6 @@ const Creator = (): JSX.Element => {
   const formID = useTypedSelector(({ form: { id }}) => id );
   const selectedForm = useTypedSelector(({ firestore: { data }}) => data.forms?.[ formID ] ?? {}, _isEqual );
   const dispatch = useDispatch();
-
-  const getData = useCallback(( answers: Answers ): void => {
-    const result: Mapping< string[] > = { };
-
-    _forEach( answers, ( answer ) => {
-      _forEach( answer.fields, ({ value, fieldName }) => {
-        if ( _isNil( result[ fieldName ])) {
-          result[ fieldName ] = [];
-        }
-
-        result[ fieldName ] = _union( result[ fieldName ], [ value ]);
-      });
-    });
-
-    dispatch( setAnswers( result, answers?.length || 0 ));
-  }, [ dispatch ]);
-
-  useEffect(() => {
-    getData([]);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onLogout = (): void => {
     dispatch( signOut());
@@ -83,33 +46,7 @@ const Creator = (): JSX.Element => {
     if ( !_isEmpty( formID )) { dispatch( clearDraw()); }
   }, [ formID, dispatch ]);
 
-  const onDownloadAnswers = async (): Promise<void> => {
-    const _formID = 'kolejny';
-
-    if ( IS_DEVELOPMENT_MODE && _formID ) {
-      try {
-        const savedForm = await getFormCollection( auth.uid, _formID ) as IFormDoc;
-        const answersOfForm = mapAnswers( savedForm?.answers );
-        const formName = savedForm ? savedForm.name.replaceAll( ' ', '_' ) : getNewFileName();
-
-        /* In database doesn't exist emptyColumn fields that is append in google forms
-         and we want to be compatibility with it so we added it to header row */
-        answersOfForm[ 0 ] = {
-          emptyColumn: '',
-          ...answersOfForm[ 0 ],
-        };
-
-        const csvContent = `data:text/csv;charset=utf-8,${ jsonToCSV( answersOfForm ) }`;
-        const encodedUri = encodeURI( csvContent );
-        const linkEl = document.createElement( 'a' );
-
-        linkEl.setAttribute( 'href', encodedUri );
-        linkEl.setAttribute( 'download', `${ formName }.csv` );
-
-        linkEl.click();
-      } catch ( error: unknown ) { console.error( 'Error!', error ); }
-    }
-  };
+  const onDownloadAnswers = (): void => { dispatch( downloadAnswersCSV()); };
 
   const onDropAccepted = ( acceptedFiles: File[]): void => {
     setAcceptedFileNames( _map( acceptedFiles, ( file ) => file.name ));

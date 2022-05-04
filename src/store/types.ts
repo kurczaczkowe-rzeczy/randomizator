@@ -25,7 +25,10 @@ import {
   REMOVE_TAG,
   ERROR_DRAW_RESULT,
   REMOVE_ERROR_DRAW_RESULT,
-  DRAW_RESULT, SET_ERRORS_DRAW_RESULT,
+  DRAW_RESULT,
+  SET_ERRORS_DRAW_RESULT,
+  AnswersActionsTypes,
+  CLEAR_ANSWERS,
 } from 'store/actions';
 import {
   WeightAnswers,
@@ -88,7 +91,7 @@ export interface IDrawState extends IState {
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IRootState {
-  ans: any;
+  ans: IState;
   auth: unknown;
   draw: IDrawState;
   firebase: any;
@@ -149,6 +152,11 @@ export type DrawAction =
   | IActionWithPayload< typeof ERROR_DRAW_RESULT | typeof REMOVE_ERROR_DRAW_RESULT, IDrawErrorPayload >
   | IActionWithPayload< typeof SET_ERRORS_DRAW_RESULT, IDrawErrorsPayload >
   | IActionWithPayload< typeof DRAW_RESULT, IDrawPayload >;
+
+export interface IAnswersPayload { error: string }
+export type AnswersAction =
+  | IAction< typeof CLEAR_ANSWERS >
+  | IActionWithPayload< AnswersActionsTypes, IAnswersPayload >;
 
 // ACTION UTILS
 /* eslint-disable @typescript-eslint/no-explicit-any */
