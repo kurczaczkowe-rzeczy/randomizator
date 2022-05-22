@@ -55,9 +55,9 @@ export const getCells: AnswerRowCellGetter< ReactNodeArray | ReactNode > = (
   if ( _isNil( element )) { return null; }
 
   if (
-    typeof element == 'string' ||
-    typeof element == 'number' ||
-    typeof element == 'boolean'
+    typeof element == 'string'
+    || typeof element == 'number'
+    || typeof element == 'boolean'
   ) {
     return getCellContent(
       element,

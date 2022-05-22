@@ -1,41 +1,29 @@
 import { readString } from 'react-papaparse';
-import _forEach from 'lodash/forEach';
 import _isEmpty from 'lodash/isEmpty';
+import _map from 'lodash/map';
+import _filter from 'lodash/filter';
+import _reduce from 'lodash/reduce';
 
-import { AnswerFields } from 'page/Guest';
-import { createAnswer, createAnswerField } from 'utils/answersUtils';
+import { AnswerFields, AnswersFields } from 'types';
 
-import { IAnswerWithId } from './Creator.types';
+type CreateParsedAnswer = ( fieldNames: string[]) => ( answer: string[]) => AnswerFields;
 
-export const parseText = ( text: string ): IAnswerWithId[] => {
-  const jsonCSV = readString( text ).data as string[][];
+const createParsedAnswer: CreateParsedAnswer = ( fieldNames ) => ( answer ) => _reduce< string, AnswerFields >(
+  answer,
+  (
+    result,
+    fieldValue,
+    index,
+  ) => index === 0
+    ? result
+    : (
+      { ...result, [ fieldNames[ index ] ]: fieldValue }
+    ),
+  {},
+);
 
-  const answers: IAnswerWithId[] = [];
-  let fieldNames: string[] = [];
-  let answerFields: AnswerFields = [];
+export const parseText = ( text: string ): AnswersFields => {
+  const [ fieldNames, ...answers ] = readString( text ).data as string[][];
 
-  _forEach( jsonCSV, ( fileRow, index ) => {
-    if ( index === 0 ) {
-      fieldNames = fileRow;
-
-      return;
-    }
-
-    _forEach( fileRow, ( cell, ind ) => {
-      if ( ind !== 0 ) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        answerFields.push( createAnswerField( cell, fieldNames[ ind ]));
-      }
-    });
-
-    if ( !_isEmpty( answerFields )) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      answers.push( createAnswer( answerFields ));
-    }
-    answerFields = [];
-  });
-
-  return answers;
+  return _filter( _map( answers, createParsedAnswer( fieldNames )), ( answer ) => !_isEmpty( answer ));
 };

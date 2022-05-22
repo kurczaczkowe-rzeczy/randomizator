@@ -10,6 +10,6 @@ export type HasProperties = ( object: unknown, properties: string[]) => boolean;
  * @param properties - array of properties.
  */
 export const hasProperties: HasProperties = ( object, properties ) =>
-  typeof object == 'object' &&
-  !_isNil( object ) &&
-  _every( properties, ( property ) => property in object || object.hasOwnProperty( property ));
+  typeof object == 'object'
+  && !_isNil( object )
+  && _every( properties, ( property ) => property in object || object.hasOwnProperty( property ));

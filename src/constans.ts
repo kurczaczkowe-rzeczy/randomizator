@@ -39,6 +39,7 @@ export const CARDS = {
   DRAW: 'DRAW',
   GUEST_FORM: 'GUEST_FORM',
   USER_CREATOR: 'USER_CREATOR',
+  FILE_DROPZONE: 'FILE_DROPZONE',
 } as const;
 
 // Sizes

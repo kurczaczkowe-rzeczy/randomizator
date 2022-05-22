@@ -1,4 +1,4 @@
-import { StringOrNumber } from './utilityTypes';
+import { Mapping, StringOrNumber } from './utilityTypes';
 
 export interface IWeightAnswer {
   /** Identifier of whole answer. */
@@ -26,5 +26,10 @@ export interface IAnswer extends IBaseAnswer {
 
 export type WeightAnswers = IWeightAnswer[];
 export type Answers = IAnswer[];
-export type FirestoreAnswer = Required< IAnswer >;
+export type OrderedFirestoreAnswer = Required< IAnswer >;
+export type OrderedFirestoreAnswers = OrderedFirestoreAnswer[];
+export type FirestoreAnswer = Omit< Required< IAnswer >, 'id' >;
 export type FirestoreAnswers = FirestoreAnswer[];
+
+export type AnswerFields = Mapping< string >;
+export type AnswersFields = AnswerFields[];

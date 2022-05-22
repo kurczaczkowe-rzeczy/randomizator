@@ -22,7 +22,7 @@ import {
   Mapping,
   Tags,
   Tag,
-  FirestoreAnswer,
+  OrderedFirestoreAnswer,
   IField,
 } from 'types';
 
@@ -45,12 +45,12 @@ export const setDrawResult: DrawActionCreator = () => async ( dispatch, getState
     payload: { fields: _map< IField, string >( fields, ({ name }) => name ) },
   }));
 
-  const groupedAnswers = _reduce< FirestoreAnswer, Mapping< string[]>>(
+  const groupedAnswers = _reduce< OrderedFirestoreAnswer, Mapping< string[]>>(
     getState().firestore.ordered?.answers,
     ( result, { fieldName, value }) => ({ ...result, [ fieldName ]: [ ...( result[ fieldName ] || []), value ]}),
     {},
   );
-    // ToDo: If groupedAnswers is null throw error
+  // ToDo: If groupedAnswers is null throw error
   const tags = _map< Tag, string >( _get(
     getState(),
     'draw.tags',

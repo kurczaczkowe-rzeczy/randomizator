@@ -9,18 +9,16 @@ import {
   useHistory,
 } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { useFirestore } from 'react-redux-firebase';
 import _isEmpty from 'lodash/isEmpty';
-import _forEach from 'lodash/forEach';
 import _isEqual from 'lodash/isEqual';
 
+import useAnswerBatch from 'hooks/useAnswerBatch';
 import useTypedSelector from 'hooks/useTypedSelector';
 import useTimeout from 'hooks/useTimeout';
 import useLocaleString from 'hooks/useLocaleString';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { getCreatorName } from 'store/actions/userActions';
 import { fetchFormName } from 'store/actions/formAction';
-import { createAnswer } from 'utils/answersUtils';
 import {
   APP_NAME_SUFFIX,
   CARDS,
@@ -40,11 +38,7 @@ const GuestPage = (): JSX.Element => {
   const [ isHighlighted, setIsHighlighted ] = useState( false );
   const { runTimeout, stopTimeout } = useTimeout( DELAY_FORM_NAME_HIGHLIGHT );
 
-  const {
-    doc,
-    FieldValue,
-    batch: firestoreBatch,
-  } = useFirestore();
+  const { addAnswer } = useAnswerBatch( creatorId, formId );
 
   const auth = useTypedSelector(({ firebase: { auth }}) => auth );
   const creatorName = useTypedSelector(({ usr: { creatorName }}) => creatorName );
@@ -80,36 +74,14 @@ const GuestPage = (): JSX.Element => {
 
   const onSubmit: IGuest[ 'onSubmit' ] = async ( fields ): Promise< void > => {
     dispatch( showLoader( PAGES.GUEST, CARDS.GUEST_FORM ));
-    const formRef = doc( `${ creatorId }/${ formId }` );
-    const answersRef = formRef.collection( 'answers' ).doc();
-    const fieldsRef = answersRef.collection( 'fields' );
 
-    const answers = createAnswer(
+    await addAnswer(
       fields,
-      formId,
-      answersRef.id,
+      () => { alert( getString( 'dataSave' )); },
+      () => { alert( getString( 'sendingAnswersError' )); },
     );
 
-    try {
-      const batch = firestoreBatch();
-
-      _forEach( answers, ( answer ) => {
-        batch.set( fieldsRef.doc(), answer );
-      });
-
-      batch.update( formRef, { counter: FieldValue.increment( 1 ) });
-      await batch.commit();
-    } catch ( e: unknown ) {
-      // ToDo: Better error handling
-      console.error( 'Guest container submit:', e );
-      alert( getString( 'guestFormSubmittingError' ));
-
-      return;
-    } finally {
-      dispatch( hideLoader( PAGES.GUEST, CARDS.GUEST_FORM ));
-    }
-
-    alert( getString( 'dataSave' ));
+    dispatch( hideLoader( PAGES.GUEST, CARDS.GUEST_FORM ));
   };
 
   const onBackToCreator = (): void => {

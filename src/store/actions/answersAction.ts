@@ -9,7 +9,7 @@ import {
   IAction,
   IActionWithPayload,
 } from 'store/types';
-import { FirestoreAnswer, Mapping } from 'types';
+import { OrderedFirestoreAnswer, Mapping } from 'types';
 import { startDownloadCSV, getNewFileName } from 'utils/fileUtils';
 
 // ToDo: change to general type action and then check action as described here https://phryneas.de/redux-typescript-no-discriminating-union
@@ -64,7 +64,8 @@ export const downloadAnswersCSV: AnswerActionCreator = () => async ( dispatch, g
   await dispatch( getAnswersOnceFromFirestore({ type: NO_ANSWERS_ERROR, payload: { error: 'No answers' }}));
 
   // ToDo: issue #201 - Optimize grouping answers
-  const groupedAnswersByAnswerID = _groupBy< FirestoreAnswer >( getState().firestore.ordered?.answers, 'answerID' );
+  const groupedAnswersByAnswerID = _groupBy< OrderedFirestoreAnswer >( getState().firestore.ordered?.answers,
+    'answerID' );
   const groupedAnswers = _reduce< typeof groupedAnswersByAnswerID, Mapping< string >[]>(
     groupedAnswersByAnswerID,
     ( answers, currentAnswer ) => [
