@@ -3,13 +3,9 @@ import { ReactNode } from 'react';
 import { StringOrNode } from 'types';
 
 export interface TitleWithContentAndId {
-  /**
-   * Text described content of specific card.
-   */
+  /** Text described content of specific card. */
   content: string;
-  /**
-   * Identifier of title.
-   */
+  /** Identifier of title. */
   id: string;
 }
 
@@ -28,4 +24,7 @@ export interface ICard {
   isLoading?: boolean;
   /** Specify title of card */
   title?: StringOrNode | TitleWithContentAndId;
+  /** Determine if card is displaying with background, border and padding or is just an unstyled container
+   * for a body passed from the parent component as it is. */
+  transparent?: boolean;
 }

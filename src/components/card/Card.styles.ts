@@ -8,19 +8,21 @@ export default makeStyles(({
   shadow,
   classes,
 }) => ({
-  card: {
-    backgroundColor: palette.backgroundLight,
+  root: {
     borderRadius: 4,
     width: '100%',
     height: 'max-content',
-    padding: spacing( 2.5, 4.5 ),
-    color: palette.colorText,
     display: 'flex',
     flexDirection: 'column',
-    boxShadow: shadow.card,
     position: 'relative',
+    color: palette.colorText,
 
     '& h3': { textAlign: 'center' },
+  },
+  card: {
+    backgroundColor: palette.backgroundLight,
+    padding: spacing( 2.5, 4.5 ),
+    boxShadow: shadow.card,
   },
   center: { alignItems: 'center' },
   fullWidth: { width: '100%' },
