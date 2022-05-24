@@ -9,6 +9,7 @@ import {
   IAnswer,
   IWeightAnswer,
   WeightAnswers,
+  StringOrNumber,
 } from 'types';
 
 export type SetValue<T> = ( value: T | (( val: T ) => T )) => void;
@@ -46,7 +47,7 @@ export type DocumentOrQuerySnapshot< Data = DocumentData > =
   | null;
 
 /** Array of filter tuples allows adding condition to firestore query. */
-export type Filters = [ string, WhereFilterOp, string ][];
+export type Filters = [ string, WhereFilterOp, StringOrNumber ][];
 
 /** An object collect information about state of fetching answers. */
 export interface IUseAnswersConnectReturn {

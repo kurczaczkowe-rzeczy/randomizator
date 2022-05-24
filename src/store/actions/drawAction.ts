@@ -24,6 +24,7 @@ import {
   Tag,
   OrderedFirestoreAnswer,
   IField,
+  RandomizedAnswers,
 } from 'types';
 
 import { randomItem, filterByTag } from './drawAction.utils';
@@ -43,11 +44,23 @@ export const setDrawResult: DrawActionCreator = () => async ( dispatch, getState
   await dispatch( getAnswersOnceFromFirestore({
     type: SET_ERRORS_DRAW_RESULT,
     payload: { fields: _map< IField, string >( fields, ({ name }) => name ) },
-  }));
+  },
+  [
+    [
+      'weight',
+      '!=',
+      0,
+    ],
+  ]));
 
-  const groupedAnswers = _reduce< OrderedFirestoreAnswer, Mapping< string[]>>(
+  const groupedAnswers = _reduce< OrderedFirestoreAnswer, Mapping< RandomizedAnswers >>(
     getState().firestore.ordered?.answers,
-    ( result, { fieldName, value }) => ({ ...result, [ fieldName ]: [ ...( result[ fieldName ] || []), value ]}),
+    ( result,
+      {
+        fieldName,
+        value,
+        weight,
+      }) => ({ ...result, [ fieldName ]: [ ...( result[ fieldName ] || []), { value, weight }]}),
     {},
   );
   // ToDo: If groupedAnswers is null throw error
@@ -57,7 +70,7 @@ export const setDrawResult: DrawActionCreator = () => async ( dispatch, getState
     '',
   ), ( value ) => value.text );
 
-  const draw = _reduce< Mapping< string[]>, Mapping< string >>(
+  const draw = _reduce< Mapping< RandomizedAnswers >, Mapping< string >>(
     groupedAnswers,
     (
       result,

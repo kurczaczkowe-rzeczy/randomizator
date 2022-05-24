@@ -11,14 +11,17 @@ import {
 } from 'store/types';
 import { OrderedFirestoreAnswer, Mapping } from 'types';
 import { startDownloadCSV, getNewFileName } from 'utils/fileUtils';
+import { Filters } from 'hooks/types';
 
 // ToDo: change to general type action and then check action as described here https://phryneas.de/redux-typescript-no-discriminating-union
 type AnswerActionCreator< Payload extends unknown[] = []> = ActionCreator< AnswersAction, Payload >;
-type GetAnswersOnceFromFirestoreArgs =
-  [ noAnswerOrRefErrorAction: IAction< unknown > | IActionWithPayload< unknown, unknown >];
+type GetAnswersOnceFromFirestoreArgs = [
+  noAnswerOrRefErrorAction: IAction< unknown > | IActionWithPayload< unknown, unknown >,
+  filters?: Filters,
+];
 
 export const getAnswersOnceFromFirestore: AnswerActionCreator< GetAnswersOnceFromFirestoreArgs > =
-  ( noAnswerOrRefErrorAction ) =>
+  ( noAnswerOrRefErrorAction, filters = []) =>
     async (
       dispatch,
       getState,
@@ -37,6 +40,7 @@ export const getAnswersOnceFromFirestore: AnswerActionCreator< GetAnswersOnceFro
               '==',
               id,
             ],
+            ...filters,
           ],
           storeAs: 'answers',
         });
@@ -51,7 +55,7 @@ export const getAnswersOnceFromFirestore: AnswerActionCreator< GetAnswersOnceFro
       if ( !answersRef?.size ) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-        dispatch( noAnswerOrRefErrorAction());
+        dispatch( noAnswerOrRefErrorAction );
       }
     };
 
