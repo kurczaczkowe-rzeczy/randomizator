@@ -1,4 +1,8 @@
-import { useCallback, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { getSnapshotByObject } from 'redux-firestore';
@@ -54,6 +58,10 @@ const useAnswersConnect = ({
   }, [ answers, startAfter ]);
 
   const isLoading = isRequesting || !startAfter;
+
+  useEffect(() => {
+    updateStartAfter();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {
     formID,
