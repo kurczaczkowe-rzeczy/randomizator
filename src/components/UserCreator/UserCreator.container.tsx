@@ -70,6 +70,7 @@ const UserCreator = (): JSX.Element => {
     }
 
     try {
+      // ToDo: change Promise.all to batch
       await Promise.all([
         firestore.collection( 'users' )
           .doc( newUser.uid )

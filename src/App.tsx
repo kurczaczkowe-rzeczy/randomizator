@@ -8,19 +8,21 @@ import {
   Route,
   Redirect,
 } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
 import _isNil from 'lodash/isNil';
 import _map from 'lodash/map';
 
+import useAnswerBatch from 'hooks/useAnswerBatch';
+import useTypedSelector from 'hooks/useTypedSelector';
 import useLocalStorage from 'hooks/useLocalStorage';
 import useLocaleString from 'hooks/useLocaleString';
 import {
+  hideLoader,
   showLoader,
   showModal,
 } from 'store/actions/globalActions';
 import { getCurrentUserRole } from 'store/actions/userActions';
-import { RootState } from 'store/reducers/rootReducer';
 import {
   ROUTES,
   IS_DEVELOPMENT_MODE,
@@ -47,11 +49,15 @@ const unauthenticatedRoutes = <Route exact path={ ROUTES.home } component={ Logi
 const App = (): JSX.Element => {
   const getString = useLocaleString();
   const dispatch = useDispatch();
-  const auth = useSelector(( state: RootState ) => state.firebase.auth );
-  const isLoading = useSelector(( state: RootState ) => state.global.isLoading );
-  const currentUserRole = useSelector(( state: RootState ) => state.usr.currentUserRole );
+  const auth = useTypedSelector(({ firebase: { auth }}) => auth );
+  const forms = useTypedSelector(({ firestore: { ordered: { forms }}}) => forms );
+  const isLoading = useTypedSelector(({ global: { isLoading }}) => isLoading );
+  const currentUserRole = useTypedSelector(({ usr: { currentUserRole }}) => currentUserRole );
   const [ showDevModal, setShowDevModal ] = useLocalStorage( SHOW_DEV_MODAL_KEY );
   const bodyRef = useRef( document.body );
+  const hasCalledRestructuring = useRef( false );
+
+  const { updateFirestoreDataStructure } = useAnswerBatch( auth.uid, '' );
 
   const menuItems = getMenuItemsForCurrentUser( getMenuItems( getString ), currentUserRole );
   const authenticatedRoutes = useMemo(() => _map( authenticatedRoutesCollection, ( props ) => (
@@ -91,6 +97,30 @@ const App = (): JSX.Element => {
   }, [ isLoading ]);
 
   const isAuthenticated = isLoaded( auth ) && !isEmpty( auth );
+
+  useEffect(() => {
+    const shouldRunEffect = isAuthenticated && forms && !hasCalledRestructuring.current;
+
+    console.log( `Is update structure should run: %c${ shouldRunEffect }`,
+      `color: ${ shouldRunEffect ? 'green' : 'red' }` );
+    ( async () => {
+      if ( shouldRunEffect ) {
+        dispatch( showLoader( PAGES.CREATOR ));
+
+        updateFirestoreDataStructure(
+          forms,
+          () => { dispatch( hideLoader( PAGES.CREATOR )); },
+          () => { dispatch( hideLoader( PAGES.CREATOR )); },
+        );
+        hasCalledRestructuring.current = true;
+      }
+    })();
+  }, [
+    dispatch,
+    forms,
+    isAuthenticated,
+    updateFirestoreDataStructure,
+  ]);
 
   return isEmpty( currentUserRole )
     ? <LoadingScreen />

@@ -92,7 +92,8 @@ export interface IDrawState extends IState {
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IRootState {
   ans: IState;
-  auth: unknown;
+  answersManager: IAnswersManagerState;
+  auth: any;
   draw: IDrawState;
   firebase: any;
   firestore: any;
