@@ -175,6 +175,7 @@ const useAnswerBatch = ( creatorID: string, formID: string ): IAnswerBatch => {
 
     if ( _isEmpty( oldStructuredForms )) {
       onSuccess();
+      console.info( '%cNothing to do. Every forms are now in right structure.', 'color: #4199f7;' );
 
       return;
     }

@@ -101,7 +101,7 @@ const App = (): JSX.Element => {
   useEffect(() => {
     const shouldRunEffect = isAuthenticated && forms && !hasCalledRestructuring.current;
 
-    console.log( `Is update structure should run: %c${ shouldRunEffect }`,
+    console.log( `Should structure update be run? %c${ !!shouldRunEffect }`,
       `color: ${ shouldRunEffect ? 'green' : 'red' }` );
     ( async () => {
       if ( shouldRunEffect ) {
