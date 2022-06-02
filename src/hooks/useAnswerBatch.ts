@@ -5,6 +5,7 @@ import _forEach from 'lodash/forEach';
 import _filter from 'lodash/filter';
 import _chunk from 'lodash/chunk';
 import _noop from 'lodash/noop';
+import _isEmpty from 'lodash/isEmpty';
 
 import { checkValueIsValid } from 'utils/answersUtils';
 import useLocaleString from 'hooks/useLocaleString';
@@ -170,7 +171,15 @@ const useAnswerBatch = ( creatorID: string, formID: string ): IAnswerBatch => {
     onSuccess,
     onFailure,
   ) => {
-    _forEach( _filter( forms, 'answers' ), async ({ id, answers }) => {
+    const oldStructuredForms = _filter( forms, 'answers' );
+
+    if ( _isEmpty( oldStructuredForms )) {
+      onSuccess();
+
+      return;
+    }
+
+    _forEach( oldStructuredForms, async ({ id, answers }) => {
       try {
         const batch = firestoreBatch();
 
