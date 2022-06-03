@@ -5,6 +5,8 @@ import _map from 'lodash/map';
 import _includes from 'lodash/includes';
 import _isEqual from 'lodash/isEqual';
 
+import Typography from '@material-ui/core/Typography';
+
 import Card from 'components/card';
 import Tabs from 'components/Tabs';
 import AnswersTable from 'components/AnswersTable';
@@ -23,6 +25,7 @@ export const AnswersManager = (): JSX.Element => {
   const getString = useLocaleString();
 
   const formID = useTypedSelector(({ form: { id }}) => id );
+  const isEmptyForm = useTypedSelector(({ form: { counter }}) => !counter );
   const fields = useTypedSelector(({ firestore: { data: { forms }}}) => forms?.[ formID ]?.fields ?? [], _isEqual );
   const isLoading = useTypedSelector(({ global: { bindToCard }}) => _includes( bindToCard, CARDS.ANSWERS_TABLE ));
 
@@ -30,12 +33,21 @@ export const AnswersManager = (): JSX.Element => {
 
   return (
     <Card
-      body={ (
-        <Tabs
-          defaultTab={ _get( _first( tabs ), 'index' ) ?? '' }
-          tabs={ _map( tabs, ( tab ) => ({ ...tab, content: <AnswersTable tab={ tab.index as string } /> })) }
-        />
-      ) }
+      body={ ( isEmptyForm
+        ? (
+          <div className={ styles.emptyInfoContainer }>
+            <p className={ styles.emptyInfoWrapper }>
+              <Typography variant="h6">{ getString( 'emptyFormFirstLine' ) }</Typography>
+              <Typography variant="caption">{ getString( 'emptyFormSecondLine' ) }</Typography>
+            </p>
+          </div>
+        )
+        : (
+          <Tabs
+            defaultTab={ _get( _first( tabs ), 'index' ) ?? '' }
+            tabs={ _map( tabs, ( tab ) => ({ ...tab, content: <AnswersTable tab={ tab.index as string } /> })) }
+          />
+        )) }
       cardClass={ styles.card }
       title={ getString( 'answersWeightManagerTitle' ) }
       isLoading={ isLoading }

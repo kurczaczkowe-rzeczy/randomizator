@@ -9,6 +9,9 @@ import { FormAction, IFormState } from 'store/types';
 const initialState: IFormState = {
   id: '',
   errors: null,
+  name: '',
+  fields: [],
+  counter: 0,
 };
 
 const reducer = ( state = initialState, action: FormAction = { type: CLEAR_FORM }): IFormState => {

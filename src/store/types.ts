@@ -68,9 +68,9 @@ export interface IFormsState extends IState {
   readonly forms: Forms;
 }
 
-/** An object represent form state. It extends {@link IForm} and {@link IState} to provide id of selected
- * form and its errors. */
-export interface IFormState extends Pick< IForm, 'id' >, IState {}
+/** An object represent form state. It extends {@link IForm} and {@link IState} to provide selected
+ * form data and its errors. */
+export interface IFormState extends IForm, IState {}
 
 export interface IUserState extends IState {
   creatorName: string;

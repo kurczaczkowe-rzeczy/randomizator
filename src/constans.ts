@@ -58,6 +58,8 @@ export const ANSWER_WEIGHT_COLUMN_WIDTH = 80;
 export const ANSWER_EDIT_ICON_COLUMN_WIDTH = 48;
 export const ANSWER_LINE_THROUGH_BOLD = 1;
 export const ANSWER_PADDING_SPACE_TO_REMOVE = 6;
+export const ANSWER_TABLE_HEIGHT = 450;
+export const TAB_HEIGHT = 48;
 
 export const USER_ROLES = {
   ADMIN: 'ADMIN',

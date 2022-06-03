@@ -28,6 +28,7 @@ const useAnswersConnect = ({
   const [ startAfter, setStartAfter ] = useState< DocumentOrQuerySnapshot >( null );
 
   const formID = useTypedSelector(({ form: { id }}) => id );
+  const isEmptyForm = useTypedSelector(({ form: { counter }}) => !counter );
   const answers = useTypedSelector< Answers >(({ firestore: { ordered: { answers }}}) => answers, _isEqual );
   const isRequesting = useTypedSelector(({ firestore: { status: { requesting: { answers }}}}) => !!answers );
 
@@ -57,7 +58,7 @@ const useAnswersConnect = ({
     }
   }, [ answers, startAfter ]);
 
-  const isLoading = isRequesting || !startAfter;
+  const isLoading = ( isRequesting || !startAfter ) && !isEmptyForm;
 
   useEffect(() => {
     updateStartAfter();

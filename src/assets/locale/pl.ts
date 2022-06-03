@@ -22,6 +22,8 @@ const localizationPL = {
   emailAlreadyInUse: 'Ten email jest już zajęty',
   errorAnswerSending: 'Wystąpił błąd podczas zapisywania odpowiedzi.',
   emptyContentCell: 'Brak odpowiedzi',
+  emptyFormFirstLine: 'Nie wykryto przesłanych odpowiedzi.',
+  emptyFormSecondLine: 'Dodaj odpowiedzi po przez dedykowaną im stronę.',
   errorOnlyCSVAccepted: 'Taki plik nie jest akceptowany. Proszę podać plik z rozszerzeniem CSV',
   errorPageNotFound: 'Nie znaleziono strony',
   errorUserFormNotExist: 'Nie istnieje taki formularz tego użytkownika',
