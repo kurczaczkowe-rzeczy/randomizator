@@ -1,8 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { useCallback, useState } from 'react';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { getSnapshotByObject } from 'redux-firestore';
@@ -28,9 +24,9 @@ const useAnswersConnect = ({
   const [ startAfter, setStartAfter ] = useState< DocumentOrQuerySnapshot >( null );
 
   const formID = useTypedSelector(({ form: { id }}) => id );
-  const isEmptyForm = useTypedSelector(({ form: { counter }}) => !counter );
   const answers = useTypedSelector< Answers >(({ firestore: { ordered: { answers }}}) => answers, _isEqual );
   const isRequesting = useTypedSelector(({ firestore: { status: { requesting: { answers }}}}) => !!answers );
+  const isRequested = useTypedSelector(({ firestore: { status: { requested: { answers }}}}) => !!answers );
 
   useFirestoreConnect([
     {
@@ -58,11 +54,7 @@ const useAnswersConnect = ({
     }
   }, [ answers, startAfter ]);
 
-  const isLoading = ( isRequesting || !startAfter ) && !isEmptyForm;
-
-  useEffect(() => {
-    updateStartAfter();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const isLoading = !( !isRequesting && isRequested );
 
   return {
     formID,

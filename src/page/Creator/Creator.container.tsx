@@ -12,7 +12,6 @@ import _isEqual from 'lodash/isEqual';
 import useAnswerBatch from 'hooks/useAnswerBatch';
 import useLocaleString from 'hooks/useLocaleString';
 import useTypedSelector from 'hooks/useTypedSelector';
-import { clearDraw } from 'store/actions/drawAction';
 import { downloadAnswersCSV } from 'store/actions/answersAction';
 import { signOut } from 'store/actions/authAction';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
@@ -53,10 +52,6 @@ const Creator = (): JSX.Element => {
       dispatch( toggleLoader );
     }
   }, [ selectedForm.counter, dispatch ]);
-
-  useEffect(() => {
-    if ( !_isEmpty( formID )) { dispatch( clearDraw()); }
-  }, [ formID, dispatch ]);
 
   const onDownloadAnswers = (): void => { dispatch( downloadAnswersCSV()); };
 
