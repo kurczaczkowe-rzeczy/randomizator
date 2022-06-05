@@ -7,7 +7,11 @@ import _reduce from 'lodash/reduce';
 import { CARDS, PAGES } from 'constans';
 import { getAnswersOnceFromFirestore } from 'store/actions/answersAction';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
-import { ActionCreator, DrawAction } from 'store/types';
+import {
+  ActionCreator,
+  DrawAction,
+  FirestoreAction,
+} from 'store/types';
 import {
   ADD_TAG,
   DRAW_RESULT,
@@ -17,6 +21,7 @@ import {
   REMOVE_ERROR_DRAW_RESULT,
   CLEAR_DRAW_RESULT,
   SET_ERRORS_DRAW_RESULT,
+  CLEAR_FIRESTORE_ANSWERS,
 } from 'store/actions';
 import {
   Mapping,
@@ -29,10 +34,14 @@ import {
 
 import { randomItem, filterByTag } from './drawAction.utils';
 
-type DrawActionCreator< PayloadArgs extends unknown[] = []> = ActionCreator< DrawAction, PayloadArgs >;
+type DrawActionCreator< PayloadArgs extends unknown[] = []> =
+  ActionCreator< DrawAction | FirestoreAction, PayloadArgs >;
 
 /** Actions trigger clean draw store. */
-export const clearDraw: DrawActionCreator = () => ( dispatch ) => { dispatch({ type: CLEAR_DRAW_RESULT }); };
+export const clearDraw: DrawActionCreator = () => ( dispatch ) => {
+  dispatch({ type: CLEAR_DRAW_RESULT });
+  dispatch({ type: CLEAR_FIRESTORE_ANSWERS });
+};
 
 // ToDo: issue #109 - firstly get only answers that matches to tags then draw from them
 /** Action fetch available answers to every field and filter them by tag then draw from them answers. */

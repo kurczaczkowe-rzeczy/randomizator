@@ -2,8 +2,8 @@ import { combineReducers, Reducer } from 'redux';
 import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer } from 'redux-firestore';
 
-import { CLEAR_DRAW_RESULT, LOGOUT_SUCCESS } from 'store/actions';
-import { IAction, LogoutAction } from 'store/types';
+import { CLEAR_FIRESTORE_ANSWERS, LOGOUT_SUCCESS } from 'store/actions';
+import { FirestoreAction, LogoutAction } from 'store/types';
 
 import globalReducer from './globalReducer';
 import authReducer from './authReducer';
@@ -29,12 +29,13 @@ const appReducer = combineReducers({
 
 export type RootState = ReturnType<typeof appReducer>;
 
-const rootReducer: Reducer<RootState, LogoutAction | IAction< typeof CLEAR_DRAW_RESULT >> = ( state, action ) => {
+// ToDo: I lied here with action because every action should be included here
+const rootReducer: Reducer<RootState, LogoutAction | FirestoreAction> = ( state, action ) => {
   if ( action.type === LOGOUT_SUCCESS ) {
     state = undefined;
   }
 
-  if ( action.type === CLEAR_DRAW_RESULT && state ) {
+  if ( action.type === CLEAR_FIRESTORE_ANSWERS && state ) {
     state = {
       ...state,
       firestore: {

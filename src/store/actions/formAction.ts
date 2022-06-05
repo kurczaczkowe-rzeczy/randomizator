@@ -3,11 +3,17 @@ import {
   ERROR_FORM,
   SET_SELECTED_FORM,
   CLEAR_FORM,
+  CLEAR_FIRESTORE_ANSWERS,
 } from 'store/actions';
-import { ActionCreator, FormAction } from 'store/types';
+import {
+  ActionCreator,
+  FirestoreAction,
+  FormAction,
+} from 'store/types';
 import { IForm } from 'types';
 
-type FormActionCreator< PayloadArgs extends unknown[] = []> = ActionCreator< FormAction, PayloadArgs >;
+type FormActionCreator< PayloadArgs extends unknown[] = []> =
+  ActionCreator< FormAction | FirestoreAction, PayloadArgs >;
 
 // ToDo: Focus on this func, it could be rewrite or deleted and instead of using them use setSelectedForm
 export const fetchFormName: FormActionCreator<[ userID: string, formID: IForm[ 'id' ] ]> = ( userID, formID ) =>
@@ -50,6 +56,7 @@ export const fetchFormName: FormActionCreator<[ userID: string, formID: IForm[ '
 export const setSelectedForm: FormActionCreator<[ formID: IForm[ 'id' ]]> = ( formID ) => ( dispatch, getState ) => {
   const form = getState().firestore.data.forms[ formID ];
 
+  dispatch({ type: CLEAR_FIRESTORE_ANSWERS });
   dispatch({ type: SET_SELECTED_FORM, payload: { id: formID, ...form }});
 };
 

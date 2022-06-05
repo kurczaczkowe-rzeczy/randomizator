@@ -73,3 +73,6 @@ export type AnswersManagerActionsTypes =
 export type AnswersManagerActionsTypesWithPayload =
   | typeof SET_EDITED_ANSWER
   | typeof UNSET_EDITED_ANSWER;
+
+export const CLEAR_FIRESTORE_ANSWERS = 'CLEAR_FIRESTORE_ANSWERS';
+export type FirestoreActionTypes = typeof CLEAR_FIRESTORE_ANSWERS;

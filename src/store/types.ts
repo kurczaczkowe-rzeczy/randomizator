@@ -29,6 +29,7 @@ import {
   SET_ERRORS_DRAW_RESULT,
   AnswersActionsTypes,
   CLEAR_ANSWERS,
+  FirestoreActionTypes,
 } from 'store/actions';
 import {
   WeightAnswers,
@@ -158,6 +159,8 @@ export interface IAnswersPayload { error: string }
 export type AnswersAction =
   | IAction< typeof CLEAR_ANSWERS >
   | IActionWithPayload< AnswersActionsTypes, IAnswersPayload >;
+
+export type FirestoreAction = IAction< FirestoreActionTypes >;
 
 // ACTION UTILS
 /* eslint-disable @typescript-eslint/no-explicit-any */
