@@ -56,12 +56,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install depedencies
         run: |
-          npm i
+          npm i -g
           npm i -g firebase-tools
       - name: Setup storybook
-        run: |
-          npm run build-storybook
-          firebase target:apply hosting stories randomizator-stories
+        run: npm run build-storybook
+      - name: Setup firebase
+        run: firebase target:apply hosting stories randomizator-stories
       - name: Deploy storybook
         run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }} --only hosting:stories
   bump_version:
