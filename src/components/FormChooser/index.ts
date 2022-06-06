@@ -1,2 +1,2 @@
-export { default } from './FormChooser.view';
+export { default } from './FormChooser.container';
 export * from './FormChooser.types';

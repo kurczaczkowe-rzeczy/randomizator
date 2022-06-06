@@ -1,55 +1,72 @@
-import { useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useCallback, useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import _isEmpty from 'lodash/isEmpty';
-import _isEqual from 'lodash/isEqual';
-import _some from 'lodash/some';
+import _noop from 'lodash/noop';
+import _reduce from 'lodash/reduce';
 
-import { RootState } from 'store/reducers/rootReducer';
 import useLocaleString from 'hooks/useLocaleString';
+import asyncNoop from 'utils/asyncNoop';
+import { IField, Mapping } from 'types';
 
+import { getErrorMessage } from './Form.utils';
 import FormView from './Form.view';
-import { FormContainer, IGuestValues } from './Form.types';
+import {
+  FormContainer,
+  GuestSubmitHandler,
+  IGuestValues,
+} from './Form.types';
 
 // ToDo: #167
 const Form = ({
+  name,
   preview = false,
-  onSubmit = (): void => {},
-  additionalFunction = (): void => {},
+  onSubmit = asyncNoop,
+  additionalFunction = _noop,
+  fields = [],
 }: FormContainer ): JSX.Element => {
-  const methods = useForm<IGuestValues>();
+  const methods = useForm< IGuestValues >();
+  const { formState: { isSubmitSuccessful }, reset } = methods;
   const getString = useLocaleString();
-  const nameOfForm = useSelector(( state: RootState ) => state.form.name );
 
-  const someFieldFill = ( ...fields: string[]): boolean => _some( fields, ( field ) => !_isEmpty( field ));
+  const handleSubmit = useCallback< GuestSubmitHandler >( async ({ checkIsNotRobot, ...fields }) => {
+    const message = getErrorMessage(
+      checkIsNotRobot,
+      name,
+      fields,
+    );
 
-  const handleSubmit = useCallback(({
-    nameMale,
-    nameFemale,
-    checkIsNotRobot,
-  }) => {
-    if ( _isEmpty( checkIsNotRobot )) {
-      alert( getString( 'formErrorEmptyFormName' ));
-    } else if ( !_isEqual( checkIsNotRobot, nameOfForm )) {
-      alert( getString( 'formErrorWrongFormName' ));
-    } else {
-      if ( someFieldFill( nameMale, nameFemale )) {
-        onSubmit( nameMale, nameFemale );
-        methods.reset();
-      } else {
-        alert( getString( 'formErrorEmptyFormFields' ));
-      }
+    if ( message ) {
+      /* ToDo: this not work as expect, it should be don second unction to run on invalid values
+          and resolver to check validity of form */
+      alert( getString( message ));
+
+      return;
     }
+
+    await onSubmit( fields );
   }, [
-    nameOfForm,
+    name,
     onSubmit,
     getString,
-    methods,
+  ]);
+
+  useEffect(() => {
+    if ( isSubmitSuccessful ) {
+      reset( _reduce< IField, Mapping< string >>(
+        fields,
+        ( clearedValues, { name }) => ({ ...clearedValues, [ name ]: '' }),
+        { checkIsNotRobot: '' },
+      ));
+    }
+  }, [
+    isSubmitSuccessful,
+    reset,
+    fields,
   ]);
 
   return (
     <FormProvider { ...methods }>
       <FormView
+        fields={ fields }
         preview={ preview }
         onSubmit={ handleSubmit }
         additionalFunction={ additionalFunction }

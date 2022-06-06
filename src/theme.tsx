@@ -47,6 +47,7 @@ declare module '@material-ui/core/styles/createPalette' {
     colorText: CSSProperties[ 'color' ];
     colorTextSelected: CSSProperties[ 'color' ];
     fadedBackgroundDark: () => CSSProperties[ 'color' ];
+    fadedColorText: () => CSSProperties[ 'color' ];
     fadedMain: () => CSSProperties[ 'color' ];
   }
 
@@ -57,6 +58,7 @@ declare module '@material-ui/core/styles/createPalette' {
     colorText: CSSProperties[ 'color' ];
     colorTextSelected: CSSProperties[ 'color' ];
     fadedBackgroundDark: () => CSSProperties[ 'color' ];
+    fadedColorText: () => CSSProperties[ 'color' ];
     fadedMain: () => CSSProperties[ 'color' ];
   }
 }
@@ -78,6 +80,9 @@ const palette = {
   },
   fadedBackgroundDark(): CSSProperties[ 'color' ] {
     return fade( this.backgroundDark, 0.75 );
+  },
+  fadedColorText(): CSSProperties[ 'color' ] {
+    return fade( this.colorText, 0.6 );
   },
 };
 
@@ -125,7 +130,7 @@ const classes = {
     borderBottom: 'none',
 
     color: palette.primary.main,
-    '&:hover:not(.Mui-selected)': { borderColor: palette.backgroundLight },
+    '&:hover:not($selected)': { borderColor: palette.backgroundLight },
   },
 };
 
@@ -216,7 +221,7 @@ export const theme = createMuiTheme({
       root: {
         ...classes.tab,
 
-        '&.Mui-selected': { borderColor: palette.primary.main },
+        '&$selected': { borderColor: palette.primary.main },
       },
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

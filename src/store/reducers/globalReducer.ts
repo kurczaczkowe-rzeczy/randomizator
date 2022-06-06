@@ -23,8 +23,8 @@ const initialState: IGlobalState = {
 const reducer = ( state = initialState, action: GlobalAction = { type: CLEAR_GLOBAL }): IGlobalState => {
   switch ( action.type ) {
     case SHOW_LOADER: {
-      const isEmptyBindings = action.payload.bindToCard === 'none';
-      const newBindings = !isEmptyBindings ? [ ...state.bindToCard, action.payload.bindToCard ] : [];
+      const isEmptyBindings = !action.payload.bindToCard;
+      const newBindings = isEmptyBindings ? [] : [ ...state.bindToCard, action.payload.bindToCard ];
 
       return {
         ...state,
@@ -35,8 +35,8 @@ const reducer = ( state = initialState, action: GlobalAction = { type: CLEAR_GLO
     }
     case HIDE_LOADER: {
       const newLoadingQueue = _pull( state.loadingsQueue, action.payload.callFrom );
-      const isEmptyBindings = action.payload.bindToCard === 'none';
-      const newBindings = !isEmptyBindings ? _pull( state.bindToCard, action.payload.bindToCard ) : [];
+      const isEmptyBindings = !action.payload.bindToCard;
+      const newBindings = isEmptyBindings ? [] : _pull( state.bindToCard, action.payload.bindToCard );
 
       return {
         ...state,

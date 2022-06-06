@@ -1,6 +1,7 @@
 import { SyntheticEvent } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import classNames from 'classnames';
+import _map from 'lodash/map';
 
 import useLocaleString from 'hooks/useLocaleString';
 
@@ -13,11 +14,12 @@ import { IForm, IGuestValues } from './Form.types';
 
 /** Components represents a document section containing interactive controls for submitting information. */
 export const Form = ({
+  fields,
   preview,
   additionalFunction,
   onSubmit,
 }: IForm ): JSX.Element => {
-  const { control, handleSubmit } = useFormContext<IGuestValues>();
+  const { control, handleSubmit } = useFormContext< IGuestValues >();
   const getString = useLocaleString();
 
   return (
@@ -25,28 +27,19 @@ export const Form = ({
       className={ classNames( classes.form, { [ classes.disabled ]: preview }) }
       onSubmit={ handleSubmit( onSubmit ) }
     >
-      <div className={ classes.alignBottom }>
-        {/* ToDo: issue #187 */}
-        <Label content={ getString( 'nameMaleLabel' ) } />
-        <Controller
-          control={ control }
-          name="nameMale"
-          render={ ({ field }): JSX.Element => (
-            <TextInput { ...field } />
-          ) }
-        />
-      </div>
-      <div className={ classes.alignBottom }>
-        {/* ToDo: issue #187 */}
-        <Label content={ getString( 'nameFemaleLabel' ) } />
-        <Controller
-          control={ control }
-          name="nameFemale"
-          render={ ({ field }): JSX.Element => (
-            <TextInput { ...field } />
-          ) }
-        />
-      </div>
+      { _map( fields, ({ name }) => (
+        <div className={ classes.alignBottom }>
+          {/* ToDo: issue #187 */}
+          <Label content={ name } />
+          <Controller
+            control={ control }
+            name={ name }
+            render={ ({ field }): JSX.Element => (
+              <TextInput { ...field } />
+            ) }
+          />
+        </div>
+      ))}
       <div className={ classes.checkIsNotRobot }>
         <Controller
           control={ control }

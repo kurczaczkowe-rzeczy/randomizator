@@ -1,8 +1,10 @@
 import classNames from 'classnames';
+import _includes from 'lodash/includes';
 
 import BackIcon from '@material-ui/icons/Forward';
 
 import useLocaleString from 'hooks/useLocaleString';
+import useTypedSelector from 'hooks/useTypedSelector';
 
 import Card from 'components/card';
 import CopyText from 'components/copyText';
@@ -11,6 +13,7 @@ import Form from 'components/form';
 import FormName from 'components/guestFormDescription';
 import Button from 'components/Button';
 import TextBox from 'components/textBox';
+import { CARDS } from 'constans';
 
 import { IGuest } from './Guest.types';
 import useStyles from './Guest.styles';
@@ -20,7 +23,7 @@ import useStyles from './Guest.styles';
  */
 export const GuestView = ({
   creatorName,
-  formName = '',
+  form,
   onSubmit,
   isHighlighted,
   highlightFormName,
@@ -29,6 +32,8 @@ export const GuestView = ({
 }: IGuest ): JSX.Element => {
   const styles = useStyles();
   const getString = useLocaleString();
+
+  const isLoading = useTypedSelector(({ global: { bindToCard }}) => _includes( bindToCard, CARDS.GUEST_FORM ));
 
   return (
     <div className={ styles.root }>
@@ -54,12 +59,12 @@ export const GuestView = ({
             <FormName content={ (
               <CopyText
                 withFlexStart
-                text={ formName }
+                text={ form.name }
                 content={ (
                   <TextBox
                     additionalClasses={ classNames( styles.textBox, { [ styles.highlightText ]: isHighlighted }) }
                   >
-                    { formName }
+                    { form.name }
                   </TextBox>
                 ) }
               />
@@ -77,7 +82,14 @@ export const GuestView = ({
             </p>
           </>
         ) }
-        body={ <Form onSubmit={ onSubmit } additionalFunction={ highlightFormName } /> }
+        body={ (
+          <Form
+            { ...form }
+            onSubmit={ onSubmit }
+            additionalFunction={ highlightFormName }
+          />
+        ) }
+        isLoading={ isLoading }
       />
     </div>
   );

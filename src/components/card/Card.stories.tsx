@@ -16,6 +16,8 @@ const WithTitleAsObject = Template.bind({});
 const WithId = Template.bind({});
 const WithClassPassedFromUp = Template.bind({});
 const WithLoadingState = Template.bind({});
+const WithFullWidthBody = Template.bind({});
+const Transparent = Template.bind({});
 
 WithTitle.args = {
   title: 'Przykładowy tytuł',
@@ -27,8 +29,8 @@ WithTitleAsObject.args = {
 };
 WithId.args = {
   id: 'Identyfikator',
-  body: 'Identyfikator może zostać wykorzystany do zanimowania komponentu.' +
-    ' Przykład na stronie gościa a dokładnie to animowany jest w ten sposób.',
+  body: 'Identyfikator może zostać wykorzystany do zanimowania komponentu.'
+    + ' Przykład na stronie gościa a dokładnie to animowany jest w ten sposób.',
 };
 WithClassPassedFromUp.args = {
   cardClass: 'className',
@@ -38,6 +40,15 @@ WithLoadingState.args = {
   body: 'Z widocznym loaderem',
   isLoading: true,
 };
+WithFullWidthBody.args = {
+  body: 'Ciało karty wypełnia całą dostępną powierzchnie karty',
+  fullWidthBody: true,
+};
+Transparent.args = {
+  body: 'Komponent nie posiada tła, paddingów oraz obramowania',
+  transparent: true,
+  title: null,
+};
 
 export {
   Default,
@@ -46,4 +57,6 @@ export {
   WithId,
   WithClassPassedFromUp,
   WithLoadingState,
+  WithFullWidthBody,
+  Transparent,
 };

@@ -1,219 +1,108 @@
-import { useEffect, useState } from 'react';
-import { jsonToCSV } from 'react-papaparse';
 import {
-  useSelector,
-  shallowEqual,
-  useDispatch,
-} from 'react-redux';
-import { isEmpty } from 'react-redux-firebase';
-import _isNil from 'lodash/isNil';
-import _forEach from 'lodash/forEach';
-import _union from 'lodash/union';
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { shallowEqual, useDispatch } from 'react-redux';
 import _isNull from 'lodash/isNull';
 import _isEmpty from 'lodash/isEmpty';
 import _map from 'lodash/map';
+import _isEqual from 'lodash/isEqual';
 
-import { db, firestore } from 'config/firebaseConfig';
-import prepareLink from 'utils/prepareLink';
-import useLocalStorage from 'hooks/useLocalStorage';
+import useAnswerBatch from 'hooks/useAnswerBatch';
 import useLocaleString from 'hooks/useLocaleString';
-import { clearDraw, setDrawResult } from 'store/actions/drawAction';
-import { setAnswers } from 'store/actions/answersAction';
-import { setFormName } from 'store/actions/formAction';
+import useTypedSelector from 'hooks/useTypedSelector';
+import { downloadAnswersCSV } from 'store/actions/answersAction';
 import { signOut } from 'store/actions/authAction';
-import { addForm } from 'store/actions/formsActions';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
-import { RootState } from 'store/reducers/rootReducer';
-import {
-  FORM_ID_KEY,
-  HOME_PAGE,
-  IS_DEVELOPMENT_MODE,
-} from 'constans';
+import { CARDS, PAGES } from 'constans';
 
-import { IOption } from 'components/Select';
 import PageContainer from 'components/PageContainer';
+import { AnswersFields } from 'types';
 
 import CreatorView from './Creator.view';
-import {
-  IForm,
-  IAnswers,
-  IAnswersStore,
-} from './Creator.types';
-import {
-  getFormCollection,
-  formsSubscription,
-  getNewFileName,
-  parseText,
-} from './Creator.utils';
+import { parseText } from './Creator.utils';
 
 // ToDo: issue #150
 const Creator = (): JSX.Element => {
   const getString = useLocaleString();
 
-  const [ formID, setFormID ] = useLocalStorage<string>( FORM_ID_KEY );
-  const [ link, setLink ] = useState( '' );
-  const [ acceptedFileNames, setAcceptedFileNames ] = useState<string[]>([]);
-  const [ answersFromFile, setAnswersFromFile ] = useState<IAnswers[]>([]);
+  const previousAnswersCount = useRef< number | null >( null );
 
-  const auth = useSelector(( state: RootState ) => state.firebase.auth, shallowEqual );
-  const answersCounter = useSelector(( state: RootState ) => state.ans.counter );
-  const defaultFormId = useSelector(( state: RootState ) => state.form.id );
-  const forms = useSelector(( state: RootState ) => state.forms.forms );
+  const [ acceptedFileNames, setAcceptedFileNames ] = useState< string[] >([]);
+  const [ answersFromFile, setAnswersFromFile ] = useState< AnswersFields >([]);
+
+  const auth = useTypedSelector(({ firebase: { auth }}) => auth, shallowEqual );
+  const formID = useTypedSelector(({ form: { id }}) => id );
+  const selectedForm = useTypedSelector(({ firestore: { data }}) => data.forms?.[ formID ] ?? {}, _isEqual );
   const dispatch = useDispatch();
 
-  const updateFormID = ( forms: IForm[]): void => {
-    const found = forms.findIndex(( form: IForm ) => form.id === formID );
+  const { addAnswers } = useAnswerBatch( auth.uid, formID );
 
-    if ( found === -1 && forms.length > 0 ) {
-      setFormID( forms[ 0 ].id );
-    }
-    // ToDo: issue #160
-  };
-
-  useEffect(() => {
-    if ( !isEmpty( auth )) {
-      const subscription = formsSubscription(
-        auth.uid,
-        ( doc ) => { // ToDo maybe puts this function into const
-          const form = {
-            name: doc.data()?.name ?? getString( 'noName' ),
-            id: doc.id,
-          };
-
-          dispatch( addForm( form )); // ToDo we can add all forms at once?
-          if ( _isNil( formID )) {
-            setFormID( form.id );
-          }
-        },
-        updateFormID,
-      );
-
-      return (): void => subscription();
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    if ( !isEmpty( auth ) && formID !== null ) {
-      const subscription = formsSubscription( auth.uid, ( doc ) => {
-        const ans = doc.data()?.answers;
-
-        if ( formID === doc.id ) {
-          const form = {
-            id: doc.id,
-            name: doc.data()?.name,
-          };
-
-          dispatch( setFormName( form ));
-          getData( ans );
-        }
-      });
-
-      setLink( `/${ auth.uid }/${ formID }` );
-
-      return subscription;
-    }
-  }, [ formID ]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const getData = ( answers: IAnswers[]): void => {
-    const result: IAnswersStore = { };
-
-    _forEach( answers, ( answer ) => {
-      _forEach( answer, ( value, key ) => {
-        if ( _isNil( result[ key ])) {
-          result[ key ] = [];
-        }
-
-        result[ key ] = _union( result[ key ], [ value ]);
-      });
-    });
-
-    dispatch( setAnswers( result, answers.length ));
-  };
-  const onRandomClick = (): void => {
-    dispatch( setDrawResult());
-  };
   const onLogout = (): void => {
     dispatch( signOut());
   };
 
   useEffect(() => {
-    const toggleLoader = _isNull( answersCounter ) ? showLoader( 'CREATOR_PAGE' ) : hideLoader( 'CREATOR_PAGE' );
+    if ( !previousAnswersCount.current ) {
+      const toggleLoader = _isNull( selectedForm.counter ) ? showLoader( PAGES.CREATOR ) : hideLoader( PAGES.CREATOR );
 
-    dispatch( toggleLoader );
-  }, [ answersCounter, dispatch ]);
+      previousAnswersCount.current = selectedForm.counter;
 
-  const onDownloadAnswers = async (): Promise<void> => {
-    if ( IS_DEVELOPMENT_MODE && formID ) {
-      try {
-        const savedForm = await getFormCollection( auth.uid, formID );
-        const answersOfForm = savedForm?.answers;
-        const formName = savedForm ? savedForm.name.replaceAll( ' ', '_' ) : getNewFileName();
-
-        /* In database doesn't exist emptyColumn fields that is append in google forms
-         and we want to be compatibility with it so we added it to header row */
-        answersOfForm[ 0 ] = {
-          emptyColumn: '',
-          ...answersOfForm[ 0 ],
-        };
-
-        const csvContent = `data:text/csv;charset=utf-8,${ jsonToCSV( answersOfForm ) }`;
-        const encodedUri = encodeURI( csvContent );
-        const link = document.createElement( 'a' );
-
-        link.setAttribute( 'href', encodedUri );
-        link.setAttribute( 'download', `${ formName }.csv` );
-
-        link.click();
-      } catch ( error: unknown ) { console.error( 'Error!', error ); }
+      dispatch( toggleLoader );
     }
-  };
-  const onMenuItemClick = ({ id }: IOption ): void => {
-    setFormID( id );
-    dispatch( clearDraw());
-  };
+  }, [ selectedForm.counter, dispatch ]);
+
+  const onDownloadAnswers = (): void => { dispatch( downloadAnswersCSV()); };
 
   const onDropAccepted = ( acceptedFiles: File[]): void => {
+    dispatch( showLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
     setAcceptedFileNames( _map( acceptedFiles, ( file ) => file.name ));
 
     const reader = new FileReader();
 
+    // ToDo: handle all cases and errors in FileReader, @see https://developer.mozilla.org/en-US/docs/Web/API/FileReader
     reader.onload = (): void => {
       const { result } = reader;
 
       if ( typeof result === 'string' ) {
+        // ToDo: handle check if uploaded file has compatible answers to selected form
         setAnswersFromFile( parseText( result ));
       } else {
-        console.error( 'TypeError: CreatorPageContainer.onDropAccepted.reader.onload ->', {
+        console.error( 'TypeError: Incompatible type of FileReader result ->', {
           resultType: typeof result,
           result,
         });
       }
+
+      dispatch( hideLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
     };
 
     reader.readAsText( acceptedFiles[ 0 ]);
   };
-  const onDropRejected = (): void => { alert( getString( 'errorOnlyCSVAccepted' )); }; // ToDo change to snackbar
+  const onDropRejected = (): void => {
+    // ToDo: extend handling errors
+    alert( getString( 'errorOnlyCSVAccepted' )); // ToDo change to snackbar
+  };
   const onRemove = (): void => { setAcceptedFileNames([]); };
-  const onSend = async (): Promise<void> => {
+  const onSend = async (): Promise< void > => {
     if ( !_isEmpty( answersFromFile )) {
-      try {
-        const docReference = await db.collection( auth.uid ).doc( formID );
-
-        // ToDo move to hook
-        await docReference.update({ answers: firestore.FieldValue.arrayUnion( ...answersFromFile ) });
-        setAcceptedFileNames([]);
-        alert( getString( 'dataSave' )); // ToDo change to snackbar
-      } catch ( error: unknown ) { console.log( 'Error!', error ); } // ToDo better error handling
+      dispatch( showLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
+      await addAnswers(
+        answersFromFile,
+        () => {
+          alert( getString( 'dataSave' )); // ToDo change to snackbar
+          setAcceptedFileNames([]);
+          dispatch( hideLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
+        },
+        () => {
+          alert( getString( 'sendingAnswersError' ));
+          dispatch( hideLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
+        },
+      );
     }
   };
 
-  const selectFormsProps = {
-    defaultValue: defaultFormId,
-    options: forms,
-    onItemClick: onMenuItemClick,
-    name: 'forms',
-    label: getString( 'activeNameForm' ),
-    value: formID,
-  };
   const fileContainerProps = {
     acceptedFileNames,
     onDropAccepted,
@@ -225,12 +114,9 @@ const Creator = (): JSX.Element => {
   return (
     <PageContainer>
       <CreatorView
-        answersCounter={ answersCounter }
+        selectedForm={ selectedForm }
         fileContainerProps={ fileContainerProps }
-        link={ prepareLink( link, HOME_PAGE ) }
-        selectFormsProps={ selectFormsProps }
         onDownloadAnswers={ onDownloadAnswers }
-        onDrawClick={ onRandomClick }
         onLogout={ onLogout }
       />
     </PageContainer>

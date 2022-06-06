@@ -1,18 +1,13 @@
 import { Story, Meta } from '@storybook/react';
 
-import Component, { IUserCreator } from '.';
+import Component from './UserCreator.view';
+import { IUserCreator } from './UserCreator.types';
+import { defaultUserValues } from './UserCreator.consts';
 
 export default{
   title: 'components/UserCreator',
   component: Component,
-  args: {
-    defaultValues: {
-      email: '',
-      formName: '',
-      nickname: '',
-      password: '',
-    },
-  },
+  args: { defaultValues: { ...defaultUserValues }},
 } as Meta;
 
 const Template: Story<IUserCreator> = ( args ) => <Component { ...args } />;

@@ -8,26 +8,30 @@ export default makeStyles(({
   shadow,
   classes,
 }) => ({
-  card: {
-    backgroundColor: palette.backgroundLight,
+  root: {
     borderRadius: 4,
     width: '100%',
-    padding: spacing( 2.5, 4.5 ),
-    color: palette.colorText,
+    height: 'max-content',
     display: 'flex',
     flexDirection: 'column',
-    boxShadow: shadow.card,
     position: 'relative',
+    color: palette.colorText,
 
     '& h3': { textAlign: 'center' },
   },
+  card: {
+    backgroundColor: palette.backgroundLight,
+    padding: spacing( 2.5, 4.5 ),
+    boxShadow: shadow.card,
+  },
   center: { alignItems: 'center' },
-  bodyWrapper: { width: '100%' },
+  fullWidth: { width: '100%' },
   loadingRoot: { fontSize: LOADER_SIZE },
   loaderWrapper: {
     position: 'absolute',
     backgroundColor: palette.fadedBackgroundDark(),
     borderRadius: spacing( 0.5 ),
     ...classes.centerWithFillParent,
+    zIndex: 999,
   },
 }));

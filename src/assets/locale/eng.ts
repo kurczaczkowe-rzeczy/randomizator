@@ -1,9 +1,11 @@
 /* eslint-disable max-len */
-import { IResourceType } from 'hooks/types';
+import { LocaleResources } from 'assets/locale/types';
 
-export default{
+const localizationENG: LocaleResources = {
   addUser: 'Add user',
+  answersWeightManagerTitle: 'Answers',
   activeNameForm: 'Name of active form',
+  content: 'Content',
   copied: 'Copied',
   copyIcon: 'Copy link',
   countAnswers: 'Count answers',
@@ -20,10 +22,15 @@ export default{
   email: 'E-mail',
   emailAddress: 'email@example.com',
   emailAlreadyInUse: 'This email is already in use',
+  emptyContentCell: 'Empty',
+  emptyFormFirstLine: 'Form has no answers.',
+  emptyFormSecondLine: 'Add answer on form page.',
+  errorAnswerSending: 'Error occurrence while answers was sending.',
   errorOnlyCSVAccepted: 'File was rejected. Please, put only files with CSV extension',
   errorPageNotFound: 'Page not found',
   errorUserFormNotExist: 'This form not exist for this user',
   errorUserNotExist: 'This user is not exist',
+  fieldName: 'Field name',
   filter: 'Filter',
   firestorePermissionDenied: 'You have not permission to execute this action. All progress will be revert.',
   form: 'Form',
@@ -44,8 +51,6 @@ export default{
   modalChangeUrlSecond: 'Randomizer move out and is now available at',
   modalChangeUrlThird: '. There you will find a stable version of the application.',
   modalChangeUrlTitle: 'Attention! We are changing the website address.',
-  nameFemaleLabel: 'Name female',
-  nameMaleLabel: 'Name male',
   networkRequestFailed: 'Connection error. Please check your network connection.',
   nickname: 'Nickname',
   noName: 'No name',
@@ -55,10 +60,14 @@ export default{
   password: 'Password',
   previewForm: 'Preview form',
   send: 'Send',
+  sendingAnswersError: 'Error occurrence on form submitting. Try again later.',
   tempAppNotCreated: 'Temporary app was not created',
   typeFilterElements: 'Enter a filtering elements',
   unknownError: 'An unknown error occurrence',
   userIsNullAfterCreating: 'Unknown error occurred after user create. Please check if user was added to firebase admin panel.',
   version: 'Version',
   weakPassword: 'Password is too weak to create account',
-} as IResourceType;
+  weight: 'Weight',
+};
+
+export default localizationENG;

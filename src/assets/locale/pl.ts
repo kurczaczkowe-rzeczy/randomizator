@@ -1,9 +1,9 @@
-import { IResourceType } from 'hooks/types';
-
 /* eslint-disable max-len */
-export default{
+const localizationPL = {
   addUser: 'Dodaj użytkownika',
+  answersWeightManagerTitle: 'Odpowiedzi',
   activeNameForm: 'Nazwa aktywnego formularza',
+  content: 'Zawartość',
   copied: 'Skopiowano',
   copyIcon: 'Skopiuj link',
   countAnswers: 'Ilość odpowiedzi',
@@ -20,10 +20,15 @@ export default{
   email: 'E-mail',
   emailAddress: 'email@przykladowy.pl',
   emailAlreadyInUse: 'Ten email jest już zajęty',
+  errorAnswerSending: 'Wystąpił błąd podczas zapisywania odpowiedzi.',
+  emptyContentCell: 'Brak odpowiedzi',
+  emptyFormFirstLine: 'Nie wykryto przesłanych odpowiedzi.',
+  emptyFormSecondLine: 'Dodaj odpowiedzi po przez dedykowaną im stronę.',
   errorOnlyCSVAccepted: 'Taki plik nie jest akceptowany. Proszę podać plik z rozszerzeniem CSV',
   errorPageNotFound: 'Nie znaleziono strony',
   errorUserFormNotExist: 'Nie istnieje taki formularz tego użytkownika',
   errorUserNotExist: 'Nie istnieje taki użytkownik',
+  fieldName: 'Nazwa pola',
   filter: 'Filtruj',
   firestorePermissionDenied: 'Nie masz uprawnień do wykonania tej akcji. Cały postęp zostanie wycofany.',
   form: 'Formularz',
@@ -44,8 +49,6 @@ export default{
   modalChangeUrlSecond: 'Randomizator spakował swoje rzeczy i teraz jest dostępny pod adresem',
   modalChangeUrlThird: '. Tam znajdziesz stabilną wersję aplikacji.',
   modalChangeUrlTitle: 'Uwaga! Zmieniamy adres strony.',
-  nameFemaleLabel: 'Imie damskie',
-  nameMaleLabel: 'Imie męskie',
   networkRequestFailed: 'Błąd połączenia z serwerem. Sprawdź połączenie z internetem',
   nickname: 'Nazwa użytkownika',
   noName: 'Brak nazwy',
@@ -55,10 +58,14 @@ export default{
   password: 'Hasło',
   previewForm: 'Wygląd formularza',
   send: 'Wyślij',
+  sendingAnswersError: 'Wystąpił błąd podczas przesyłania odpowiedzi. Spróbuj ponownie później.',
   tempAppNotCreated: 'Tymczasowa aplikacja nie została utworzona.',
   typeFilterElements: 'Wprowadź składnik filtrowania',
   unknownError: 'Wystąpił nieznany błąd',
   userIsNullAfterCreating: 'Wystąpił nieoczekiwany błąd po utworzeniu użytkownika. Sprawdź proszę w panelu admina firebase czy użytkownik został stworzony.',
   version: 'Wersja',
   weakPassword: 'Hasło jest zbyt słabe aby utworzyć konto',
-} as IResourceType;
+  weight: 'Waga',
+};
+
+export default localizationPL;

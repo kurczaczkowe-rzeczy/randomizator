@@ -33,7 +33,7 @@ export interface ISelect {
    * @return undefined
    */
   onOpen?: () => void;
-  /** Control select open state. If not provided component was selfcontrolled */
+  /** Control select open state. If not provided component was self controlled */
   open?: boolean;
   /** Array of available options. */
   options?: IOption[];

@@ -1,6 +1,7 @@
 import { Story, Meta } from '@storybook/react';
 
-import Component, { IFormChooser } from '.';
+import Component from './FormChooser.view';
+import { IFormChooser } from '.';
 import mockData from './FormChooser.mock';
 
 export default{

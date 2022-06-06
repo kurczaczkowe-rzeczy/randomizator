@@ -1,27 +1,28 @@
 import { useSelector } from 'react-redux';
 
-import stringsPl from 'assets/locale/pl';
-import stringsEng from 'assets/locale/eng';
+import localizationPL from 'assets/locale/pl';
+import localizationENG from 'assets/locale/eng';
+import { LocaleResources } from 'assets/locale/types';
 import { RootState } from 'store/reducers/rootReducer';
 
-import { GetString, IResourceType } from './types';
+import { GetString } from './types';
 
 const useLocaleString = (): GetString => {
   const language = useSelector(( state: RootState ) => state.global.language );
-  let localeFile: IResourceType;
+  let localization: LocaleResources;
 
   switch ( language ) {
     case 'ENG': {
-      localeFile = stringsEng;
+      localization = localizationENG;
       break;
     }
     default: {
-      localeFile = stringsPl;
+      localization = localizationPL;
       break;
     }
   }
 
-  return ( resourceId ): string => localeFile[ resourceId ] ?? '';
+  return ( resourceId ) => localization[ resourceId ] ?? '';
 };
 
 export default useLocaleString;

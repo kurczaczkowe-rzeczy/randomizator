@@ -7,4 +7,9 @@ export default makeStyles(( theme ) => ({
     columnGap: '6%',
     rowGap: '12%',
   },
+  left: {
+    display: 'flex',
+    flexDirection: 'column',
+    rowGap: '12%',
+  },
 }));

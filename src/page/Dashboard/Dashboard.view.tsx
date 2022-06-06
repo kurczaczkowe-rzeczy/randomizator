@@ -1,23 +1,26 @@
-import Card from 'components/card';
+import AnswersManager from 'components/AnswersManager';
+import FormChooser from 'components/FormChooser';
+import PageContainer from 'components/PageContainer';
 import UserCreator from 'components/UserCreator';
 
 import useStyles from './Dashboard.styles';
-import { IDashboard } from './Dashboard.types';
 
 /**
  * Component contains multiple widget for user and form management.
  */
-export const Dashboard = ({ userCreatorProps }: IDashboard ): JSX.Element => {
+export const Dashboard = (): JSX.Element => {
   const styles = useStyles();
 
   return (
-    <div className={ styles.root }>
-      <Card
-        centerBody={ false }
-        isLoading={ userCreatorProps.isLoading }
-        body={ <UserCreator { ...userCreatorProps } /> }
-      />
-    </div>
+    <PageContainer>
+      <div className={ styles.root }>
+        <div className={ styles.left }>
+          <FormChooser />
+          <UserCreator />
+        </div>
+        <AnswersManager />
+      </div>
+    </PageContainer>
   );
 };
 

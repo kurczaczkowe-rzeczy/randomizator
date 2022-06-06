@@ -2,9 +2,11 @@ import _filter from 'lodash/filter';
 
 import { GetString } from 'hooks/types';
 import { hasAccess } from 'utils/permissionUtils';
+import { Role } from 'types';
 import { ROUTES, USER_ROLES } from 'constans';
 
-import { IDrawerMenu } from 'components/DrawerMenu/DrawerMenu.types';
+import { IProtectedRoute } from 'components/ProtectedRoute';
+import { IDrawerMenu } from 'components/DrawerMenu';
 import Creator from 'page/Creator';
 import Dashboard from 'page/Dashboard';
 
@@ -27,12 +29,14 @@ export const getMenuItems = ( getString: GetString ): IDrawerMenu[ 'items' ] => 
   },
 ];
 
-type GetMenuItemsForCurrentUser = ( items: IDrawerMenu[ 'items' ], role: string ) => IDrawerMenu[ 'items' ];
+type GetMenuItemsForCurrentUser = ( items: IDrawerMenu[ 'items' ], role: Role ) => IDrawerMenu[ 'items' ];
 
 export const getMenuItemsForCurrentUser: GetMenuItemsForCurrentUser = ( items, role ) =>
   _filter( items, ({ access }) => hasAccess( access, role ));
 
-export const authenticatedRoutesCollection = [
+type AuthenticatedRoute = Omit<IProtectedRoute, 'currentUserRole'> & { key: string };
+
+export const authenticatedRoutesCollection: AuthenticatedRoute[] = [
   {
     key: 'creator',
     exact: true,

@@ -139,7 +139,7 @@ const rules = {
   'object-property-newline': [ 2, { allowAllPropertiesOnSameLine: true }],
   'object-shorthand': [ 2, 'always' ],
   'operator-assignment': [ 2, 'always' ],
-  'operator-linebreak': [ 2 ],
+  'operator-linebreak': [ 2, 'before', { overrides: { '=': 'after' }}],
   'padding-line-between-statements': [
     2,
     {

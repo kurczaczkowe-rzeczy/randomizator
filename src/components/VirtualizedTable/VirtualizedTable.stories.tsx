@@ -5,7 +5,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import Card from 'components/card';
 
-import Component, { IVirtualizedTable } from '.';
+import Component, { MockTable } from '.';
 import mockData, { sortData } from './VirtualizedTable.mock';
 
 export default{
@@ -25,11 +25,11 @@ const useStyles = makeStyles({
   },
 });
 
-const Template: Story<IVirtualizedTable> = ( args ) => {
+const Template: Story<MockTable> = ( args ) => {
   // eslint-disable-next-line react/destructuring-assignment
-  const [ rows, setRows ] = useState<IVirtualizedTable[ 'rows' ]>( args.rows );
+  const [ rows, setRows ] = useState<MockTable[ 'rows' ]>( args.rows );
 
-  const onLoadMoreRows: IVirtualizedTable[ 'onLoadMoreRows' ] = ( params ) => {
+  const onLoadMoreRows: MockTable[ 'onLoadMoreRows' ] = ( params ) => {
     args.onLoadMoreRows( params );
 
     setTimeout(() => {

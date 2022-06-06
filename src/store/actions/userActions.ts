@@ -1,5 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
 
+import { PAGES, USER_ROLES } from 'constans';
+
 import {
   GET_CREATOR_NAME,
   ERROR_USER_DONT_EXIST,
@@ -38,9 +40,15 @@ export const getCurrentUserRole = (): UserThunkAction => async (
   getState,
   { getFirestore },
 ) => {
-  const { uid } = getState().firebase.auth;
+  const { uid, isEmpty } = getState().firebase.auth;
 
   try {
+    if ( isEmpty ) {
+      dispatch({ type: GET_CURRENT_USER_ROLE, payload: { currentUserRole: USER_ROLES.GUEST }});
+
+      return;
+    }
+
     const doc = await getFirestore()
       .collection( 'users' )
       .doc( uid )
@@ -48,12 +56,14 @@ export const getCurrentUserRole = (): UserThunkAction => async (
 
     if ( doc.exists ) {
       dispatch({ type: GET_CURRENT_USER_ROLE, payload: { currentUserRole: doc.data().role }});
-    } else {
-      dispatch({ type: ERROR_USER_DONT_EXIST, payload: { errorMsg: 'User don\'t exist' }});
+
+      return;
     }
+
+    dispatch({ type: ERROR_USER_DONT_EXIST, payload: { errorMsg: 'User don\'t exist' }});
   } catch ( error: unknown ) {
     console.error( error ); // ToDo: issue #172
   } finally {
-    dispatch( hideLoader( 'APP' ));
+    dispatch( hideLoader( PAGES.HOME ));
   }
 };

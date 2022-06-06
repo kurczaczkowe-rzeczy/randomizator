@@ -1,45 +1,64 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ThunkAction } from 'redux-thunk';
 import {
   SET_FORM_NAME,
-  ERROR_FORM_DONT_EXIST,
+  ERROR_FORM,
+  SET_SELECTED_FORM,
+  CLEAR_FORM,
+  CLEAR_FIRESTORE_ANSWERS,
 } from 'store/actions';
 import {
+  ActionCreator,
+  FirestoreAction,
   FormAction,
-  IForm,
-  FormState,
 } from 'store/types';
+import { IForm } from 'types';
 
-export const fetchFormName = ( userID: string, formID: string ): ThunkAction<void, FormState, any, FormAction> =>
-  (
+type FormActionCreator< PayloadArgs extends unknown[] = []> =
+  ActionCreator< FormAction | FirestoreAction, PayloadArgs >;
+
+// ToDo: Focus on this func, it could be rewrite or deleted and instead of using them use setSelectedForm
+export const fetchFormName: FormActionCreator<[ userID: string, formID: IForm[ 'id' ] ]> = ( userID, formID ) =>
+  async (
     dispatch,
-    _,
+    getState,
     { getFirestore },
-  ): void => {
+  ) => {
+    const { id } = getState().form;
+
+    if ( id === formID ) { return; }
+
     const firestore = getFirestore();
 
-    // ToDo consider whether it makes sense to create a hook/util for a firebase
-    firestore.collection( userID ).doc( formID )
-      .get()
-      .then(( doc: any ) => {
-        if ( doc.exists ) {
-          dispatch({
-            type: SET_FORM_NAME,
-            payload: { name: doc.data().name, id: formID },
-          });
-        } else {
-          dispatch({
-            type: ERROR_FORM_DONT_EXIST,
-            payload: { errorMessage: 'Form don\'t exist' },
-          });
-        }
+    try {
+      const doc = await firestore.get( `${ userID }/${ formID }` );
+
+      if ( doc.exists ) {
+        dispatch({
+          type: SET_FORM_NAME,
+          payload: { id: formID },
+        });
+      } else {
+        dispatch({
+          type: ERROR_FORM,
+          payload: { errorMessage: 'Form don\'t exist' },
+        });
+      }
+    } catch ( e: unknown ) {
+      // ToDo: Better error handling
+      console.error( 'Form name fetch:', e );
+      dispatch({
+        type: ERROR_FORM,
+        payload: { errorMessage: 'Unknown error occurrence' },
       });
+    }
   };
 
-export const setFormName = ( formProp: IForm ): ThunkAction<void, FormState, IForm, FormAction> =>
-  ( dispatch ): void => {
-    dispatch({
-      type: SET_FORM_NAME,
-      payload: formProp,
-    });
-  };
+/** Action trigger select specific form from firestore. */
+export const setSelectedForm: FormActionCreator<[ formID: IForm[ 'id' ]]> = ( formID ) => ( dispatch, getState ) => {
+  const form = getState().firestore.data.forms[ formID ];
+
+  dispatch({ type: CLEAR_FIRESTORE_ANSWERS });
+  dispatch({ type: SET_SELECTED_FORM, payload: { id: formID, ...form }});
+};
+
+/** Action trigger cleaning form store. */
+export const clearForm: FormActionCreator = () => ( dispatch ) => { dispatch({ type: CLEAR_FORM }); };

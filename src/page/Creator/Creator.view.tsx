@@ -6,7 +6,7 @@ import { IS_DEVELOPMENT_MODE } from 'constans';
 import AnswersCounter from 'components/answersCounter';
 import ButtonView from 'components/Button';
 import Card from 'components/card';
-import Draw from 'components/draw';
+import Draw from 'components/Draw';
 import FileContainer from 'components/FileContainer';
 import Form from 'components/form';
 import FormChooser from 'components/FormChooser';
@@ -14,15 +14,13 @@ import FormChooser from 'components/FormChooser';
 import { ICreator } from './Creator.types';
 import useStyles from './Creator.styles';
 
-/** Page allows creators share link to form, display form preview, upload answers from CSV files
- * and draw answers. */
-const Creator = ({
-  answersCounter,
+/** Page contain panel with preview of form, drawing answers, select that provide form context
+ * and link to actual form and provides possibility to upload answers. For admin additionally provides button
+ * that allow download answers. */
+export const Creator = ({
+  selectedForm,
   fileContainerProps,
-  link,
-  selectFormsProps,
   onDownloadAnswers,
-  onDrawClick,
   onLogout,
 }: ICreator ): JSX.Element => {
   const styles = useStyles();
@@ -31,7 +29,7 @@ const Creator = ({
   return (
     <div className={ styles.root }>
       <div className={ styles.leftSpace }>
-        <FormChooser link={ link } selectFormsProps={ selectFormsProps } />
+        <FormChooser />
         { IS_DEVELOPMENT_MODE && (
           <ButtonView
             value={ getString( 'getAnswers' ) }
@@ -42,7 +40,7 @@ const Creator = ({
       </div>
       <div className={ styles.rightSpace }>
         <div className={ styles.inline }>
-          <AnswersCounter counter={ answersCounter } />
+          <AnswersCounter counter={ selectedForm.counter } />
           <ButtonView
             value={ getString( 'logout' ) }
             icon={ <ExitToAppIcon /> }
@@ -52,13 +50,9 @@ const Creator = ({
         </div>
         <Card
           title={ getString( 'previewForm' ) }
-          body={ <Form preview /> }
+          body={ <Form { ...selectedForm } preview /> }
         />
-        <Card
-          cardClass={ styles.fullWidth }
-          title={ getString( 'draw' ) }
-          body={ <Draw onRandomClick={ onDrawClick } /> }
-        />
+        <Draw />
       </div>
     </div>
   );

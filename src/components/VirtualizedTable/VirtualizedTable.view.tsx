@@ -1,3 +1,4 @@
+/* eslint-disable func-style, react/function-component-definition */
 import { useState } from 'react';
 import {
   Table,
@@ -25,7 +26,7 @@ import {
  *
  * If width/height/both are 0 make sure that parent or one of his parent has set value.
  */
-export const VirtualizedTable = ({
+export function VirtualizedTable<RowTypes>({
   rows,
   maxRows,
   columns,
@@ -34,7 +35,8 @@ export const VirtualizedTable = ({
   sortDirection = SortDirection.ASC,
   overscanRowCount = 10,
   onLoadMoreRows,
-}: IVirtualizedTable ): JSX.Element => {
+  rowRenderer = undefined,
+}: IVirtualizedTable< RowTypes > ): JSX.Element {
   const styles = useStyle();
   const disableSort = !onSort;
   const [ currentSortDirection, setCurrentSortDirection ] = useState( disableSort ? undefined : sortDirection );
@@ -75,6 +77,7 @@ export const VirtualizedTable = ({
               rowGetter={ ({ index }) => rows[ index ] }
               rowHeight={ ROW_HEIGHT + ROW_OFFSET }
               rowClassName={ getRowClassNames( styles ) }
+              rowRenderer={ rowRenderer }
               onRowsRendered={ onRowsRendered }
               overscanRowCount={ overscanRowCount }
               sort={ sort }
@@ -96,6 +99,6 @@ export const VirtualizedTable = ({
       )}
     </InfiniteLoader>
   );
-};
+}
 
 export default VirtualizedTable;

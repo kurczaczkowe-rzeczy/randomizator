@@ -42,7 +42,7 @@ export default makeStyles(({
     position: 'fixed',
     top: 0,
     left: 0,
-    zIndex: 100,
+    zIndex: 999,
     ...collapsedRules( borders.menu ),
     padding: spacing( 2.5, 0 ),
     backgroundColor: palette.backgroundLight,
