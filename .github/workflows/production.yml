@@ -21,7 +21,7 @@ jobs:
       - name: Install Packages
         run: |
           npm install
-          npm i -g firebase-tools
+          npm i -g firebase-tools@9.8.0
       - name: Build production page
         env:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY_PROD }}

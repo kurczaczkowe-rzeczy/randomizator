@@ -57,7 +57,7 @@ jobs:
       - name: Install depedencies
         run: |
           npm i
-          npm i -g firebase-tools
+          npm i -g firebase-tools@9.8.0
       - name: Setup storybook
         run: npm run build-storybook
       - name: Setup firebase
