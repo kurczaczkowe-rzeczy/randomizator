@@ -42,12 +42,13 @@ export const getCurrentUserRole = (): UserThunkAction => async (
 ) => {
   const { uid, isEmpty } = getState().firebase.auth;
 
-  try {
-    if ( isEmpty ) {
-      dispatch({ type: GET_CURRENT_USER_ROLE, payload: { currentUserRole: USER_ROLES.GUEST }});
+  if ( isEmpty ) {
+    dispatch({ type: GET_CURRENT_USER_ROLE, payload: { currentUserRole: USER_ROLES.GUEST }});
 
-      return;
-    }
+    return;
+  }
+
+  try {
 
     const doc = await getFirestore()
       .collection( 'users' )
