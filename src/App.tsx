@@ -139,8 +139,7 @@ const App = (): JSX.Element => {
             path={ ROUTES.guest }
             component={ GuestPage }
           />
-          {/* eslint-disable-next-line react/jsx-no-useless-fragment */}
-          <>{ isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes }</>
+          { isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes }
           <Redirect from="/*" to={ ROUTES.notFound } />
         </Switch>
         { isAuthenticated && <DrawerMenu items={ menuItems } /> }

@@ -19,6 +19,10 @@ const reducer = ( state = initialState, action: FormAction = { type: CLEAR_FORM 
     case CLEAR_FORM:
       return initialState;
     case SET_SELECTED_FORM:
+      return {
+        ...action.payload,
+        errors: null,
+      };
     case SET_FORM_NAME:
       return {
         ...state,
