@@ -17,7 +17,6 @@ import {
   UserActionsTypes,
   AnswersManagerActionsTypes,
   AnswersManagerActionsTypesWithPayload,
-  FormActionsTypesWithPayload,
   FormActionsTypes,
   DrawActionsTypes,
   ADD_TAG,
@@ -30,6 +29,8 @@ import {
   AnswersActionsTypes,
   CLEAR_ANSWERS,
   FirestoreActionTypes,
+  SET_FORM_NAME,
+  SET_SELECTED_FORM,
 } from 'store/actions';
 import {
   WeightAnswers,
@@ -54,11 +55,11 @@ export interface IActionWithPayload< Type, Payload > extends IAction< Type >{ pa
 type Card = keyof typeof CARDS;
 
 // STATES
-export interface IGlobalState{
+export interface IGlobalState {
   readonly bindToCard: ( Card | undefined )[];
   readonly isLoading: boolean;
   readonly isModalOpen: boolean;
-  readonly language: 'PL' | 'ENG' ;
+  readonly language: 'PL' | 'ENG';
   readonly loadingsQueue: string[];
 }
 
@@ -118,7 +119,8 @@ export type GlobalAction =
 export type FormsAction = IAction< typeof CLEAR_FORMS > | IActionWithPayload< typeof ADD_FORM, IForm >;
 export type FormAction =
   | IAction< FormActionsTypes >
-  | IActionWithPayload< FormActionsTypesWithPayload, Pick< IForm, 'id' >>
+  | IActionWithPayload< typeof SET_SELECTED_FORM, IForm >
+  | IActionWithPayload< typeof SET_FORM_NAME, Pick< IForm, 'id' >>
   | IActionWithPayload< typeof ERROR_FORM, IErrorMessage >;
 export interface IUserActionPayload {
   currentUserRole?: Role;

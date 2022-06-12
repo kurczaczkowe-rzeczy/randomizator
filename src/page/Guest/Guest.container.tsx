@@ -11,12 +11,15 @@ import {
 import { useDispatch } from 'react-redux';
 import _isEmpty from 'lodash/isEmpty';
 import _isEqual from 'lodash/isEqual';
+import _includes from 'lodash/includes';
 
 import useAnswerBatch from 'hooks/useAnswerBatch';
 import useTypedSelector from 'hooks/useTypedSelector';
 import useTimeout from 'hooks/useTimeout';
 import useLocaleString from 'hooks/useLocaleString';
-import { hideLoader, showLoader } from 'store/actions/globalActions';
+import {
+  forceHideLoader, hideLoader, showLoader,
+} from 'store/actions/globalActions';
 import { getCreatorName } from 'store/actions/userActions';
 import { fetchFormName } from 'store/actions/formAction';
 import {
@@ -46,16 +49,25 @@ const GuestPage = (): JSX.Element => {
     _isEqual );
   const errorFormName = useTypedSelector(({ form: { errors }}) => errors );
   const errorUserName = useTypedSelector(({ usr: { errors }}) => errors );
+  const loaderCaller = useTypedSelector(({ global: { loadingsQueue }}) => loadingsQueue, _isEqual );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const action = _isEmpty( creatorName ) || _isEmpty( form.name ) ? showLoader : hideLoader;
+    const notEmptyFormNameAndCreatorName = !_isEmpty( creatorName ) && !_isEmpty( form.name );
 
-    dispatch( action( PAGES.GUEST ));
+    if (( _includes( loaderCaller, PAGES.HOME ) && notEmptyFormNameAndCreatorName )
+      || notEmptyFormNameAndCreatorName ) {
+      dispatch( forceHideLoader());
+
+      return;
+    }
+
+    dispatch( showLoader( PAGES.GUEST ));
   }, [
     dispatch,
     creatorName,
     form.name,
+    loaderCaller,
   ]);
 
   const highlightFormName = useCallback(( event ) => {
@@ -92,6 +104,8 @@ const GuestPage = (): JSX.Element => {
     dispatch( getCreatorName( creatorId ));
     dispatch( fetchFormName( creatorId, formId ));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  console.log( 'GuestPage ->', {});
 
   return ( errorFormName || errorUserName )
     ? <Redirect from="/*" to={ `${ APP_NAME_SUFFIX }/not_found` } />
