@@ -49,7 +49,7 @@ export const FormChooser = ({
             <Link
               className={ styles.openInNewIconWrapper }
               title={ getString( 'openFormLink' ) }
-              to={ `/${ creatorID }/${ formID }` }
+              to={ prepareLink( `/${ creatorID }/${ formID }` ) }
               target="_blank"
               rel="noopener noreferrer"
             >
