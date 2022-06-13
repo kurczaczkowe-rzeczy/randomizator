@@ -7,7 +7,12 @@ export default makeStyles(({ palette, spacing }) => ({
   },
   selectWrapper: { marginBottom: spacing( 3 ) },
   linkWrapper: { display: 'flex' },
-  openInNewIconWrapper: { marginRight: spacing( 1 ) },
+  openInNewIconWrapper: {
+    marginRight: spacing( 1 ),
+
+    '&:visited, &:link': { color: 'inherit' },
+    '&:focus': { color: palette.primary.main },
+  },
   openInNewIcon: {
     cursor: 'pointer',
 

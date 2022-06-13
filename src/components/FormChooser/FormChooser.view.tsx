@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import _isEmpty from 'lodash/isEmpty';
 
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
@@ -49,9 +50,15 @@ export const FormChooser = ({
             />
           </div>
           <div className={ styles.linkWrapper }>
-            <div className={ styles.openInNewIconWrapper } title={ getString( 'openFormLink' ) }>
+            <Link
+              className={ styles.openInNewIconWrapper }
+              title={ getString( 'openFormLink' ) }
+              to={ link }
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <OpenInNewIcon classes={{ root: styles.openInNewIcon }} onClick={ onGoToForm } />
-            </div>
+            </Link>
             <CopyText
               text={ link }
               content={ (
