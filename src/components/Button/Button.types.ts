@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, MouseEvent } from 'react';
 
 export interface IButton{
   /** Specify additional styles passed to button element. */
@@ -10,7 +10,7 @@ export interface IButton{
   /**
    * Action call on user interaction via mouse click on this element.
    */
-  onClick?: () => void;
+  onClick?: ( event: MouseEvent<HTMLElement> ) => void;
   /**
    * Type of Button. Default value is Button.
    */

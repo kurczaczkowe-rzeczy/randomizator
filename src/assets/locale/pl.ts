@@ -3,6 +3,7 @@ const localizationPL = {
   addUser: 'Dodaj użytkownika',
   answersWeightManagerTitle: 'Odpowiedzi',
   activeNameForm: 'Nazwa aktywnego formularza',
+  confirmation: 'Zatwierdź zmiany',
   content: 'Zawartość',
   copied: 'Skopiowano',
   copyIcon: 'Skopiuj link',

@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import _isEqual from 'lodash/isEqual';
 
-import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
-
+import Button from 'components/Button';
+import useLocaleString from 'hooks/useLocaleString';
 import useTypedSelector from 'hooks/useTypedSelector';
 
 import useStyle from './AnswerListener.styles';
@@ -13,12 +13,20 @@ export const AnswerListener = ({ onWeightUpdate }: IAnswerListener ): JSX.Elemen
   const styles = useStyle();
   const areDirtyAnswers = useTypedSelector(({ answersManager: { areDirtyAnswers }}) => areDirtyAnswers );
   const dirtyAnswer = useTypedSelector(({ answersManager: { dirtyAnswer }}) => dirtyAnswer, _isEqual );
+  const getString = useLocaleString();
 
   return (
-    <PlaylistAddCheckIcon
-      className={ classNames( styles.root, { [ styles.dirty ]: areDirtyAnswers }) }
-      onClick={ () => { onWeightUpdate( dirtyAnswer ); } }
-    />
+    <div className={ styles.root }>
+      <Button
+        className={ classNames( styles.save, { [ styles.dirty ]: areDirtyAnswers }) }
+        onClick={ ( e ) => {
+          e.preventDefault();
+          onWeightUpdate( dirtyAnswer );
+        } }
+        type="submit"
+        value={ getString( 'confirmation' ) }
+      />
+    </div>
   );
 };
 
