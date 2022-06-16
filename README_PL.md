@@ -1,4 +1,4 @@
-# Randomizator [![App Release](https://img.shields.io/badge/dynamic/json?color=blue&label=wersja&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
+# Randomizator ![version](https://img.shields.io/github/package-json/v/kurczaczkowe-rzeczy/randomizator?label=wersja) ![Latest release](https://img.shields.io/github/v/release/kurczaczkowe-rzeczy/randomizator?label=ostatnie%20wydanie)
 
 Jeśli chcesz przetestować, sprawdź [to łącze](https://kurczaczkowe-rzeczy.github.io/randomizator/). Przykładowy użytkownik:
 - Nazwa użytkownika: randomizator@example.com
