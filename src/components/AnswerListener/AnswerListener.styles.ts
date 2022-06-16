@@ -1,14 +1,18 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-export default makeStyles(({ palette }) => ({
+export default makeStyles(({ spacing }) => ({
   root: {
-    color: palette.fadedColorText(),
-    pointerEvents: 'none',
-    transition: 'color 300ms ease-in-out',
+    position: 'absolute',
+    bottom: '20px',
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
   },
-  dirty: {
-    color: palette.colorTextSelected,
-    pointerEvents: 'auto',
-    cursor: 'pointer',
+  save: {
+    width: 'max-content',
+    padding: spacing( 1, 1.5 ),
+    opacity: 0,
+    transition: 'opacity 300ms ease-in-out',
   },
+  dirty: { opacity: 1 },
 }));

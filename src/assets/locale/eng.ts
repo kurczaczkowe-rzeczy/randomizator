@@ -5,6 +5,7 @@ const localizationENG: LocaleResources = {
   addUser: 'Add user',
   answersWeightManagerTitle: 'Answers',
   activeNameForm: 'Name of active form',
+  confirmation: 'Confirm changes',
   content: 'Content',
   copied: 'Copied',
   copyIcon: 'Copy link',

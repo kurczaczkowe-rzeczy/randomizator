@@ -7,6 +7,7 @@ import {
 import _isEmpty from 'lodash/isEmpty';
 import _differenceBy from 'lodash/differenceBy';
 
+import AnswerListener from 'components/AnswerListener';
 import AnswerRow from 'components/AnswerRow';
 import VirtualizedTable from 'components/VirtualizedTable';
 import useLocaleString from 'hooks/useLocaleString';
@@ -30,7 +31,7 @@ export const AnswersTable = ({
     keyName: '_id',
   });
 
-  const columns = getColumns( getString, onWeightUpdate );
+  const columns = getColumns( getString );
 
   useEffect(() => {
     if ( _isEmpty( fields ) || _differenceBy(
@@ -53,6 +54,7 @@ export const AnswersTable = ({
           maxRows={ 10000 }
         />
       </FormProvider>
+      <AnswerListener onWeightUpdate={ onWeightUpdate } />
     </form>
   );
 };
