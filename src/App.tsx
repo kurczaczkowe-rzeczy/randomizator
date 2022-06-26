@@ -127,6 +127,7 @@ const App = (): JSX.Element => {
     : (
       <>
         <Switch>
+          { isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes }
           <Route
             exact
             key="error"
@@ -139,7 +140,6 @@ const App = (): JSX.Element => {
             path={ ROUTES.guest }
             component={ GuestPage }
           />
-          { isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes }
           <Redirect from="/*" to={ ROUTES.notFound } />
         </Switch>
         { isAuthenticated && <DrawerMenu items={ menuItems } /> }

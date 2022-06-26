@@ -60,6 +60,7 @@ const localizationENG: LocaleResources = {
   organizationName: 'Kurczaczkowe rzeczy',
   password: 'Password',
   previewForm: 'Preview form',
+  promptConfirmation: 'It looks like you have some unsaved changes. Are you sure you want to leave the page?',
   send: 'Send',
   sendingAnswersError: 'Error occurrence on form submitting. Try again later.',
   tempAppNotCreated: 'Temporary app was not created',

@@ -1,3 +1,5 @@
+import { AnyAction } from 'redux';
+
 import {
   SHOW_LOADER,
   HIDE_LOADER,
@@ -5,18 +7,21 @@ import {
   HIDE_MODAL,
   SHOW_MODAL,
   FORCE_HIDE_LOADER,
+  SET_BLOCK_NAVIGATION_CB,
+  BLOCK_NAVIGATION_CB,
 } from 'store/actions';
 import {
   ActionCreator,
   GlobalAction,
-  IGlobalActionsPayloads,
+  IBlocNavigationPayload,
+  ILoaderPayload,
 } from 'store/types';
 
 type GlobalActionCreator< PayloadArgs extends unknown[] = []> = ActionCreator< GlobalAction, PayloadArgs >;
 
 type LoaderActionCreator = GlobalActionCreator<[
-  callFrom: IGlobalActionsPayloads[ 'callFrom' ],
-  bindToCard?: IGlobalActionsPayloads[ 'bindToCard' ],
+  callFrom: ILoaderPayload[ 'callFrom' ],
+  bindToCard?: ILoaderPayload[ 'bindToCard' ],
 ]>;
 
 /**
@@ -45,3 +50,22 @@ export const showModal: GlobalActionCreator = () => ( dispatch ) => { dispatch({
 export const hideModal: GlobalActionCreator = () => ( dispatch ) => { dispatch({ type: HIDE_MODAL }); };
 
 export const clearGlobal: GlobalActionCreator = () => ( dispatch ) => { dispatch({ type: CLEAR_GLOBAL }); };
+
+export const blockNavigationCb: GlobalActionCreator = () => ( dispatch, getState ) => {
+  const { global } = getState();
+
+  if ( global.blockNavigationActionType ) {
+    dispatch< AnyAction >({
+      type: global.blockNavigationActionType,
+      payload: global.blockNavigationActionPayload,
+    });
+  }
+  dispatch({ type: BLOCK_NAVIGATION_CB });
+};
+
+export const setBlockNavigationCb: GlobalActionCreator<[
+  blockNavigationActionType: IBlocNavigationPayload[ 'blockNavigationActionType' ],
+  blockNavigationActionPayload?: IBlocNavigationPayload[ 'blockNavigationActionPayload' ],
+]> = ( blockNavigationActionType, blockNavigationActionPayload ) => ( dispatch ) => {
+  dispatch({ type: SET_BLOCK_NAVIGATION_CB, payload: { blockNavigationActionType, blockNavigationActionPayload }});
+};

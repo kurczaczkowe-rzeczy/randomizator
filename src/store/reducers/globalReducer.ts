@@ -1,19 +1,23 @@
-import _union from 'lodash/union';
-import _pull from 'lodash/pull';
 import _isEmpty from 'lodash/isEmpty';
+import _pull from 'lodash/pull';
+import _union from 'lodash/union';
 
 import {
-  HIDE_LOADER,
-  FORCE_HIDE_LOADER,
-  SHOW_LOADER,
+  BLOCK_NAVIGATION_CB,
   CLEAR_GLOBAL,
+  FORCE_HIDE_LOADER,
+  HIDE_LOADER,
   HIDE_MODAL,
+  SET_BLOCK_NAVIGATION_CB,
+  SHOW_LOADER,
   SHOW_MODAL,
 } from 'store/actions';
 import { GlobalAction, IGlobalState } from 'store/types';
 
 const initialState: IGlobalState = {
   bindToCard: [],
+  blockNavigationActionPayload: undefined,
+  blockNavigationActionType: null,
   isLoading: true,
   isModalOpen: false,
   language: 'PL',
@@ -67,6 +71,20 @@ const reducer = ( state = initialState, action: GlobalAction = { type: CLEAR_GLO
     }
     case CLEAR_GLOBAL: {
       return initialState;
+    }
+    case SET_BLOCK_NAVIGATION_CB: {
+      return {
+        ...state,
+        blockNavigationActionPayload: action.payload.blockNavigationActionPayload,
+        blockNavigationActionType: action.payload.blockNavigationActionType,
+      };
+    }
+    case BLOCK_NAVIGATION_CB: {
+      return {
+        ...state,
+        blockNavigationActionPayload: undefined,
+        blockNavigationActionType: null,
+      };
     }
     default: {
       return state;

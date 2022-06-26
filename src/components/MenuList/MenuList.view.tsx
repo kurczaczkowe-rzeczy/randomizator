@@ -17,18 +17,25 @@ const MenuList = ({ items, onClose }: IMenuList ): JSX.Element => {
         path,
         id,
         children,
-      }) => (
-        <MenuItem
-          onClick={ (): void => {
-            onClose();
-            history.push( path );
-          } }
-          active={ Boolean( matchPath( history.location.pathname, { path, exact: true })?.isExact ) }
-          key={ id }
-        >
-          { children }
-        </MenuItem>
-      ))}
+        hasNestedRoutes,
+      }) => {
+        const match = matchPath( history.location.pathname, { path, exact: !hasNestedRoutes });
+
+        return (
+          <MenuItem
+            onClick={ (): void => {
+              onClose();
+              if ( match ) { return; }
+
+              history.push( path );
+            } }
+            active={ ( hasNestedRoutes && !!match ) || !!match?.isExact }
+            key={ id }
+          >
+            { children }
+          </MenuItem>
+        );
+      })}
     </>
   );
 };
