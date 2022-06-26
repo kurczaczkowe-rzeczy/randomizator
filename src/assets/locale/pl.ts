@@ -58,6 +58,7 @@ const localizationPL = {
   organizationName: 'Kurczaczkowe rzeczy',
   password: 'Hasło',
   previewForm: 'Wygląd formularza',
+  promptConfirmation: 'Wygląda na to, że masz jakieś nie zapisane zmiany. Czy na pewno chcesz opuścić stronę?',
   send: 'Wyślij',
   sendingAnswersError: 'Wystąpił błąd podczas przesyłania odpowiedzi. Spróbuj ponownie później.',
   tempAppNotCreated: 'Tymczasowa aplikacja nie została utworzona.',

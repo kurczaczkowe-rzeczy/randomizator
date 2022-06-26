@@ -47,7 +47,7 @@ export const authenticatedRoutesCollection: AuthenticatedRoute[] = [
   },
   {
     key: 'dashboard',
-    exact: true,
+    exact: false,
     component: Dashboard,
     path: ROUTES.dashboard,
     access: [ USER_ROLES.ADMIN ],

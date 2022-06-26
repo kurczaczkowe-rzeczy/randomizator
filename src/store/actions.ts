@@ -51,14 +51,18 @@ export const FORCE_HIDE_LOADER = 'FORCE_HIDE_LOADER';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const CLEAR_GLOBAL = 'CLEAR_GLOBAL';
+export const BLOCK_NAVIGATION_CB = 'BLOCK_NAVIGATION_CB';
+export const SET_BLOCK_NAVIGATION_CB = 'SET_BLOCK_NAVIGATION_CB';
 export type GlobalActionsTypes =
   | typeof FORCE_HIDE_LOADER
   | typeof SHOW_MODAL
   | typeof HIDE_MODAL
-  | typeof CLEAR_GLOBAL;
-export type GlobalActionsTypesWithPayload =
+  | typeof CLEAR_GLOBAL
+  | typeof BLOCK_NAVIGATION_CB;
+export type LoaderActionsTypes =
   | typeof SHOW_LOADER
   | typeof HIDE_LOADER;
+export type BlockNavigationActionType = typeof SET_BLOCK_NAVIGATION_CB;
 
 export const CLEAR_ANSWERS_MANAGER = 'CLEAR_ANSWERS_MANAGER';
 export const SET_EDITED_ANSWER = 'SET_EDITED_ANSWER';

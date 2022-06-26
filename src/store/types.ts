@@ -13,7 +13,7 @@ import {
   SET_DIRTY_ANSWER,
   LogoutActionsTypes,
   GlobalActionsTypes,
-  GlobalActionsTypesWithPayload,
+  LoaderActionsTypes,
   UserActionsTypes,
   AnswersManagerActionsTypes,
   AnswersManagerActionsTypesWithPayload,
@@ -31,6 +31,7 @@ import {
   FirestoreActionTypes,
   SET_FORM_NAME,
   SET_SELECTED_FORM,
+  BlockNavigationActionType,
 } from 'store/actions';
 import {
   WeightAnswers,
@@ -57,6 +58,8 @@ type Card = keyof typeof CARDS;
 // STATES
 export interface IGlobalState {
   readonly bindToCard: ( Card | undefined )[];
+  readonly blockNavigationActionPayload?: Mapping< unknown >;
+  readonly blockNavigationActionType: string | null;
   readonly isLoading: boolean;
   readonly isModalOpen: boolean;
   readonly language: 'PL' | 'ENG';
@@ -107,15 +110,20 @@ export interface IRootState {
 /* eslint-enable @typescript-eslint/no-explicit-any */
 // ACTIONS
 export type LogoutAction = IAction< LogoutActionsTypes >;
-export interface IGlobalActionsPayloads {
+export interface ILoaderPayload {
   /** Card from which loader action was called. */
   bindToCard?: Card;
   /** Page from which loader action was called. */
   callFrom: keyof typeof PAGES;
 }
+export interface IBlocNavigationPayload {
+  blockNavigationActionPayload?: Mapping< unknown >;
+  blockNavigationActionType: string;
+}
 export type GlobalAction =
   | IAction< GlobalActionsTypes >
-  | IActionWithPayload< GlobalActionsTypesWithPayload, IGlobalActionsPayloads >;
+  | IActionWithPayload< LoaderActionsTypes, ILoaderPayload >
+  | IActionWithPayload< BlockNavigationActionType, IBlocNavigationPayload >;
 export type FormsAction = IAction< typeof CLEAR_FORMS > | IActionWithPayload< typeof ADD_FORM, IForm >;
 export type FormAction =
   | IAction< FormActionsTypes >

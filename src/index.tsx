@@ -13,6 +13,7 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import StylesProvider from '@material-ui/styles/StylesProvider';
 
 import { firebase } from 'config/firebaseConfig';
+import { blockNavigationCb } from 'store/actions/globalActions';
 import rootReducer from 'store/reducers/rootReducer';
 import { createGenerateClassName } from 'utils/createGenerateClassName';
 import { theme } from 'theme';
@@ -48,7 +49,20 @@ const render = (
         <StylesProvider generateClassName={ generateClassName }>
           <ThemeProvider theme={ theme }>
             <CssBaseline />
-            <BrowserRouter>
+            <BrowserRouter getUserConfirmation={ ( message, callback ) => {
+              // ToDo: Create custom dialog with confirmation
+              const confirm = window.confirm( message );
+
+              if ( confirm ) {
+                // ToDo: Here is probably problem with no recognize ThunkAction as valid dispatch action
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                store.dispatch( blockNavigationCb());
+              }
+
+              callback( confirm );
+            } }
+            >
               <App />
             </BrowserRouter>
             <Footer />

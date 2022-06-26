@@ -17,6 +17,8 @@ export interface ITab {
 export type onTabChange = ( newTab: string ) => void;
 
 export interface ITabs {
+  /** Blocks possibility to switch tabs. */
+  blockChangeTab?: boolean;
   /** Specify which tab is default selected */
   defaultTab: StringOrNumber;
   /** Method call after user click on any tab */

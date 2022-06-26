@@ -140,7 +140,6 @@ const App = (): JSX.Element => {
             path={ ROUTES.guest }
             component={ GuestPage }
           />
-          { isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes }
           <Redirect from="/*" to={ ROUTES.notFound } />
         </Switch>
         { isAuthenticated && <DrawerMenu items={ menuItems } /> }
