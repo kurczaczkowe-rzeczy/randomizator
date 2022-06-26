@@ -4,6 +4,7 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 import _isEmpty from 'lodash/isEmpty';
 import _first from 'lodash/first';
 import _map from 'lodash/map';
+import _find from 'lodash/find';
 
 import { FORM_ID_KEY } from 'constans';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -37,14 +38,18 @@ const FormChooser = (): JSX.Element => {
 
   useEffect(() => {
     if ( !_isEmpty( forms ) && _isEmpty( defaultFormID )) {
-      onFormSelect({ id: _isEmpty( formID ) ? _first< IBaseForm >( forms )?.id : formID });
+      onFormSelect({
+        id: _isEmpty( formID ) || !_find( forms, [ 'id', formID ])
+          ? _first< IBaseForm >( forms )?.id
+          : formID,
+      });
     }
   }, [
     defaultFormID,
     formID,
     forms,
     onFormSelect,
-    setFormID,
+    setFormID, // ToDo: check if it is needed here
   ]);
 
   return (

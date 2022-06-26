@@ -8,7 +8,9 @@ import { firebaseConfig } from 'config/firebaseConfig';
 import useLocaleString from 'hooks/useLocaleString';
 import useTypedSelector from 'hooks/useTypedSelector';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
-import { PAGES, CARDS } from 'constans';
+import {
+  PAGES, CARDS, USER_ROLES,
+} from 'constans';
 
 import Card from 'components/card';
 
@@ -22,7 +24,7 @@ import {
 } from './UserCreator.utils';
 
 const UserCreator = (): JSX.Element => {
-  const firestore = useFirestore();
+  const { batch: firestoreBatch, collection } = useFirestore();
   const dispatch = useDispatch();
   const isLoading = useTypedSelector(({ global: { bindToCard }}) => _includes( bindToCard, CARDS.USER_CREATOR ));
   const getString = useLocaleString();
@@ -70,15 +72,28 @@ const UserCreator = (): JSX.Element => {
     }
 
     try {
-      // ToDo: change Promise.all to batch
-      await Promise.all([
-        firestore.collection( 'users' )
-          .doc( newUser.uid )
-          .set({ name: nickname }),
-        firestore.collection( newUser.uid )
-          .add({ name: formName, answers: []}),
-      ]);
+      const batch = firestoreBatch();
+      const newUserNewFormRef = collection( newUser.uid ).doc();
 
+      batch.set( collection( 'users' ).doc( newUser.uid ), { name: nickname, role: USER_ROLES.CREATOR });
+      batch.set( newUserNewFormRef, {
+        name: formName,
+        counter: 0,
+        fields: [
+          {
+            name: 'Imię męskie',
+            type: 'text',
+          },
+          {
+            name: 'Imię damskie',
+            type: 'text',
+          },
+        ],
+      });
+
+      await batch.commit();
+
+      alert( getString( 'userAdded' ));
     } catch ( error: unknown ) {
       const errorMessage = userCreatorErrorHandler( error, getString );
 

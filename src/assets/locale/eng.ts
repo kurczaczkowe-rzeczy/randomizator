@@ -66,6 +66,7 @@ const localizationENG: LocaleResources = {
   tempAppNotCreated: 'Temporary app was not created',
   typeFilterElements: 'Enter a filtering elements',
   unknownError: 'An unknown error occurrence',
+  userAdded: 'User was added with form data.',
   userIsNullAfterCreating: 'Unknown error occurred after user create. Please check if user was added to firebase admin panel.',
   version: 'Version',
   weakPassword: 'Password is too weak to create account',
