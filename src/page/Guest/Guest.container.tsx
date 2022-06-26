@@ -105,8 +105,6 @@ const GuestPage = (): JSX.Element => {
     dispatch( fetchFormName( creatorId, formId ));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  console.log( 'GuestPage ->', {});
-
   return ( errorFormName || errorUserName )
     ? <Redirect from="/*" to={ `${ APP_NAME_SUFFIX }/not_found` } />
     : (

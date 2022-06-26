@@ -13,4 +13,5 @@ export default{
 
 const Template: Story<IDrawerMenu> = ( args ) => <Component { ...args } />;
 
-export const Default = Template.bind({});
+export const DrawerMenu = Template.bind({});
+DrawerMenu.storyName = 'DrawerMenu';

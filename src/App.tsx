@@ -127,6 +127,7 @@ const App = (): JSX.Element => {
     : (
       <>
         <Switch>
+          { isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes }
           <Route
             exact
             key="error"

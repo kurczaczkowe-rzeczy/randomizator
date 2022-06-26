@@ -20,6 +20,7 @@ export const getMenuItems = ( getString: GetString ): IDrawerMenu[ 'items' ] => 
     id: 1,
     path: ROUTES.dashboard,
     access: [ USER_ROLES.ADMIN ],
+    hasNestedRoutes: true,
   },
   {
     children: getString( 'formManagement' ),

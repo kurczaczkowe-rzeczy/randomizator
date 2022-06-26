@@ -12,4 +12,5 @@ export default{
 
 const Template: Story<IMenuList> = ( args ) => <Component { ...args } />;
 
-export const Default = Template.bind({});
+export const MenuList = Template.bind({});
+MenuList.storyName = 'MenuList';
