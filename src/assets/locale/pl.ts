@@ -64,6 +64,7 @@ const localizationPL = {
   tempAppNotCreated: 'Tymczasowa aplikacja nie została utworzona.',
   typeFilterElements: 'Wprowadź składnik filtrowania',
   unknownError: 'Wystąpił nieznany błąd',
+  userAdded: 'Użytkownik został dodany wraz z danymi formularza.',
   userIsNullAfterCreating: 'Wystąpił nieoczekiwany błąd po utworzeniu użytkownika. Sprawdź proszę w panelu admina firebase czy użytkownik został stworzony.',
   version: 'Wersja',
   weakPassword: 'Hasło jest zbyt słabe aby utworzyć konto',

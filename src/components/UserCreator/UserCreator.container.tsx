@@ -73,7 +73,7 @@ const UserCreator = (): JSX.Element => {
 
     try {
       const batch = firestoreBatch();
-      const newUserNewFormRef = collection( newUser.uid ).doc( newUser.uid );
+      const newUserNewFormRef = collection( newUser.uid ).doc();
 
       batch.set( collection( 'users' ).doc( newUser.uid ), { name: nickname, role: USER_ROLES.CREATOR });
       batch.set( newUserNewFormRef, {
@@ -92,6 +92,8 @@ const UserCreator = (): JSX.Element => {
       });
 
       await batch.commit();
+
+      alert( getString( 'userAdded' ));
     } catch ( error: unknown ) {
       const errorMessage = userCreatorErrorHandler( error, getString );
 
