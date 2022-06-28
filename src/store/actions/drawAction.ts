@@ -6,7 +6,11 @@ import _reduce from 'lodash/reduce';
 
 import { CARDS, PAGES } from 'constans';
 import { getAnswersOnceFromFirestore } from 'store/actions/answersAction';
-import { hideLoader, showLoader } from 'store/actions/globalActions';
+import {
+  clearFirestoreAnswers,
+  hideLoader,
+  showLoader,
+} from 'store/actions/globalActions';
 import {
   ActionCreator,
   DrawAction,
@@ -21,7 +25,6 @@ import {
   REMOVE_ERROR_DRAW_RESULT,
   CLEAR_DRAW_RESULT,
   SET_ERRORS_DRAW_RESULT,
-  CLEAR_FIRESTORE_ANSWERS,
 } from 'store/actions';
 import {
   Mapping,
@@ -40,7 +43,7 @@ type DrawActionCreator< PayloadArgs extends unknown[] = []> =
 /** Actions trigger clean draw store. */
 export const clearDraw: DrawActionCreator = () => ( dispatch ) => {
   dispatch({ type: CLEAR_DRAW_RESULT });
-  dispatch({ type: CLEAR_FIRESTORE_ANSWERS });
+  dispatch( clearFirestoreAnswers());
 };
 
 // ToDo: issue #109 - firstly get only answers that matches to tags then draw from them

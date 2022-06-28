@@ -55,6 +55,8 @@ export interface IUseAnswersConnectReturn {
   answers: Answers;
   /** Identifier of form associated with answer. */
   formID: IAnswer[ 'formID' ];
+  /** Specify if form was changed or not. */
+  formWasChanged: boolean;
   /** State of loading answers. */
   isLoading: boolean;
   /** Methods allows keep tracking last fetched answer. */

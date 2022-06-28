@@ -1,4 +1,9 @@
-import { useCallback, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { getSnapshotByObject } from 'redux-firestore';
@@ -28,6 +33,8 @@ const useAnswersConnect = ({
   const isRequesting = useTypedSelector(({ firestore: { status: { requesting: { answers }}}}) => !!answers );
   const isRequested = useTypedSelector(({ firestore: { status: { requested: { answers }}}}) => !!answers );
 
+  const previousFormID = useRef( formID );
+
   useFirestoreConnect([
     {
       collectionGroup: 'fields',
@@ -55,12 +62,24 @@ const useAnswersConnect = ({
   }, [ answers, startAfter ]);
 
   const isLoading = !( !isRequesting && isRequested );
+  const formWasChanged = !_isEqual( previousFormID.current, formID );
+
+  useEffect(() => {
+    if ( formWasChanged ) {
+      previousFormID.current = formID;
+    }
+  }, [ formID, formWasChanged ]);
+
+  useEffect(() => {
+    if ( formWasChanged ) { setStartAfter( null ); }
+  }, [ formWasChanged ]);
 
   return {
     formID,
     answers,
     isLoading,
     updateStartAfter,
+    formWasChanged,
   };
 };
 
