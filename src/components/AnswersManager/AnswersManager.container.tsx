@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import _first from 'lodash/first';
 import _get from 'lodash/get';
 import _map from 'lodash/map';
@@ -15,6 +16,7 @@ import useLocaleString from 'hooks/useLocaleString';
 import useTypedSelector from 'hooks/useTypedSelector';
 import { CARDS } from 'constans';
 import { CLEAR_ANSWERS_MANAGER } from 'store/actions';
+import { clearFirestoreAnswers } from 'store/actions/globalActions';
 
 import useStyle from './AnswersManager.styles';
 
@@ -25,6 +27,7 @@ import useStyle from './AnswersManager.styles';
 export const AnswersManager = (): JSX.Element => {
   const styles = useStyle();
   const getString = useLocaleString();
+  const dispatch = useDispatch();
 
   const formID = useTypedSelector(({ form: { id }}) => id );
   const isEmptyForm = useTypedSelector(({ form: { counter }}) => !counter );
@@ -53,6 +56,7 @@ export const AnswersManager = (): JSX.Element => {
               defaultTab={ _get( _first( tabs ), 'index' ) ?? '' }
               tabs={ _map( tabs, ( tab ) => ({ ...tab, content: <AnswersTable tab={ tab.index as string } /> })) }
               blockChangeTab={ shouldShowPrompt }
+              onTabChange={ () => { dispatch( clearFirestoreAnswers()); } }
             />
           )) }
         cardClass={ styles.card }

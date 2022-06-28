@@ -19,6 +19,11 @@ export interface IAnswersTable {
   onWeightUpdate: IAnswerListener[ 'onWeightUpdate' ];
   /** This value specify list of answers. */
   rows: IAnswerRow[];
+  /**
+   * This value trigger reset whole form to avoid remember fo example data from last selected form. If not specified
+   * it defaults to ***false***.
+   */
+  shouldReset?: boolean;
 }
 /** An object represent connection between tab and rendered table. */
 export interface IAnswerTableContainer {

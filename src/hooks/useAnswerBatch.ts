@@ -53,8 +53,8 @@ const MAX_ANSWERS_COUNT_TO_CHUNK = 100;
 
 // ToDo: remove in next version
 const getFieldName = ( fieldName: string ): string => {
-  if ( fieldName === 'nameFemale' ) { return 'Imie damskie'; }
-  if ( fieldName === 'nameMale' ) { return 'Imie męskie'; }
+  if ( fieldName === 'nameFemale' ) { return 'Imię damskie'; }
+  if ( fieldName === 'nameMale' ) { return 'Imię męskie'; }
 
   return fieldName;
 };
@@ -188,7 +188,7 @@ const useAnswerBatch = ( creatorID: string, formID: string ): IAnswerBatch => {
         formRef = doc( `${ creatorID }/${ id }` );
 
         batch.update( formRef, {
-          fields: [{ name: 'Imie męskie', type: 'text' }, { name: 'Imie damskie', type: 'text' }],
+          fields: [{ name: 'Imię męskie', type: 'text' }, { name: 'Imię damskie', type: 'text' }],
           answers: FieldValue.delete(),
         });
 

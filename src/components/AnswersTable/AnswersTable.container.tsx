@@ -1,4 +1,8 @@
-import { useCallback, useEffect } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import { useFirestore } from 'react-redux-firebase';
 import _map from 'lodash/map';
@@ -7,6 +11,7 @@ import _compact from 'lodash/compact';
 
 import { clearAnswerManager } from 'store/actions/answersManagerActions';
 import { showLoader, hideLoader } from 'store/actions/globalActions';
+import { Filters } from 'hooks/types';
 import useAnswersConnect from 'hooks/useAnswersConnect';
 import useTypedSelector from 'hooks/useTypedSelector';
 import { CARDS, PAGES } from 'constans';
@@ -23,20 +28,20 @@ const AnswersTableContainer = ({ tab }: IAnswerTableContainer ): JSX.Element => 
   const { batch: firestoreBatch, doc } = useFirestore();
   const dispatch = useDispatch();
   const creatorID = useTypedSelector(({ firebase: { auth: { uid }}}) => uid );
+  const filters = useMemo< Filters >(() => [
+    [
+      'fieldName',
+      '==',
+      tab,
+    ],
+  ], [ tab ]);
   const {
     answers,
     isLoading,
     updateStartAfter,
     formID,
-  } = useAnswersConnect({
-    filters: [
-      [
-        'fieldName',
-        '==',
-        tab,
-      ],
-    ],
-  });
+    formWasChanged,
+  } = useAnswersConnect({ filters });
 
   const answersRows = _map<IAnswer, IAnswerRow>( answers, ( answer ) => ({ ...answer, edit: false }));
 
@@ -83,6 +88,7 @@ const AnswersTableContainer = ({ tab }: IAnswerTableContainer ): JSX.Element => 
       rows={ answersRows }
       onLoadMoreRows={ onLoadMoreRows }
       onWeightUpdate={ onWeightUpdate }
+      shouldReset={ formWasChanged }
     />
   );
 };

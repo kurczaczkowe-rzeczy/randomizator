@@ -21,6 +21,7 @@ export const AnswersTable = ({
   rows,
   onLoadMoreRows,
   onWeightUpdate,
+  shouldReset = false,
 }: IAnswersTable ): JSX.Element => {
   const styles = useStyle();
   const getString = useLocaleString();
@@ -42,6 +43,12 @@ export const AnswersTable = ({
       append( rows );
     }
   }, [ append, rows ]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if ( shouldReset ) {
+      methods.reset();
+    }
+  }, [ shouldReset, methods ]);
 
   return (
     <form className={ styles.tableWrapper }>

@@ -51,5 +51,10 @@ export default{
 
 const Template: Story< IAnswersTable > = ( args, context ) => <Component { ...args } { ...context } />;
 
-export const AnswersTable = Template.bind({});
-AnswersTable.storyName = 'AnswersTable';
+export const Filled = Template.bind({});
+
+export const Empty = Template.bind({});
+Empty.args = { rows: []};
+
+export const WithShouldReset = Template.bind({});
+WithShouldReset.args = { ...WithShouldReset.args, shouldReset: true };
