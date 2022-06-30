@@ -4,6 +4,7 @@ import _some from 'lodash/some';
 import _filter from 'lodash/filter';
 import _sumBy from 'lodash/sumBy';
 import _random from 'lodash/random';
+import _isEmpty from 'lodash/isEmpty';
 
 import { RandomizedAnswer, RandomizedAnswers } from 'types';
 
@@ -16,6 +17,8 @@ const hasTags = ( tags: string[]) => ( answer: RandomizedAnswer ) => _some( tags
 
 /** Method randomize index of array and return value of that index. */
 export const randomItem = ( array: RandomizedAnswers ): string => {
+  if ( _isEmpty( array )) { return ''; }
+
   const weightsSum = _sumBy( array, ({ weight }) => weight );
   let randomNumber = _random( 0, weightsSum );
   let index = -1;
