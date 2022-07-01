@@ -29,9 +29,9 @@ type AnswerControllerDecorator = (
   defaultValues?: IAnswersValues,
 ) => Decorator;
 
-type DispatchDecorator = <State, Action extends ReduxAction>(
-  callback: ( dispatch: ThunkDispatch< State, unknown, Action > ) => void,
-  clearAction: () => ThunkAction< void, State, unknown, Action >
+type DispatchDecorator = <State, Action extends ReduxAction, Middleware = unknown>(
+  callback: ( dispatch: ThunkDispatch< State, Middleware, Action > ) => void,
+  clearAction: () => ThunkAction< void | Promise< void >, State, Middleware, Action >
 ) => Decorator;
 
 const DEFAULT_VALUES = { answers: [{ weight: 5, id: 'aWd2fg4h57r' }]} as IAnswersValues;

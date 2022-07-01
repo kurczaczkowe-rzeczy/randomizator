@@ -3,7 +3,7 @@ import _filter from 'lodash/filter';
 import { GetString } from 'hooks/types';
 import { hasAccess } from 'utils/permissionUtils';
 import { Role } from 'types';
-import { ROUTES, USER_ROLES } from 'constans';
+import { ROUTES } from 'constans';
 
 import { IProtectedRoute } from 'components/ProtectedRoute';
 import { IDrawerMenu } from 'components/DrawerMenu';
@@ -19,7 +19,7 @@ export const getMenuItems = ( getString: GetString ): IDrawerMenu[ 'items' ] => 
     children: getString( 'dashboard' ),
     id: 1,
     path: ROUTES.dashboard,
-    access: [ USER_ROLES.ADMIN ],
+    access: [],
     hasNestedRoutes: true,
   },
   {
@@ -50,6 +50,6 @@ export const authenticatedRoutesCollection: AuthenticatedRoute[] = [
     exact: false,
     component: Dashboard,
     path: ROUTES.dashboard,
-    access: [ USER_ROLES.ADMIN ],
+    access: [],
   },
 ];
