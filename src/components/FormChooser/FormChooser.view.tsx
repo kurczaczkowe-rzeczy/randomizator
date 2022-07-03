@@ -50,8 +50,6 @@ export const FormChooser = ({
               className={ styles.openInNewIconWrapper }
               title={ getString( 'openFormLink' ) }
               to={ prepareLink( `/${ creatorID }/${ formID }` ) }
-              target="_blank"
-              rel="noopener noreferrer"
             >
               <OpenInNewIcon classes={{ root: styles.openInNewIcon }} />
             </Link>
