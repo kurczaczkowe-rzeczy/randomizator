@@ -186,11 +186,9 @@ const useAnswerBatch = ( creatorID: string, formID: string ): IAnswerBatch => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
         formRef = doc( `${ creatorID }/${ id }` );
+        const data = { fields: [{ name: 'Imię męskie', type: 'text' }, { name: 'Imię damskie', type: 'text' }]};
 
-        batch.update( formRef, {
-          fields: [{ name: 'Imię męskie', type: 'text' }, { name: 'Imię damskie', type: 'text' }],
-          answers: FieldValue.delete(),
-        });
+        batch.update( formRef, data );
 
         batch.commit();
 
