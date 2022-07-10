@@ -4,13 +4,13 @@ import { ANSWER_TABLE_HEIGHT, TAB_HEIGHT } from 'constans';
 
 export default makeStyles({
   card: {
-    '& > div': {
+    '& > div:last-of-type': {
       flex: '1 1 auto',
       width: '100%',
+      height: ANSWER_TABLE_HEIGHT + TAB_HEIGHT,
     },
   },
   emptyInfoContainer: {
-    height: ANSWER_TABLE_HEIGHT + TAB_HEIGHT,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

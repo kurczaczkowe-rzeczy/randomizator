@@ -16,7 +16,7 @@ import { Filters } from 'hooks/types';
 // ToDo: change to general type action and then check action as described here https://phryneas.de/redux-typescript-no-discriminating-union
 type AnswerActionCreator< Payload extends unknown[] = []> = ActionCreator< AnswersAction, Payload >;
 type GetAnswersOnceFromFirestoreArgs = [
-  noAnswerOrRefErrorAction: IAction< unknown > | IActionWithPayload< unknown, unknown >,
+  noAnswerOrRefErrorAction: IAction< string > | IActionWithPayload< string, unknown >,
   filters?: Filters,
 ];
 
