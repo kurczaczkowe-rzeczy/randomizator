@@ -1,4 +1,5 @@
-import { AnyAction } from 'redux';
+import _isEmpty from 'lodash/isEmpty';
+import _forEach from 'lodash/forEach';
 
 import {
   SHOW_LOADER,
@@ -15,7 +16,7 @@ import {
   ActionCreator,
   FirestoreAction,
   GlobalAction,
-  IBlocNavigationPayload,
+  IGlobalState,
   ILoaderPayload,
 } from 'store/types';
 
@@ -69,10 +70,9 @@ export const clearGlobal: GlobalActionCreator = () => ( dispatch ) => { dispatch
 export const blockNavigationCb: GlobalActionCreator = () => ( dispatch, getState ) => {
   const { global } = getState();
 
-  if ( global.blockNavigationActionType ) {
-    dispatch< AnyAction >({
-      type: global.blockNavigationActionType,
-      payload: global.blockNavigationActionPayload,
+  if ( !_isEmpty( global.blockNavigationActions )) {
+    _forEach( global.blockNavigationActions, ({ type, payload }) => {
+      dispatch({ type, payload } as GlobalAction );
     });
   }
   dispatch({ type: BLOCK_NAVIGATION_CB });
@@ -80,16 +80,13 @@ export const blockNavigationCb: GlobalActionCreator = () => ( dispatch, getState
 
 /**
  * Action trigger save information about prepared action and his payload to store.
- * @param blockNavigationActionType - type of action that should be to invoke when user want to change page from
- * blocked page
- * @param blockNavigationActionPayload - data that should be passed to action invoked when user want to change page
- * from blocked page
+ * @param blockNavigationActions - array of types associated with their payloads that will be invoked after confirm
+ * dialog.
  */
 export const setBlockNavigationCb: GlobalActionCreator<[
-  blockNavigationActionType: IBlocNavigationPayload[ 'blockNavigationActionType' ],
-  blockNavigationActionPayload?: IBlocNavigationPayload[ 'blockNavigationActionPayload' ],
-]> = ( blockNavigationActionType, blockNavigationActionPayload ) => ( dispatch ) => {
-  dispatch({ type: SET_BLOCK_NAVIGATION_CB, payload: { blockNavigationActionType, blockNavigationActionPayload }});
+  blockNavigationActions: IGlobalState[ 'blockNavigationActions' ],
+]> = ( blockNavigationActions ) => ( dispatch ) => {
+  dispatch({ type: SET_BLOCK_NAVIGATION_CB, payload: { blockNavigationActions }});
 };
 
 /** Action clear answers in firestore store. */

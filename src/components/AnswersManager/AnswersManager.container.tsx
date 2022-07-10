@@ -15,7 +15,7 @@ import useBeforeUnloadEvent from 'hooks/useBeforeUnloadEvent';
 import useLocaleString from 'hooks/useLocaleString';
 import useTypedSelector from 'hooks/useTypedSelector';
 import { CARDS } from 'constans';
-import { CLEAR_ANSWERS_MANAGER } from 'store/actions';
+import { CLEAR_ANSWERS_MANAGER, CLEAR_FIRESTORE_ANSWERS } from 'store/actions';
 import { clearFirestoreAnswers } from 'store/actions/globalActions';
 
 import useStyle from './AnswersManager.styles';
@@ -34,8 +34,15 @@ export const AnswersManager = (): JSX.Element => {
   const fields = useTypedSelector(({ firestore: { data: { forms }}}) => forms?.[ formID ]?.fields ?? [], _isEqual );
   const isLoading = useTypedSelector(({ global: { bindToCard }}) => _includes( bindToCard, CARDS.ANSWERS_TABLE ));
 
-  const { shouldShowPrompt, Prompt } =
-    useBeforeUnloadEvent(({ answersManager: { areDirtyAnswers }}) => areDirtyAnswers, CLEAR_ANSWERS_MANAGER );
+  const blockNavigationActions = useMemo(() => [
+    { type: CLEAR_ANSWERS_MANAGER },
+    { type: CLEAR_FIRESTORE_ANSWERS },
+  ], []);
+
+  const { shouldShowPrompt, Prompt } = useBeforeUnloadEvent(
+    ({ answersManager: { areDirtyAnswers }}) => areDirtyAnswers,
+    blockNavigationActions,
+  );
 
   const tabs = useMemo(() => _map( fields, ({ name }) => ({ index: name, label: name })), [ fields ]);
 

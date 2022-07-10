@@ -6,32 +6,32 @@ import {
 import { ThunkAction } from 'redux-thunk';
 
 import {
-  ERROR_FORM,
-  CLEAR_FORMS,
   ADD_FORM,
-  CLEAR_USER,
-  SET_DIRTY_ANSWER,
-  LogoutActionsTypes,
-  GlobalActionsTypes,
-  LoaderActionsTypes,
-  UserActionsTypes,
+  ADD_TAG,
+  AnswersActionsTypes,
   AnswersManagerActionsTypes,
   AnswersManagerActionsTypesWithPayload,
-  FormActionsTypes,
-  DrawActionsTypes,
-  ADD_TAG,
-  SET_TAGS,
-  REMOVE_TAG,
-  ERROR_DRAW_RESULT,
-  REMOVE_ERROR_DRAW_RESULT,
-  DRAW_RESULT,
-  SET_ERRORS_DRAW_RESULT,
-  AnswersActionsTypes,
+  BlockNavigationActionType,
   CLEAR_ANSWERS,
+  CLEAR_FORMS,
+  CLEAR_USER,
+  DRAW_RESULT,
+  DrawActionsTypes,
+  ERROR_DRAW_RESULT,
+  ERROR_FORM,
   FirestoreActionTypes,
+  FormActionsTypes,
+  GlobalActionsTypes,
+  LoaderActionsTypes,
+  LogoutActionsTypes,
+  REMOVE_ERROR_DRAW_RESULT,
+  REMOVE_TAG,
+  SET_DIRTY_ANSWER,
+  SET_ERRORS_DRAW_RESULT,
   SET_FORM_NAME,
   SET_SELECTED_FORM,
-  BlockNavigationActionType,
+  SET_TAGS,
+  UserActionsTypes,
 } from 'store/actions';
 import {
   WeightAnswers,
@@ -50,19 +50,30 @@ export interface IState { readonly errors: string | null }
 
 export interface IErrorMessage { errorMessage: string }
 
-export interface IAction< Type > { type: Type }
-export interface IActionWithPayload< Type, Payload > extends IAction< Type >{ payload: Payload }
+export interface IAction< Type extends string > { type: Type }
+export interface IActionWithPayload< Type extends string, Payload > extends IAction< Type >{ payload: Payload }
 
 type Card = keyof typeof CARDS;
 
+interface IBlockNavigationAction extends IAction< string >{
+  /** Data that should be passed to action invoked when user want to change page from blocked page */
+  payload?: Mapping< unknown >;
+}
+
 // STATES
+/** An object represent global variables stored in state. */
 export interface IGlobalState {
+  /** Contains all cards on which loader should be shown. */
   readonly bindToCard: ( Card | undefined )[];
-  readonly blockNavigationActionPayload?: Mapping< unknown >;
-  readonly blockNavigationActionType: string | null;
+  /** Array of types associated with their payloads that will be invoked after confirm dialog. */
+  readonly blockNavigationActions: IBlockNavigationAction[];
+  /** Specify that loader should show. */
   readonly isLoading: boolean;
+  /** Specify that modal should be open. */
   readonly isModalOpen: boolean;
+  /** Contains current selected language */
   readonly language: 'PL' | 'ENG';
+  /** Contains all pages on which loader should be shown. */
   readonly loadingsQueue: string[];
 }
 
@@ -117,8 +128,8 @@ export interface ILoaderPayload {
   callFrom: keyof typeof PAGES;
 }
 export interface IBlocNavigationPayload {
-  blockNavigationActionPayload?: Mapping< unknown >;
-  blockNavigationActionType: string;
+  /** Array of types associated with their payloads that will be invoked after confirm dialog. */
+  blockNavigationActions: IGlobalState[ 'blockNavigationActions' ];
 }
 export type GlobalAction =
   | IAction< GlobalActionsTypes >
@@ -187,7 +198,7 @@ interface IMiddlewares {
   getFirestore: () => IFirestore;
 }
 
-export type ActionCreator< Action extends IAction< unknown >, PayloadArgs extends unknown[] = []> =
+export type ActionCreator< Action extends IAction< string >, PayloadArgs extends unknown[] = []> =
   ( ...payload: PayloadArgs ) => ThunkAction<
     Promise< void > | void,
     IRootState,

@@ -16,8 +16,7 @@ import { GlobalAction, IGlobalState } from 'store/types';
 
 const initialState: IGlobalState = {
   bindToCard: [],
-  blockNavigationActionPayload: undefined,
-  blockNavigationActionType: null,
+  blockNavigationActions: [],
   isLoading: true,
   isModalOpen: false,
   language: 'PL',
@@ -75,15 +74,13 @@ const reducer = ( state = initialState, action: GlobalAction = { type: CLEAR_GLO
     case SET_BLOCK_NAVIGATION_CB: {
       return {
         ...state,
-        blockNavigationActionPayload: action.payload.blockNavigationActionPayload,
-        blockNavigationActionType: action.payload.blockNavigationActionType,
+        blockNavigationActions: action.payload.blockNavigationActions,
       };
     }
     case BLOCK_NAVIGATION_CB: {
       return {
         ...state,
-        blockNavigationActionPayload: undefined,
-        blockNavigationActionType: null,
+        blockNavigationActions: [],
       };
     }
     default: {

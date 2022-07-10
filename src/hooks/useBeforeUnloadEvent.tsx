@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Prompt } from 'react-router';
+import _isEmpty from 'lodash/isEmpty';
 import _isNil from 'lodash/isNil';
 
 import useLocaleString from 'hooks/useLocaleString';
@@ -16,8 +17,7 @@ interface IUseBeforeUnloadEvent {
 
 const useBeforeUnloadEvent = (
   selector: ( state: RootState ) => boolean,
-  blockNavigationActionType: IGlobalState[ 'blockNavigationActionType' ],
-  blockNavigationActionPayload?: IGlobalState[ 'blockNavigationActionPayload' ],
+  blockNavigationActions: IGlobalState[ 'blockNavigationActions' ] = [],
 ): IUseBeforeUnloadEvent => {
   const shouldShowPrompt = useTypedSelector( selector );
   const dispatch = useDispatch();
@@ -42,14 +42,15 @@ const useBeforeUnloadEvent = (
   }, [ shouldShowPrompt, message ]);
 
   useEffect(() => {
-    if ( shouldShowPrompt && !_isNil( blockNavigationActionType )) {
-      dispatch( setBlockNavigationCb( blockNavigationActionType, blockNavigationActionPayload ));
+    if ( shouldShowPrompt
+      && !_isNil( blockNavigationActions )
+      && !_isEmpty( blockNavigationActions )) {
+      dispatch( setBlockNavigationCb( blockNavigationActions ));
     }
   }, [
     shouldShowPrompt,
     dispatch,
-    blockNavigationActionType,
-    blockNavigationActionPayload,
+    blockNavigationActions,
   ]);
 
   return {
