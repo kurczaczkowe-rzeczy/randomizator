@@ -7,7 +7,9 @@ import CopyTextView from 'components/copyText/CopyText.view';
 
 // ToDo we can replace {...} with prop and pass prop to view component
 const CopyText = ({
-  text, content, withFlexStart,
+  text,
+  content,
+  withFlexStart,
 }) => {
   const [ isCopied, setIsCopied ] = useStateWithCallback( false, ( copied ) => {
     if ( copied ) {

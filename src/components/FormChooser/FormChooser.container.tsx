@@ -22,7 +22,7 @@ const FormChooser = (): JSX.Element => {
   const [ formID, setFormID ] = useLocalStorage<string>( FORM_ID_KEY );
   const creatorId = useTypedSelector(({ firebase: { auth: { uid }}}) => uid );
   const defaultFormID = useTypedSelector(({ form: { id }}) => id );
-  const forms = useTypedSelector< IBaseForm[] >(( state ) => _map( state.firestore.ordered.forms,
+  const forms = useTypedSelector< IBaseForm[] >(({ firestore: { ordered: { forms }}}) => _map( forms,
     ({ id, name }) => ({ id, name })),
   shallowEqual );
   const dispatch = useDispatch();

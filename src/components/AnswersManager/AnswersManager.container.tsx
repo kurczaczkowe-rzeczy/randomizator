@@ -30,7 +30,7 @@ export const AnswersManager = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const formID = useTypedSelector(({ form: { id }}) => id );
-  const isEmptyForm = useTypedSelector(({ form: { counter }}) => !counter );
+  const isEmptyForm = useTypedSelector(({ firestore: { data: { forms }}}) => !forms?.[ formID ]?.counter );
   const fields = useTypedSelector(({ firestore: { data: { forms }}}) => forms?.[ formID ]?.fields ?? [], _isEqual );
   const isLoading = useTypedSelector(({ global: { bindToCard }}) => _includes( bindToCard, CARDS.ANSWERS_TABLE ));
 

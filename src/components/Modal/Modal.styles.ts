@@ -1,7 +1,9 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 export default makeStyles(({
-  palette, spacing, borders,
+  palette,
+  spacing,
+  borders,
 }) => ({
   modal: {
     display: 'flex',

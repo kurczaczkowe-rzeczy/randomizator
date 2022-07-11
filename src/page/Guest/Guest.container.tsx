@@ -18,7 +18,9 @@ import useTypedSelector from 'hooks/useTypedSelector';
 import useTimeout from 'hooks/useTimeout';
 import useLocaleString from 'hooks/useLocaleString';
 import {
-  forceHideLoader, hideLoader, showLoader,
+  forceHideLoader,
+  hideLoader,
+  showLoader,
 } from 'store/actions/globalActions';
 import { getCreatorName } from 'store/actions/userActions';
 import { fetchFormName } from 'store/actions/formAction';

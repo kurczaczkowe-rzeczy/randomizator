@@ -31,7 +31,9 @@ export const AnswerWeightController = ({ answerIndex }: IAnswerRowController ): 
         onChange={ ( event: ChangeEvent<HTMLInputElement> ) => {
           registerProps.onChange( event );
           dispatch( setDirtyAnswer( answerIndex, {
-            id, weight: Number( event.target.value ), answerID,
+            id,
+            weight: Number( event.target.value ),
+            answerID,
           }));
         } }
       />
