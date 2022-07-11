@@ -1,5 +1,4 @@
 const rules = {
-  // 'array-bracket-newline': [ 2, { minItems: 3, multiline: true }],
   'array-bracket-newline': [ 2, 'consistent' ],
   'array-bracket-spacing': [
     2,
@@ -11,7 +10,6 @@ const rules = {
     },
   ],
   'array-callback-return': [ 2 ],
-  // 'array-element-newline': [ 2, { minItems: 3, multiline: true }],
   'array-element-newline': [ 2, 'consistent'],
   'arrow-body-style': [ 2, 'as-needed' ],
   'arrow-parens': [ 2, 'always' ],
@@ -38,7 +36,6 @@ const rules = {
   eqeqeq: [ 2 ],
   'func-call-spacing': [ 2, 'never' ],
   'func-style': [ 2, 'expression' ],
-  // 'function-paren-newline': [ 2, { minItems: 3 }],
   'function-paren-newline': [ 2, 'consistent' ],
   'generator-star-spacing': [ 2, { after: true, before: false }],
   indent: [
@@ -130,7 +127,7 @@ const rules = {
   'no-var': [ 2 ],
   'no-whitespace-before-property': [ 2 ],
   'nonblock-statement-body-position': [ 2, 'below' ],
-  'object-curly-newline': [ 2, { minProperties: 3, multiline: true }],
+  'object-curly-newline': [ 2, { multiline: true }],
   'object-curly-spacing': [
     2,
     'always',
