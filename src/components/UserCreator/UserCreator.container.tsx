@@ -9,7 +9,9 @@ import useLocaleString from 'hooks/useLocaleString';
 import useTypedSelector from 'hooks/useTypedSelector';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
 import {
-  PAGES, CARDS, USER_ROLES,
+  PAGES,
+  CARDS,
+  USER_ROLES,
 } from 'constans';
 
 import Card from 'components/card';

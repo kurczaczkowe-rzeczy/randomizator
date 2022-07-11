@@ -1,7 +1,9 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 export default makeStyles(({
-  palette, spacing, shadow,
+  palette,
+  spacing,
+  shadow,
 }) => ({
   root: {
     width: '100%',
