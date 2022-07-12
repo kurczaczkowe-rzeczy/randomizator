@@ -56,10 +56,8 @@ in the GitHub Pages service under the link https://kuraczaczkowe-rzeczy.github.i
 ### Dashboard
 ![dashboard](https://user-images.githubusercontent.com/34583194/178568732-2029c547-d935-49a7-a1f3-2d14f36fc46a.png)
 
-
 ### Error page
 ![form-not-exist](https://user-images.githubusercontent.com/33415084/95674980-26542680-0bb4-11eb-8f30-a7d7e7a36c50.png)
-
 ![user-and-form-not-exist](https://user-images.githubusercontent.com/33415084/95674981-26ecbd00-0bb4-11eb-863a-9fd83ccd9fc5.png)
 
 ## Installation

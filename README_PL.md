@@ -51,12 +51,14 @@ w usłudze GitHub Pages pod linkiem https://kurczaczkowe-rzeczy.github.io/rand
 ![form-display](https://user-images.githubusercontent.com/34583194/103149592-1f789100-476b-11eb-8d35-fbce43ab6bd5.png)
 
 ### Strona twórcy
-![after-login](https://user-images.githubusercontent.com/34583194/103149942-e8a47a00-476e-11eb-9601-13cbf2b06b15.png)
-![show-list-forms](https://user-images.githubusercontent.com/33415084/96367974-3e4a1e00-1151-11eb-8fbc-ef82d197b314.png)
+![after-login](https://user-images.githubusercontent.com/34583194/178568227-0fc7c80d-9d95-4544-a3fa-19ba239885a7.png)
+![show-list-forms](https://user-images.githubusercontent.com/34583194/178568625-d25411c5-ccf3-4e5e-b403-5938a351f1a2.png)
+
+### Pulpit
+![dashboard](https://user-images.githubusercontent.com/34583194/178568732-2029c547-d935-49a7-a1f3-2d14f36fc46a.png)
 
 ### Strona błędu
 ![form-not-exist](https://user-images.githubusercontent.com/33415084/95674980-26542680-0bb4-11eb-8f30-a7d7e7a36c50.png)
-
 ![user-and-form-not-exist](https://user-images.githubusercontent.com/33415084/95674981-26ecbd00-0bb4-11eb-863a-9fd83ccd9fc5.png)
 
 ## Instalacja
