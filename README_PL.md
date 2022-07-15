@@ -33,6 +33,83 @@ poprzez wprowadzenie do pola powyżej wylosowanych odpowiedzi ciągu znaków i�
 [![Material-UI icon Release](https://img.shields.io/badge/dynamic/json?color=blue&label=material-ui&query=%24.dependencies['@material-ui/core']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![Copy to clipboard](https://img.shields.io/badge/dynamic/json?color=blue&label=react-copy-to-clipboard&query=%24.dependencies['react-copy-to-clipboard']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 
+## Struktura danych w Firebase
+
+```
+root
+ ├── userId_1 [collection]
+ |  ├── formId_1 [document]
+ |  |  ├── answers [collection]
+ |  |  |  ├── answerId_1 [document]
+ |  |  |  |  └── fields [collection]
+ |  |  |  |  |  ├── fieldId_1 [document]
+ |  |  |  |  |  |  ├── answerID [field]: string
+ |  |  |  |  |  |  ├── fieldName [field]: string
+ |  |  |  |  |  |  ├── formID [field]: string
+ |  |  |  |  |  |  ├── timestamp [field]: number
+ |  |  |  |  |  |  ├── value [field]: string
+ |  |  |  |  |  |  └── weight [field]: number
+ |  |  |  |  |  ├── fieldId_2 [document]
+ ...
+ |  |  |  |  |  └── fieldId_N [document]
+ |  |  |  ├── answerId_2 [document]
+ ...
+ |  |  |  ├── answerId_N [document]
+ |  |  ├── counter [field]: number
+ |  |  ├── fields [field]: array
+ |  |  |  ├── name [field]: string
+ |  |  |  └── type [field]: string
+ |  |  └── name [field]: string
+ |  ├── formId_2 [document]
+ ...
+ |  └── formId_N [document]
+ ├── userId_2 [collection]
+ ...
+ ├── userId_N [collection]
+ └── users [collection]
+    ├── userId_1 [document]
+    |  ├── name [field]: string
+    |  └── role [field]: CREATOR | GUEST | ADMIN
+    ├── userId_2 [document]
+    ...
+    └── userId_N [document]
+```
+
+W pierwszym zagnieżdżeniu znajdują się kolekcje użytkowników, które zawierają formularze dodane przez użytkownika
+oraz kolekcja z użytkownikami (*users*).
+
+#### Kolekcja *users*
+Kolekcja *users* zawiera dokumenty o id odpowiadającym id użytkownika. Każdy dokument zawiera pola:
+ - *name* - nazwa użytkownika
+ - *role* - rola przypisana do użytkownika.
+
+#### Kolekcja użytkownika *userId_**
+Kolekcja użytkownika *userId_** zawsze nazywa się identyfikatorem użytkownika. Kolekcja zawiera listę dokumentów,
+które odpowiadają formularzom dodanym przez użytkownika.
+
+#### Dokument formularzu *formId_**
+Dokument formularzu *formId_** zawsze ma własny unikalny identyfikator. Zawiera w sobie:
+ - *answers* - kolekcja zawierająca listę odpowiedzi
+ - *counter* - licznik odpowiedzi
+ - *fields* - lista pól w formularzu
+   - *name* - nazwa pola
+   - *type* - typ pola
+ - *name* - nazwa formularzu.
+
+#### Kolekcja odpowiedzi *answers*
+Kolekcja odpowiedzi *answers* zawiera listę odpowiedzi. Każda odpowiedź to dokument o unikalnym identyfikatorze
+z kolekcją pól *fields*.
+
+#### Kolekcja pól *fields*
+Kolekcja pól *fields* zawiera listę odpowiedzi do konkretnych pól w odrębnych dokumentach. Każdy dokument zawiera:
+ - *answerID* - identyfikator odpowiedzi
+ - *fieldName* - nazwa pola, do którego została dodana odpowiedź
+ - *fieldID* - identyfikator odpowiedzi w danym polu
+ - *timestamp* - znacznik czasowy z momentu dodania odpowiedzi
+ - *value* - odpowiedź zawarta w polu
+ - *weight* - waga odpowiedzi, jeśli jest 0, to odpowiedź nie jest brana pod uwagę podczas losowania; im wyższa
+   wartość, tym częściej będzie się pojawiać w losowaniu.
+
 ## Opis głównych gałęzi
 
 Na gałęzi `master` znajduje się wersja aplikacji z najnowszymi funkcjonalnościami i poprawkami.

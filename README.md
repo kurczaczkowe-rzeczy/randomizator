@@ -32,6 +32,81 @@ a string of characters that begin a given answer in the field.
 [![Material-UI icon Release](https://img.shields.io/badge/dynamic/json?color=blue&label=material-ui&query=%24.dependencies['@material-ui/core']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![Copy to clipboard](https://img.shields.io/badge/dynamic/json?color=blue&label=react-copy-to-clipboard&query=%24.dependencies['react-copy-to-clipboard']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 
+## Firebase data structure
+
+```
+root
+ ├── userId_1 [collection]
+ |  ├── formId_1 [document]
+ |  |  ├── answers [collection]
+ |  |  |  ├── answerId_1 [document]
+ |  |  |  |  └── fields [collection]
+ |  |  |  |  |  ├── fieldId_1 [document]
+ |  |  |  |  |  |  ├── answerID [field]: string
+ |  |  |  |  |  |  ├── fieldName [field]: string
+ |  |  |  |  |  |  ├── formID [field]: string
+ |  |  |  |  |  |  ├── timestamp [field]: number
+ |  |  |  |  |  |  ├── value [field]: string
+ |  |  |  |  |  |  └── weight [field]: number
+ |  |  |  |  |  ├── fieldId_2 [document]
+ ...
+ |  |  |  |  |  └── fieldId_N [document]
+ |  |  |  ├── answerId_2 [document]
+ ...
+ |  |  |  ├── answerId_N [document]
+ |  |  ├── counter [field]: number
+ |  |  ├── fields [field]: array
+ |  |  |  ├── name [field]: string
+ |  |  |  └── type [field]: string
+ |  |  └── name [field]: string
+ |  ├── formId_2 [document]
+ ...
+ |  └── formId_N [document]
+ ├── userId_2 [collection]
+ ...
+ ├── userId_N [collection]
+ └── users [collection]
+    ├── userId_1 [document]
+    |  ├── name [field]: string
+    |  └── role [field]: CREATOR | GUEST | ADMIN
+    ├── userId_2 [document]
+    ...
+    └── userId_N [document]
+```
+
+The first nest contains user collections that contain user-added forms and a collection with users (*users*).
+
+#### Collection *users*
+Collection *users* contains documents with id matching the user id. Every doc contains:
+- *name* - user name
+- *role* - role associated with user.
+
+#### User collection *userId_**
+User collection *userId_** always name is equal to user id. Collection contains document list,
+which have forms added by user.
+
+#### Form doc *formId_**
+Form doc *formId_** always have unique id. Contains:
+- *answers* - collection have list of answers
+- *counter* - answers counter
+- *fields* - array of fields
+    - *name* - fields name
+    - *type* - fields type
+- *name* - form name
+
+#### Answers collection *answers*
+Answers collection *answers* have answers list. Every answer is doc with unique id with fields collection *fields*.
+
+#### Fields collection *fields*
+Fields collection *fields* have answers list to specific fields stored in separate doc. Every doc contains:
+- *answerID* - answer id
+- *fieldName* - field name associated with answer
+- *fieldID* - field answer id
+- *timestamp* - information identifying when a certain answer was added
+- *value* - answers put in specific field
+- *weight* - answer weight; if it is 0, the answer is not taken into account during the draw; the higher the value,
+  the more often it will appear in the draw
+
 ## Description of major branches
 
 The `master` branch contains the application version with the newest functionalities and bug fixes.
