@@ -1,13 +1,33 @@
-import FiraSansBold from './FiraSans/FiraSans-Bold.ttf';
-import FiraSansBoldItalic from './FiraSans/FiraSans-BoldItalic.ttf';
-import FiraSansRegularItalic from './FiraSans/FiraSans-Italic.ttf';
-import FiraSansRegular from './FiraSans/FiraSans-Regular.ttf';
-import MontserratBold from './Montserrat/Montserrat-Bold.ttf';
-import MontserratBoldItalic from './Montserrat/Montserrat-BoldItalic.ttf';
-import MontserratRegularItalic from './Montserrat/Montserrat-Italic.ttf';
-import MontserratRegular from './Montserrat/Montserrat-Regular.ttf';
-import MontserratMediumItalic from './Montserrat/Montserrat-MediumItalic.ttf';
-import MontserratMedium from './Montserrat/Montserrat-Medium.ttf';
+import FiraSansBoldTTF from './FiraSans/FiraSans-Bold.ttf';
+import FiraSansBoldWOFF from './FiraSans/FiraSans-Bold.woff';
+import FiraSansBoldWOFF2 from './FiraSans/FiraSans-Bold.woff2';
+import FiraSansBoldItalicTTF from './FiraSans/FiraSans-BoldItalic.ttf';
+import FiraSansBoldItalicWOFF from './FiraSans/FiraSans-BoldItalic.woff';
+import FiraSansBoldItalicWOFF2 from './FiraSans/FiraSans-BoldItalic.woff2';
+import FiraSansRegularItalicTTF from './FiraSans/FiraSans-Italic.ttf';
+import FiraSansRegularItalicWOFF from './FiraSans/FiraSans-Italic.woff';
+import FiraSansRegularItalicWOFF2 from './FiraSans/FiraSans-Italic.woff2';
+import FiraSansRegularTTF from './FiraSans/FiraSans-Regular.ttf';
+import FiraSansRegularWOFF from './FiraSans/FiraSans-Regular.woff';
+import FiraSansRegularWOFF2 from './FiraSans/FiraSans-Regular.woff2';
+import MontserratBoldTTF from './Montserrat/Montserrat-Bold.ttf';
+import MontserratBoldWOFF from './Montserrat/Montserrat-Bold.woff';
+import MontserratBoldWOFF2 from './Montserrat/Montserrat-Bold.woff2';
+import MontserratBoldItalicTTF from './Montserrat/Montserrat-BoldItalic.ttf';
+import MontserratBoldItalicWOFF from './Montserrat/Montserrat-BoldItalic.woff';
+import MontserratBoldItalicWOFF2 from './Montserrat/Montserrat-BoldItalic.woff2';
+import MontserratRegularItalicTTF from './Montserrat/Montserrat-Italic.ttf';
+import MontserratRegularItalicWOFF from './Montserrat/Montserrat-Italic.woff';
+import MontserratRegularItalicWOFF2 from './Montserrat/Montserrat-Italic.woff2';
+import MontserratRegularTTF from './Montserrat/Montserrat-Regular.ttf';
+import MontserratRegularWOFF from './Montserrat/Montserrat-Regular.woff';
+import MontserratRegularWOFF2 from './Montserrat/Montserrat-Regular.woff2';
+import MontserratMediumItalicTTF from './Montserrat/Montserrat-MediumItalic.ttf';
+import MontserratMediumItalicWOFF from './Montserrat/Montserrat-MediumItalic.woff';
+import MontserratMediumItalicWOFF2 from './Montserrat/Montserrat-MediumItalic.woff2';
+import MontserratMediumTTF from './Montserrat/Montserrat-Medium.ttf';
+import MontserratMediumWOFF from './Montserrat/Montserrat-Medium.woff';
+import MontserratMediumWOFF2 from './Montserrat/Montserrat-Medium.woff2';
 
 export default[
   {
@@ -17,7 +37,9 @@ export default[
     fontWeight: 400,
     src: `
         local('Montserrat-Regular'),
-        url(${ MontserratRegular }) format('ttf')
+        url(${ MontserratRegularTTF }) format('ttf')
+        url(${ MontserratRegularWOFF }) format('woff')
+        url(${ MontserratRegularWOFF2 }) format('woff2')
       `,
   },
   {
@@ -27,7 +49,9 @@ export default[
     fontWeight: 400,
     src: `
         local('Montserrat-Italic'),
-        url(${ MontserratRegularItalic }) format('ttf')
+        url(${ MontserratRegularItalicTTF }) format('ttf')
+        url(${ MontserratRegularItalicWOFF }) format('woff')
+        url(${ MontserratRegularItalicWOFF2 }) format('woff2')
       `,
   },
   {
@@ -37,7 +61,9 @@ export default[
     fontWeight: 500,
     src: `
         local('Montserrat-Medium'),
-        url(${ MontserratMedium }) format('ttf')
+        url(${ MontserratMediumTTF }) format('ttf')
+        url(${ MontserratMediumWOFF }) format('woff')
+        url(${ MontserratMediumWOFF2 }) format('woff2')
       `,
   },
   {
@@ -47,7 +73,9 @@ export default[
     fontWeight: 500,
     src: `
         local('Montserrat-MediumItalic'),
-        url(${ MontserratMediumItalic }) format('ttf')
+        url(${ MontserratMediumItalicTTF }) format('ttf')
+        url(${ MontserratMediumItalicWOFF }) format('woff')
+        url(${ MontserratMediumItalicWOFF2 }) format('woff2')
       `,
   },
   {
@@ -57,7 +85,9 @@ export default[
     fontWeight: 700,
     src: `
         local('Montserrat-Bold'),
-        url(${ MontserratBold }) format('ttf')
+        url(${ MontserratBoldTTF }) format('ttf')
+        url(${ MontserratBoldWOFF }) format('woff')
+        url(${ MontserratBoldWOFF2 }) format('woff2')
       `,
   },
   {
@@ -67,7 +97,9 @@ export default[
     fontWeight: 700,
     src: `
         local('Montserrat-BoldItalic'),
-        url(${ MontserratBoldItalic }) format('ttf')
+        url(${ MontserratBoldItalicTTF }) format('ttf')
+        url(${ MontserratBoldItalicWOFF }) format('woff')
+        url(${ MontserratBoldItalicWOFF2 }) format('woff2')
       `,
   },
   {
@@ -77,7 +109,9 @@ export default[
     fontWeight: 400,
     src: `
        local('FiraSans-Regular'),
-       url(${ FiraSansRegular }) format('ttf')
+       url(${ FiraSansRegularTTF }) format('ttf')
+        url(${ FiraSansRegularWOFF }) format('woff')
+        url(${ FiraSansRegularWOFF2 }) format('woff2')
      `,
   },
   {
@@ -87,7 +121,9 @@ export default[
     fontWeight: 400,
     src: `
        local('FiraSans-Italic'),
-       url(${ FiraSansRegularItalic }) format('ttf')
+       url(${ FiraSansRegularItalicTTF }) format('ttf')
+        url(${ FiraSansRegularItalicWOFF }) format('woff')
+        url(${ FiraSansRegularItalicWOFF2 }) format('woff2')
      `,
   },
   {
@@ -97,7 +133,9 @@ export default[
     fontWeight: 700,
     src: `
        local('FiraSans-Bold'),
-       url(${ FiraSansBold }) format('ttf')
+       url(${ FiraSansBoldTTF }) format('ttf')
+        url(${ FiraSansBoldWOFF }) format('woff')
+        url(${ FiraSansBoldWOFF2 }) format('woff2')
      `,
   },
   {
@@ -107,7 +145,9 @@ export default[
     fontWeight: 700,
     src: `
        local('FiraSans-BoldItalic'),
-       url(${ FiraSansBoldItalic }) format('ttf')
+       url(${ FiraSansBoldItalicTTF }) format('ttf')
+        url(${ FiraSansBoldItalicWOFF }) format('woff')
+        url(${ FiraSansBoldItalicWOFF2 }) format('woff2')
      `,
   },
 ] as const;
