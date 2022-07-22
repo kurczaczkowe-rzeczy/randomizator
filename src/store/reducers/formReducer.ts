@@ -1,34 +1,40 @@
 import {
-  SET_FORM_NAME,
-  ERROR_FORM_DONT_EXIST,
   CLEAR_FORM,
+  ERROR_FORM,
+  SET_FORM_NAME,
+  SET_SELECTED_FORM,
 } from 'store/actions';
-import { FormAction, FormState } from 'store/types';
+import { FormAction, IFormState } from 'store/types';
 
-const initialState: FormState = {
+const initialState: IFormState = {
   id: '',
-  name: '',
   errors: null,
+  name: '',
+  fields: [],
+  counter: 0,
 };
 
-const reducer = ( state = initialState, action: FormAction = { type: CLEAR_FORM }): FormState => {
+const reducer = ( state = initialState, action: FormAction = { type: CLEAR_FORM }): IFormState => {
   switch ( action.type ) {
+    case CLEAR_FORM:
+      return initialState;
+    case SET_SELECTED_FORM:
+      return {
+        ...action.payload,
+        errors: null,
+      };
     case SET_FORM_NAME:
       return {
         ...state,
-        name: action.payload.name,
-        id: action.payload.id,
+        ...action.payload,
         errors: null,
       };
-    case ERROR_FORM_DONT_EXIST:
+    case ERROR_FORM:
       return {
         ...state,
-        name: '',
-        id: '',
+        ...initialState,
         errors: action.payload.errorMessage,
       };
-    case CLEAR_FORM:
-      return initialState;
     default:
       return state;
   }

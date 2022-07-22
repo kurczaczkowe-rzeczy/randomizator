@@ -1,7 +1,6 @@
 import { Story, Meta } from '@storybook/react';
 
-import Component from '.';
-import { ICard } from './Card.types';
+import Component, { ICard } from '.';
 
 export default{
   title: 'components/Card',
@@ -9,13 +8,16 @@ export default{
   args: { body: <div><p>Domyślny widok</p></div> },
 } as Meta;
 
-const Template : Story<ICard> = ( args ) => <Component { ...args } />;
+const Template: Story<ICard> = ( args ) => <Component { ...args } />;
 
 const Default = Template.bind({});
 const WithTitle = Template.bind({});
 const WithTitleAsObject = Template.bind({});
 const WithId = Template.bind({});
 const WithClassPassedFromUp = Template.bind({});
+const WithLoadingState = Template.bind({});
+const WithFullWidthBody = Template.bind({});
+const Transparent = Template.bind({});
 
 WithTitle.args = {
   title: 'Przykładowy tytuł',
@@ -27,12 +29,25 @@ WithTitleAsObject.args = {
 };
 WithId.args = {
   id: 'Identyfikator',
-  body: 'Identyfikator może zostać wykorzystany do zanimowania komponentu.' +
-    ' Przykład na stronie gościa a dokładnie to animowany jest w ten sposób.',
+  body: 'Identyfikator może zostać wykorzystany do zanimowania komponentu.'
+    + ' Przykład na stronie gościa a dokładnie to animowany jest w ten sposób.',
 };
 WithClassPassedFromUp.args = {
   cardClass: 'className',
   body: 'Z klasą. Do cardClass przekazujesz klasę z pliku *.styles. Przykład w kontrolkach.',
+};
+WithLoadingState.args = {
+  body: 'Z widocznym loaderem',
+  isLoading: true,
+};
+WithFullWidthBody.args = {
+  body: 'Ciało karty wypełnia całą dostępną powierzchnie karty',
+  fullWidthBody: true,
+};
+Transparent.args = {
+  body: 'Komponent nie posiada tła, paddingów oraz obramowania',
+  transparent: true,
+  title: null,
 };
 
 export {
@@ -41,4 +56,7 @@ export {
   WithTitleAsObject,
   WithId,
   WithClassPassedFromUp,
+  WithLoadingState,
+  WithFullWidthBody,
+  Transparent,
 };

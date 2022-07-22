@@ -1,49 +1,77 @@
-import { useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import _isEmpty from 'lodash/isEmpty';
-import _isEqual from 'lodash/isEqual';
-import _some from 'lodash/some';
+import { useCallback, useEffect } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import _noop from 'lodash/noop';
+import _reduce from 'lodash/reduce';
 
-import { RootState } from 'store/reducers/rootReducer';
+import useLocaleString from 'hooks/useLocaleString';
+import asyncNoop from 'utils/asyncNoop';
+import { IField, Mapping } from 'types';
 
+import { getErrorMessage } from './Form.utils';
 import FormView from './Form.view';
-import { FormContainer } from './Form.types';
+import {
+  FormContainer,
+  GuestSubmitHandler,
+  IGuestValues,
+} from './Form.types';
 
+// ToDo: #167
 const Form = ({
+  name,
   preview = false,
-  onSubmit = (): void => {},
-  additionalFunction = (): void => {},
+  onSubmit = asyncNoop,
+  additionalFunction = _noop,
+  fields = [],
 }: FormContainer ): JSX.Element => {
+  const methods = useForm< IGuestValues >();
+  const { formState: { isSubmitSuccessful }, reset } = methods;
+  const getString = useLocaleString();
 
-  const nameOfForm = useSelector(( state: RootState ) => state.form.name );
+  const handleSubmit = useCallback< GuestSubmitHandler >( async ({ checkIsNotRobot, ...fields }) => {
+    const message = getErrorMessage(
+      checkIsNotRobot,
+      name,
+      fields,
+    );
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const someFieldFill = ( ...args: any[]): boolean => _some( args, ( field ) => !_isEmpty( field ));
+    if ( message ) {
+      /* ToDo: this not work as expect, it should be don second unction to run on invalid values
+          and resolver to check validity of form */
+      alert( getString( message ));
 
-  /* ToDo use constants instead of hardcoded strings */
-  const handleSubmit = useCallback(( event ) => {
-    const data = new FormData( event.target );
-    const fromInput = data.get( 'check_is_not_robot' );
-
-    if ( _isEmpty( fromInput )) {
-      alert( 'Wpisz nazwę formularza we właściwym miejscu' );
-    } else if ( !_isEqual( fromInput, nameOfForm )) {
-      alert( 'Wpisz poprawną nazwę formularza' );
-    } else {
-      if ( someFieldFill( data.get( 'name_male' ), data.get( 'name_female' ))) {
-        onSubmit( data.get( 'name_male' ) as string, data.get( 'name_female' ) as string );
-      } else {
-        alert( 'Wpisz wartość w pola formularza. Wystarczy jedno pole!' );
-      }
+      return;
     }
-  }, [ nameOfForm, onSubmit ]);
+
+    await onSubmit( fields );
+  }, [
+    name,
+    onSubmit,
+    getString,
+  ]);
+
+  useEffect(() => {
+    if ( isSubmitSuccessful ) {
+      reset( _reduce< IField, Mapping< string >>(
+        fields,
+        ( clearedValues, { name }) => ({ ...clearedValues, [ name ]: '' }),
+        { checkIsNotRobot: '' },
+      ));
+    }
+  }, [
+    isSubmitSuccessful,
+    reset,
+    fields,
+  ]);
 
   return (
-    <FormView
-      preview={ preview }
-      onSubmit={ handleSubmit }
-      additionalFunction={ additionalFunction }
-    />
+    <FormProvider { ...methods }>
+      <FormView
+        fields={ fields }
+        preview={ preview }
+        onSubmit={ handleSubmit }
+        additionalFunction={ additionalFunction }
+      />
+    </FormProvider>
   );
 };
 

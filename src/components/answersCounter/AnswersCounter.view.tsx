@@ -1,22 +1,20 @@
-import classes from './answersCounter.module.scss';
+import useLocaleString from 'hooks/useLocaleString';
 
-// ToDo move hardcoded strings to messages
-export interface IAnswersCounter{
-  /**
-   * Number of form answers
-   */
-  counter: number;
-}
+import classes from './answersCounter.module.scss';
+import { IAnswersCounter } from './AnswersCounter.types';
 
 /**
  * UI component displaying the number of answers
  */
-export const AnswersCounter = ({ counter }: IAnswersCounter ): JSX.Element => (
-  <h3 className={ classes.title }>
-    Ilość odpowiedzi:
-    {' '}
-    <span>{ counter }</span>
-  </h3>
-);
+export const AnswersCounter = ({ counter }: IAnswersCounter ): JSX.Element => {
+  const getString = useLocaleString();
+
+  return (
+    <h3 className={ classes.title }>
+      { `${ getString( 'countAnswers' ) }: ` }
+      <span>{counter}</span>
+    </h3>
+  );
+};
 
 export default AnswersCounter;

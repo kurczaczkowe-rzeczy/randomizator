@@ -1,1 +1,1 @@
-export { default } from 'components/copyText/CopyText.container';
+export { default } from './CopyText.container';

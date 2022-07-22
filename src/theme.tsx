@@ -1,35 +1,37 @@
 import { CSSProperties } from 'react';
 
+import { fade } from '@material-ui/core/styles/colorManipulator';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
 import fonts from 'assets/fonts';
+import { Mapping } from 'types';
 
-interface IGradients {[ key: string ]: CSSProperties['backgroundImage']}
+type Gradients = Mapping< CSSProperties[ 'backgroundImage' ] >;
 
-interface IFonts {
-  size: {
-    [ key: string ]: CSSProperties['fontSize'];
-  };
-}
+interface IFonts { size: Mapping< CSSProperties[ 'fontSize' ] > }
 
-interface IBorders {[ key: string ]: CSSProperties['border']}
+export type Borders = Mapping< CSSProperties[ 'border' ] >;
 
-interface IShadows {[ key: string ]: CSSProperties['boxShadow']}
+type Shadows = Mapping< CSSProperties[ 'boxShadow' ] >;
+
+type Classes = Mapping< CSSProperties >;
 
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
-    borders: IBorders;
+    borders: Borders;
+    classes: Classes;
     fonts: IFonts;
-    gradient: IGradients;
-    shadow: IShadows;
+    gradient: Gradients;
+    shadow: Shadows;
     themeName: string;
   }
 
   interface ThemeOptions {
-    borders: IBorders;
+    borders: Borders;
+    classes: Classes;
     fonts: IFonts;
-    gradient: IGradients;
-    shadow: IShadows;
+    gradient: Gradients;
+    shadow: Shadows;
     themeName: string;
   }
 }
@@ -39,35 +41,55 @@ declare module '@material-ui/core/styles/createMuiTheme' {
 */
 declare module '@material-ui/core/styles/createPalette' {
   interface Palette {
-    backgroundDark: CSSProperties['color'];
-    backgroundLight: CSSProperties['color'];
-    colorText: CSSProperties['color'];
-    colorTextSelected: CSSProperties['color'];
+    backgroundDark: CSSProperties[ 'color' ];
+    backgroundHighlighted: CSSProperties[ 'color' ];
+    backgroundLight: CSSProperties[ 'color' ];
+    colorText: CSSProperties[ 'color' ];
+    colorTextSelected: CSSProperties[ 'color' ];
+    fadedBackgroundDark: () => CSSProperties[ 'color' ];
+    fadedColorText: () => CSSProperties[ 'color' ];
+    fadedMain: () => CSSProperties[ 'color' ];
   }
 
   interface PaletteOptions {
-    backgroundDark: CSSProperties['color'];
-    backgroundLight: CSSProperties['color'];
-    colorText: CSSProperties['color'];
-    colorTextSelected: CSSProperties['color'];
+    backgroundDark: CSSProperties[ 'color' ];
+    backgroundHighlighted: CSSProperties[ 'color' ];
+    backgroundLight: CSSProperties[ 'color' ];
+    colorText: CSSProperties[ 'color' ];
+    colorTextSelected: CSSProperties[ 'color' ];
+    fadedBackgroundDark: () => CSSProperties[ 'color' ];
+    fadedColorText: () => CSSProperties[ 'color' ];
+    fadedMain: () => CSSProperties[ 'color' ];
   }
 }
-
+// ToDo: issue #192
 const palette = {
   primary: {
     main: '#771e76',
     light: '#765076',
   },
   secondary: { main: '#e28521' },
+  error: { main: '#b02d2d' },
+  backgroundHighlighted: '#333',
   backgroundLight: '#222',
   backgroundDark: '#1b1b1b',
   colorText: '#bdaeae',
   colorTextSelected: '#fff',
+  fadedMain(): CSSProperties[ 'color' ] {
+    return fade( this.primary.main, 0.2 );
+  },
+  fadedBackgroundDark(): CSSProperties[ 'color' ] {
+    return fade( this.backgroundDark, 0.75 );
+  },
+  fadedColorText(): CSSProperties[ 'color' ] {
+    return fade( this.colorText, 0.6 );
+  },
 };
 
 const shadow = {
   card: `0 0 5px ${ palette.primary.main }`,
   focus: `0 0 10px ${ palette.primary.main }`,
+  dropzoneBoxActive: `0 0 10px ${ palette.primary.main }`,
 };
 
 const typography = {
@@ -80,30 +102,62 @@ const typography = {
   h6: { fontFamily: 'FiraSans' },
 };
 
+const borders = {
+  input: '2px solid',
+  separator: `2px solid ${ palette.primary.main }`,
+  menu: `4px solid ${ palette.primary.main }`,
+  dropzoneBox: `3px dashed ${ palette.colorText }`,
+  dropzoneBoxActive: `3px dashed ${ palette.primary.main }`,
+};
+
+const classes = {
+  centerWithFillParent: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 1000,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tab: {
+    opacity: 1,
+    fontWeight: 700,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    border: `2px solid ${ palette.backgroundHighlighted }`,
+    borderBottom: 'none',
+
+    color: palette.primary.main,
+    '&:hover:not($selected)': { borderColor: palette.backgroundLight },
+  },
+};
+
 export const theme = createMuiTheme({
   themeName: 'randoTheme',
   palette,
   gradient: {
     input: `linear-gradient(
         180deg,
-        ${ palette.backgroundLight } 0%,
-        ${ palette.backgroundLight } 49%,
+        transparent 0%,
+        transparent 49%,
         ${ palette.primary.main } 50%,
         ${ palette.primary.main } 100%
       ) 1`,
   },
   fonts: {
     size: {
+      menuButton: '2rem',
+      menuItem: 16,
       label: 19,
       base: 17,
     },
   },
-  borders: {
-    input: '2px solid',
-    separator: `2px solid ${ palette.primary.main }`,
-  },
+  borders,
   shadow,
   typography,
+  classes,
   overrides: {
     MuiCssBaseline: {
       '@global': {
@@ -134,24 +188,16 @@ export const theme = createMuiTheme({
             paddingRight: '78px',
           },
         },
-        button: {
-          transition: 'all 0.6s linear',
-
-          '&:focus': {
-            outline: 'none',
-            boxShadow: shadow.focus,
-          },
-        },
         input: {
           transition: 'all 0.6s linear',
 
           '&:focus': {
             borderImage: `linear-gradient(
-                 0deg,
-                 ${ palette.primary.main } 0%,
-                 ${ palette.primary.main } 49%,
-                 ${ palette.backgroundDark } 50%,
-                 ${ palette.backgroundDark } 100%
+                 180deg,
+                 transparent 0%,
+                 transparent 49%,
+                 ${ palette.primary.main } 50%,
+                 ${ palette.primary.main } 100%
                ) 1`,
             outline: 'none',
             boxShadow: shadow.focus,
@@ -159,5 +205,35 @@ export const theme = createMuiTheme({
         },
       },
     },
+    MuiFormHelperText: {
+      root: {
+        '&$error': {
+          backgroundColor: palette.error.main,
+          textAlign: 'center',
+          padding: 7,
+          boxSizing: 'border-box',
+          color: palette.colorTextSelected,
+          boxShadow: `0 0 5px ${ palette.error.main }`,
+        },
+      },
+    },
+    MuiTab: {
+      root: {
+        ...classes.tab,
+
+        '&$selected': { borderColor: palette.primary.main },
+      },
+    },
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    MuiTabScrollButton: {
+      root: {
+        ...classes.tab,
+        border: 'none',
+
+        '&:hover .MuiSvgIcon-root': { fontSize: '2rem' },
+      },
+    },
+    MuiTabs: { flexContainer: { color: palette.primary.main }},
   },
 });

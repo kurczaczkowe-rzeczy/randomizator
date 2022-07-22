@@ -1,5 +1,7 @@
 import { Story, Meta } from '@storybook/react';
 
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 import Button from '.';
 import { IButton } from './Button.types';
 
@@ -17,3 +19,16 @@ ButtonType.args = { type: 'button' };
 export const SubmitType = Template.bind({});
 SubmitType.args = { type: 'submit' };
 
+export const IconButton = Template.bind({});
+IconButton.args = {
+  type: 'button',
+  variant: 'iconButton',
+  icon: <ExitToAppIcon />,
+};
+
+export const TextIconButton = Template.bind({});
+TextIconButton.args = {
+  type: 'button',
+  variant: 'textIconButton',
+  icon: <ExitToAppIcon />,
+};

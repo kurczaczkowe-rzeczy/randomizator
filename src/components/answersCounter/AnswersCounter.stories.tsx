@@ -1,7 +1,7 @@
 import { Story, Meta } from '@storybook/react';
 
 import Component from '.';
-import { IAnswersCounter } from './AnswersCounter.view';
+import { IAnswersCounter } from './AnswersCounter.types';
 
 export default{
   title: 'components/AnswersCounter',

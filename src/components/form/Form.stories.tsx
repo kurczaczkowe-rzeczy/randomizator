@@ -7,14 +7,14 @@ import { action } from '@storybook/addon-actions';
 export default{
   title: 'components/Form',
   component: Form,
+  args: {
+    preview: false,
+    additionalFunction: action( 'additionalFunction' ),
+    onSubmit: action( 'onSubmit' ),
+  },
 } as Meta;
 
 const Template: Story<IForm> = ( args ) => <Form { ...args } />;
 
 export const Default = Template.bind({});
-Default.args = {
-  preview: false,
-  additionalFunction: action( 'additionalFunction' ),
-  onSubmit: action( 'onSubmit' ),
-};
 

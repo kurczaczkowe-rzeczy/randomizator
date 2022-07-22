@@ -1,5 +1,5 @@
 const rules = {
-  'array-bracket-newline': [ 2, { minItems: 3, multiline: true }],
+  'array-bracket-newline': [ 2, 'consistent' ],
   'array-bracket-spacing': [
     2,
     'always',
@@ -10,7 +10,7 @@ const rules = {
     },
   ],
   'array-callback-return': [ 2 ],
-  'array-element-newline': [ 2, { minItems: 3, multiline: true }],
+  'array-element-newline': [ 2, 'consistent'],
   'arrow-body-style': [ 2, 'as-needed' ],
   'arrow-parens': [ 2, 'always' ],
   'arrow-spacing': [ 2, { after: true, before: true }],
@@ -36,7 +36,7 @@ const rules = {
   eqeqeq: [ 2 ],
   'func-call-spacing': [ 2, 'never' ],
   'func-style': [ 2, 'expression' ],
-  'function-paren-newline': [ 2, { minItems: 3 }],
+  'function-paren-newline': [ 2, 'consistent' ],
   'generator-star-spacing': [ 2, { after: true, before: false }],
   indent: [
     2,
@@ -105,6 +105,7 @@ const rules = {
       maxEOF: 1,
     },
   ],
+  'no-multi-spaces': [ 2 ],
   'no-new-symbol': [ 2 ],
   'no-obj-calls': [ 2 ],
   'no-template-curly-in-string': [ 2 ],
@@ -126,7 +127,7 @@ const rules = {
   'no-var': [ 2 ],
   'no-whitespace-before-property': [ 2 ],
   'nonblock-statement-body-position': [ 2, 'below' ],
-  'object-curly-newline': [ 2, { minProperties: 3, multiline: true }],
+  'object-curly-newline': [ 2, { multiline: true }],
   'object-curly-spacing': [
     2,
     'always',
@@ -138,7 +139,7 @@ const rules = {
   'object-property-newline': [ 2, { allowAllPropertiesOnSameLine: true }],
   'object-shorthand': [ 2, 'always' ],
   'operator-assignment': [ 2, 'always' ],
-  'operator-linebreak': [ 2 ],
+  'operator-linebreak': [ 2, 'before', { overrides: { '=': 'after' }}],
   'padding-line-between-statements': [
     2,
     {
@@ -340,7 +341,7 @@ const rules = {
     'always',
     { ignoreClassFields: false },
   ],
-  'react/forbid-component-props': [ 2, { forbid: [ 'className', 'style' ]}],
+  'react/forbid-component-props': [ 0 ],
   'react/forbid-prop-types': [
     2,
     {
@@ -476,6 +477,7 @@ const rules = {
   ],
   'react-hooks/exhaustive-deps': [ 1 ],
   'react-hooks/rules-of-hooks': [ 2 ],
+  "@typescript-eslint/explicit-function-return-type": [ 0 ],
 };
 
 const orderConfig = {
@@ -551,7 +553,9 @@ module.exports = {
         '@typescript-eslint/default-param-last': [ 2 ],
         'dot-notation': [ 0 ],
         '@typescript-eslint/dot-notation': [ 2 ],
-        '@typescript-eslint/explicit-function-return-type': [ 1 ],
+        '@typescript-eslint/explicit-function-return-type': [ 1, {
+          allowExpressions: true,
+        }],
         'func-call-spacing': [ 0 ],
         '@typescript-eslint/func-call-spacing': [ 2, 'never' ],
         'keyword-spacing': [ 0 ],
@@ -619,6 +623,17 @@ module.exports = {
         ],
         'space-infix-ops': [ 0 ],
         '@typescript-eslint/space-infix-ops': [ 2 ],
+        '@typescript-eslint/type-annotation-spacing': [
+          2, {
+            before: false,
+            after: true,
+            overrides: {
+              arrow: {
+                before: true,
+                after: true,
+              }
+            }
+          }],
       },
     },
   ],

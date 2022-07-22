@@ -1,11 +1,6 @@
 import styles from './loading.module.scss';
 
-export interface ILoading{
-  /**
-   * Specify class for loading element. Set only font-size attribute to change size of loading.
-   */
-  classes?: { root: string };
-}
+import { ILoading } from './Loading.types';
 
 /**
  * UI component displaying loader

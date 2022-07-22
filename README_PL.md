@@ -1,4 +1,4 @@
-# Randomizator [![App Release](https://img.shields.io/badge/dynamic/json?color=blue&label=wersja&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
+# Randomizator ![version](https://img.shields.io/github/package-json/v/kurczaczkowe-rzeczy/randomizator?label=wersja) ![Latest release](https://img.shields.io/github/v/release/kurczaczkowe-rzeczy/randomizator?label=ostatnie%20wydanie)
 
 Jeśli chcesz przetestować, sprawdź [to łącze](https://kurczaczkowe-rzeczy.github.io/randomizator/). Przykładowy użytkownik:
 - Nazwa użytkownika: randomizator@example.com
@@ -33,6 +33,83 @@ poprzez wprowadzenie do pola powyżej wylosowanych odpowiedzi ciągu znaków i�
 [![Material-UI icon Release](https://img.shields.io/badge/dynamic/json?color=blue&label=material-ui&query=%24.dependencies['@material-ui/core']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 [![Copy to clipboard](https://img.shields.io/badge/dynamic/json?color=blue&label=react-copy-to-clipboard&query=%24.dependencies['react-copy-to-clipboard']&url=https%3A%2F%2Fraw.githubusercontent.com%2Fkurczaczkowe-rzeczy%2Frandomizator%2Fmaster%2Fpackage.json)]()
 
+## Struktura danych w Firebase
+
+```
+root
+ ├── userId_1 [collection]
+ |  ├── formId_1 [document]
+ |  |  ├── answers [collection]
+ |  |  |  ├── answerId_1 [document]
+ |  |  |  |  └── fields [collection]
+ |  |  |  |  |  ├── fieldId_1 [document]
+ |  |  |  |  |  |  ├── answerID [field]: string
+ |  |  |  |  |  |  ├── fieldName [field]: string
+ |  |  |  |  |  |  ├── formID [field]: string
+ |  |  |  |  |  |  ├── timestamp [field]: number
+ |  |  |  |  |  |  ├── value [field]: string
+ |  |  |  |  |  |  └── weight [field]: number
+ |  |  |  |  |  ├── fieldId_2 [document]
+ ...
+ |  |  |  |  |  └── fieldId_N [document]
+ |  |  |  ├── answerId_2 [document]
+ ...
+ |  |  |  ├── answerId_N [document]
+ |  |  ├── counter [field]: number
+ |  |  ├── fields [field]: array
+ |  |  |  ├── name [field]: string
+ |  |  |  └── type [field]: string
+ |  |  └── name [field]: string
+ |  ├── formId_2 [document]
+ ...
+ |  └── formId_N [document]
+ ├── userId_2 [collection]
+ ...
+ ├── userId_N [collection]
+ └── users [collection]
+    ├── userId_1 [document]
+    |  ├── name [field]: string
+    |  └── role [field]: CREATOR | GUEST | ADMIN
+    ├── userId_2 [document]
+    ...
+    └── userId_N [document]
+```
+
+W pierwszym zagnieżdżeniu znajdują się kolekcje użytkowników, które zawierają formularze dodane przez użytkownika
+oraz kolekcja z użytkownikami (*users*).
+
+#### Kolekcja *users*
+Kolekcja *users* zawiera dokumenty o id odpowiadającym id użytkownika. Każdy dokument zawiera pola:
+ - *name* - nazwa użytkownika
+ - *role* - rola przypisana do użytkownika.
+
+#### Kolekcja użytkownika *userId_**
+Kolekcja użytkownika *userId_** zawsze nazywa się identyfikatorem użytkownika. Kolekcja zawiera listę dokumentów,
+które odpowiadają formularzom dodanym przez użytkownika.
+
+#### Dokument formularzu *formId_**
+Dokument formularzu *formId_** zawsze ma własny unikalny identyfikator. Zawiera w sobie:
+ - *answers* - kolekcja zawierająca listę odpowiedzi
+ - *counter* - licznik odpowiedzi
+ - *fields* - lista pól w formularzu
+   - *name* - nazwa pola
+   - *type* - typ pola
+ - *name* - nazwa formularzu.
+
+#### Kolekcja odpowiedzi *answers*
+Kolekcja odpowiedzi *answers* zawiera listę odpowiedzi. Każda odpowiedź to dokument o unikalnym identyfikatorze
+z kolekcją pól *fields*.
+
+#### Kolekcja pól *fields*
+Kolekcja pól *fields* zawiera listę odpowiedzi do konkretnych pól w odrębnych dokumentach. Każdy dokument zawiera:
+ - *answerID* - identyfikator odpowiedzi
+ - *fieldName* - nazwa pola, do którego została dodana odpowiedź
+ - *fieldID* - identyfikator odpowiedzi w danym polu
+ - *timestamp* - znacznik czasowy z momentu dodania odpowiedzi
+ - *value* - odpowiedź zawarta w polu
+ - *weight* - waga odpowiedzi, jeśli jest 0, to odpowiedź nie jest brana pod uwagę podczas losowania; im wyższa
+   wartość, tym częściej będzie się pojawiać w losowaniu.
+
 ## Opis głównych gałęzi
 
 Na gałęzi `master` znajduje się wersja aplikacji z najnowszymi funkcjonalnościami i poprawkami.
@@ -51,12 +128,14 @@ w usłudze GitHub Pages pod linkiem https://kurczaczkowe-rzeczy.github.io/rand
 ![form-display](https://user-images.githubusercontent.com/34583194/103149592-1f789100-476b-11eb-8d35-fbce43ab6bd5.png)
 
 ### Strona twórcy
-![after-login](https://user-images.githubusercontent.com/34583194/103149942-e8a47a00-476e-11eb-9601-13cbf2b06b15.png)
-![show-list-forms](https://user-images.githubusercontent.com/33415084/96367974-3e4a1e00-1151-11eb-8fbc-ef82d197b314.png)
+![after-login](https://user-images.githubusercontent.com/34583194/178568227-0fc7c80d-9d95-4544-a3fa-19ba239885a7.png)
+![show-list-forms](https://user-images.githubusercontent.com/34583194/178568625-d25411c5-ccf3-4e5e-b403-5938a351f1a2.png)
+
+### Pulpit
+![dashboard](https://user-images.githubusercontent.com/34583194/178568732-2029c547-d935-49a7-a1f3-2d14f36fc46a.png)
 
 ### Strona błędu
 ![form-not-exist](https://user-images.githubusercontent.com/33415084/95674980-26542680-0bb4-11eb-8f30-a7d7e7a36c50.png)
-
 ![user-and-form-not-exist](https://user-images.githubusercontent.com/33415084/95674981-26ecbd00-0bb4-11eb-863a-9fd83ccd9fc5.png)
 
 ## Instalacja
