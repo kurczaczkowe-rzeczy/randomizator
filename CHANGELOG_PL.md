@@ -1,3 +1,9 @@
+## 2.0.21 (Lipiec 24, 2022)
+- Poprawienie duplikowania odpowiedzi po odświeżeniu strony
+
+## 2.0.20 (Lipiec 23, 2022)
+- Wprowadzenie formatów woff i woff2 do istniejących czcionek
+
 ## 2.0.19 (Lipiec 11, 2022)
 - Poprawienie wyświetlania widoku odpowiedzi przy zmianie z pustego na widok z pierwszą odpowiedzią
 
