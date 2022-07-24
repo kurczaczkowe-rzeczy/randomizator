@@ -1,3 +1,9 @@
+## 2.0.21 (July 24, 2022)
+- Fixed duplicate answers on every refresh
+
+## 2.0.20 (July 23, 2022)
+- Added woff and woff2 formats for existed fonts
+
 ## 2.0.19 (July 11, 2022)
 - Fixed answers view not react on adding answers when form has no answers
 

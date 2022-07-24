@@ -12,6 +12,8 @@ import { useDispatch } from 'react-redux';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
 import _isNil from 'lodash/isNil';
 import _map from 'lodash/map';
+import _filter from 'lodash/filter';
+import _isEmpty from 'lodash/isEmpty';
 
 import useAnswerBatch from 'hooks/useAnswerBatch';
 import useTypedSelector from 'hooks/useTypedSelector';
@@ -99,19 +101,25 @@ const App = (): JSX.Element => {
   const isAuthenticated = isLoaded( auth ) && !isEmpty( auth );
 
   useEffect(() => {
-    const shouldRunEffect = isAuthenticated && forms && !hasCalledRestructuring.current;
+    const oldStructuredForms = _filter( forms, ({ counter }) => typeof counter !== 'number' );
+    const shouldRunEffect = isAuthenticated && !_isEmpty( oldStructuredForms ) && !hasCalledRestructuring.current;
+    const hideLoaderAction = (): void => { dispatch( hideLoader( PAGES.CREATOR )); };
 
     console.log( `Should structure update be run? %c${ !!shouldRunEffect }`,
       `color: ${ shouldRunEffect ? 'green' : 'red' }` );
+    if ( _isEmpty( oldStructuredForms ) && forms ) {
+      hideLoaderAction();
+      console.info( '%cNothing to do. Every forms are now in right structure.', 'color: #4199f7;' );
+      hasCalledRestructuring.current = true;
+
+      return;
+    }
+
     ( async () => {
       if ( shouldRunEffect ) {
         dispatch( showLoader( PAGES.CREATOR ));
 
-        updateFirestoreDataStructure(
-          forms,
-          () => { dispatch( hideLoader( PAGES.CREATOR )); },
-          () => { dispatch( hideLoader( PAGES.CREATOR )); },
-        );
+        updateFirestoreDataStructure( oldStructuredForms, hideLoaderAction, hideLoaderAction );
         hasCalledRestructuring.current = true;
       }
     })();
