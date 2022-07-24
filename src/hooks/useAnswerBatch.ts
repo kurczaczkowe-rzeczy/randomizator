@@ -2,10 +2,8 @@ import { useCallback, useMemo } from 'react';
 import { useFirestore } from 'react-redux-firebase';
 import { WriteBatch } from '@firebase/firestore-types';
 import _forEach from 'lodash/forEach';
-import _filter from 'lodash/filter';
 import _chunk from 'lodash/chunk';
 import _noop from 'lodash/noop';
-import _isEmpty from 'lodash/isEmpty';
 
 import { checkValueIsValid } from 'utils/answersUtils';
 import useLocaleString from 'hooks/useLocaleString';
@@ -31,6 +29,7 @@ type CreateAnswer = ( batch: WriteBatch, answerFields: AnswerFields, formID?: st
 // ToDo: remove in next version
 interface IFirestormOldFormStructure {
   answers: Mapping< string >[];
+  counter?: number;
   id: string;
   name: string;
 }
@@ -171,22 +170,16 @@ const useAnswerBatch = ( creatorID: string, formID: string ): IAnswerBatch => {
     onSuccess,
     onFailure,
   ) => {
-    const oldStructuredForms = _filter( forms, 'answers' );
-
-    if ( _isEmpty( oldStructuredForms )) {
-      onSuccess();
-      console.info( '%cNothing to do. Every forms are now in right structure.', 'color: #4199f7;' );
-
-      return;
-    }
-
-    _forEach( oldStructuredForms, async ({ id, answers }) => {
+    _forEach( forms, async ({ id, answers }) => {
       try {
         const batch = firestoreBatch();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
         formRef = doc( `${ creatorID }/${ id }` );
-        const data = { fields: [{ name: 'Imię męskie', type: 'text' }, { name: 'Imię damskie', type: 'text' }]};
+        const data = {
+          fields: [{ name: 'Imię męskie', type: 'text' }, { name: 'Imię damskie', type: 'text' }],
+          counter: 0,
+        };
 
         batch.update( formRef, data );
 
