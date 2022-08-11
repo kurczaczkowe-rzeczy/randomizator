@@ -66,3 +66,7 @@ export const USER_ROLES = {
   CREATOR: 'CREATOR',
   GUEST: 'GUEST',
 } as const;
+
+// CHANNELS
+export const MAIN_BROADCAST_CHANNEL = 'randomizator';
+export const ASK_FOR_PAGE_ORIGIN = 'ASK_FOR_PAGE_ORIGIN';
