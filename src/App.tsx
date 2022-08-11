@@ -7,6 +7,9 @@ import {
   Switch,
   Route,
   Redirect,
+  useLocation,
+  useHistory,
+  useRouteMatch,
 } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
@@ -15,7 +18,9 @@ import _map from 'lodash/map';
 import _filter from 'lodash/filter';
 import _isEmpty from 'lodash/isEmpty';
 
+import { handleAskForPageOrigin } from 'utils/backToOrigin';
 import useAnswerBatch from 'hooks/useAnswerBatch';
+import useBroadcastChannel from 'hooks/useBroadcastChannel';
 import useTypedSelector from 'hooks/useTypedSelector';
 import useLocalStorage from 'hooks/useLocalStorage';
 import useLocaleString from 'hooks/useLocaleString';
@@ -60,6 +65,22 @@ const App = (): JSX.Element => {
   const hasCalledRestructuring = useRef( false );
 
   const { updateFirestoreDataStructure } = useAnswerBatch( auth.uid, '' );
+
+  const { length } = useHistory();
+  const { pathname } = useLocation();
+  const match = useRouteMatch( ROUTES.guest );
+  const { sendData } = useBroadcastChannel({
+    onMessage: ({ data }) => {
+      handleAskForPageOrigin(
+        data,
+        length,
+        match,
+        sendData,
+        pathname,
+      );
+    },
+    runsOnce: false,
+  });
 
   const menuItems = getMenuItemsForCurrentUser( getMenuItems( getString ), currentUserRole );
   const authenticatedRoutes = useMemo(() => _map( authenticatedRoutesCollection, ( props ) => (
