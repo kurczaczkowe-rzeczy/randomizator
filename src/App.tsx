@@ -50,6 +50,7 @@ import {
   getMenuItems,
   getMenuItemsForCurrentUser,
 } from 'App.utils';
+import { getPageFromPathname } from 'utils/getPageFromPathname';
 
 const unauthenticatedRoutes = <Route exact path={ ROUTES.home } component={ Login } />;
 
@@ -108,8 +109,9 @@ const App = (): JSX.Element => {
       dispatch( showLoader( PAGES.HOME ));
     } else {
       dispatch( getCurrentUserRole());
+      dispatch( showLoader( getPageFromPathname( pathname )));
     }
-  }, [ auth, dispatch ]);
+  }, [ auth, dispatch, pathname ]);
 
   useEffect(() => {
     if ( isLoading ) {
@@ -122,6 +124,10 @@ const App = (): JSX.Element => {
   const isAuthenticated = isLoaded( auth ) && !isEmpty( auth );
 
   useEffect(() => {
+    if ( hasCalledRestructuring.current ) {
+      return;
+    }
+
     const oldStructuredForms = _filter( forms, ({ counter }) => typeof counter !== 'number' );
     const shouldRunEffect = isAuthenticated && !_isEmpty( oldStructuredForms ) && !hasCalledRestructuring.current;
     const hideLoaderAction = (): void => { dispatch( hideLoader( PAGES.CREATOR )); };
