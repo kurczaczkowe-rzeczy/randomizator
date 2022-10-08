@@ -1,10 +1,17 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import _first from 'lodash/first';
 import _get from 'lodash/get';
 import _map from 'lodash/map';
 import _includes from 'lodash/includes';
 import _isEqual from 'lodash/isEqual';
+import _isNil from 'lodash/isNil';
+import _split from 'lodash/split';
+import _last from 'lodash/last';
+import _toLower from 'lodash/toLower';
+import _some from 'lodash/some';
+import _kebabCase from 'lodash/kebabCase';
 
 import Typography from '@material-ui/core/Typography';
 
@@ -14,9 +21,9 @@ import AnswersTable from 'components/AnswersTable';
 import useBeforeUnloadEvent from 'hooks/useBeforeUnloadEvent';
 import useLocaleString from 'hooks/useLocaleString';
 import useTypedSelector from 'hooks/useTypedSelector';
-import { CARDS } from 'constans';
+import { CARDS, PAGES, ROUTES } from 'constans';
 import { CLEAR_ANSWERS_MANAGER, CLEAR_FIRESTORE_ANSWERS } from 'store/actions';
-import { clearFirestoreAnswers } from 'store/actions/globalActions';
+import { clearFirestoreAnswers, hideLoader, showLoader } from 'store/actions/globalActions';
 
 import useStyle from './AnswersManager.styles';
 
@@ -28,11 +35,29 @@ export const AnswersManager = (): JSX.Element => {
   const styles = useStyle();
   const getString = useLocaleString();
   const dispatch = useDispatch();
+  const { push, location: { pathname }} = useHistory();
 
   const formID = useTypedSelector(({ form: { id }}) => id );
-  const isEmptyForm = useTypedSelector(({ firestore: { data: { forms }}}) => !forms?.[ formID ]?.counter );
+  const counter = useTypedSelector(({ firestore: { data: { forms }}}) => forms?.[ formID ]?.counter );
+  const isEmptyForm = !counter;
   const fields = useTypedSelector(({ firestore: { data: { forms }}}) => forms?.[ formID ]?.fields ?? [], _isEqual );
   const isLoading = useTypedSelector(({ global: { bindToCard }}) => _includes( bindToCard, CARDS.ANSWERS_TABLE ));
+
+  useEffect(() => {
+    const action = _isNil( counter ) ? showLoader : hideLoader;
+
+    dispatch( action( PAGES.DASHBOARD ));
+  }, [ counter, dispatch ]);
+
+  useEffect(() => {
+    const lastPathPart = _last( _split( pathname, '/' ));
+    const isTabExist = _some(
+      [ ...fields, { name: _toLower( PAGES.DASHBOARD ) }],
+      ({ name }) => _kebabCase( name ) === lastPathPart,
+    );
+
+    typeof counter == 'number' && !isTabExist && push( ROUTES.notFound );
+  }, [ fields, counter, push, pathname ]);
 
   const blockNavigationActions = useMemo(() => [
     { type: CLEAR_ANSWERS_MANAGER },

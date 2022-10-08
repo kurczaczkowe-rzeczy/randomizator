@@ -1,6 +1,7 @@
 import _isEmpty from 'lodash/isEmpty';
 import _pull from 'lodash/pull';
 import _union from 'lodash/union';
+import _includes from 'lodash/includes';
 
 import {
   BLOCK_NAVIGATION_CB,
@@ -38,7 +39,7 @@ const reducer = ( state = initialState, action: GlobalAction = { type: CLEAR_GLO
     }
     case HIDE_LOADER: {
       const newLoadingQueue = _pull( state.loadingsQueue, action.payload.callFrom );
-      const isEmptyBindings = !action.payload.bindToCard;
+      const isEmptyBindings = _includes( state.loadingsQueue, action.payload.callFrom ) && !action.payload.bindToCard;
       const newBindings = isEmptyBindings ? [] : _pull( state.bindToCard, action.payload.bindToCard );
 
       return {
