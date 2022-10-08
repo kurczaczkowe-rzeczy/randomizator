@@ -21,9 +21,10 @@ import _isEmpty from 'lodash/isEmpty';
 import { handleAskForPageOrigin } from 'utils/backToOrigin';
 import useAnswerBatch from 'hooks/useAnswerBatch';
 import useBroadcastChannel from 'hooks/useBroadcastChannel';
-import useTypedSelector from 'hooks/useTypedSelector';
+import useEffectOnce from 'hooks/useEffectOnce';
 import useLocalStorage from 'hooks/useLocalStorage';
 import useLocaleString from 'hooks/useLocaleString';
+import useTypedSelector from 'hooks/useTypedSelector';
 import {
   hideLoader,
   showLoader,
@@ -50,7 +51,6 @@ import {
   getMenuItems,
   getMenuItemsForCurrentUser,
 } from 'App.utils';
-import { getPageFromPathname } from 'utils/getPageFromPathname';
 
 const unauthenticatedRoutes = <Route exact path={ ROUTES.home } component={ Login } />;
 
@@ -88,11 +88,9 @@ const App = (): JSX.Element => {
     <ProtectedRoute currentUserRole={ currentUserRole } { ...props } />
   )), [ currentUserRole ]);
 
-  useEffect(() => {
-    if ( _isNil( showDevModal )) {
-      setShowDevModal( true );
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffectOnce(() => {
+    _isNil( showDevModal ) && setShowDevModal( true );
+  });
 
   useEffect(() => {
     if ( !isLoading && IS_DEVELOPMENT_MODE && showDevModal ) {
@@ -107,10 +105,11 @@ const App = (): JSX.Element => {
   useEffect(() => {
     if ( !isLoaded( auth )) {
       dispatch( showLoader( PAGES.HOME ));
-    } else {
-      dispatch( getCurrentUserRole());
-      dispatch( showLoader( getPageFromPathname( pathname )));
+
+      return;
     }
+
+    dispatch( getCurrentUserRole());
   }, [ auth, dispatch, pathname ]);
 
   useEffect(() => {

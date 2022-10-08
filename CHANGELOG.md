@@ -1,3 +1,17 @@
+## 2.0.25 (October 8, 2022)
+- Fixed loading cards algorithm
+- Fixed algorithm solving problem with blinking answers table on dashboard
+
+## 2.0.24 (September 26, 2022)
+- Fixed blinking answers table empty state on loading doesn't exist form answers tab
+
+## 2.0.23 (August 11, 2022)
+- Added possibility to open form in new tab
+- Added possibility to back to origin form page in new form tab
+
+## 2.0.22 (July 27, 2022)
+- Fixed fonts loading
+
 ## 2.0.21 (July 24, 2022)
 - Fixed duplicate answers on every refresh
 

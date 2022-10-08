@@ -40,20 +40,29 @@ export const getCurrentUserRole = (): UserThunkAction => async (
   getState,
   { getFirestore },
 ) => {
-  const { uid, isEmpty } = getState().firebase.auth;
+  const {
+    firebase: { auth: { isEmpty, uid }},
+    usr: { currentUserRole },
+  } = getState();
 
   if ( isEmpty ) {
     dispatch({ type: GET_CURRENT_USER_ROLE, payload: { currentUserRole: USER_ROLES.GUEST }});
+    dispatch( hideLoader( PAGES.HOME ));
 
     return;
   }
 
   try {
-
     const doc = await getFirestore()
       .collection( 'users' )
       .doc( uid )
       .get();
+
+    if ( doc.exists && currentUserRole === doc.data().role ) {
+      dispatch( hideLoader( PAGES.HOME ));
+
+      return;
+    }
 
     if ( doc.exists ) {
       dispatch({ type: GET_CURRENT_USER_ROLE, payload: { currentUserRole: doc.data().role }});
