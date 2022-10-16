@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import useLocaleString from 'hooks/useLocaleString';
 
 import Label from 'components/form/components/label';
-import ButtonView from 'components/Button';
+import Button from 'components/Button';
 import TextInput from 'components/form/components/textInput';
 
 import useStyle from './UserCreator.styles';
@@ -75,7 +75,7 @@ export const UserCreator = ({
           { ...register( 'formName', { required: true }) }
         />
       </div>
-      <ButtonView value={ getString( 'addUser' ) } type="submit" />
+      <Button label={ getString( 'addUser' ) } type="submit" />
     </form>
   );
 };

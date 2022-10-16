@@ -60,7 +60,7 @@ export const Filters = ({
           variant="textIconButton"
           icon={ <KeyboardArrowUpIcon classes={{ root: filterChevronRootClasses }} /> }
           onClick={ onToggleVisibility }
-          value={ getString( 'filter' ) }
+          label={ getString( 'filter' ) }
         />
       </div>
       <form className={ styles.filterForm } onSubmit={ handleSubmit( onSubmit ) }>
@@ -83,7 +83,7 @@ export const Filters = ({
             );
           }) }
         </div>
-        <Button value="" type="submit" className={ styles.hiddenButton } />
+        <Button label="" type="submit" className={ styles.hiddenButton } />
       </form>
     </div>
   );

@@ -4,7 +4,7 @@ import useLocaleString from 'hooks/useLocaleString';
 import { IS_DEVELOPMENT_MODE } from 'constans';
 
 import AnswersCounter from 'components/answersCounter';
-import ButtonView from 'components/Button';
+import Button from 'components/Button';
 import Card from 'components/card';
 import Draw from 'components/Draw';
 import FileContainer from 'components/FileContainer';
@@ -31,8 +31,8 @@ export const Creator = ({
       <div className={ styles.leftSpace }>
         <FormChooser />
         { IS_DEVELOPMENT_MODE && (
-          <ButtonView
-            value={ getString( 'getAnswers' ) }
+          <Button
+            label={ getString( 'getAnswers' ) }
             onClick={ onDownloadAnswers }
           />
         )}
@@ -41,8 +41,8 @@ export const Creator = ({
       <div className={ styles.rightSpace }>
         <div className={ styles.inline }>
           <AnswersCounter counter={ selectedForm.counter } />
-          <ButtonView
-            value={ getString( 'logout' ) }
+          <Button
+            label={ getString( 'logout' ) }
             icon={ <ExitToAppIcon /> }
             onClick={ onLogout }
             variant="iconButton"

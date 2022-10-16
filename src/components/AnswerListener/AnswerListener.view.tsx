@@ -24,7 +24,7 @@ export const AnswerListener = ({ onWeightUpdate }: IAnswerListener ): JSX.Elemen
           onWeightUpdate( dirtyAnswer );
         } }
         type="submit"
-        value={ getString( 'confirmation' ) }
+        label={ getString( 'confirmation' ) }
       />
     </div>
   );

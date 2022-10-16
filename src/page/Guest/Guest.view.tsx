@@ -40,7 +40,7 @@ export const GuestView = ({
       <div className={ styles.descriptor }>
         { isCreator && (
           <Button
-            value={ getString( 'goBackToManagement' ) }
+            label={ getString( 'goBackToManagement' ) }
             icon={ <BackIcon classes={{ root: styles.backIcon }} /> }
             onClick={ onBackToCreator }
             variant="iconButton"

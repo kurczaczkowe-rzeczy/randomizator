@@ -7,7 +7,7 @@ import useLocaleString from 'hooks/useLocaleString';
 
 import Label from './components/label/Label.view';
 import TextInput from './components/textInput';
-import ButtonView from 'components/Button';
+import Button from 'components/Button';
 
 import classes from './form.module.scss';
 import { IForm, IGuestValues } from './Form.types';
@@ -59,7 +59,7 @@ export const Form = ({
           ) }
         />
       </div>
-      <ButtonView value={ getString( 'send' ) } type="submit" />
+      <Button label={ getString( 'send' ) } type="submit" />
     </form>
   );
 };

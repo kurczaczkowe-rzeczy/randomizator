@@ -28,7 +28,7 @@ const Draw = ({
       <SelectFilter />
       { !_isEmpty( fields ) && (
         <Button
-          value={ getString( 'drawAnswers' ) }
+          label={ getString( 'drawAnswers' ) }
           icon={ <ScatterPlotIcon /> }
           onClick={ onRandomClick }
           variant="iconButton"

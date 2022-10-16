@@ -9,9 +9,9 @@ import useStyles from './Button.styles';
 /**
  * Clickable element that trigger some action
  */
-export const ButtonView = ({
+export const Button = ({
   icon,
-  value, // ToDo: issue #188
+  label,
   onClick,
   type = 'button',
   variant = 'button',
@@ -46,12 +46,12 @@ export const ButtonView = ({
         ? (
           <>
             { preparedIcon }
-            <span>{ value }</span>
+            <span>{ label }</span>
           </>
         )
-        : value}
+        : label}
     </button>
   );
 };
 
-export default ButtonView;
+export default Button;

@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import useLocaleString from 'hooks/useLocaleString';
 
 import Card from 'components/card';
-import ButtonView from 'components/Button';
+import Button from 'components/Button';
 import TextInput from 'components/form/components/textInput';
 
 import { ILogin, ILoginValues } from './Login.types';
@@ -49,7 +49,7 @@ export const Login = ({ onLogin, authError }: ILogin ): JSX.Element => {
                   />
                 ) }
               />
-              <ButtonView value={ getString( 'login' ) } type="submit" />
+              <Button label={ getString( 'login' ) } type="submit" />
             </form>
             {authError && <div className={ styles.error }>{ authError }</div>}
           </>
