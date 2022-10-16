@@ -12,7 +12,6 @@ import _isEqual from 'lodash/isEqual';
 import useAnswerBatch from 'hooks/useAnswerBatch';
 import useLocaleString from 'hooks/useLocaleString';
 import useTypedSelector from 'hooks/useTypedSelector';
-import { downloadAnswersCSV } from 'store/actions/answersAction';
 import { signOut } from 'store/actions/authAction';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { CARDS, PAGES } from 'constans';
@@ -52,8 +51,6 @@ const Creator = (): JSX.Element => {
       dispatch( toggleLoader );
     }
   }, [ selectedForm.counter, dispatch ]);
-
-  const onDownloadAnswers = (): void => { dispatch( downloadAnswersCSV()); };
 
   const onDropAccepted = ( acceptedFiles: File[]): void => {
     dispatch( showLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
@@ -116,7 +113,6 @@ const Creator = (): JSX.Element => {
       <CreatorView
         selectedForm={ selectedForm }
         fileContainerProps={ fileContainerProps }
-        onDownloadAnswers={ onDownloadAnswers }
         onLogout={ onLogout }
       />
     </PageContainer>

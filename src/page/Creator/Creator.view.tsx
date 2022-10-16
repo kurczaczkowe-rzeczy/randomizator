@@ -4,6 +4,7 @@ import useLocaleString from 'hooks/useLocaleString';
 import { IS_DEVELOPMENT_MODE } from 'constans';
 
 import AnswersCounter from 'components/answersCounter';
+import AnswersDownloader from 'components/AnswersDownloader';
 import Button from 'components/Button';
 import Card from 'components/card';
 import Draw from 'components/Draw';
@@ -20,7 +21,6 @@ import useStyles from './Creator.styles';
 export const Creator = ({
   selectedForm,
   fileContainerProps,
-  onDownloadAnswers,
   onLogout,
 }: ICreator ): JSX.Element => {
   const styles = useStyles();
@@ -30,12 +30,7 @@ export const Creator = ({
     <div className={ styles.root }>
       <div className={ styles.leftSpace }>
         <FormChooser />
-        { IS_DEVELOPMENT_MODE && (
-          <Button
-            label={ getString( 'getAnswers' ) }
-            onClick={ onDownloadAnswers }
-          />
-        )}
+        { IS_DEVELOPMENT_MODE && <AnswersDownloader /> }
         <FileContainer { ...fileContainerProps } />
       </div>
       <div className={ styles.rightSpace }>

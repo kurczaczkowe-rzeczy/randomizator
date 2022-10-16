@@ -1,8 +1,9 @@
 import _groupBy from 'lodash/groupBy';
 import _reduce from 'lodash/reduce';
 
-import { IS_DEVELOPMENT_MODE } from 'constans';
-import { FETCH_ANSWERS_ERROR, NO_ANSWERS_ERROR } from 'store/actions';
+import { startDownloadCSV, getNewFileName } from 'utils/fileUtils';
+import { ANSWERS_ERROR, NO_ANSWERS_ERROR } from 'store/actions';
+import { hideLoader, showLoader } from 'store/actions/globalActions';
 import {
   ActionCreator,
   AnswersAction,
@@ -10,7 +11,7 @@ import {
   IActionWithPayload,
 } from 'store/types';
 import { OrderedFirestoreAnswer, Mapping } from 'types';
-import { startDownloadCSV, getNewFileName } from 'utils/fileUtils';
+import { CARDS, IS_DEVELOPMENT_MODE, PAGES } from 'constans';
 import { Filters } from 'hooks/types';
 
 // ToDo: change to general type action and then check action as described here https://phryneas.de/redux-typescript-no-discriminating-union
@@ -60,11 +61,19 @@ export const getAnswersOnceFromFirestore: AnswerActionCreator< GetAnswersOnceFro
     };
 
 export const downloadAnswersCSV: AnswerActionCreator = () => async ( dispatch, getState ) => {
+  if ( !IS_DEVELOPMENT_MODE ) {
+    // ToDo: show snackbar
+    return;
+  }
+
   const { id } = getState().form;
 
-  if ( !IS_DEVELOPMENT_MODE || !id ) { return; }
+  if ( !id ) {
+    // ToDo: show snackbar
+    return;
+  }
 
-  // ToDo: issue #201 - add action trigger loader on button
+  dispatch( showLoader( PAGES.CREATOR, CARDS.ANSWERS_DOWNLOADER ));
   await dispatch( getAnswersOnceFromFirestore({ type: NO_ANSWERS_ERROR, payload: { error: 'No answers' }}));
 
   // ToDo: issue #201 - Optimize grouping answers
@@ -87,5 +96,5 @@ export const downloadAnswersCSV: AnswerActionCreator = () => async ( dispatch, g
   const { name } = getState().firestore.data?.forms?.[ id ];
 
   startDownloadCSV( groupedAnswers, groupedAnswers ? name.replaceAll( ' ', '_' ) : getNewFileName());
-  // ToDo: issue #201 - add action hide loader from button
+  dispatch( hideLoader( PAGES.CREATOR, CARDS.ANSWERS_DOWNLOADER ));
 };
