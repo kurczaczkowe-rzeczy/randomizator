@@ -1,7 +1,7 @@
-import _groupBy from 'lodash/groupBy';
-import _reduce from 'lodash/reduce';
+import _map from 'lodash/map';
 
-import { startDownloadCSV, getNewFileName } from 'utils/fileUtils';
+import { startDownloadCSV } from 'utils/fileUtils';
+import { Filters } from 'hooks/types';
 import { ANSWERS_ERROR, NO_ANSWERS_ERROR } from 'store/actions';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
 import {
@@ -10,9 +10,8 @@ import {
   IAction,
   IActionWithPayload,
 } from 'store/types';
-import { OrderedFirestoreAnswer, Mapping } from 'types';
+import { IAnswer } from 'types';
 import { CARDS, IS_DEVELOPMENT_MODE, PAGES } from 'constans';
-import { Filters } from 'hooks/types';
 
 // ToDo: change to general type action and then check action as described here https://phryneas.de/redux-typescript-no-discriminating-union
 type AnswerActionCreator< Payload extends unknown[] = []> = ActionCreator< AnswersAction, Payload >;
@@ -74,27 +73,20 @@ export const downloadAnswersCSV: AnswerActionCreator = () => async ( dispatch, g
   }
 
   dispatch( showLoader( PAGES.CREATOR, CARDS.ANSWERS_DOWNLOADER ));
-  await dispatch( getAnswersOnceFromFirestore({ type: NO_ANSWERS_ERROR, payload: { error: 'No answers' }}));
+  try {
+    await dispatch( getAnswersOnceFromFirestore({ type: NO_ANSWERS_ERROR, payload: { error: 'No answers' }}));
+  } catch {
+    dispatch( hideLoader( PAGES.CREATOR, CARDS.ANSWERS_DOWNLOADER ));
 
-  // ToDo: issue #201 - Optimize grouping answers
-  const groupedAnswersByAnswerID = _groupBy< OrderedFirestoreAnswer >( getState().firestore.ordered?.answers,
-    'answerID' );
-  const groupedAnswers = _reduce< typeof groupedAnswersByAnswerID, Mapping< string >[]>(
-    groupedAnswersByAnswerID,
-    ( answers, currentAnswer ) => [
-      ...answers,
-      _reduce(
-        currentAnswer,
-        ( answer, { fieldName, value }) => ({ ...answer, [ fieldName ]: value }),
-        /* In database doesn't exist emptyColumn fields that is appended in google forms.
-           We want to be compatibility with it, so we added it to header row and this create new column. */
-        { emptyColumn: '' },
-      ),
-    ],
-    [],
+    return;
+  }
+
+  const backupAnswers = _map< IAnswer, Omit< IAnswer, 'formID' | 'timestamp' | 'id' > & { emptyColumn: '' }>(
+    getState().firestore.ordered.answers,
+    ({ answerID, fieldName, value, weight }) => ({ emptyColumn: '', answerID, fieldName, value, weight }),
   );
   const { name } = getState().firestore.data?.forms?.[ id ];
 
-  startDownloadCSV( groupedAnswers, groupedAnswers ? name.replaceAll( ' ', '_' ) : getNewFileName());
+  startDownloadCSV( backupAnswers, name.replaceAll( ' ', '_' ));
   dispatch( hideLoader( PAGES.CREATOR, CARDS.ANSWERS_DOWNLOADER ));
 };
