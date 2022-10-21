@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react';
 
-import classes from './loading.module.scss';
+import classes from './Loading.module.scss';
 
 import Component from '.';
 import { ILoading } from './Loading.types';
