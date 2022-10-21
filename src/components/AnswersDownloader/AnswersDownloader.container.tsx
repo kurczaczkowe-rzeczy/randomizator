@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import _includes from 'lodash/includes';
 
-import useLocalize from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import useTypedSelector from 'hooks/useTypedSelector';
 import { downloadAnswersCSV } from 'store/actions/answersAction';
 import { CARDS } from 'constans';

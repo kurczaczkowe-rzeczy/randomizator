@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 
 import { errorLogger, FirebaseError } from 'utils/errorLogger';
-import { GetString } from 'hooks/types';
+import { Localize } from 'hooks/types';
 import { firebaseConfig } from 'config/firebaseConfig';
 
 import { ERROR_ORIGIN, NAME_OF_TEMP_APP } from './UserCreator.consts';
@@ -10,39 +10,39 @@ import { ERROR_ORIGIN, NAME_OF_TEMP_APP } from './UserCreator.consts';
  * Method handle errors in user creator widget.
  *
  * @param error - object contains message and code of occurred error
- * @param getString - method used to return localized string.
+ * @param localize - method used to return localized string.
  */
-export const userCreatorErrorHandler = ( error: unknown, getString: GetString ): string => {
+export const userCreatorErrorHandler = ( error: unknown, localize: Localize ): string => {
   if ( error && typeof error == 'object' && error.hasOwnProperty( 'code' )) {
     const firebaseError = error as FirebaseError;
 
     switch ( firebaseError.code ) {
       case 'permission-denied': {
-        return getString( 'firestorePermissionDenied' );
+        return localize( 'firestorePermissionDenied' );
       }
       case 'auth/email-already-in-use': {
-        return getString( 'emailAlreadyInUse' );
+        return localize( 'emailAlreadyInUse' );
       }
       case 'auth/weak-password': {
-        return getString( 'weakPassword' );
+        return localize( 'weakPassword' );
       }
       case 'app/duplicate-app': {
-        return getString( 'duplicatedApp' );
+        return localize( 'duplicatedApp' );
       }
       case 'auth/network-request-failed': {
-        return getString( 'networkRequestFailed' );
+        return localize( 'networkRequestFailed' );
       }
       default: {
         errorLogger( firebaseError, ERROR_ORIGIN );
 
-        return getString( 'unknownError' );
+        return localize( 'unknownError' );
       }
     }
   }
 
   errorLogger( error, ERROR_ORIGIN );
 
-  return getString( 'unknownError' );
+  return localize( 'unknownError' );
 };
 
 /**
@@ -57,12 +57,12 @@ export const deleteNewApp = (): void => {
  *
  * @param email - user email used to login to app
  * @param password - user password
- * @param getString - method used to return localized string.
+ * @param localize - method used to return localized string.
  */
 export const removeUser = async (
   email: string,
   password: string,
-  getString: GetString,
+  localize: Localize,
 ): Promise<void> => {
   let newAppInstance: firebase.app.App | null = null;
 
@@ -76,7 +76,7 @@ export const removeUser = async (
 
   try {
     if ( !newAppInstance?.auth().currentUser ) {
-      alert( getString( 'tempAppNotCreated' ));
+      alert( localize( 'tempAppNotCreated' ));
 
       return;
     }

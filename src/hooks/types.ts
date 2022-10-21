@@ -14,7 +14,7 @@ import {
 
 export type SetValue<T> = ( value: T | (( val: T ) => T )) => void;
 
-export type GetString = ( resourceId: LocaleResourcesIDs ) => string;
+export type Localize = ( resourceId: LocaleResourcesIDs ) => string;
 
 /** An object represents shape of form values. */
 export interface IAnswersValues {

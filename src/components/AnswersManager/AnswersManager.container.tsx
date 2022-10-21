@@ -19,7 +19,7 @@ import Card from 'components/card';
 import Tabs from 'components/Tabs';
 import AnswersTable from 'components/AnswersTable';
 import useBeforeUnloadEvent from 'hooks/useBeforeUnloadEvent';
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import useTypedSelector from 'hooks/useTypedSelector';
 import { CARDS, PAGES, ROUTES } from 'constans';
 import { CLEAR_ANSWERS_MANAGER, CLEAR_FIRESTORE_ANSWERS } from 'store/actions';
@@ -33,7 +33,7 @@ import useStyle from './AnswersManager.styles';
  */
 export const AnswersManager = (): JSX.Element => {
   const styles = useStyle();
-  const getString = useLocaleString();
+  const localize = useLocalize();
   const dispatch = useDispatch();
   const { push, location: { pathname }} = useHistory();
 
@@ -78,8 +78,8 @@ export const AnswersManager = (): JSX.Element => {
           ? (
             <div className={ styles.emptyInfoContainer }>
               <p className={ styles.emptyInfoWrapper }>
-                <Typography variant="h6">{ getString( 'emptyFormFirstLine' ) }</Typography>
-                <Typography variant="caption">{ getString( 'emptyFormSecondLine' ) }</Typography>
+                <Typography variant="h6">{ localize( 'emptyFormFirstLine' ) }</Typography>
+                <Typography variant="caption">{ localize( 'emptyFormSecondLine' ) }</Typography>
               </p>
             </div>
           )
@@ -92,7 +92,7 @@ export const AnswersManager = (): JSX.Element => {
             />
           )) }
         cardClass={ styles.card }
-        title={ getString( 'answersWeightManagerTitle' ) }
+        title={ localize( 'answersWeightManagerTitle' ) }
         isLoading={ isLoading }
       />
       <Prompt />

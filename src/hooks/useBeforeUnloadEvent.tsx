@@ -4,7 +4,7 @@ import { Prompt } from 'react-router';
 import _isEmpty from 'lodash/isEmpty';
 import _isNil from 'lodash/isNil';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import useTypedSelector from 'hooks/useTypedSelector';
 import { setBlockNavigationCb } from 'store/actions/globalActions';
 import { RootState } from 'store/reducers/rootReducer';
@@ -21,8 +21,8 @@ const useBeforeUnloadEvent = (
 ): IUseBeforeUnloadEvent => {
   const shouldShowPrompt = useTypedSelector( selector );
   const dispatch = useDispatch();
-  const getString = useLocaleString();
-  const message = getString( 'promptConfirmation' );
+  const localize = useLocalize();
+  const message = localize( 'promptConfirmation' );
 
   useEffect(() => {
     const eventListener = ( event: BeforeUnloadEvent ): string | undefined => {

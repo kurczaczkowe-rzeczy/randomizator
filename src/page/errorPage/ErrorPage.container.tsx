@@ -4,14 +4,14 @@ import uuid from 'react-uuid';
 
 import { RootState } from 'store/reducers/rootReducer';
 import { forceHideLoader } from 'store/actions/globalActions';
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 
 import PageContainer from 'components/PageContainer';
 
 import ErrorPage from './ErrorPage.view';
 
 const ErrorPageContainer = (): JSX.Element => {
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   // ToDo: change to one selector with all possibly occurrence errors
   const userName = useSelector(( state: RootState ) => state.usr.errors );
@@ -27,11 +27,11 @@ const ErrorPageContainer = (): JSX.Element => {
   }, [ isLoading, dispatch ]);
 
   if ( formName ) {
-    errors.push( <p key={ uuid() }>{ getString( 'errorUserFormNotExist' ) }</p> );
+    errors.push( <p key={ uuid() }>{ localize( 'errorUserFormNotExist' ) }</p> );
   }
 
   if ( userName ) {
-    errors.push( <p key={ uuid() }>{ getString( 'errorUserNotExist' ) }</p> );
+    errors.push( <p key={ uuid() }>{ localize( 'errorUserNotExist' ) }</p> );
   }
 
   return (

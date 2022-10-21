@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import _noop from 'lodash/noop';
 import _reduce from 'lodash/reduce';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import asyncNoop from 'utils/asyncNoop';
 import { IField, Mapping } from 'types';
 
@@ -25,7 +25,7 @@ const Form = ({
 }: FormContainer ): JSX.Element => {
   const methods = useForm< IGuestValues >();
   const { formState: { isSubmitSuccessful }, reset } = methods;
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   const handleSubmit = useCallback< GuestSubmitHandler >( async ({ checkIsNotRobot, ...fields }) => {
     const message = getErrorMessage(
@@ -37,7 +37,7 @@ const Form = ({
     if ( message ) {
       /* ToDo: this not work as expect, it should be don second unction to run on invalid values
           and resolver to check validity of form */
-      alert( getString( message ));
+      alert( localize( message ));
 
       return;
     }
@@ -46,7 +46,7 @@ const Form = ({
   }, [
     name,
     onSubmit,
-    getString,
+    localize,
   ]);
 
   useEffect(() => {

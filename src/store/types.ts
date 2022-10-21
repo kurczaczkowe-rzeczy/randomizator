@@ -60,6 +60,10 @@ interface IBlockNavigationAction extends IAction< string >{
   payload?: Mapping< unknown >;
 }
 
+const language = { PL: 'PL', ENG: 'ENG' } as const;
+
+export type Language = keyof typeof language;
+
 // STATES
 /** An object represent global variables stored in state. */
 export interface IGlobalState {
@@ -72,7 +76,7 @@ export interface IGlobalState {
   /** Specify that modal should be open. */
   readonly isModalOpen: boolean;
   /** Contains current selected language */
-  readonly language: 'PL' | 'ENG';
+  readonly language: Language;
   /** Contains all pages on which loader should be shown. */
   readonly loadingsQueue: string[];
 }

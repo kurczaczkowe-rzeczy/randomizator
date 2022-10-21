@@ -23,7 +23,7 @@ import useAnswerBatch from 'hooks/useAnswerBatch';
 import useBroadcastChannel from 'hooks/useBroadcastChannel';
 import useEffectOnce from 'hooks/useEffectOnce';
 import useLocalStorage from 'hooks/useLocalStorage';
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import useTypedSelector from 'hooks/useTypedSelector';
 import {
   hideLoader,
@@ -55,7 +55,7 @@ import {
 const unauthenticatedRoutes = <Route exact path={ ROUTES.home } component={ Login } />;
 
 const App = (): JSX.Element => {
-  const getString = useLocaleString();
+  const localize = useLocalize();
   const dispatch = useDispatch();
   const auth = useTypedSelector(({ firebase: { auth }}) => auth );
   const forms = useTypedSelector(({ firestore: { ordered: { forms }}}) => forms );
@@ -83,7 +83,7 @@ const App = (): JSX.Element => {
     runsOnce: false,
   });
 
-  const menuItems = getMenuItemsForCurrentUser( getMenuItems( getString ), currentUserRole );
+  const menuItems = getMenuItemsForCurrentUser( getMenuItems( localize ), currentUserRole );
   const authenticatedRoutes = useMemo(() => _map( authenticatedRoutesCollection, ( props ) => (
     <ProtectedRoute currentUserRole={ currentUserRole } { ...props } />
   )), [ currentUserRole ]);

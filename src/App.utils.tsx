@@ -1,6 +1,6 @@
 import _filter from 'lodash/filter';
 
-import { GetString } from 'hooks/types';
+import { Localize } from 'hooks/types';
 import { hasAccess } from 'utils/permissionUtils';
 import { Role } from 'types';
 import { ROUTES } from 'constans';
@@ -11,19 +11,20 @@ import Creator from 'page/Creator';
 import Dashboard from 'page/Dashboard';
 
 /**
- * Method return global routes for whole app that user will be interact.
- * @param getString - method used to provide locale string.
+ * Method return global routes for whole app that user will be interacted.
+ * @param localize - method used to provide locale string.
  */
-export const getMenuItems = ( getString: GetString ): IDrawerMenu[ 'items' ] => [
+export const getMenuItems = ( localize: Localize ): IDrawerMenu[ 'items' ] => [
   {
-    children: getString( 'dashboard' ),
+    // ToDo: consider if there's only should be key for localization and localiztion should be resolving in component
+    children: localize( 'dashboard' ),
     id: 1,
     path: ROUTES.dashboard,
     access: [],
     hasNestedRoutes: true,
   },
   {
-    children: getString( 'formManagement' ),
+    children: localize( 'formManagement' ),
     id: 2,
     path: ROUTES.home,
     access: [],

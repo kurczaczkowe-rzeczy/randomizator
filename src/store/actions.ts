@@ -5,12 +5,12 @@ export type LoginActionsTypes = typeof LOGIN_SUCCESS | typeof LOGIN_ERROR;
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export type LogoutActionsTypes = typeof LOGOUT_SUCCESS;
 
-export const FETCH_ANSWERS_ERROR = 'FETCH_ANSWERS_ERROR';
+export const ANSWERS_ERROR = 'ANSWERS_ERROR';
 export const NO_ANSWERS_ERROR = 'NO_ANSWERS_ERROR';
 export const CLEAR_ANSWERS = 'CLEAR_ANSWERS';
 export type AnswersActionsTypes =
   | typeof NO_ANSWERS_ERROR
-  | typeof FETCH_ANSWERS_ERROR;
+  | typeof ANSWERS_ERROR;
 
 export const GET_CREATOR_NAME = 'GET_CREATOR_NAME';
 export const ERROR_USER_DONT_EXIST = 'ERROR_USER_DONT_EXIST';

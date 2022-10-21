@@ -4,7 +4,7 @@ import _map from 'lodash/map';
 import _includes from 'lodash/includes';
 import _isEmpty from 'lodash/isEmpty';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import TextNode from 'components/textNode';
 import Button from 'components/Button';
 import SelectFilter from 'components/selectFilter';
@@ -21,14 +21,14 @@ const Draw = ({
   onRandomClick,
 }: IDraw ): JSX.Element => {
   const styles = useStyles();
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   return (
     <>
       <SelectFilter />
       { !_isEmpty( fields ) && (
         <Button
-          label={ getString( 'drawAnswers' ) }
+          label={ localize( 'drawAnswers' ) }
           icon={ <ScatterPlotIcon /> }
           onClick={ onRandomClick }
           variant="iconButton"
@@ -50,7 +50,7 @@ const Draw = ({
                 type="input-text"
               />
             </div>
-            { _includes( errors, name ) && <p className={ styles.error }>{ getString( 'noValueToDraw' ) }</p> }
+            { _includes( errors, name ) && <p className={ styles.error }>{ localize( 'noValueToDraw' ) }</p> }
           </Fragment>
         ))}
       </div>

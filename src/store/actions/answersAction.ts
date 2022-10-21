@@ -4,6 +4,7 @@ import { startDownloadCSV } from 'utils/fileUtils';
 import { Filters } from 'hooks/types';
 import { ANSWERS_ERROR, NO_ANSWERS_ERROR } from 'store/actions';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
+import { prepareLocalize } from 'hooks/useLocalize';
 import {
   ActionCreator,
   AnswersAction,
@@ -29,6 +30,8 @@ export const getAnswersOnceFromFirestore: AnswerActionCreator< GetAnswersOnceFro
     ) => {
       const firestore = getFirestore();
       const { id } = getState().form;
+      const { language } = getState().global;
+      const localize = prepareLocalize( language );
       let answersRef;
 
       try {
@@ -46,19 +49,34 @@ export const getAnswersOnceFromFirestore: AnswerActionCreator< GetAnswersOnceFro
         });
       } catch ( e: unknown ) {
       // ToDo: better error handling
-        console.error( 'Error occurred on fetch once answers: ', e );
-        dispatch({ type: FETCH_ANSWERS_ERROR, payload: { error: 'Network error' }});
+        console.error( 'Error occurred on fetch once answers:', e );
+        dispatch({ type: ANSWERS_ERROR, payload: { error: localize( 'networkError' ) }});
+
+        throw e;
       }
 
-    /* ToDo: If there is no answers dispatch other error
-     ToDo: If firestore's ref not exist, was not properly created dispatch another error */
-      if ( !answersRef?.size ) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      if ( !answersRef ) {
+        dispatch({ type: ANSWERS_ERROR, payload: { error: localize( 'noAnswersRef' ) }});
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         dispatch( noAnswerOrRefErrorAction );
+
+        return;
       }
+
+      if ( answersRef.empty ) {
+        dispatch({ type: ANSWERS_ERROR, payload: { error: localize( 'noAnswers' ) }});
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        dispatch( noAnswerOrRefErrorAction );
+
+        return;
+      }
+
+      dispatch({ type: ANSWERS_ERROR, payload: { error: localize( 'unknownError' ) }});
     };
 
+/** Method makes backup of firestore answers and save it to file with form name. */
 export const downloadAnswersCSV: AnswerActionCreator = () => async ( dispatch, getState ) => {
   if ( !IS_DEVELOPMENT_MODE ) {
     // ToDo: show snackbar

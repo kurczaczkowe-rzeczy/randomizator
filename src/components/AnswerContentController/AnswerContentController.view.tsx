@@ -3,7 +3,7 @@ import _isString from 'lodash/isString';
 import _isEmpty from 'lodash/isEmpty';
 
 import useAnswerController from 'hooks/useAnswerController';
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 
 import useStyle from './AnswerContentController.styles';
 import { IAnswerContentController } from './AnswerContentController.types';
@@ -14,9 +14,9 @@ import { IAnswerContentController } from './AnswerContentController.types';
  */
 export const AnswerContentController = ({ answer, answerIndex }: IAnswerContentController ): JSX.Element => {
   const styles = useStyle();
-  const getString = useLocaleString();
+  const localize = useLocalize();
   const { weight } = useAnswerController( answerIndex );
-  const emptyMessage = `(${ getString( 'emptyContentCell' ) })`;
+  const emptyMessage = `(${ localize( 'emptyContentCell' ) })`;
 
   const isEmptyAnswer = _isString( answer ) && _isEmpty( answer );
   const isCrossedOut = !Number( weight );

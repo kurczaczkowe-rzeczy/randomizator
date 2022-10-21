@@ -1,7 +1,7 @@
 import { WithContext as ReactTags } from 'react-tag-input';
 import _noop from 'lodash/noop';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 
 import { ISelectFilter } from './SelectFilter.types';
 import './selectFilter.scss';
@@ -14,13 +14,13 @@ export const SelectFilter = ({
   handleDrag = _noop,
   handleTagClick = _noop,
 }: ISelectFilter ): JSX.Element => {
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   return (
     <ReactTags
       autofocus={ false }
       inputFieldPosition="top"
-      placeholder={ getString( 'typeFilterElements' ) }
+      placeholder={ localize( 'typeFilterElements' ) }
       tags={ tags }
       delimiters={ delimiters }
       handleDelete={ handleDelete }

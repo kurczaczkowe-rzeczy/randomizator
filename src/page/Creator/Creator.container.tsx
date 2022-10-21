@@ -10,7 +10,7 @@ import _map from 'lodash/map';
 import _isEqual from 'lodash/isEqual';
 
 import useAnswerBatch from 'hooks/useAnswerBatch';
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import useTypedSelector from 'hooks/useTypedSelector';
 import { signOut } from 'store/actions/authAction';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
@@ -24,7 +24,7 @@ import { parseText } from './Creator.utils';
 
 // ToDo: issue #150
 const Creator = (): JSX.Element => {
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   const previousAnswersCount = useRef< number | null >( null );
 
@@ -79,7 +79,7 @@ const Creator = (): JSX.Element => {
   };
   const onDropRejected = (): void => {
     // ToDo: extend handling errors
-    alert( getString( 'errorOnlyCSVAccepted' )); // ToDo change to snackbar
+    alert( localize( 'errorOnlyCSVAccepted' )); // ToDo change to snackbar
   };
   const onRemove = (): void => { setAcceptedFileNames([]); };
   const onSend = async (): Promise< void > => {
@@ -88,12 +88,12 @@ const Creator = (): JSX.Element => {
       await addAnswers(
         answersFromFile,
         () => {
-          alert( getString( 'dataSave' )); // ToDo change to snackbar
+          alert( localize( 'dataSave' )); // ToDo change to snackbar
           setAcceptedFileNames([]);
           dispatch( hideLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
         },
         () => {
-          alert( getString( 'sendingAnswersError' ));
+          alert( localize( 'sendingAnswersError' ));
           dispatch( hideLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
         },
       );

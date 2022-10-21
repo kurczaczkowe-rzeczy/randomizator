@@ -19,7 +19,7 @@ import useBroadcastChannel from 'hooks/useBroadcastChannel';
 import useEffectOnce from 'hooks/useEffectOnce';
 import useTypedSelector from 'hooks/useTypedSelector';
 import useTimeout from 'hooks/useTimeout';
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import {
   forceHideLoader,
   hideLoader,
@@ -41,7 +41,7 @@ import GuestView from './Guest.view';
 import { IGuest } from './Guest.types';
 
 const GuestPage = (): JSX.Element => {
-  const getString = useLocaleString();
+  const localize = useLocalize();
   const { creatorId, formId } = useParams<{[ key: string ]: string }>();
   const [ isHighlighted, setIsHighlighted ] = useState( false );
   const { runTimeout, stopTimeout } = useTimeout( DELAY_FORM_NAME_HIGHLIGHT );
@@ -107,8 +107,8 @@ const GuestPage = (): JSX.Element => {
 
     await addAnswer(
       fields,
-      () => { alert( getString( 'dataSave' )); },
-      () => { alert( getString( 'sendingAnswersError' )); },
+      () => { alert( localize( 'dataSave' )); },
+      () => { alert( localize( 'sendingAnswersError' )); },
     );
 
     dispatch( hideLoader( PAGES.GUEST, CARDS.GUEST_FORM ));

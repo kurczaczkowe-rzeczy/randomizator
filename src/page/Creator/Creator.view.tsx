@@ -1,6 +1,6 @@
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import { IS_DEVELOPMENT_MODE } from 'constans';
 
 import AnswersCounter from 'components/answersCounter';
@@ -24,7 +24,7 @@ export const Creator = ({
   onLogout,
 }: ICreator ): JSX.Element => {
   const styles = useStyles();
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   return (
     <div className={ styles.root }>
@@ -37,14 +37,14 @@ export const Creator = ({
         <div className={ styles.inline }>
           <AnswersCounter counter={ selectedForm.counter } />
           <Button
-            label={ getString( 'logout' ) }
+            label={ localize( 'logout' ) }
             icon={ <ExitToAppIcon /> }
             onClick={ onLogout }
             variant="iconButton"
           />
         </div>
         <Card
-          title={ getString( 'previewForm' ) }
+          title={ localize( 'previewForm' ) }
           body={ <Form { ...selectedForm } preview /> }
         />
         <Draw />

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 
 import Label from 'components/form/components/label';
 import Button from 'components/Button';
@@ -20,7 +20,7 @@ export const UserCreator = ({
   onSubmit,
 }: IUserCreator ): JSX.Element => {
   const styles = useStyle();
-  const getString = useLocaleString();
+  const localize = useLocalize();
   const {
     handleSubmit,
     register,
@@ -41,7 +41,7 @@ export const UserCreator = ({
     >
       <div className={ styles.row }>
         {/* ToDo: issue #187 */}
-        <Label required content={ getString( 'email' ) } />
+        <Label required content={ localize( 'email' ) } />
         <TextInput
           required
           type="email"
@@ -50,7 +50,7 @@ export const UserCreator = ({
       </div>
       <div className={ styles.row }>
         {/* ToDo: issue #187 */}
-        <Label required content={ getString( 'password' ) } />
+        <Label required content={ localize( 'password' ) } />
         <TextInput
           required
           type="password"
@@ -59,7 +59,7 @@ export const UserCreator = ({
       </div>
       <div className={ styles.row }>
         {/* ToDo: issue #187 */}
-        <Label required content={ getString( 'nickname' ) } />
+        <Label required content={ localize( 'nickname' ) } />
         <TextInput
           required
           type="text"
@@ -68,14 +68,14 @@ export const UserCreator = ({
       </div>
       <div className={ styles.row }>
         {/* ToDo: issue #187 */}
-        <Label required content={ getString( 'formName' ) } />
+        <Label required content={ localize( 'formName' ) } />
         <TextInput
           required
           type="text"
           { ...register( 'formName', { required: true }) }
         />
       </div>
-      <Button label={ getString( 'addUser' ) } type="submit" />
+      <Button label={ localize( 'addUser' ) } type="submit" />
     </form>
   );
 };

@@ -1,19 +1,19 @@
 import { IVirtualizedTable } from 'components/VirtualizedTable';
-import { GetString } from 'hooks/types';
+import { Localize } from 'hooks/types';
 import { ANSWER_EDIT_ICON_COLUMN_WIDTH, ANSWER_WEIGHT_COLUMN_WIDTH } from 'constans';
 
 import { IAnswerRow } from './AnswersTable.types';
 
-export const getColumns = ( getString: GetString ):
+export const getColumns = ( localize: Localize ):
   IVirtualizedTable< IAnswerRow >[ 'columns' ] => [
   {
-    label: getString( 'content' ),
+    label: localize( 'content' ),
     dataKey: 'value',
     width: 0,
     flexGrow: 1,
   },
   {
-    label: getString( 'weight' ),
+    label: localize( 'weight' ),
     dataKey: 'weight',
     width: ANSWER_WEIGHT_COLUMN_WIDTH,
   },
