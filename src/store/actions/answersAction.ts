@@ -90,9 +90,15 @@ export const downloadAnswersCSV: AnswerActionCreator = () => async ( dispatch, g
     return;
   }
 
+  const { language } = getState().global;
+  const localize = prepareLocalize( language );
+
   dispatch( showLoader( PAGES.CREATOR, CARDS.ANSWERS_DOWNLOADER ));
   try {
-    await dispatch( getAnswersOnceFromFirestore({ type: NO_ANSWERS_ERROR, payload: { error: 'No answers' }}));
+    await dispatch( getAnswersOnceFromFirestore({
+      type: NO_ANSWERS_ERROR,
+      payload: { error: localize( 'noAnswers' ) },
+    }));
   } catch {
     dispatch( hideLoader( PAGES.CREATOR, CARDS.ANSWERS_DOWNLOADER ));
 
