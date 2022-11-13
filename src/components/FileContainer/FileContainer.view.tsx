@@ -9,7 +9,8 @@ import { CARDS } from 'constans';
 import { IFileContainer } from './FileContainer.types';
 
 const FileContainer = ({
-  acceptedFileNames,
+  fileName,
+  shouldDisplayError,
   onDropAccepted,
   onDropRejected,
   onRemove,
@@ -27,7 +28,11 @@ const FileContainer = ({
       body={ (
         <>
           <Dropzone onDropAccepted={ onDropAccepted } onDropRejected={ onDropRejected } />
-          <FileList files={ acceptedFileNames } onRemove={ onRemove } onSend={ onSend } />
+          <FileList
+            files={ fileName ? [{ fileName, error: shouldDisplayError }] : [] }
+            onRemove={ onRemove }
+            onSend={ onSend }
+          />
         </>
       ) }
       isLoading={ isLoading }

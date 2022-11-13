@@ -19,8 +19,6 @@ export interface IFormDoc {
 export interface ICreator {
   /** Props passed to FileContainer component. */
   fileContainerProps: IFileContainer;
-  /** Method download answers and converts it to csv file. */
-  onDownloadAnswers: () => void;
   /** Method change current displays form. */
   onFormIdChange?: ( formID: string ) => void;
   /** Method signs out users. */

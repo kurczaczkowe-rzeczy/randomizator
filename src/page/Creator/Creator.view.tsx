@@ -1,10 +1,11 @@
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import { IS_DEVELOPMENT_MODE } from 'constans';
 
 import AnswersCounter from 'components/answersCounter';
-import ButtonView from 'components/Button';
+import AnswersDownloader from 'components/AnswersDownloader';
+import Button from 'components/Button';
 import Card from 'components/card';
 import Draw from 'components/Draw';
 import FileContainer from 'components/FileContainer';
@@ -20,36 +21,30 @@ import useStyles from './Creator.styles';
 export const Creator = ({
   selectedForm,
   fileContainerProps,
-  onDownloadAnswers,
   onLogout,
 }: ICreator ): JSX.Element => {
   const styles = useStyles();
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   return (
     <div className={ styles.root }>
       <div className={ styles.leftSpace }>
         <FormChooser />
-        { IS_DEVELOPMENT_MODE && (
-          <ButtonView
-            value={ getString( 'getAnswers' ) }
-            onClick={ onDownloadAnswers }
-          />
-        )}
+        { IS_DEVELOPMENT_MODE && <AnswersDownloader /> }
         <FileContainer { ...fileContainerProps } />
       </div>
       <div className={ styles.rightSpace }>
         <div className={ styles.inline }>
           <AnswersCounter counter={ selectedForm.counter } />
-          <ButtonView
-            value={ getString( 'logout' ) }
+          <Button
+            label={ localize( 'logout' ) }
             icon={ <ExitToAppIcon /> }
             onClick={ onLogout }
             variant="iconButton"
           />
         </div>
         <Card
-          title={ getString( 'previewForm' ) }
+          title={ localize( 'previewForm' ) }
           body={ <Form { ...selectedForm } preview /> }
         />
         <Draw />

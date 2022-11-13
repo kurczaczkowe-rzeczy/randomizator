@@ -1,6 +1,6 @@
 import { ReactComponent as Unicorn } from 'assets/unicorn.svg';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 
 import Link from 'components/Link';
 import Card from 'components/card/Card.view';
@@ -9,7 +9,7 @@ import classes from './errorPage.module.scss';
 import { IErrors } from './ErrorPage.types';
 
 export const ErrorPage = ({ errors }: IErrors ): JSX.Element => {
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   return (
     <>
@@ -17,12 +17,12 @@ export const ErrorPage = ({ errors }: IErrors ): JSX.Element => {
         <Unicorn width="200px" />
         <Card
           cardClass={ classes.card }
-          title={ getString( 'errorPageNotFound' ) }
+          title={ localize( 'errorPageNotFound' ) }
           body={ errors }
         />
       </div>
       <div className={ classes.bottom }>
-        { getString( 'iconMade' ) }
+        { localize( 'iconMade' ) }
         <Link
           href="https://www.flaticon.local/authors/freepik"
           title="Freepik"

@@ -1,6 +1,13 @@
 $size: 45px;
 $circumference: 3.14 * 2 * $size;
 
+.loading {
+  width: 80%;
+  height: 80%;
+  max-width: 1em;
+  max-height: 1em;
+}
+
 .circle{
   stroke: url('#linear-loading-gradient');
   stroke-width: 8px;

@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 import _includes from 'lodash/includes';
 
 import { firebaseConfig } from 'config/firebaseConfig';
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import useTypedSelector from 'hooks/useTypedSelector';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
 import {
@@ -29,7 +29,7 @@ const UserCreator = (): JSX.Element => {
   const { batch: firestoreBatch, collection } = useFirestore();
   const dispatch = useDispatch();
   const isLoading = useTypedSelector(({ global: { bindToCard }}) => _includes( bindToCard, CARDS.USER_CREATOR ));
-  const getString = useLocaleString();
+  const localize = useLocalize();
   const [ shouldReset, setShouldReset ] = useState( false );
 
   const showLoaderOnUserCreator = (): void => {
@@ -56,7 +56,7 @@ const UserCreator = (): JSX.Element => {
 
       newUser = userCredential.user;
     } catch ( error: unknown ) {
-      const errorMessage = userCreatorErrorHandler( error, getString );
+      const errorMessage = userCreatorErrorHandler( error, localize );
 
       alert( errorMessage );
       hideLoaderOnUserCreator();
@@ -67,7 +67,7 @@ const UserCreator = (): JSX.Element => {
     }
 
     if ( !newUser ) {
-      alert( getString( 'userIsNullAfterCreating' ));
+      alert( localize( 'userIsNullAfterCreating' ));
       hideLoaderOnUserCreator();
 
       return;
@@ -95,15 +95,15 @@ const UserCreator = (): JSX.Element => {
 
       await batch.commit();
 
-      alert( getString( 'userAdded' ));
+      alert( localize( 'userAdded' ));
     } catch ( error: unknown ) {
-      const errorMessage = userCreatorErrorHandler( error, getString );
+      const errorMessage = userCreatorErrorHandler( error, localize );
 
       alert( errorMessage );
       await removeUser(
         email,
         password,
-        getString,
+        localize,
       );
 
       return;

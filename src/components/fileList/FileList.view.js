@@ -12,14 +12,18 @@ const FileList = ({
 }) => files.map(( file ) => (
   <FileItem
     key={ `file-${ uuid() }` }
-    displayName={ file }
+    displayName={ file.fileName }
+    error={ file.error }
     onSend={ onSend }
     onRemove={ onRemove }
   />
 ));
 
 FileList.propTypes = {
-  files: PropTypes.arrayOf( PropTypes.string ).isRequired,
+  files: PropTypes.arrayOf( PropTypes.shape({
+    error: PropTypes.bool,
+    fileName: PropTypes.string,
+  })).isRequired,
   onRemove: PropTypes.func.isRequired,
   onSend: PropTypes.func.isRequired,
 };

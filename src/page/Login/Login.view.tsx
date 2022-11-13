@@ -1,9 +1,9 @@
 import { useForm, Controller } from 'react-hook-form';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 
 import Card from 'components/card';
-import ButtonView from 'components/Button';
+import Button from 'components/Button';
 import TextInput from 'components/form/components/textInput';
 
 import { ILogin, ILoginValues } from './Login.types';
@@ -14,14 +14,14 @@ import useStyles from './Login.styles';
  */
 export const Login = ({ onLogin, authError }: ILogin ): JSX.Element => {
   const styles = useStyles();
-  const getString = useLocaleString();
+  const localize = useLocalize();
   const { control, handleSubmit } = useForm<ILoginValues>();
 
   return (
     <div className={ styles.root }>
       <Card
         cardClass={ styles.card }
-        title={ getString( 'login' ) }
+        title={ localize( 'login' ) }
         body={ (
           <>
             <form onSubmit={ handleSubmit( onLogin ) } method="post">
@@ -32,7 +32,7 @@ export const Login = ({ onLogin, authError }: ILogin ): JSX.Element => {
                   <TextInput
                     required
                     type="email"
-                    placeholder={ getString( 'emailAddress' ) }
+                    placeholder={ localize( 'emailAddress' ) }
                     { ...field }
                   />
                 ) }
@@ -44,12 +44,12 @@ export const Login = ({ onLogin, authError }: ILogin ): JSX.Element => {
                   <TextInput
                     required
                     type="password"
-                    placeholder={ getString( 'password' ) }
+                    placeholder={ localize( 'password' ) }
                     { ...field }
                   />
                 ) }
               />
-              <ButtonView value={ getString( 'login' ) } type="submit" />
+              <Button label={ localize( 'login' ) } type="submit" />
             </form>
             {authError && <div className={ styles.error }>{ authError }</div>}
           </>

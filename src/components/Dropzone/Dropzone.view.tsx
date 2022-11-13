@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import DescriptionIcon from '@material-ui/icons/Description';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 
 import useStyles from './Dropzone.styles';
 
@@ -13,7 +13,7 @@ export const DropzoneView = ({
   onDropAccepted,
   onDropRejected,
 }: DropzoneProps ): JSX.Element => {
-  const getString = useLocaleString();
+  const localize = useLocalize();
   const styles = useStyles();
 
   return (
@@ -35,11 +35,11 @@ export const DropzoneView = ({
           <input { ...getInputProps() } />
           <DescriptionIcon classes={{ root: styles.icon }} />
           { isDragActive
-            ? <p>{ getString( 'dropzoneDropFile' )}</p>
+            ? <p>{ localize( 'dropzoneDropFile' )}</p>
             : (
               <>
-                <p>{ getString( 'dropzoneSelectFile' )}</p>
-                <p>{ getString( 'dropzoneOnlyCSV' )}</p>
+                <p>{ localize( 'dropzoneSelectFile' )}</p>
+                <p>{ localize( 'dropzoneOnlyCSV' )}</p>
               </>
             )}
         </div>

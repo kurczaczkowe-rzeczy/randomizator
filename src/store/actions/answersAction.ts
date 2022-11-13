@@ -1,17 +1,18 @@
-import _groupBy from 'lodash/groupBy';
-import _reduce from 'lodash/reduce';
+import _map from 'lodash/map';
 
-import { IS_DEVELOPMENT_MODE } from 'constans';
-import { FETCH_ANSWERS_ERROR, NO_ANSWERS_ERROR } from 'store/actions';
+import { startDownloadCSV } from 'utils/fileUtils';
+import { Filters } from 'hooks/types';
+import { ANSWERS_ERROR, NO_ANSWERS_ERROR } from 'store/actions';
+import { hideLoader, showLoader } from 'store/actions/globalActions';
+import { prepareLocalize } from 'hooks/useLocalize';
 import {
   ActionCreator,
   AnswersAction,
   IAction,
   IActionWithPayload,
 } from 'store/types';
-import { OrderedFirestoreAnswer, Mapping } from 'types';
-import { startDownloadCSV, getNewFileName } from 'utils/fileUtils';
-import { Filters } from 'hooks/types';
+import { IAnswer } from 'types';
+import { CARDS, IS_DEVELOPMENT_MODE, PAGES } from 'constans';
 
 // ToDo: change to general type action and then check action as described here https://phryneas.de/redux-typescript-no-discriminating-union
 type AnswerActionCreator< Payload extends unknown[] = []> = ActionCreator< AnswersAction, Payload >;
@@ -29,6 +30,8 @@ export const getAnswersOnceFromFirestore: AnswerActionCreator< GetAnswersOnceFro
     ) => {
       const firestore = getFirestore();
       const { id } = getState().form;
+      const { language } = getState().global;
+      const localize = prepareLocalize( language );
       let answersRef;
 
       try {
@@ -46,46 +49,68 @@ export const getAnswersOnceFromFirestore: AnswerActionCreator< GetAnswersOnceFro
         });
       } catch ( e: unknown ) {
       // ToDo: better error handling
-        console.error( 'Error occurred on fetch once answers: ', e );
-        dispatch({ type: FETCH_ANSWERS_ERROR, payload: { error: 'Network error' }});
+        console.error( 'Error occurred on fetch once answers:', e );
+        dispatch({ type: ANSWERS_ERROR, payload: { error: localize( 'networkError' ) }});
+
+        throw e;
       }
 
-    /* ToDo: If there is no answers dispatch other error
-     ToDo: If firestore's ref not exist, was not properly created dispatch another error */
-      if ( !answersRef?.size ) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      if ( !answersRef ) {
+        dispatch({ type: ANSWERS_ERROR, payload: { error: localize( 'noAnswersRef' ) }});
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         dispatch( noAnswerOrRefErrorAction );
+
+        return;
       }
+
+      if ( answersRef.empty ) {
+        dispatch({ type: ANSWERS_ERROR, payload: { error: localize( 'noAnswers' ) }});
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        dispatch( noAnswerOrRefErrorAction );
+
+        return;
+      }
+
+      dispatch({ type: ANSWERS_ERROR, payload: { error: localize( 'unknownError' ) }});
     };
 
+/** Method makes backup of firestore answers and save it to file with form name. */
 export const downloadAnswersCSV: AnswerActionCreator = () => async ( dispatch, getState ) => {
+  if ( !IS_DEVELOPMENT_MODE ) {
+    // ToDo: show snackbar
+    return;
+  }
+
   const { id } = getState().form;
 
-  if ( !IS_DEVELOPMENT_MODE || !id ) { return; }
+  if ( !id ) {
+    // ToDo: show snackbar
+    return;
+  }
 
-  // ToDo: issue #201 - add action trigger loader on button
-  await dispatch( getAnswersOnceFromFirestore({ type: NO_ANSWERS_ERROR, payload: { error: 'No answers' }}));
+  const { language } = getState().global;
+  const localize = prepareLocalize( language );
 
-  // ToDo: issue #201 - Optimize grouping answers
-  const groupedAnswersByAnswerID = _groupBy< OrderedFirestoreAnswer >( getState().firestore.ordered?.answers,
-    'answerID' );
-  const groupedAnswers = _reduce< typeof groupedAnswersByAnswerID, Mapping< string >[]>(
-    groupedAnswersByAnswerID,
-    ( answers, currentAnswer ) => [
-      ...answers,
-      _reduce(
-        currentAnswer,
-        ( answer, { fieldName, value }) => ({ ...answer, [ fieldName ]: value }),
-        /* In database doesn't exist emptyColumn fields that is appended in google forms.
-           We want to be compatibility with it, so we added it to header row and this create new column. */
-        { emptyColumn: '' },
-      ),
-    ],
-    [],
+  dispatch( showLoader( PAGES.CREATOR, CARDS.ANSWERS_DOWNLOADER ));
+  try {
+    await dispatch( getAnswersOnceFromFirestore({
+      type: NO_ANSWERS_ERROR,
+      payload: { error: localize( 'noAnswers' ) },
+    }));
+  } catch {
+    dispatch( hideLoader( PAGES.CREATOR, CARDS.ANSWERS_DOWNLOADER ));
+
+    return;
+  }
+
+  const backupAnswers = _map< IAnswer, Omit< IAnswer, 'formID' | 'timestamp' | 'id' > & { emptyColumn: '' }>(
+    getState().firestore.ordered.answers,
+    ({ answerID, fieldName, value, weight }) => ({ emptyColumn: '', answerID, fieldName, value, weight }),
   );
   const { name } = getState().firestore.data?.forms?.[ id ];
 
-  startDownloadCSV( groupedAnswers, groupedAnswers ? name.replaceAll( ' ', '_' ) : getNewFileName());
-  // ToDo: issue #201 - add action hide loader from button
+  startDownloadCSV( backupAnswers, name.replaceAll( ' ', '_' ));
+  dispatch( hideLoader( PAGES.CREATOR, CARDS.ANSWERS_DOWNLOADER ));
 };

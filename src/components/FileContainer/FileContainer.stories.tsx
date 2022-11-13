@@ -12,6 +12,6 @@ export default{
 const Template: Story<IFileContainer> = ( args ) => <Component { ...args } />;
 
 export const Empty = Template.bind({});
-Empty.args = { acceptedFileNames: []};
+Empty.args = { fileName: undefined };
 
 export const WithFiles = Template.bind({});

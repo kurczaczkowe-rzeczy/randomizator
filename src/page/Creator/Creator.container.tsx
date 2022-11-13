@@ -10,9 +10,8 @@ import _map from 'lodash/map';
 import _isEqual from 'lodash/isEqual';
 
 import useAnswerBatch from 'hooks/useAnswerBatch';
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import useTypedSelector from 'hooks/useTypedSelector';
-import { downloadAnswersCSV } from 'store/actions/answersAction';
 import { signOut } from 'store/actions/authAction';
 import { hideLoader, showLoader } from 'store/actions/globalActions';
 import { CARDS, PAGES } from 'constans';
@@ -21,19 +20,20 @@ import PageContainer from 'components/PageContainer';
 import { AnswersFields } from 'types';
 
 import CreatorView from './Creator.view';
-import { parseText } from './Creator.utils';
+import { IParsedAnswerFile, parseAnswerFile } from './Creator.utils';
+
+const initFileData = { answers: [], shouldDisplayError: false };
 
 // ToDo: issue #150
 const Creator = (): JSX.Element => {
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   const previousAnswersCount = useRef< number | null >( null );
 
-  const [ acceptedFileNames, setAcceptedFileNames ] = useState< string[] >([]);
-  const [ answersFromFile, setAnswersFromFile ] = useState< AnswersFields >([]);
+  const [ answersFileData, setAnswersFileData ] = useState< IParsedAnswerFile >( initFileData );
 
   const auth = useTypedSelector(({ firebase: { auth }}) => auth, shallowEqual );
-  const formID = useTypedSelector(({ form: { id }}) => id );
+  const { id: formID, fields } = useTypedSelector(({ form }) => form, shallowEqual );
   const selectedForm = useTypedSelector(({ firestore: { data }}) => data.forms?.[ formID ] ?? {}, _isEqual );
   const dispatch = useDispatch();
 
@@ -53,11 +53,10 @@ const Creator = (): JSX.Element => {
     }
   }, [ selectedForm.counter, dispatch ]);
 
-  const onDownloadAnswers = (): void => { dispatch( downloadAnswersCSV()); };
-
   const onDropAccepted = ( acceptedFiles: File[]): void => {
+    if ( !acceptedFiles.length ) { return; }
+
     dispatch( showLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
-    setAcceptedFileNames( _map( acceptedFiles, ( file ) => file.name ));
 
     const reader = new FileReader();
 
@@ -66,8 +65,7 @@ const Creator = (): JSX.Element => {
       const { result } = reader;
 
       if ( typeof result === 'string' ) {
-        // ToDo: handle check if uploaded file has compatible answers to selected form
-        setAnswersFromFile( parseText( result ));
+        setAnswersFileData( parseAnswerFile( result, fields, acceptedFiles[ 0 ].name ));
       } else {
         console.error( 'TypeError: Incompatible type of FileReader result ->', {
           resultType: typeof result,
@@ -82,29 +80,37 @@ const Creator = (): JSX.Element => {
   };
   const onDropRejected = (): void => {
     // ToDo: extend handling errors
-    alert( getString( 'errorOnlyCSVAccepted' )); // ToDo change to snackbar
+    alert( localize( 'errorOnlyCSVAccepted' )); // ToDo change to snackbar
   };
-  const onRemove = (): void => { setAcceptedFileNames([]); };
+  const onRemove = (): void => { setAnswersFileData( initFileData ); };
   const onSend = async (): Promise< void > => {
-    if ( !_isEmpty( answersFromFile )) {
-      dispatch( showLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
-      await addAnswers(
-        answersFromFile,
-        () => {
-          alert( getString( 'dataSave' )); // ToDo change to snackbar
-          setAcceptedFileNames([]);
-          dispatch( hideLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
-        },
-        () => {
-          alert( getString( 'sendingAnswersError' ));
-          dispatch( hideLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
-        },
-      );
+    // ToDo: change to custom dialog
+    if ( _isEmpty( answersFileData.answers )
+      || ( answersFileData.shouldDisplayError && !window.confirm( localize( 'someFieldNamesNotFoundConfirmation' )))
+    ) {
+      return;
     }
+
+    dispatch( showLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
+    await addAnswers(
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      answersFileData.answers,
+      () => {
+        alert( localize( 'dataSave' )); // ToDo change to snackbar
+        setAnswersFileData( initFileData );
+        dispatch( hideLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
+      },
+      () => {
+        alert( localize( 'sendingAnswersError' ));
+        dispatch( hideLoader( PAGES.CREATOR, CARDS.FILE_DROPZONE ));
+      },
+    );
   };
 
   const fileContainerProps = {
-    acceptedFileNames,
+    fileName: answersFileData.fileName,
+    shouldDisplayError: answersFileData.shouldDisplayError,
     onDropAccepted,
     onDropRejected,
     onRemove,
@@ -116,7 +122,6 @@ const Creator = (): JSX.Element => {
       <CreatorView
         selectedForm={ selectedForm }
         fileContainerProps={ fileContainerProps }
-        onDownloadAnswers={ onDownloadAnswers }
         onLogout={ onLogout }
       />
     </PageContainer>

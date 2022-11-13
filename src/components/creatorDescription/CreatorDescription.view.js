@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 
 import Description from 'components/description/Description.view';
 import TextBox from 'components/textBox/TextBox.view';
 
 const CreatorDescription = ({ content }) => {
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   return ( // todo to refactor
     <Description
-      label={ getString( 'creator' ) }
+      label={ localize( 'creator' ) }
       content={ (
         <TextBox>
           { content }

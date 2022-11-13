@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import _isEmpty from 'lodash/isEmpty';
 
-import Loading from 'components/loading';
+import Loading from 'components/Loading';
 
 import { ICard } from './Card.types';
 import useStyles from './Card.styles';

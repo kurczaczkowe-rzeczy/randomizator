@@ -1,6 +1,6 @@
 import Link from 'components/Link';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import {
   APP_VERSION,
   CURRENT_DATE,
@@ -13,16 +13,16 @@ import classes from './footer.module.scss';
  * Component for display info about creators of application
  */
 export const Footer = (): JSX.Element => {
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   return (
     <div className={ classes.footer }>
-      {`${ getString( 'createBy' ) } `}
+      {`${ localize( 'createBy' ) } `}
       <Link
         href={ ORGANIZATION_MAIN_PAGE }
-        label={ getString( 'organizationName' ) }
+        label={ localize( 'organizationName' ) }
       />
-      {`. ${ getString( 'version' ) }: ${ APP_VERSION } ( ${ CURRENT_DATE } )`}
+      {`. ${ localize( 'version' ) }: ${ APP_VERSION } ( ${ CURRENT_DATE } )`}
     </div>
   );
 };

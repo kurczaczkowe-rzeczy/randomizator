@@ -6,7 +6,7 @@ import _chunk from 'lodash/chunk';
 import _noop from 'lodash/noop';
 
 import { checkValueIsValid } from 'utils/answersUtils';
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import {
   AnswerFields,
   AnswersFields,
@@ -64,7 +64,7 @@ const useAnswerBatch = ( creatorID: string, formID: string ): IAnswerBatch => {
     FieldValue,
     batch: firestoreBatch,
   } = useFirestore();
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   // ToDo: change to const in next version
   let formRef = useMemo(() => creatorID && formID ? doc( `${ creatorID }/${ formID }` ) : null, [
@@ -84,9 +84,9 @@ const useAnswerBatch = ( creatorID: string, formID: string ): IAnswerBatch => {
        ToDo: remove formId in next version
      */
     if ( !formRef ) {
-      alert( getString( 'errorAnswerSending' ));
+      alert( localize( 'errorAnswerSending' ));
 
-      throw Error( getString( 'errorAnswerSending' ));
+      throw Error( localize( 'errorAnswerSending' ));
     }
 
     const answersRef = formRef.collection( 'answers' ).doc();
@@ -112,7 +112,7 @@ const useAnswerBatch = ( creatorID: string, formID: string ): IAnswerBatch => {
     FieldValue,
     formID,
     formRef,
-    getString,
+    localize,
   ]);
 
   const addAnswer = useCallback< AddAnswer >( async (

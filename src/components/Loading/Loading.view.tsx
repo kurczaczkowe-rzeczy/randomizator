@@ -1,5 +1,6 @@
-import styles from './loading.module.scss';
+import classNames from 'classnames';
 
+import styles from './Loading.module.scss';
 import { ILoading } from './Loading.types';
 
 /**
@@ -7,10 +8,8 @@ import { ILoading } from './Loading.types';
  */
 export const Loading = ({ classes = { root: '' }}: ILoading ): JSX.Element => (
   <svg
-    className={ classes.root }
+    className={ classNames( styles.loading, classes.root ) }
     xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
     viewBox="0 0 100 100"
   >
     <defs>

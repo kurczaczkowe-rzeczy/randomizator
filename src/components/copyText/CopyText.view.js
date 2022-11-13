@@ -3,7 +3,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import classNames from 'classnames';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 
 import classes from 'components/copyText/copyText.module.scss';
 
@@ -14,7 +14,7 @@ const CopyText = ({
   withFlexStart,
   onClick,
 }) => {
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   return (
     <div className={ classNames( classes.text, { [ classes.withFlexStart ]: withFlexStart }) }>
@@ -22,10 +22,10 @@ const CopyText = ({
         text={ text }
         onCopy={ onClick }
       >
-        <span title={ getString( 'copyIcon' ) }><FileCopyIcon /></span>
+        <span title={ localize( 'copyIcon' ) }><FileCopyIcon /></span>
       </CopyToClipboard>
       { content }
-      <div className={ classNames( classes.copied, { [ classes.show ]: isCopied }) }>{ getString( 'copied' ) }</div>
+      <div className={ classNames( classes.copied, { [ classes.show ]: isCopied }) }>{ localize( 'copied' ) }</div>
     </div>
   );
 };

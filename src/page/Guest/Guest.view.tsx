@@ -3,7 +3,7 @@ import _includes from 'lodash/includes';
 
 import BackIcon from '@material-ui/icons/Forward';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import useTypedSelector from 'hooks/useTypedSelector';
 
 import Card from 'components/card';
@@ -31,7 +31,7 @@ export const GuestView = ({
   isCreator,
 }: IGuest ): JSX.Element => {
   const styles = useStyles();
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   const isLoading = useTypedSelector(({ global: { bindToCard }}) => _includes( bindToCard, CARDS.GUEST_FORM ));
 
@@ -40,7 +40,7 @@ export const GuestView = ({
       <div className={ styles.descriptor }>
         { isCreator && (
           <Button
-            value={ getString( 'goBackToManagement' ) }
+            label={ localize( 'goBackToManagement' ) }
             icon={ <BackIcon classes={{ root: styles.backIcon }} /> }
             onClick={ onBackToCreator }
             variant="iconButton"
@@ -76,9 +76,9 @@ export const GuestView = ({
       <Card
         title={ (
           <>
-            <h3>{ getString( 'form' ).toUpperCase()}</h3>
+            <h3>{ localize( 'form' ).toUpperCase()}</h3>
             <p>
-              { getString( 'formOneFieldRequired' )}
+              { localize( 'formOneFieldRequired' )}
             </p>
           </>
         ) }

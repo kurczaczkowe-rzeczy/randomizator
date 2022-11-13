@@ -4,7 +4,7 @@ import _isEmpty from 'lodash/isEmpty';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 import prepareLink from 'utils/prepareLink';
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import useTypedSelector from 'hooks/useTypedSelector';
 import { HOME_PAGE } from 'constans';
 
@@ -24,7 +24,7 @@ export const FormChooser = ({
   defaultFormID,
 }: IFormChooser ): JSX.Element => {
   const styles = useStyle();
-  const getString = useLocaleString();
+  const localize = useLocalize();
   const isRequesting = useTypedSelector(({ firestore: { status: { requesting: { forms }}}}) => !!forms );
 
   const link = prepareLink( `/${ creatorID }/${ formID }`, HOME_PAGE );
@@ -38,7 +38,7 @@ export const FormChooser = ({
           <div className={ styles.selectWrapper }>
             <Select
               name="forms"
-              label={ getString( 'activeNameForm' ) }
+              label={ localize( 'activeNameForm' ) }
               defaultValue={ defaultFormID }
               options={ forms }
               value={ _isEmpty( forms ) ? defaultFormID : formID }
@@ -48,7 +48,7 @@ export const FormChooser = ({
           <div className={ styles.linkWrapper }>
             <Link
               className={ styles.openInNewIconWrapper }
-              title={ getString( 'openFormLink' ) }
+              title={ localize( 'openFormLink' ) }
               to={ prepareLink( `/${ creatorID }/${ formID }` ) }
               target="_blank"
               rel="noopener noreferrer"

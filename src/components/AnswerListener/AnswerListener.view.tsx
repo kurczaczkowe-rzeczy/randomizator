@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import _isEqual from 'lodash/isEqual';
 
 import Button from 'components/Button';
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import useTypedSelector from 'hooks/useTypedSelector';
 
 import useStyle from './AnswerListener.styles';
@@ -13,7 +13,7 @@ export const AnswerListener = ({ onWeightUpdate }: IAnswerListener ): JSX.Elemen
   const styles = useStyle();
   const areDirtyAnswers = useTypedSelector(({ answersManager: { areDirtyAnswers }}) => areDirtyAnswers );
   const dirtyAnswer = useTypedSelector(({ answersManager: { dirtyAnswer }}) => dirtyAnswer, _isEqual );
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   return (
     <div className={ styles.root }>
@@ -24,7 +24,7 @@ export const AnswerListener = ({ onWeightUpdate }: IAnswerListener ): JSX.Elemen
           onWeightUpdate( dirtyAnswer );
         } }
         type="submit"
-        value={ getString( 'confirmation' ) }
+        label={ localize( 'confirmation' ) }
       />
     </div>
   );

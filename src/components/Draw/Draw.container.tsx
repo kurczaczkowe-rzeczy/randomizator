@@ -8,14 +8,14 @@ import _includes from 'lodash/includes';
 import { CARDS } from 'constans';
 import Card from 'components/card';
 import { clearDraw, setDrawResult } from 'store/actions/drawAction';
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import useTypedSelector from 'hooks/useTypedSelector';
 
 import DrawView from './Draw.view';
 
 /** Component draw answers from available answers. It allows also draw answers by query. */
 const Draw = (): JSX.Element => {
-  const getString = useLocaleString();
+  const localize = useLocalize();
   const dispatch = useDispatch();
 
   const { listen } = useHistory();
@@ -40,7 +40,7 @@ const Draw = (): JSX.Element => {
   return (
     <Card
       fullWidthBody
-      title={ getString( 'draw' ) }
+      title={ localize( 'draw' ) }
       isLoading={ isRequesting || isDrawing }
       body={ (
         <DrawView

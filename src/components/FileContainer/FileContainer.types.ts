@@ -4,7 +4,7 @@ export interface IFileContainer {
   /**
    * Store all files name that was accepted by Dropzone component.
    */
-  acceptedFileNames: string[];
+  fileName?: string;
   /**
    * Method trigger if files chosen via drag&drop or file browser has accepted formats.
    */
@@ -21,4 +21,6 @@ export interface IFileContainer {
    * Methods upload chosen files.
    */
   onSend: () => void;
+  /** If `true` component should display warning. */
+  shouldDisplayError: boolean;
 }

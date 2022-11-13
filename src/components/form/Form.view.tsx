@@ -3,11 +3,11 @@ import { Controller, useFormContext } from 'react-hook-form';
 import classNames from 'classnames';
 import _map from 'lodash/map';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 
 import Label from './components/label/Label.view';
 import TextInput from './components/textInput';
-import ButtonView from 'components/Button';
+import Button from 'components/Button';
 
 import classes from './form.module.scss';
 import { IForm, IGuestValues } from './Form.types';
@@ -20,7 +20,7 @@ export const Form = ({
   onSubmit,
 }: IForm ): JSX.Element => {
   const { control, handleSubmit } = useFormContext< IGuestValues >();
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   return (
     <form
@@ -49,7 +49,7 @@ export const Form = ({
               required
               fullWidth
               onFocus={ additionalFunction }
-              placeholder={ getString( 'formSendPlaceholder' ) }
+              placeholder={ localize( 'formSendPlaceholder' ) }
               { ...field }
               onChange={ ( event: SyntheticEvent ) => {
                 additionalFunction( event );
@@ -59,7 +59,7 @@ export const Form = ({
           ) }
         />
       </div>
-      <ButtonView value={ getString( 'send' ) } type="submit" />
+      <Button label={ localize( 'send' ) } type="submit" />
     </form>
   );
 };

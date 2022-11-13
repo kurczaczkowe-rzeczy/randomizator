@@ -10,7 +10,7 @@ import _differenceBy from 'lodash/differenceBy';
 import AnswerListener from 'components/AnswerListener';
 import AnswerRow from 'components/AnswerRow';
 import VirtualizedTable from 'components/VirtualizedTable';
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 
 import useStyle from './AnswersTable.styles';
 import { IAnswersTable, IAnswerRow } from './AnswersTable.types';
@@ -24,7 +24,7 @@ export const AnswersTable = ({
   shouldReset = false,
 }: IAnswersTable ): JSX.Element => {
   const styles = useStyle();
-  const getString = useLocaleString();
+  const localize = useLocalize();
   const methods = useForm({ defaultValues: { answers: rows }});
   const { fields, append } = useFieldArray({
     control: methods.control,
@@ -32,7 +32,7 @@ export const AnswersTable = ({
     keyName: '_id',
   });
 
-  const columns = getColumns( getString );
+  const columns = getColumns( localize );
 
   useEffect(() => {
     if ( _isEmpty( fields ) || _differenceBy(

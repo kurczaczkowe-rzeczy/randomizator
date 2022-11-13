@@ -9,7 +9,7 @@ import _map from 'lodash/map';
 
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 
 import Button from 'components/Button';
 import Label from 'components/form/components/label';
@@ -35,7 +35,7 @@ export const Filters = ({
   // @ts-ignore
   const { handleSubmit, register } = useForm<IFilters[ 'defaultValues' ]>({ defaultValues });
   const [ show, setShow ] = useState( false );
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   const filterChevronRootClasses = classNames( styles.filterChevron, { [ styles.filterChevronRotate ]: show });
   const fieldsWrapperClasses = classNames( styles.fieldsWrapper, {
@@ -60,7 +60,7 @@ export const Filters = ({
           variant="textIconButton"
           icon={ <KeyboardArrowUpIcon classes={{ root: filterChevronRootClasses }} /> }
           onClick={ onToggleVisibility }
-          value={ getString( 'filter' ) }
+          label={ localize( 'filter' ) }
         />
       </div>
       <form className={ styles.filterForm } onSubmit={ handleSubmit( onSubmit ) }>
@@ -83,7 +83,7 @@ export const Filters = ({
             );
           }) }
         </div>
-        <Button value="" type="submit" className={ styles.hiddenButton } />
+        <Button label="" type="submit" className={ styles.hiddenButton } />
       </form>
     </div>
   );

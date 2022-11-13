@@ -1,7 +1,7 @@
 import Typography from '@material-ui/core/Typography';
 import { ReactComponent as Unicorn } from 'assets/unicorn.svg';
 
-import useLocaleString from 'hooks/useLocaleString';
+import useLocalize from 'hooks/useLocalize';
 import { PROD_ADDRESS, PROD_HOST_NAME } from 'constans';
 
 import Link from 'components/Link';
@@ -15,7 +15,7 @@ import useStyles from './ProdReleaseModal.styles';
  */
 const ProdReleaseModal = (): JSX.Element => {
   const styles = useStyles();
-  const getString = useLocaleString();
+  const localize = useLocalize();
 
   return (
     <Modal
@@ -23,19 +23,19 @@ const ProdReleaseModal = (): JSX.Element => {
       body={ (
         <div>
           <Typography classes={{ root: styles.modalParagraph }}>
-            { getString( 'modalChangeUrlFirst' ) }
+            { localize( 'modalChangeUrlFirst' ) }
           </Typography>
           <Typography classes={{ root: styles.modalParagraph }}>
-            { `${ getString( 'modalChangeUrlSecond' ) } ` }
+            { `${ localize( 'modalChangeUrlSecond' ) } ` }
             <Link href={ PROD_ADDRESS } label={ PROD_HOST_NAME } />
-            { getString( 'modalChangeUrlThird' )}
+            { localize( 'modalChangeUrlThird' )}
           </Typography>
           <Typography classes={{ root: styles.modalParagraph }}>
-            { getString( 'modalChangeUrlFourth' )}
+            { localize( 'modalChangeUrlFourth' )}
           </Typography>
         </div>
       ) }
-      title={ getString( 'modalChangeUrlTitle' ) }
+      title={ localize( 'modalChangeUrlTitle' ) }
       icon={ <Unicorn /> }
     />
   );

@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 
 const mockData = {
-  acceptedFileNames: [ 'plik.csv' ],
+  fileName: 'plik.csv',
   onDropAccepted: action( 'onDropAccepted' ),
   onDropRejected: action( 'onDropRejected' ),
   onRemove: action( 'onRemove' ),
