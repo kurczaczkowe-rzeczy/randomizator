@@ -64,6 +64,8 @@ const localizationPL = {
   promptConfirmation: 'Wygląda na to, że masz jakieś nie zapisane zmiany. Czy na pewno chcesz opuścić stronę?',
   send: 'Wyślij',
   sendingAnswersError: 'Wystąpił błąd podczas przesyłania odpowiedzi. Spróbuj ponownie później.',
+  someFieldNamesNotFound: 'Wykryto w zestawie pola formularza nie pasujące do obecnie wybranego. Pola niepasujące nie zostaną zapisane.',
+  someFieldNamesNotFoundConfirmation: 'Plik zwiera pola, które nie istnieją w bieżącym formularzu i nie zostaną one zapisane. Czy mimo to chcesz kontynuować?',
   tempAppNotCreated: 'Tymczasowa aplikacja nie została utworzona.',
   typeFilterElements: 'Wprowadź składnik filtrowania',
   unknownError: 'Wystąpił nieznany błąd',

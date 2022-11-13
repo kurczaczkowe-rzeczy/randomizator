@@ -66,6 +66,8 @@ const localizationENG: LocaleResources = {
   promptConfirmation: 'It looks like you have some unsaved changes. Are you sure you want to leave the page?',
   send: 'Send',
   sendingAnswersError: 'Error occurrence on form submitting. Try again later.',
+  someFieldNamesNotFound: 'Detected fields that doesn\'t fit to current selected form. Mismatched fields will not be saved.',
+  someFieldNamesNotFoundConfirmation: 'File contains fields not existed in current selected form and that fields will not be saved. Do you want to continue?',
   tempAppNotCreated: 'Temporary app was not created',
   typeFilterElements: 'Enter a filtering elements',
   unknownError: 'An unknown error occurrence',

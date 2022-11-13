@@ -4,13 +4,48 @@
   align-items: center;
   background-color: #222222;
   border-radius: 5px;
+
   p{
     margin-left: 16px;
     color: #bdaeae;
   }
+
+  div { position: relative; }
+
   .icon{
     color: #bdaeae;
     cursor: pointer;
-    margin: 0 16px;
+    margin: 0 8px;
+
+    &--error {
+      @extend .icon;
+      color: #e28521;
+      position: relative;
+      cursor: help;
+
+      &:hover + .tooltip, &:focus + .tooltip  {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.tooltip {
+  color: #bdaeae !important;
+  box-shadow: 0 0 5px #771e76;
+  background-color: #222 !important;
+  padding: 12px !important;
+  border-radius: 4px !important;
+  text-align: center;
+}
+
+.arrow {
+  color: #222 !important;
+  width: 2em !important;
+  height: 1.42em !important;
+  margin-bottom: -1.41em !important;
+
+  &::before {
+    box-shadow: 0 0 5px 0 #771e76;
   }
 }
