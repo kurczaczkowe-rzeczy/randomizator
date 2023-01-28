@@ -12,12 +12,18 @@ const CopyText = ({
   text,
   content,
   withFlexStart,
+  withFlexEnd,
   onClick,
 }) => {
   const getString = useLocaleString();
 
   return (
-    <div className={ classNames( classes.text, { [ classes.withFlexStart ]: withFlexStart }) }>
+    <div
+      className={ classNames( classes.text, {
+        [ classes.withFlexStart ]: withFlexStart,
+        [ classes.withFlexEnd ]: withFlexEnd,
+      }) }
+    >
       <CopyToClipboard
         text={ text }
         onCopy={ onClick }
@@ -34,12 +40,14 @@ CopyText.propTypes = {
   content: PropTypes.element.isRequired,
   text: PropTypes.string.isRequired,
   isCopied: PropTypes.bool,
+  withFlexEnd: PropTypes.bool,
   withFlexStart: PropTypes.bool,
   onClick: PropTypes.func,
 };
 
 CopyText.defaultProps = {
   isCopied: false,
+  withFlexEnd: false,
   withFlexStart: false,
   onClick: () => {},
 };

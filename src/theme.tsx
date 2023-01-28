@@ -186,6 +186,8 @@ export const theme = createMuiTheme({
             paddingTop: '48px',
             paddingLeft: '78px',
             paddingRight: '78px',
+            '@media (max-width: 1280px)': { padding: 34 },
+            '@media (max-width: 640px)': { padding: 24 },
           },
         },
         input: {

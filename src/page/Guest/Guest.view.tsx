@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import useMediaQuery from 'hooks/useMediaQuery';
 import _includes from 'lodash/includes';
 
 import BackIcon from '@material-ui/icons/Forward';
@@ -35,6 +36,8 @@ export const GuestView = ({
 
   const isLoading = useTypedSelector(({ global: { bindToCard }}) => _includes( bindToCard, CARDS.GUEST_FORM ));
 
+  const { matches: matchesTo640 } = useMediaQuery({ maxSize: 640 });
+
   return (
     <div className={ styles.root }>
       <div className={ styles.descriptor }>
@@ -58,7 +61,8 @@ export const GuestView = ({
           body={ (
             <FormName content={ (
               <CopyText
-                withFlexStart
+                withFlexStart={ !matchesTo640 }
+                withFlexEnd={ matchesTo640 }
                 text={ form.name }
                 content={ (
                   <TextBox
@@ -74,10 +78,11 @@ export const GuestView = ({
         />
       </div>
       <Card
+        fullWidthBody={ matchesTo640 }
         title={ (
           <>
             <h3>{ getString( 'form' ).toUpperCase()}</h3>
-            <p>
+            <p className={ styles.formNote }>
               { getString( 'formOneFieldRequired' )}
             </p>
           </>

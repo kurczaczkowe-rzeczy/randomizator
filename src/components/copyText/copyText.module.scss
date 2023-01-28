@@ -1,21 +1,44 @@
+$svgSize: 1.5rem;
+
 .text {
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
 
+  span {
+    width: $svgSize;
+    height: $svgSize;
+  }
+
   svg {
     cursor: pointer;
+    font-size: $svgSize;
 
     &:hover {
       fill: #771e76;
     }
   }
 
+  @media (max-width: 640px) {
+    $svgSize: 1.2rem;
+    span {
+      width: $svgSize;
+      height: $svgSize;
+    }
+
+    svg {
+      font-size: $svgSize;
+    }
+  }
 }
 
 .withFlexStart {
   align-items: flex-start;
+}
+
+.withFlexEnd {
+  align-items: flex-end;
 }
 
 .copied{

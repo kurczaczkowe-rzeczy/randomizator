@@ -10,6 +10,7 @@ const CopyText = ({
   text,
   content,
   withFlexStart,
+  withFlexEnd,
 }) => {
   const [ isCopied, setIsCopied ] = useStateWithCallback( false, ( copied ) => {
     if ( copied ) {
@@ -20,6 +21,7 @@ const CopyText = ({
   return (
     <CopyTextView
       withFlexStart={ withFlexStart }
+      withFlexEnd={ withFlexEnd }
       text={ text }
       content={ content }
       isCopied={ isCopied }
@@ -31,9 +33,13 @@ const CopyText = ({
 CopyText.propTypes = {
   content: PropTypes.element.isRequired,
   text: PropTypes.string.isRequired,
+  withFlexEnd: PropTypes.bool,
   withFlexStart: PropTypes.bool,
 };
 
-CopyText.defaultProps = { withFlexStart: false };
+CopyText.defaultProps = {
+  withFlexStart: false,
+  withFlexEnd: false,
+};
 
 export default CopyText;

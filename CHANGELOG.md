@@ -1,3 +1,7 @@
+## 2.0.26 (Styczeń 29, 2023)
+- Fixed mobile view for guest page
+- Fixed BroadcastChannel API support for safari < 15.1
+
 ## 2.0.25 (October 8, 2022)
 - Fixed loading cards algorithm
 - Fixed algorithm solving problem with blinking answers table on dashboard

@@ -1,6 +1,6 @@
 .content {
   color: white;
-  padding: 0 10px 5px 5px;
+  padding: 0 10px 5px 8px;
   margin-left: 10px;
   width: max-content;
   position: relative;
@@ -31,5 +31,11 @@
     width: calc(100% - 3px);
     height: calc(100% - 3px);
     background: #222;
+  }
+
+  @media (max-width: 640px) {
+    font-size: 11px;
+    margin-top: 10px;
+    margin-bottom: 0;
   }
 }
