@@ -1,6 +1,7 @@
 import { MAIN_BROADCAST_CHANNEL } from 'constans';
 import useEffectOnce from 'hooks/useEffectOnce';
 import { useEffect, useMemo } from 'react';
+import { attachBroadcastChannelPolyfill } from 'utils/broadcastChannelPolyfill';
 
 interface IUseBroadcastChannelOptions {
   /**
@@ -24,13 +25,17 @@ interface IUseBroadcastChannelReturn {
 
 /**
  * Hook create broadcast channel with name provided by **channelName** param.
- * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel} for more information about BroadcastChannel.
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/BroadcastChannel} for more information about
+ *   BroadcastChannel.
  */
 const useBroadcastChannel = ({
   onMessage,
   channelName = MAIN_BROADCAST_CHANNEL,
   runsOnce = true,
 }: IUseBroadcastChannelOptions ): IUseBroadcastChannelReturn => {
+  if ( typeof BroadcastChannel == 'undefined' ) {
+    attachBroadcastChannelPolyfill();
+  }
   const channel = useMemo(() => new BroadcastChannel( channelName ), [ channelName ]);
 
   useEffectOnce(() => {
