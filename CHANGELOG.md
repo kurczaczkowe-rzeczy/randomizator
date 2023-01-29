@@ -1,3 +1,6 @@
+## 2.0.27 (Styczeń 29, 2023)
+- Fixed mobile view for footer
+
 ## 2.0.26 (Styczeń 29, 2023)
 - Fixed mobile view for guest page
 - Fixed BroadcastChannel API support for safari < 15.1

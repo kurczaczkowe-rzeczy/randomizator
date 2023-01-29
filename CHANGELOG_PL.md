@@ -1,3 +1,6 @@
+## 2.0.27 (Styczeń 29, 2023)
+- Poprawienie wyświetlania stopki dla widoku mobilnego
+
 ## 2.0.26 (Styczeń 29, 2023)
 - Poprawienie wyświetlania strony gościa dla widoku mobilnego
 - Poprawienie wsparcia BroadcastChannel API dla safari < 15.1
