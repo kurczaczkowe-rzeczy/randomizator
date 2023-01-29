@@ -5,8 +5,16 @@ export default makeStyles(({ spacing, palette }) => ({
     display: 'grid',
     gridTemplateColumns: '30% 60%',
     columnGap: '10%',
+    rowGap: spacing( 4.25 ),
+    '@media (max-width: 1280px)': { gridTemplateColumns: '100%' },
+    '@media (max-width: 640px)': { rowGap: spacing( 3 ) },
   },
-  descriptor: { '& > *:not(:last-child)': { marginBottom: spacing( 4.25 ) }},
+  descriptor: {
+    display: 'grid',
+    rowGap: spacing( 4.25 ),
+    gridAutoRows: 'max-content',
+    '@media (max-width: 640px)': { rowGap: spacing( 3 ) },
+  },
   backIcon: { transform: 'rotateY(180deg)' },
   baseLine: { alignItems: 'baseline' },
   highlightCard: {
@@ -15,7 +23,10 @@ export default makeStyles(({ spacing, palette }) => ({
     animationTimingFunction: 'ease-in-out',
     animationIterationCount: 'infinite',
   },
-  textBox: { marginTop: 0 },
+  textBox: {
+    marginTop: 0,
+    '@media (max-width: 640px)': { marginTop: 10 },
+  },
   highlightText: {
     '&::before': {
       animationName: '$highLightBefore, $rotate',
@@ -31,6 +42,7 @@ export default makeStyles(({ spacing, palette }) => ({
       animationDuration: '2.5s',
     },
   },
+  formNote: { '@media (max-width: 640px)': { fontSize: 12 }},
   '@keyframes highLightAfter': { '50%': { backgroundColor: palette.backgroundHighlighted }},
   '@keyframes highLightBefore': {
     '50%': {

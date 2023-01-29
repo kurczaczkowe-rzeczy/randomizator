@@ -7,6 +7,9 @@ import {
   Switch,
   Route,
   Redirect,
+  useLocation,
+  useHistory,
+  useRouteMatch,
 } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
@@ -15,10 +18,13 @@ import _map from 'lodash/map';
 import _filter from 'lodash/filter';
 import _isEmpty from 'lodash/isEmpty';
 
+import { handleAskForPageOrigin } from 'utils/backToOrigin';
 import useAnswerBatch from 'hooks/useAnswerBatch';
-import useTypedSelector from 'hooks/useTypedSelector';
+import useBroadcastChannel from 'hooks/useBroadcastChannel';
+import useEffectOnce from 'hooks/useEffectOnce';
 import useLocalStorage from 'hooks/useLocalStorage';
 import useLocaleString from 'hooks/useLocaleString';
+import useTypedSelector from 'hooks/useTypedSelector';
 import {
   hideLoader,
   showLoader,
@@ -61,16 +67,30 @@ const App = (): JSX.Element => {
 
   const { updateFirestoreDataStructure } = useAnswerBatch( auth.uid, '' );
 
+  const { length } = useHistory();
+  const { pathname } = useLocation();
+  const match = useRouteMatch( ROUTES.guest );
+  const { sendData } = useBroadcastChannel({
+    onMessage: ({ data }) => {
+      handleAskForPageOrigin(
+        data,
+        length,
+        match,
+        sendData,
+        pathname,
+      );
+    },
+    runsOnce: false,
+  });
+
   const menuItems = getMenuItemsForCurrentUser( getMenuItems( getString ), currentUserRole );
   const authenticatedRoutes = useMemo(() => _map( authenticatedRoutesCollection, ( props ) => (
     <ProtectedRoute currentUserRole={ currentUserRole } { ...props } />
   )), [ currentUserRole ]);
 
-  useEffect(() => {
-    if ( _isNil( showDevModal )) {
-      setShowDevModal( true );
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffectOnce(() => {
+    _isNil( showDevModal ) && setShowDevModal( true );
+  });
 
   useEffect(() => {
     if ( !isLoading && IS_DEVELOPMENT_MODE && showDevModal ) {
@@ -85,10 +105,12 @@ const App = (): JSX.Element => {
   useEffect(() => {
     if ( !isLoaded( auth )) {
       dispatch( showLoader( PAGES.HOME ));
-    } else {
-      dispatch( getCurrentUserRole());
+
+      return;
     }
-  }, [ auth, dispatch ]);
+
+    dispatch( getCurrentUserRole());
+  }, [ auth, dispatch, pathname ]);
 
   useEffect(() => {
     if ( isLoading ) {
@@ -101,6 +123,10 @@ const App = (): JSX.Element => {
   const isAuthenticated = isLoaded( auth ) && !isEmpty( auth );
 
   useEffect(() => {
+    if ( hasCalledRestructuring.current ) {
+      return;
+    }
+
     const oldStructuredForms = _filter( forms, ({ counter }) => typeof counter !== 'number' );
     const shouldRunEffect = isAuthenticated && !_isEmpty( oldStructuredForms ) && !hasCalledRestructuring.current;
     const hideLoaderAction = (): void => { dispatch( hideLoader( PAGES.CREATOR )); };

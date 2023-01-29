@@ -13,7 +13,10 @@ import _isEmpty from 'lodash/isEmpty';
 import _isEqual from 'lodash/isEqual';
 import _includes from 'lodash/includes';
 
+import { handleSetOriginPath } from 'utils/backToOrigin';
 import useAnswerBatch from 'hooks/useAnswerBatch';
+import useBroadcastChannel from 'hooks/useBroadcastChannel';
+import useEffectOnce from 'hooks/useEffectOnce';
 import useTypedSelector from 'hooks/useTypedSelector';
 import useTimeout from 'hooks/useTimeout';
 import useLocaleString from 'hooks/useLocaleString';
@@ -26,6 +29,7 @@ import { getCreatorName } from 'store/actions/userActions';
 import { fetchFormName } from 'store/actions/formAction';
 import {
   APP_NAME_SUFFIX,
+  ASK_FOR_PAGE_ORIGIN,
   CARDS,
   DELAY_FORM_NAME_HIGHLIGHT,
   PAGES,
@@ -38,7 +42,6 @@ import { IGuest } from './Guest.types';
 
 const GuestPage = (): JSX.Element => {
   const getString = useLocaleString();
-  const { goBack } = useHistory();
   const { creatorId, formId } = useParams<{[ key: string ]: string }>();
   const [ isHighlighted, setIsHighlighted ] = useState( false );
   const { runTimeout, stopTimeout } = useTimeout( DELAY_FORM_NAME_HIGHLIGHT );
@@ -53,6 +56,19 @@ const GuestPage = (): JSX.Element => {
   const errorUserName = useTypedSelector(({ usr: { errors }}) => errors );
   const loaderCaller = useTypedSelector(({ global: { loadingsQueue }}) => loadingsQueue, _isEqual );
   const dispatch = useDispatch();
+
+  const [ pathname, setPathname ] = useState( '' );
+  const { goBack, push } = useHistory();
+  const { sendData } = useBroadcastChannel({
+    onMessage: ({ data }) => {
+      handleSetOriginPath( data, pathname, setPathname );
+    },
+    runsOnce: false,
+  });
+
+  useEffectOnce(() => {
+    sendData( ASK_FOR_PAGE_ORIGIN );
+  });
 
   useEffect(() => {
     const notEmptyFormNameAndCreatorName = !_isEmpty( creatorName ) && !_isEmpty( form.name );
@@ -99,6 +115,18 @@ const GuestPage = (): JSX.Element => {
   };
 
   const onBackToCreator = (): void => {
+    if ( _isEmpty( pathname )) {
+      push( APP_NAME_SUFFIX );
+
+      return;
+    }
+
+    if ( pathname ) {
+      push( pathname );
+
+      return;
+    }
+
     goBack();
   };
 

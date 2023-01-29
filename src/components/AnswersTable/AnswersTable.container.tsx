@@ -28,13 +28,7 @@ const AnswersTableContainer = ({ tab }: IAnswerTableContainer ): JSX.Element => 
   const { batch: firestoreBatch, doc } = useFirestore();
   const dispatch = useDispatch();
   const creatorID = useTypedSelector(({ firebase: { auth: { uid }}}) => uid );
-  const filters = useMemo< Filters >(() => [
-    [
-      'fieldName',
-      '==',
-      tab,
-    ],
-  ], [ tab ]);
+  const filters = useMemo< Filters >(() => [[ 'fieldName', '==', tab ]], [ tab ]);
   const {
     answers,
     isLoading,

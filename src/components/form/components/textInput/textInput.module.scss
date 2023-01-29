@@ -21,6 +21,12 @@
     -moz-appearance: textfield;
     text-align: right;
   }
+
+  @media (max-width: 640px) {
+    padding: 6px;
+    font-size: 12px;
+    width: 100%;
+  }
 }
 .fullWidth {
   width: 100%;

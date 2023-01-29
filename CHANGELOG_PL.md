@@ -1,8 +1,31 @@
+## 2.0.27 (Styczeń 29, 2023)
+- Poprawienie wyświetlania stopki dla widoku mobilnego
+
+## 2.0.26 (Styczeń 29, 2023)
+- Poprawienie wyświetlania strony gościa dla widoku mobilnego
+- Poprawienie wsparcia BroadcastChannel API dla safari < 15.1
+
+## 2.0.25 (Październik 8, 2022)
+- Poprawienie algorytmu wyłączenia ładowania kart
+- Poprawienie algorytmu rozwiązującego problem mignięcia pustym stanem tabeli odpowiedzi na pulpicie
+
+## 2.0.24 (Wrzesień 26, 2022)
+- Poprawienie mignięcia pustym stanem tabeli odpowiedzi podczas ładowania strony
+z nieistniejącą zakładką odpowiedzi
+
+## 2.0.23 (Sierpień 11, 2022)
+- Wprowadzenie możliwości otwarcia formularzu w nowej karcie
+- Wprowadzenie możliwości powrotu z nowej karty z formularzem do strony, z której
+został otworzony formularz
+
+## 2.0.22 (Lipiec 27, 2022)
+- Poprawienie ładowania fontów
+
 ## 2.0.21 (Lipiec 24, 2022)
-- Poprawienie duplikowania odpowiedzi po odświeżeniu strony
+- Poprawienie duplikowania odpowiedzi po odświeżeniu strony
 
 ## 2.0.20 (Lipiec 23, 2022)
-- Wprowadzenie formatów woff i woff2 do istniejących czcionek
+- Wprowadzenie formatów woff i woff2 do istniejących czcionek
 
 ## 2.0.19 (Lipiec 11, 2022)
 - Poprawienie wyświetlania widoku odpowiedzi przy zmianie z pustego na widok z pierwszą odpowiedzią
