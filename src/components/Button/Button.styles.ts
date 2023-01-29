@@ -13,6 +13,7 @@ export default makeStyles(({
     textTransform: 'uppercase',
     cursor: 'pointer',
     transition: 'all 0.6s linear',
+    '@media (max-width: 640px)': { fontSize: 12 },
   },
   containedButton: {
     backgroundColor: palette.primary.main,

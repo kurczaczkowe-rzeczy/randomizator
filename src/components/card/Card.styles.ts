@@ -23,6 +23,7 @@ export default makeStyles(({
     backgroundColor: palette.backgroundLight,
     padding: spacing( 2.5, 4.5 ),
     boxShadow: shadow.card,
+    '@media (max-width: 640px)': { padding: spacing( 2 ) },
   },
   center: { alignItems: 'center' },
   fullWidth: { width: '100%' },

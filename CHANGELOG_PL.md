@@ -1,3 +1,7 @@
+## 2.0.26 (Styczeń 29, 2023)
+- Poprawienie wyświetlania strony gościa dla widoku mobilnego
+- Poprawienie wsparcia BroadcastChannel API dla safari < 15.1
+
 ## 2.0.25 (Październik 8, 2022)
 - Poprawienie algorytmu wyłączenia ładowania kart
 - Poprawienie algorytmu rozwiązującego problem mignięcia pustym stanem tabeli odpowiedzi na pulpicie
