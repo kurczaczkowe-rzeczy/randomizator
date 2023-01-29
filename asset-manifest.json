@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/css/main.9133210b.chunk.css",
-    "main.js": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/main.276fdd79.chunk.js",
-    "main.js.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/main.276fdd79.chunk.js.map",
+    "main.css": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/css/main.355587e3.chunk.css",
+    "main.js": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/main.2dff4060.chunk.js",
+    "main.js.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/main.2dff4060.chunk.js.map",
     "runtime-main.js": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/runtime-main.45b52233.js",
     "runtime-main.js.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/runtime-main.45b52233.js.map",
-    "static/js/2.0311ceac.chunk.js": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.0311ceac.chunk.js",
-    "static/js/2.0311ceac.chunk.js.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.0311ceac.chunk.js.map",
+    "static/js/2.34cc6381.chunk.js": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.34cc6381.chunk.js",
+    "static/js/2.34cc6381.chunk.js.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.34cc6381.chunk.js.map",
     "index.html": "https://kurczaczkowe-rzeczy.github.io/randomizator/index.html",
-    "static/css/main.9133210b.chunk.css.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/css/main.9133210b.chunk.css.map",
-    "static/js/2.0311ceac.chunk.js.LICENSE.txt": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.0311ceac.chunk.js.LICENSE.txt",
+    "static/css/main.355587e3.chunk.css.map": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/css/main.355587e3.chunk.css.map",
+    "static/js/2.34cc6381.chunk.js.LICENSE.txt": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/js/2.34cc6381.chunk.js.LICENSE.txt",
     "static/media/FiraSans-Bold.3919333f.ttf": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/FiraSans-Bold.3919333f.ttf",
     "static/media/FiraSans-Bold.e7a4433a.woff": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/FiraSans-Bold.e7a4433a.woff",
     "static/media/FiraSans-Bold.ecb36ed4.woff2": "https://kurczaczkowe-rzeczy.github.io/randomizator/static/media/FiraSans-Bold.ecb36ed4.woff2",
@@ -50,8 +50,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.45b52233.js",
-    "static/js/2.0311ceac.chunk.js",
-    "static/css/main.9133210b.chunk.css",
-    "static/js/main.276fdd79.chunk.js"
+    "static/js/2.34cc6381.chunk.js",
+    "static/css/main.355587e3.chunk.css",
+    "static/js/main.2dff4060.chunk.js"
   ]
 }
